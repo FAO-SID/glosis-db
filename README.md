@@ -1,2 +1,2 @@
 # glosis-db
-GLOSIS Database. Based on ISRIC implementation of the standard ISO 28258 domain model.
+GLOSIS Database. Based on ISRIC implementation of the domain model ISO 28258.
