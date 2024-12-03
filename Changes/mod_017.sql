@@ -5,6 +5,8 @@
 ALTER TABLE IF EXISTS core.specimen DROP CONSTRAINT fk_plot;
 ALTER TABLE IF EXISTS core.specimen RENAME COLUMN plot_id TO element_id;
 ALTER TABLE IF EXISTS core.specimen ADD FOREIGN KEY (element_id) REFERENCES core.element(element_id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE IF EXISTS core.specimen DROP COLUMN upper_depth;
+ALTER TABLE IF EXISTS core.specimen DROP COLUMN lower_depth;
 ALTER TABLE IF EXISTS core.element DROP COLUMN organisation_id;
 DROP TABLE core.result_desc_specimen;
 DROP TABLE core.result_phys_chem_element;
