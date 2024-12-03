@@ -2,7 +2,7 @@
 psql -h localhost -p 5432 -d postgres -U glosis -c "DROP DATABASE IF EXISTS iso28258"
 psql -h localhost -p 5432 -d postgres -U glosis -c "CREATE DATABASE iso28258"
 psql -h localhost -p 5432 -d iso28258 -U glosis -c "CREATE EXTENSION postgis"
-psql -h localhost -p 5432 -d iso28258 -U glosis -f /home/carva014/Work/Code/FAO/glosis-db/ISO_28258_ISRIC_v1.5_changed.sql
+psql -h localhost -p 5432 -d iso28258 -U glosis -f /home/carva014/Work/Code/FAO/glosis-db/ISO_28258_v1.5_changed.sql
 psql -h localhost -p 5432 -d iso28258 -U glosis -f /home/carva014/Work/Code/FAO/glosis-db/Changes/mod_001.sql
 psql -h localhost -p 5432 -d iso28258 -U glosis -f /home/carva014/Work/Code/FAO/glosis-db/Changes/mod_002.sql
 psql -h localhost -p 5432 -d iso28258 -U glosis -f /home/carva014/Work/Code/FAO/glosis-db/Changes/mod_003.sql
@@ -31,4 +31,4 @@ pg_dump -h localhost \
         -U glosis \
         -F plain \
         -v \
-        -f /home/carva014/Work/Code/FAO/glosis-db/ISO_28258_FAO-$date.sql
+        -f /home/carva014/Work/Code/FAO/glosis-db/ISO_28258_v$date.sql
