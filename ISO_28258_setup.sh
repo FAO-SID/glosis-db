@@ -32,3 +32,11 @@ pg_dump -h localhost \
         -F plain \
         -v \
         -f /home/carva014/Work/Code/FAO/glosis-db/ISO_28258_v$date.sql
+
+pg_dump -h localhost \
+        -p 5432 \
+        -d iso28258 \
+        -U glosis \
+        -F plain \
+        -v \
+        -f /home/carva014/Work/Code/FAO/glosis-db/ISO_28258_latest.sql
