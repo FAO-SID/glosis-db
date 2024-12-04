@@ -39,4 +39,4 @@ pg_dump -h localhost \
         -U glosis \
         -F plain \
         -v \
-        -f /home/carva014/Work/Code/FAO/glosis-db/ISO_28258_latest.sql
+        -f /home/carva014/Work/Code/FAO/glosis-db/ISO_28258_v_latest.sql
