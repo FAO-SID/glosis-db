@@ -1,5 +1,5 @@
 # psql -h localhost -p 5432 -d postgres -U postgres -c "CREATE ROLE glosis WITH LOGIN SUPERUSER INHERIT CREATEDB CREATEROLE NOREPLICATION NOBYPASSRLS PASSWORD 'XXXXXXX' "
-# psql -h localhost -p 5432 -d postgres -U glosis -c "CREATE ROLE glosis_r WITH LOGIN SUPERUSER INHERIT CREATEDB CREATEROLE NOREPLICATION NOBYPASSRLS PASSWORD 'glosis' "
+# psql -h localhost -p 5432 -d postgres -U glosis -c "CREATE ROLE glosis_r WITH LOGIN NOSUPERUSER NOCREATEDB NOCREATEROLE INHERIT LOGIN NOREPLICATION NOBYPASSRLS PASSWORD 'glosis' "
 psql -h localhost -p 5432 -d postgres -U glosis -c "DROP DATABASE IF EXISTS iso28258"
 psql -h localhost -p 5432 -d postgres -U glosis -c "CREATE DATABASE iso28258"
 psql -h localhost -p 5432 -d iso28258 -U glosis -c "CREATE EXTENSION postgis"
