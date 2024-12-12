@@ -14,5 +14,3 @@ UPDATE core.observation_phys_chem SET value_min = 0, value_max = 100 WHERE prope
 UPDATE core.observation_phys_chem SET value_min = 0, value_max = 100 WHERE property_phys_chem_id = 'effectiveCecProperty';
 UPDATE core.observation_phys_chem SET value_min = 0.01, value_max = 2.65 WHERE property_phys_chem_id = 'bulkDensityFineEarthProperty';
 UPDATE core.observation_phys_chem SET value_min = 0.01, value_max = 3.60 WHERE property_phys_chem_id = 'bulkDensityWholeSoilProperty';
-
--- FIX! In web-Onthology the phys_chem property name: 'Sodium (Na+) - exchangeable %' unit: 'cmol/kg'. Remove the % in the name.

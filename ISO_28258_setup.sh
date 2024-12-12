@@ -28,6 +28,7 @@ psql -h localhost -p 5432 -d iso28258 -U glosis -f /home/carva014/Work/Code/FAO/
 psql -h localhost -p 5432 -d iso28258 -U glosis -f /home/carva014/Work/Code/FAO/glosis-db/Changes/mod_020.sql
 psql -h localhost -p 5432 -d iso28258 -U glosis -f /home/carva014/Work/Code/FAO/glosis-db/Changes/mod_021.sql
 psql -h localhost -p 5432 -d iso28258 -U glosis -f /home/carva014/Work/Code/FAO/glosis-db/Changes/mod_022.sql
+psql -h localhost -p 5432 -d iso28258 -U glosis -f /home/carva014/Work/Code/FAO/glosis-db/Changes/mod_023.sql
 
 # dump iso28258 database per schema
 date=`date +%Y-%m-%d`
