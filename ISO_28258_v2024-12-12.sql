@@ -5,7 +5,7 @@
 -- Dumped from database version 12.21 (Ubuntu 12.21-1.pgdg22.04+1)
 -- Dumped by pg_dump version 17.1 (Ubuntu 17.1-1.pgdg22.04+1)
 
--- Started on 2024-12-12 12:33:08 CET
+-- Started on 2024-12-12 15:25:04 CET
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -20,7 +20,7 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- TOC entry 9 (class 2615 OID 53768917)
+-- TOC entry 9 (class 2615 OID 53780650)
 -- Name: core; Type: SCHEMA; Schema: -; Owner: glosis
 --
 
@@ -30,7 +30,7 @@ CREATE SCHEMA core;
 ALTER SCHEMA core OWNER TO glosis;
 
 --
--- TOC entry 4428 (class 0 OID 0)
+-- TOC entry 4427 (class 0 OID 0)
 -- Dependencies: 9
 -- Name: SCHEMA core; Type: COMMENT; Schema: -; Owner: glosis
 --
@@ -39,7 +39,7 @@ COMMENT ON SCHEMA core IS 'Core entities and relations from the ISO-28258 domain
 
 
 --
--- TOC entry 10 (class 2615 OID 53768918)
+-- TOC entry 10 (class 2615 OID 53780651)
 -- Name: metadata; Type: SCHEMA; Schema: -; Owner: glosis
 --
 
@@ -49,7 +49,7 @@ CREATE SCHEMA metadata;
 ALTER SCHEMA metadata OWNER TO glosis;
 
 --
--- TOC entry 4429 (class 0 OID 0)
+-- TOC entry 4428 (class 0 OID 0)
 -- Dependencies: 10
 -- Name: SCHEMA metadata; Type: COMMENT; Schema: -; Owner: glosis
 --
@@ -68,7 +68,7 @@ COMMENT ON SCHEMA metadata IS 'Meta-data model based on VCard: https://www.w3.or
 ALTER SCHEMA public OWNER TO postgres;
 
 --
--- TOC entry 2 (class 3079 OID 53767840)
+-- TOC entry 2 (class 3079 OID 53779573)
 -- Name: postgis; Type: EXTENSION; Schema: -; Owner: -
 --
 
@@ -76,7 +76,7 @@ CREATE EXTENSION IF NOT EXISTS postgis WITH SCHEMA public;
 
 
 --
--- TOC entry 4431 (class 0 OID 0)
+-- TOC entry 4430 (class 0 OID 0)
 -- Dependencies: 2
 -- Name: EXTENSION postgis; Type: COMMENT; Schema: -; Owner: 
 --
@@ -85,7 +85,7 @@ COMMENT ON EXTENSION postgis IS 'PostGIS geometry and geography spatial types an
 
 
 --
--- TOC entry 1032 (class 1255 OID 53768925)
+-- TOC entry 1032 (class 1255 OID 53782106)
 -- Name: check_result_value(); Type: FUNCTION; Schema: core; Owner: glosis
 --
 
@@ -112,7 +112,7 @@ $$;
 ALTER FUNCTION core.check_result_value() OWNER TO glosis;
 
 --
--- TOC entry 4432 (class 0 OID 0)
+-- TOC entry 4431 (class 0 OID 0)
 -- Dependencies: 1032
 -- Name: FUNCTION check_result_value(); Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -120,48 +120,12 @@ ALTER FUNCTION core.check_result_value() OWNER TO glosis;
 COMMENT ON FUNCTION core.check_result_value() IS 'Checks if the value assigned to a result record is within the numerical bounds declared in the related observations (fields value_min and value_max).';
 
 
---
--- TOC entry 1033 (class 1255 OID 53768926)
--- Name: check_result_value_specimen(); Type: FUNCTION; Schema: core; Owner: glosis
---
-
-CREATE FUNCTION core.check_result_value_specimen() RETURNS trigger
-    LANGUAGE plpgsql
-    AS $$
-DECLARE
-    observation core.observation_numerical_specimen%ROWTYPE;
-BEGIN
-    SELECT *
-      INTO observation
-      FROM core.observation_numerical_specimen
-     WHERE observation_numerical_specimen_id = NEW.observation_numerical_specimen_id;
-
-    IF NEW.value < observation.value_min OR NEW.value > observation.value_max THEN
-        RAISE EXCEPTION 'Result value outside admissable bounds for the related observation.';
-    ELSE
-        RETURN NEW;
-    END IF;
-END;
-$$;
-
-
-ALTER FUNCTION core.check_result_value_specimen() OWNER TO glosis;
-
---
--- TOC entry 4433 (class 0 OID 0)
--- Dependencies: 1033
--- Name: FUNCTION check_result_value_specimen(); Type: COMMENT; Schema: core; Owner: glosis
---
-
-COMMENT ON FUNCTION core.check_result_value_specimen() IS 'Checks if the value assigned to a result record is within the numerical bounds declared in the related observation (fields value_min and value_max).';
-
-
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;
 
 --
--- TOC entry 210 (class 1259 OID 53768927)
+-- TOC entry 210 (class 1259 OID 53780659)
 -- Name: element; Type: TABLE; Schema: core; Owner: glosis
 --
 
@@ -183,7 +147,7 @@ CREATE TABLE core.element (
 ALTER TABLE core.element OWNER TO glosis;
 
 --
--- TOC entry 4434 (class 0 OID 0)
+-- TOC entry 4432 (class 0 OID 0)
 -- Dependencies: 210
 -- Name: TABLE element; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -192,7 +156,7 @@ COMMENT ON TABLE core.element IS 'ProfileElement is the super-class of Horizon a
 
 
 --
--- TOC entry 4435 (class 0 OID 0)
+-- TOC entry 4433 (class 0 OID 0)
 -- Dependencies: 210
 -- Name: COLUMN element.element_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -201,7 +165,7 @@ COMMENT ON COLUMN core.element.element_id IS 'Synthetic primary key.';
 
 
 --
--- TOC entry 4436 (class 0 OID 0)
+-- TOC entry 4434 (class 0 OID 0)
 -- Dependencies: 210
 -- Name: COLUMN element.profile_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -210,7 +174,7 @@ COMMENT ON COLUMN core.element.profile_id IS 'Reference to the Profile to which 
 
 
 --
--- TOC entry 4437 (class 0 OID 0)
+-- TOC entry 4435 (class 0 OID 0)
 -- Dependencies: 210
 -- Name: COLUMN element.order_element; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -219,7 +183,7 @@ COMMENT ON COLUMN core.element.order_element IS 'Order of this element within th
 
 
 --
--- TOC entry 4438 (class 0 OID 0)
+-- TOC entry 4436 (class 0 OID 0)
 -- Dependencies: 210
 -- Name: COLUMN element.upper_depth; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -228,7 +192,7 @@ COMMENT ON COLUMN core.element.upper_depth IS 'Upper depth of this profile eleme
 
 
 --
--- TOC entry 4439 (class 0 OID 0)
+-- TOC entry 4437 (class 0 OID 0)
 -- Dependencies: 210
 -- Name: COLUMN element.lower_depth; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -237,7 +201,7 @@ COMMENT ON COLUMN core.element.lower_depth IS 'Lower depth of this profile eleme
 
 
 --
--- TOC entry 4440 (class 0 OID 0)
+-- TOC entry 4438 (class 0 OID 0)
 -- Dependencies: 210
 -- Name: COLUMN element.type; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -246,7 +210,7 @@ COMMENT ON COLUMN core.element.type IS 'Type of profile element, Horizon or Laye
 
 
 --
--- TOC entry 211 (class 1259 OID 53768933)
+-- TOC entry 211 (class 1259 OID 53780665)
 -- Name: element_element_id_seq; Type: SEQUENCE; Schema: core; Owner: glosis
 --
 
@@ -261,7 +225,7 @@ ALTER TABLE core.element ALTER COLUMN element_id ADD GENERATED BY DEFAULT AS IDE
 
 
 --
--- TOC entry 212 (class 1259 OID 53768935)
+-- TOC entry 212 (class 1259 OID 53780667)
 -- Name: observation_desc_element; Type: TABLE; Schema: core; Owner: glosis
 --
 
@@ -275,7 +239,7 @@ CREATE TABLE core.observation_desc_element (
 ALTER TABLE core.observation_desc_element OWNER TO glosis;
 
 --
--- TOC entry 4441 (class 0 OID 0)
+-- TOC entry 4439 (class 0 OID 0)
 -- Dependencies: 212
 -- Name: TABLE observation_desc_element; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -284,7 +248,7 @@ COMMENT ON TABLE core.observation_desc_element IS 'Descriptive properties for th
 
 
 --
--- TOC entry 4442 (class 0 OID 0)
+-- TOC entry 4440 (class 0 OID 0)
 -- Dependencies: 212
 -- Name: COLUMN observation_desc_element.procedure_desc_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -293,7 +257,7 @@ COMMENT ON COLUMN core.observation_desc_element.procedure_desc_id IS 'Foreign ke
 
 
 --
--- TOC entry 4443 (class 0 OID 0)
+-- TOC entry 4441 (class 0 OID 0)
 -- Dependencies: 212
 -- Name: COLUMN observation_desc_element.property_desc_element_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -302,7 +266,7 @@ COMMENT ON COLUMN core.observation_desc_element.property_desc_element_id IS 'For
 
 
 --
--- TOC entry 4444 (class 0 OID 0)
+-- TOC entry 4442 (class 0 OID 0)
 -- Dependencies: 212
 -- Name: COLUMN observation_desc_element.thesaurus_desc_element_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -311,7 +275,7 @@ COMMENT ON COLUMN core.observation_desc_element.thesaurus_desc_element_id IS 'Fo
 
 
 --
--- TOC entry 213 (class 1259 OID 53768938)
+-- TOC entry 213 (class 1259 OID 53780670)
 -- Name: observation_desc_plot; Type: TABLE; Schema: core; Owner: glosis
 --
 
@@ -325,7 +289,7 @@ CREATE TABLE core.observation_desc_plot (
 ALTER TABLE core.observation_desc_plot OWNER TO glosis;
 
 --
--- TOC entry 4445 (class 0 OID 0)
+-- TOC entry 4443 (class 0 OID 0)
 -- Dependencies: 213
 -- Name: TABLE observation_desc_plot; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -334,7 +298,7 @@ COMMENT ON TABLE core.observation_desc_plot IS 'Descriptive properties for the S
 
 
 --
--- TOC entry 4446 (class 0 OID 0)
+-- TOC entry 4444 (class 0 OID 0)
 -- Dependencies: 213
 -- Name: COLUMN observation_desc_plot.procedure_desc_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -343,7 +307,7 @@ COMMENT ON COLUMN core.observation_desc_plot.procedure_desc_id IS 'Foreign key t
 
 
 --
--- TOC entry 4447 (class 0 OID 0)
+-- TOC entry 4445 (class 0 OID 0)
 -- Dependencies: 213
 -- Name: COLUMN observation_desc_plot.property_desc_plot_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -352,7 +316,7 @@ COMMENT ON COLUMN core.observation_desc_plot.property_desc_plot_id IS 'Foreign k
 
 
 --
--- TOC entry 4448 (class 0 OID 0)
+-- TOC entry 4446 (class 0 OID 0)
 -- Dependencies: 213
 -- Name: COLUMN observation_desc_plot.thesaurus_desc_plot_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -361,7 +325,7 @@ COMMENT ON COLUMN core.observation_desc_plot.thesaurus_desc_plot_id IS 'Foreign 
 
 
 --
--- TOC entry 214 (class 1259 OID 53768941)
+-- TOC entry 214 (class 1259 OID 53780673)
 -- Name: observation_desc_profile; Type: TABLE; Schema: core; Owner: glosis
 --
 
@@ -375,7 +339,7 @@ CREATE TABLE core.observation_desc_profile (
 ALTER TABLE core.observation_desc_profile OWNER TO glosis;
 
 --
--- TOC entry 4449 (class 0 OID 0)
+-- TOC entry 4447 (class 0 OID 0)
 -- Dependencies: 214
 -- Name: TABLE observation_desc_profile; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -384,7 +348,7 @@ COMMENT ON TABLE core.observation_desc_profile IS 'Descriptive properties for th
 
 
 --
--- TOC entry 4450 (class 0 OID 0)
+-- TOC entry 4448 (class 0 OID 0)
 -- Dependencies: 214
 -- Name: COLUMN observation_desc_profile.procedure_desc_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -393,7 +357,7 @@ COMMENT ON COLUMN core.observation_desc_profile.procedure_desc_id IS 'Foreign ke
 
 
 --
--- TOC entry 4451 (class 0 OID 0)
+-- TOC entry 4449 (class 0 OID 0)
 -- Dependencies: 214
 -- Name: COLUMN observation_desc_profile.property_desc_profile_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -402,7 +366,7 @@ COMMENT ON COLUMN core.observation_desc_profile.property_desc_profile_id IS 'For
 
 
 --
--- TOC entry 4452 (class 0 OID 0)
+-- TOC entry 4450 (class 0 OID 0)
 -- Dependencies: 214
 -- Name: COLUMN observation_desc_profile.thesaurus_desc_profile_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -411,7 +375,7 @@ COMMENT ON COLUMN core.observation_desc_profile.thesaurus_desc_profile_id IS 'Fo
 
 
 --
--- TOC entry 215 (class 1259 OID 53768958)
+-- TOC entry 215 (class 1259 OID 53780690)
 -- Name: observation_phys_chem; Type: TABLE; Schema: core; Owner: glosis
 --
 
@@ -428,7 +392,7 @@ CREATE TABLE core.observation_phys_chem (
 ALTER TABLE core.observation_phys_chem OWNER TO glosis;
 
 --
--- TOC entry 4453 (class 0 OID 0)
+-- TOC entry 4451 (class 0 OID 0)
 -- Dependencies: 215
 -- Name: TABLE observation_phys_chem; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -437,7 +401,7 @@ COMMENT ON TABLE core.observation_phys_chem IS 'Physio-chemical observations for
 
 
 --
--- TOC entry 4454 (class 0 OID 0)
+-- TOC entry 4452 (class 0 OID 0)
 -- Dependencies: 215
 -- Name: COLUMN observation_phys_chem.observation_phys_chem_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -446,7 +410,7 @@ COMMENT ON COLUMN core.observation_phys_chem.observation_phys_chem_id IS 'Synthe
 
 
 --
--- TOC entry 4455 (class 0 OID 0)
+-- TOC entry 4453 (class 0 OID 0)
 -- Dependencies: 215
 -- Name: COLUMN observation_phys_chem.property_phys_chem_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -455,7 +419,7 @@ COMMENT ON COLUMN core.observation_phys_chem.property_phys_chem_id IS 'Foreign k
 
 
 --
--- TOC entry 4456 (class 0 OID 0)
+-- TOC entry 4454 (class 0 OID 0)
 -- Dependencies: 215
 -- Name: COLUMN observation_phys_chem.procedure_phys_chem_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -464,7 +428,7 @@ COMMENT ON COLUMN core.observation_phys_chem.procedure_phys_chem_id IS 'Foreign 
 
 
 --
--- TOC entry 4457 (class 0 OID 0)
+-- TOC entry 4455 (class 0 OID 0)
 -- Dependencies: 215
 -- Name: COLUMN observation_phys_chem.unit_of_measure_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -473,7 +437,7 @@ COMMENT ON COLUMN core.observation_phys_chem.unit_of_measure_id IS 'Foreign key 
 
 
 --
--- TOC entry 4458 (class 0 OID 0)
+-- TOC entry 4456 (class 0 OID 0)
 -- Dependencies: 215
 -- Name: COLUMN observation_phys_chem.value_min; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -482,7 +446,7 @@ COMMENT ON COLUMN core.observation_phys_chem.value_min IS 'Minimum admissable va
 
 
 --
--- TOC entry 4459 (class 0 OID 0)
+-- TOC entry 4457 (class 0 OID 0)
 -- Dependencies: 215
 -- Name: COLUMN observation_phys_chem.value_max; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -491,7 +455,7 @@ COMMENT ON COLUMN core.observation_phys_chem.value_max IS 'Maximum admissable va
 
 
 --
--- TOC entry 266 (class 1259 OID 53770010)
+-- TOC entry 266 (class 1259 OID 53781706)
 -- Name: observation_phys_chem_element_observation_phys_chem_element_seq; Type: SEQUENCE; Schema: core; Owner: glosis
 --
 
@@ -506,7 +470,7 @@ ALTER TABLE core.observation_phys_chem ALTER COLUMN observation_phys_chem_id ADD
 
 
 --
--- TOC entry 216 (class 1259 OID 53768966)
+-- TOC entry 216 (class 1259 OID 53780698)
 -- Name: plot; Type: TABLE; Schema: core; Owner: glosis
 --
 
@@ -530,7 +494,7 @@ CREATE TABLE core.plot (
 ALTER TABLE core.plot OWNER TO glosis;
 
 --
--- TOC entry 4460 (class 0 OID 0)
+-- TOC entry 4458 (class 0 OID 0)
 -- Dependencies: 216
 -- Name: TABLE plot; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -539,7 +503,7 @@ COMMENT ON TABLE core.plot IS 'Elementary area or location where individual obse
 
 
 --
--- TOC entry 4461 (class 0 OID 0)
+-- TOC entry 4459 (class 0 OID 0)
 -- Dependencies: 216
 -- Name: COLUMN plot.plot_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -548,7 +512,7 @@ COMMENT ON COLUMN core.plot.plot_id IS 'Synthetic primary key.';
 
 
 --
--- TOC entry 4462 (class 0 OID 0)
+-- TOC entry 4460 (class 0 OID 0)
 -- Dependencies: 216
 -- Name: COLUMN plot.site_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -557,7 +521,7 @@ COMMENT ON COLUMN core.plot.site_id IS 'Foreign key to Site table.';
 
 
 --
--- TOC entry 4463 (class 0 OID 0)
+-- TOC entry 4461 (class 0 OID 0)
 -- Dependencies: 216
 -- Name: COLUMN plot.plot_code; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -566,7 +530,7 @@ COMMENT ON COLUMN core.plot.plot_code IS 'Natural key, can be null.';
 
 
 --
--- TOC entry 4464 (class 0 OID 0)
+-- TOC entry 4462 (class 0 OID 0)
 -- Dependencies: 216
 -- Name: COLUMN plot.altitude; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -575,7 +539,7 @@ COMMENT ON COLUMN core.plot.altitude IS 'Altitude at the plot in metres, if know
 
 
 --
--- TOC entry 4465 (class 0 OID 0)
+-- TOC entry 4463 (class 0 OID 0)
 -- Dependencies: 216
 -- Name: COLUMN plot.time_stamp; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -584,7 +548,7 @@ COMMENT ON COLUMN core.plot.time_stamp IS 'Time stamp of the plot, if known. Pro
 
 
 --
--- TOC entry 4466 (class 0 OID 0)
+-- TOC entry 4464 (class 0 OID 0)
 -- Dependencies: 216
 -- Name: COLUMN plot.map_sheet_code; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -593,7 +557,7 @@ COMMENT ON COLUMN core.plot.map_sheet_code IS 'Code identifying the map sheet wh
 
 
 --
--- TOC entry 4467 (class 0 OID 0)
+-- TOC entry 4465 (class 0 OID 0)
 -- Dependencies: 216
 -- Name: COLUMN plot.positional_accuracy; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -602,7 +566,7 @@ COMMENT ON COLUMN core.plot.positional_accuracy IS 'Accuracy in meters of the GP
 
 
 --
--- TOC entry 4468 (class 0 OID 0)
+-- TOC entry 4466 (class 0 OID 0)
 -- Dependencies: 216
 -- Name: COLUMN plot."position"; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -611,7 +575,7 @@ COMMENT ON COLUMN core.plot."position" IS 'Geodetic coordinates of the spatial p
 
 
 --
--- TOC entry 4469 (class 0 OID 0)
+-- TOC entry 4467 (class 0 OID 0)
 -- Dependencies: 216
 -- Name: COLUMN plot.type; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -620,7 +584,7 @@ COMMENT ON COLUMN core.plot.type IS 'Type of plot, TrialPit or Borehole.';
 
 
 --
--- TOC entry 217 (class 1259 OID 53768975)
+-- TOC entry 217 (class 1259 OID 53780707)
 -- Name: plot_individual; Type: TABLE; Schema: core; Owner: glosis
 --
 
@@ -633,7 +597,7 @@ CREATE TABLE core.plot_individual (
 ALTER TABLE core.plot_individual OWNER TO glosis;
 
 --
--- TOC entry 4470 (class 0 OID 0)
+-- TOC entry 4468 (class 0 OID 0)
 -- Dependencies: 217
 -- Name: TABLE plot_individual; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -642,7 +606,7 @@ COMMENT ON TABLE core.plot_individual IS 'Identifies the individual(s) responsib
 
 
 --
--- TOC entry 4471 (class 0 OID 0)
+-- TOC entry 4469 (class 0 OID 0)
 -- Dependencies: 217
 -- Name: COLUMN plot_individual.plot_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -651,7 +615,7 @@ COMMENT ON COLUMN core.plot_individual.plot_id IS 'Foreign key to the plot table
 
 
 --
--- TOC entry 4472 (class 0 OID 0)
+-- TOC entry 4470 (class 0 OID 0)
 -- Dependencies: 217
 -- Name: COLUMN plot_individual.individual_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -660,7 +624,7 @@ COMMENT ON COLUMN core.plot_individual.individual_id IS 'Foreign key to the indi
 
 
 --
--- TOC entry 218 (class 1259 OID 53768978)
+-- TOC entry 218 (class 1259 OID 53780710)
 -- Name: plot_plot_id_seq; Type: SEQUENCE; Schema: core; Owner: glosis
 --
 
@@ -675,7 +639,7 @@ ALTER TABLE core.plot ALTER COLUMN plot_id ADD GENERATED BY DEFAULT AS IDENTITY 
 
 
 --
--- TOC entry 219 (class 1259 OID 53768980)
+-- TOC entry 219 (class 1259 OID 53780712)
 -- Name: procedure_desc; Type: TABLE; Schema: core; Owner: glosis
 --
 
@@ -689,7 +653,7 @@ CREATE TABLE core.procedure_desc (
 ALTER TABLE core.procedure_desc OWNER TO glosis;
 
 --
--- TOC entry 4473 (class 0 OID 0)
+-- TOC entry 4471 (class 0 OID 0)
 -- Dependencies: 219
 -- Name: TABLE procedure_desc; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -698,7 +662,7 @@ COMMENT ON TABLE core.procedure_desc IS 'Descriptive Procedures for all features
 
 
 --
--- TOC entry 4474 (class 0 OID 0)
+-- TOC entry 4472 (class 0 OID 0)
 -- Dependencies: 219
 -- Name: COLUMN procedure_desc.procedure_desc_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -707,7 +671,7 @@ COMMENT ON COLUMN core.procedure_desc.procedure_desc_id IS 'Synthetic primary ke
 
 
 --
--- TOC entry 4475 (class 0 OID 0)
+-- TOC entry 4473 (class 0 OID 0)
 -- Dependencies: 219
 -- Name: COLUMN procedure_desc.reference; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -716,7 +680,7 @@ COMMENT ON COLUMN core.procedure_desc.reference IS 'Long and human readable refe
 
 
 --
--- TOC entry 4476 (class 0 OID 0)
+-- TOC entry 4474 (class 0 OID 0)
 -- Dependencies: 219
 -- Name: COLUMN procedure_desc.uri; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -725,7 +689,7 @@ COMMENT ON COLUMN core.procedure_desc.uri IS 'URI to the corresponding publicati
 
 
 --
--- TOC entry 220 (class 1259 OID 53768988)
+-- TOC entry 220 (class 1259 OID 53780720)
 -- Name: procedure_phys_chem; Type: TABLE; Schema: core; Owner: glosis
 --
 
@@ -739,7 +703,7 @@ CREATE TABLE core.procedure_phys_chem (
 ALTER TABLE core.procedure_phys_chem OWNER TO glosis;
 
 --
--- TOC entry 4477 (class 0 OID 0)
+-- TOC entry 4475 (class 0 OID 0)
 -- Dependencies: 220
 -- Name: TABLE procedure_phys_chem; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -748,7 +712,7 @@ COMMENT ON TABLE core.procedure_phys_chem IS 'Physio-chemical Procedures for the
 
 
 --
--- TOC entry 4478 (class 0 OID 0)
+-- TOC entry 4476 (class 0 OID 0)
 -- Dependencies: 220
 -- Name: COLUMN procedure_phys_chem.procedure_phys_chem_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -757,7 +721,7 @@ COMMENT ON COLUMN core.procedure_phys_chem.procedure_phys_chem_id IS 'Synthetic 
 
 
 --
--- TOC entry 4479 (class 0 OID 0)
+-- TOC entry 4477 (class 0 OID 0)
 -- Dependencies: 220
 -- Name: COLUMN procedure_phys_chem.broader_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -766,7 +730,7 @@ COMMENT ON COLUMN core.procedure_phys_chem.broader_id IS 'Foreign key to brader 
 
 
 --
--- TOC entry 4480 (class 0 OID 0)
+-- TOC entry 4478 (class 0 OID 0)
 -- Dependencies: 220
 -- Name: COLUMN procedure_phys_chem.uri; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -775,7 +739,7 @@ COMMENT ON COLUMN core.procedure_phys_chem.uri IS 'URI to the corresponding in a
 
 
 --
--- TOC entry 221 (class 1259 OID 53768996)
+-- TOC entry 221 (class 1259 OID 53780728)
 -- Name: profile; Type: TABLE; Schema: core; Owner: glosis
 --
 
@@ -791,7 +755,7 @@ CREATE TABLE core.profile (
 ALTER TABLE core.profile OWNER TO glosis;
 
 --
--- TOC entry 4481 (class 0 OID 0)
+-- TOC entry 4479 (class 0 OID 0)
 -- Dependencies: 221
 -- Name: TABLE profile; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -800,7 +764,7 @@ COMMENT ON TABLE core.profile IS 'An abstract, ordered set of soil horizons and/
 
 
 --
--- TOC entry 4482 (class 0 OID 0)
+-- TOC entry 4480 (class 0 OID 0)
 -- Dependencies: 221
 -- Name: COLUMN profile.profile_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -809,7 +773,7 @@ COMMENT ON COLUMN core.profile.profile_id IS 'Synthetic primary key.';
 
 
 --
--- TOC entry 4483 (class 0 OID 0)
+-- TOC entry 4481 (class 0 OID 0)
 -- Dependencies: 221
 -- Name: COLUMN profile.plot_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -818,7 +782,7 @@ COMMENT ON COLUMN core.profile.plot_id IS 'Foreign key to Plot feature of intere
 
 
 --
--- TOC entry 4484 (class 0 OID 0)
+-- TOC entry 4482 (class 0 OID 0)
 -- Dependencies: 221
 -- Name: COLUMN profile.surface_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -827,7 +791,7 @@ COMMENT ON COLUMN core.profile.surface_id IS 'Foreign key to Surface feature of 
 
 
 --
--- TOC entry 4485 (class 0 OID 0)
+-- TOC entry 4483 (class 0 OID 0)
 -- Dependencies: 221
 -- Name: COLUMN profile.profile_code; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -836,7 +800,7 @@ COMMENT ON COLUMN core.profile.profile_code IS 'Natural primary key, if existing
 
 
 --
--- TOC entry 222 (class 1259 OID 53769003)
+-- TOC entry 222 (class 1259 OID 53780735)
 -- Name: profile_profile_id_seq; Type: SEQUENCE; Schema: core; Owner: glosis
 --
 
@@ -851,7 +815,7 @@ ALTER TABLE core.profile ALTER COLUMN profile_id ADD GENERATED BY DEFAULT AS IDE
 
 
 --
--- TOC entry 223 (class 1259 OID 53769005)
+-- TOC entry 223 (class 1259 OID 53780737)
 -- Name: project; Type: TABLE; Schema: core; Owner: glosis
 --
 
@@ -864,7 +828,7 @@ CREATE TABLE core.project (
 ALTER TABLE core.project OWNER TO glosis;
 
 --
--- TOC entry 4486 (class 0 OID 0)
+-- TOC entry 4484 (class 0 OID 0)
 -- Dependencies: 223
 -- Name: TABLE project; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -873,7 +837,7 @@ COMMENT ON TABLE core.project IS 'Provides the context of the data collection as
 
 
 --
--- TOC entry 4487 (class 0 OID 0)
+-- TOC entry 4485 (class 0 OID 0)
 -- Dependencies: 223
 -- Name: COLUMN project.project_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -882,7 +846,7 @@ COMMENT ON COLUMN core.project.project_id IS 'Synthetic primary key.';
 
 
 --
--- TOC entry 4488 (class 0 OID 0)
+-- TOC entry 4486 (class 0 OID 0)
 -- Dependencies: 223
 -- Name: COLUMN project.name; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -891,7 +855,7 @@ COMMENT ON COLUMN core.project.name IS 'Natural key with project name.';
 
 
 --
--- TOC entry 224 (class 1259 OID 53769011)
+-- TOC entry 224 (class 1259 OID 53780743)
 -- Name: project_organisation; Type: TABLE; Schema: core; Owner: glosis
 --
 
@@ -904,7 +868,7 @@ CREATE TABLE core.project_organisation (
 ALTER TABLE core.project_organisation OWNER TO glosis;
 
 --
--- TOC entry 4489 (class 0 OID 0)
+-- TOC entry 4487 (class 0 OID 0)
 -- Dependencies: 224
 -- Name: COLUMN project_organisation.project_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -913,7 +877,7 @@ COMMENT ON COLUMN core.project_organisation.project_id IS 'Foreign key to Projec
 
 
 --
--- TOC entry 4490 (class 0 OID 0)
+-- TOC entry 4488 (class 0 OID 0)
 -- Dependencies: 224
 -- Name: COLUMN project_organisation.organisation_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -922,7 +886,7 @@ COMMENT ON COLUMN core.project_organisation.organisation_id IS 'Foreign key to O
 
 
 --
--- TOC entry 225 (class 1259 OID 53769014)
+-- TOC entry 225 (class 1259 OID 53780746)
 -- Name: project_project_id_seq; Type: SEQUENCE; Schema: core; Owner: glosis
 --
 
@@ -937,7 +901,7 @@ ALTER TABLE core.project ALTER COLUMN project_id ADD GENERATED BY DEFAULT AS IDE
 
 
 --
--- TOC entry 226 (class 1259 OID 53769016)
+-- TOC entry 226 (class 1259 OID 53780748)
 -- Name: project_related; Type: TABLE; Schema: core; Owner: glosis
 --
 
@@ -951,7 +915,7 @@ CREATE TABLE core.project_related (
 ALTER TABLE core.project_related OWNER TO glosis;
 
 --
--- TOC entry 4491 (class 0 OID 0)
+-- TOC entry 4489 (class 0 OID 0)
 -- Dependencies: 226
 -- Name: TABLE project_related; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -960,7 +924,7 @@ COMMENT ON TABLE core.project_related IS 'Relationship between two projects, e.g
 
 
 --
--- TOC entry 4492 (class 0 OID 0)
+-- TOC entry 4490 (class 0 OID 0)
 -- Dependencies: 226
 -- Name: COLUMN project_related.project_source_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -969,7 +933,7 @@ COMMENT ON COLUMN core.project_related.project_source_id IS 'Foreign key to sour
 
 
 --
--- TOC entry 4493 (class 0 OID 0)
+-- TOC entry 4491 (class 0 OID 0)
 -- Dependencies: 226
 -- Name: COLUMN project_related.project_target_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -978,7 +942,7 @@ COMMENT ON COLUMN core.project_related.project_target_id IS 'Foreign key to targ
 
 
 --
--- TOC entry 4494 (class 0 OID 0)
+-- TOC entry 4492 (class 0 OID 0)
 -- Dependencies: 226
 -- Name: COLUMN project_related.role; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -987,7 +951,7 @@ COMMENT ON COLUMN core.project_related.role IS 'Role of source project in target
 
 
 --
--- TOC entry 227 (class 1259 OID 53769022)
+-- TOC entry 227 (class 1259 OID 53780754)
 -- Name: property_desc_element; Type: TABLE; Schema: core; Owner: glosis
 --
 
@@ -1000,7 +964,7 @@ CREATE TABLE core.property_desc_element (
 ALTER TABLE core.property_desc_element OWNER TO glosis;
 
 --
--- TOC entry 4495 (class 0 OID 0)
+-- TOC entry 4493 (class 0 OID 0)
 -- Dependencies: 227
 -- Name: TABLE property_desc_element; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1009,7 +973,7 @@ COMMENT ON TABLE core.property_desc_element IS 'Descriptive properties for the E
 
 
 --
--- TOC entry 4496 (class 0 OID 0)
+-- TOC entry 4494 (class 0 OID 0)
 -- Dependencies: 227
 -- Name: COLUMN property_desc_element.property_desc_element_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1018,7 +982,7 @@ COMMENT ON COLUMN core.property_desc_element.property_desc_element_id IS 'Synthe
 
 
 --
--- TOC entry 4497 (class 0 OID 0)
+-- TOC entry 4495 (class 0 OID 0)
 -- Dependencies: 227
 -- Name: COLUMN property_desc_element.uri; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1027,7 +991,7 @@ COMMENT ON COLUMN core.property_desc_element.uri IS 'URI to the corresponding co
 
 
 --
--- TOC entry 228 (class 1259 OID 53769030)
+-- TOC entry 228 (class 1259 OID 53780762)
 -- Name: property_desc_plot; Type: TABLE; Schema: core; Owner: glosis
 --
 
@@ -1040,7 +1004,7 @@ CREATE TABLE core.property_desc_plot (
 ALTER TABLE core.property_desc_plot OWNER TO glosis;
 
 --
--- TOC entry 4498 (class 0 OID 0)
+-- TOC entry 4496 (class 0 OID 0)
 -- Dependencies: 228
 -- Name: TABLE property_desc_plot; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1049,7 +1013,7 @@ COMMENT ON TABLE core.property_desc_plot IS 'Descriptive properties for the Plot
 
 
 --
--- TOC entry 4499 (class 0 OID 0)
+-- TOC entry 4497 (class 0 OID 0)
 -- Dependencies: 228
 -- Name: COLUMN property_desc_plot.property_desc_plot_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1058,7 +1022,7 @@ COMMENT ON COLUMN core.property_desc_plot.property_desc_plot_id IS 'Synthetic pr
 
 
 --
--- TOC entry 4500 (class 0 OID 0)
+-- TOC entry 4498 (class 0 OID 0)
 -- Dependencies: 228
 -- Name: COLUMN property_desc_plot.uri; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1067,7 +1031,7 @@ COMMENT ON COLUMN core.property_desc_plot.uri IS 'URI to the corresponding code 
 
 
 --
--- TOC entry 229 (class 1259 OID 53769038)
+-- TOC entry 229 (class 1259 OID 53780770)
 -- Name: property_desc_profile; Type: TABLE; Schema: core; Owner: glosis
 --
 
@@ -1080,7 +1044,7 @@ CREATE TABLE core.property_desc_profile (
 ALTER TABLE core.property_desc_profile OWNER TO glosis;
 
 --
--- TOC entry 4501 (class 0 OID 0)
+-- TOC entry 4499 (class 0 OID 0)
 -- Dependencies: 229
 -- Name: TABLE property_desc_profile; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1089,7 +1053,7 @@ COMMENT ON TABLE core.property_desc_profile IS 'Descriptive properties for the P
 
 
 --
--- TOC entry 4502 (class 0 OID 0)
+-- TOC entry 4500 (class 0 OID 0)
 -- Dependencies: 229
 -- Name: COLUMN property_desc_profile.property_desc_profile_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1098,7 +1062,7 @@ COMMENT ON COLUMN core.property_desc_profile.property_desc_profile_id IS 'Synthe
 
 
 --
--- TOC entry 4503 (class 0 OID 0)
+-- TOC entry 4501 (class 0 OID 0)
 -- Dependencies: 229
 -- Name: COLUMN property_desc_profile.uri; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1107,7 +1071,7 @@ COMMENT ON COLUMN core.property_desc_profile.uri IS 'URI to the corresponding co
 
 
 --
--- TOC entry 230 (class 1259 OID 53769062)
+-- TOC entry 230 (class 1259 OID 53780794)
 -- Name: property_phys_chem; Type: TABLE; Schema: core; Owner: glosis
 --
 
@@ -1120,7 +1084,7 @@ CREATE TABLE core.property_phys_chem (
 ALTER TABLE core.property_phys_chem OWNER TO glosis;
 
 --
--- TOC entry 4504 (class 0 OID 0)
+-- TOC entry 4502 (class 0 OID 0)
 -- Dependencies: 230
 -- Name: TABLE property_phys_chem; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1129,7 +1093,7 @@ COMMENT ON TABLE core.property_phys_chem IS 'Physio-chemical properties for the 
 
 
 --
--- TOC entry 4505 (class 0 OID 0)
+-- TOC entry 4503 (class 0 OID 0)
 -- Dependencies: 230
 -- Name: COLUMN property_phys_chem.property_phys_chem_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1138,7 +1102,7 @@ COMMENT ON COLUMN core.property_phys_chem.property_phys_chem_id IS 'Synthetic pr
 
 
 --
--- TOC entry 4506 (class 0 OID 0)
+-- TOC entry 4504 (class 0 OID 0)
 -- Dependencies: 230
 -- Name: COLUMN property_phys_chem.uri; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1147,7 +1111,7 @@ COMMENT ON COLUMN core.property_phys_chem.uri IS 'URI to the corresponding code 
 
 
 --
--- TOC entry 231 (class 1259 OID 53769070)
+-- TOC entry 231 (class 1259 OID 53780802)
 -- Name: result_desc_element; Type: TABLE; Schema: core; Owner: glosis
 --
 
@@ -1161,7 +1125,7 @@ CREATE TABLE core.result_desc_element (
 ALTER TABLE core.result_desc_element OWNER TO glosis;
 
 --
--- TOC entry 4507 (class 0 OID 0)
+-- TOC entry 4505 (class 0 OID 0)
 -- Dependencies: 231
 -- Name: TABLE result_desc_element; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1170,7 +1134,7 @@ COMMENT ON TABLE core.result_desc_element IS 'Descriptive results for the Elemen
 
 
 --
--- TOC entry 4508 (class 0 OID 0)
+-- TOC entry 4506 (class 0 OID 0)
 -- Dependencies: 231
 -- Name: COLUMN result_desc_element.element_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1179,7 +1143,7 @@ COMMENT ON COLUMN core.result_desc_element.element_id IS 'Foreign key to the cor
 
 
 --
--- TOC entry 4509 (class 0 OID 0)
+-- TOC entry 4507 (class 0 OID 0)
 -- Dependencies: 231
 -- Name: COLUMN result_desc_element.property_desc_element_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1188,7 +1152,7 @@ COMMENT ON COLUMN core.result_desc_element.property_desc_element_id IS 'Foreign 
 
 
 --
--- TOC entry 4510 (class 0 OID 0)
+-- TOC entry 4508 (class 0 OID 0)
 -- Dependencies: 231
 -- Name: COLUMN result_desc_element.thesaurus_desc_element_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1197,7 +1161,7 @@ COMMENT ON COLUMN core.result_desc_element.thesaurus_desc_element_id IS 'Foreign
 
 
 --
--- TOC entry 232 (class 1259 OID 53769073)
+-- TOC entry 232 (class 1259 OID 53780805)
 -- Name: result_desc_plot; Type: TABLE; Schema: core; Owner: glosis
 --
 
@@ -1211,7 +1175,7 @@ CREATE TABLE core.result_desc_plot (
 ALTER TABLE core.result_desc_plot OWNER TO glosis;
 
 --
--- TOC entry 4511 (class 0 OID 0)
+-- TOC entry 4509 (class 0 OID 0)
 -- Dependencies: 232
 -- Name: TABLE result_desc_plot; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1220,7 +1184,7 @@ COMMENT ON TABLE core.result_desc_plot IS 'Descriptive results for the Plot feat
 
 
 --
--- TOC entry 4512 (class 0 OID 0)
+-- TOC entry 4510 (class 0 OID 0)
 -- Dependencies: 232
 -- Name: COLUMN result_desc_plot.plot_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1229,7 +1193,7 @@ COMMENT ON COLUMN core.result_desc_plot.plot_id IS 'Foreign key to the correspon
 
 
 --
--- TOC entry 4513 (class 0 OID 0)
+-- TOC entry 4511 (class 0 OID 0)
 -- Dependencies: 232
 -- Name: COLUMN result_desc_plot.property_desc_plot_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1238,7 +1202,7 @@ COMMENT ON COLUMN core.result_desc_plot.property_desc_plot_id IS 'Foreign key to
 
 
 --
--- TOC entry 4514 (class 0 OID 0)
+-- TOC entry 4512 (class 0 OID 0)
 -- Dependencies: 232
 -- Name: COLUMN result_desc_plot.thesaurus_desc_plot_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1247,7 +1211,7 @@ COMMENT ON COLUMN core.result_desc_plot.thesaurus_desc_plot_id IS 'Foreign key t
 
 
 --
--- TOC entry 233 (class 1259 OID 53769076)
+-- TOC entry 233 (class 1259 OID 53780808)
 -- Name: result_desc_profile; Type: TABLE; Schema: core; Owner: glosis
 --
 
@@ -1261,7 +1225,7 @@ CREATE TABLE core.result_desc_profile (
 ALTER TABLE core.result_desc_profile OWNER TO glosis;
 
 --
--- TOC entry 4515 (class 0 OID 0)
+-- TOC entry 4513 (class 0 OID 0)
 -- Dependencies: 233
 -- Name: TABLE result_desc_profile; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1270,7 +1234,7 @@ COMMENT ON TABLE core.result_desc_profile IS 'Descriptive results for the Profil
 
 
 --
--- TOC entry 4516 (class 0 OID 0)
+-- TOC entry 4514 (class 0 OID 0)
 -- Dependencies: 233
 -- Name: COLUMN result_desc_profile.profile_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1279,7 +1243,7 @@ COMMENT ON COLUMN core.result_desc_profile.profile_id IS 'Foreign key to the cor
 
 
 --
--- TOC entry 4517 (class 0 OID 0)
+-- TOC entry 4515 (class 0 OID 0)
 -- Dependencies: 233
 -- Name: COLUMN result_desc_profile.property_desc_profile_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1288,7 +1252,7 @@ COMMENT ON COLUMN core.result_desc_profile.property_desc_profile_id IS 'Foreign 
 
 
 --
--- TOC entry 4518 (class 0 OID 0)
+-- TOC entry 4516 (class 0 OID 0)
 -- Dependencies: 233
 -- Name: COLUMN result_desc_profile.thesaurus_desc_profile_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1297,7 +1261,7 @@ COMMENT ON COLUMN core.result_desc_profile.thesaurus_desc_profile_id IS 'Foreign
 
 
 --
--- TOC entry 234 (class 1259 OID 53769082)
+-- TOC entry 234 (class 1259 OID 53780814)
 -- Name: result_desc_surface; Type: TABLE; Schema: core; Owner: glosis
 --
 
@@ -1311,7 +1275,7 @@ CREATE TABLE core.result_desc_surface (
 ALTER TABLE core.result_desc_surface OWNER TO glosis;
 
 --
--- TOC entry 4519 (class 0 OID 0)
+-- TOC entry 4517 (class 0 OID 0)
 -- Dependencies: 234
 -- Name: TABLE result_desc_surface; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1320,7 +1284,7 @@ COMMENT ON TABLE core.result_desc_surface IS 'Descriptive results for the Surfac
 
 
 --
--- TOC entry 4520 (class 0 OID 0)
+-- TOC entry 4518 (class 0 OID 0)
 -- Dependencies: 234
 -- Name: COLUMN result_desc_surface.surface_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1329,7 +1293,7 @@ COMMENT ON COLUMN core.result_desc_surface.surface_id IS 'Foreign key to the cor
 
 
 --
--- TOC entry 4521 (class 0 OID 0)
+-- TOC entry 4519 (class 0 OID 0)
 -- Dependencies: 234
 -- Name: COLUMN result_desc_surface.property_desc_plot_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1338,7 +1302,7 @@ COMMENT ON COLUMN core.result_desc_surface.property_desc_plot_id IS 'Foreign key
 
 
 --
--- TOC entry 4522 (class 0 OID 0)
+-- TOC entry 4520 (class 0 OID 0)
 -- Dependencies: 234
 -- Name: COLUMN result_desc_surface.thesaurus_desc_plot_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1347,7 +1311,7 @@ COMMENT ON COLUMN core.result_desc_surface.thesaurus_desc_plot_id IS 'Foreign ke
 
 
 --
--- TOC entry 235 (class 1259 OID 53769085)
+-- TOC entry 235 (class 1259 OID 53780817)
 -- Name: result_phys_chem; Type: TABLE; Schema: core; Owner: glosis
 --
 
@@ -1363,7 +1327,7 @@ CREATE TABLE core.result_phys_chem (
 ALTER TABLE core.result_phys_chem OWNER TO glosis;
 
 --
--- TOC entry 4523 (class 0 OID 0)
+-- TOC entry 4521 (class 0 OID 0)
 -- Dependencies: 235
 -- Name: TABLE result_phys_chem; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1372,7 +1336,7 @@ COMMENT ON TABLE core.result_phys_chem IS 'Numerical results for the Specimen fe
 
 
 --
--- TOC entry 4524 (class 0 OID 0)
+-- TOC entry 4522 (class 0 OID 0)
 -- Dependencies: 235
 -- Name: COLUMN result_phys_chem.result_phys_chem_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1381,7 +1345,7 @@ COMMENT ON COLUMN core.result_phys_chem.result_phys_chem_id IS 'Synthetic primar
 
 
 --
--- TOC entry 4525 (class 0 OID 0)
+-- TOC entry 4523 (class 0 OID 0)
 -- Dependencies: 235
 -- Name: COLUMN result_phys_chem.observation_phys_chem_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1390,7 +1354,7 @@ COMMENT ON COLUMN core.result_phys_chem.observation_phys_chem_id IS 'Foreign key
 
 
 --
--- TOC entry 4526 (class 0 OID 0)
+-- TOC entry 4524 (class 0 OID 0)
 -- Dependencies: 235
 -- Name: COLUMN result_phys_chem.specimen_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1399,7 +1363,7 @@ COMMENT ON COLUMN core.result_phys_chem.specimen_id IS 'Foreign key to the corre
 
 
 --
--- TOC entry 4527 (class 0 OID 0)
+-- TOC entry 4525 (class 0 OID 0)
 -- Dependencies: 235
 -- Name: COLUMN result_phys_chem.individual_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1408,7 +1372,7 @@ COMMENT ON COLUMN core.result_phys_chem.individual_id IS 'Individual that is res
 
 
 --
--- TOC entry 4528 (class 0 OID 0)
+-- TOC entry 4526 (class 0 OID 0)
 -- Dependencies: 235
 -- Name: COLUMN result_phys_chem.value; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1417,7 +1381,7 @@ COMMENT ON COLUMN core.result_phys_chem.value IS 'Numerical value resulting from
 
 
 --
--- TOC entry 267 (class 1259 OID 53770016)
+-- TOC entry 267 (class 1259 OID 53781712)
 -- Name: result_phys_chem_specimen_result_phys_chem_specimen_id_seq; Type: SEQUENCE; Schema: core; Owner: glosis
 --
 
@@ -1432,7 +1396,7 @@ ALTER TABLE core.result_phys_chem ALTER COLUMN result_phys_chem_id ADD GENERATED
 
 
 --
--- TOC entry 269 (class 1259 OID 53770383)
+-- TOC entry 269 (class 1259 OID 53782079)
 -- Name: result_spectral; Type: TABLE; Schema: core; Owner: glosis
 --
 
@@ -1448,7 +1412,7 @@ CREATE TABLE core.result_spectral (
 ALTER TABLE core.result_spectral OWNER TO glosis;
 
 --
--- TOC entry 268 (class 1259 OID 53770381)
+-- TOC entry 268 (class 1259 OID 53782077)
 -- Name: result_spectral_result_spectral_id_seq; Type: SEQUENCE; Schema: core; Owner: glosis
 --
 
@@ -1463,7 +1427,7 @@ ALTER TABLE core.result_spectral ALTER COLUMN result_spectral_id ADD GENERATED B
 
 
 --
--- TOC entry 236 (class 1259 OID 53769101)
+-- TOC entry 236 (class 1259 OID 53780833)
 -- Name: site; Type: TABLE; Schema: core; Owner: glosis
 --
 
@@ -1480,7 +1444,7 @@ CREATE TABLE core.site (
 ALTER TABLE core.site OWNER TO glosis;
 
 --
--- TOC entry 4530 (class 0 OID 0)
+-- TOC entry 4528 (class 0 OID 0)
 -- Dependencies: 236
 -- Name: TABLE site; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1489,7 +1453,7 @@ COMMENT ON TABLE core.site IS 'Defined area which is subject to a soil quality i
 
 
 --
--- TOC entry 4531 (class 0 OID 0)
+-- TOC entry 4529 (class 0 OID 0)
 -- Dependencies: 236
 -- Name: COLUMN site.site_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1498,7 +1462,7 @@ COMMENT ON COLUMN core.site.site_id IS 'Synthetic primary key.';
 
 
 --
--- TOC entry 4532 (class 0 OID 0)
+-- TOC entry 4530 (class 0 OID 0)
 -- Dependencies: 236
 -- Name: COLUMN site.site_code; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1507,7 +1471,7 @@ COMMENT ON COLUMN core.site.site_code IS 'Natural key, can be null.';
 
 
 --
--- TOC entry 4533 (class 0 OID 0)
+-- TOC entry 4531 (class 0 OID 0)
 -- Dependencies: 236
 -- Name: COLUMN site.typical_profile; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1516,7 +1480,7 @@ COMMENT ON COLUMN core.site.typical_profile IS 'Foreign key to a profile providi
 
 
 --
--- TOC entry 4534 (class 0 OID 0)
+-- TOC entry 4532 (class 0 OID 0)
 -- Dependencies: 236
 -- Name: COLUMN site."position"; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1525,7 +1489,7 @@ COMMENT ON COLUMN core.site."position" IS 'Geodetic coordinates of the spatial p
 
 
 --
--- TOC entry 4535 (class 0 OID 0)
+-- TOC entry 4533 (class 0 OID 0)
 -- Dependencies: 236
 -- Name: COLUMN site.extent; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1534,7 +1498,7 @@ COMMENT ON COLUMN core.site.extent IS 'Site extent expressed with geodetic coord
 
 
 --
--- TOC entry 237 (class 1259 OID 53769108)
+-- TOC entry 237 (class 1259 OID 53780840)
 -- Name: site_project; Type: TABLE; Schema: core; Owner: glosis
 --
 
@@ -1547,7 +1511,7 @@ CREATE TABLE core.site_project (
 ALTER TABLE core.site_project OWNER TO glosis;
 
 --
--- TOC entry 4536 (class 0 OID 0)
+-- TOC entry 4534 (class 0 OID 0)
 -- Dependencies: 237
 -- Name: TABLE site_project; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1556,7 +1520,7 @@ COMMENT ON TABLE core.site_project IS 'Many to many relation between Site and Pr
 
 
 --
--- TOC entry 4537 (class 0 OID 0)
+-- TOC entry 4535 (class 0 OID 0)
 -- Dependencies: 237
 -- Name: COLUMN site_project.site_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1565,7 +1529,7 @@ COMMENT ON COLUMN core.site_project.site_id IS 'Foreign key to Site table';
 
 
 --
--- TOC entry 4538 (class 0 OID 0)
+-- TOC entry 4536 (class 0 OID 0)
 -- Dependencies: 237
 -- Name: COLUMN site_project.project_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1574,7 +1538,7 @@ COMMENT ON COLUMN core.site_project.project_id IS 'Foreign key to Project table'
 
 
 --
--- TOC entry 238 (class 1259 OID 53769111)
+-- TOC entry 238 (class 1259 OID 53780843)
 -- Name: site_site_id_seq; Type: SEQUENCE; Schema: core; Owner: glosis
 --
 
@@ -1589,7 +1553,7 @@ ALTER TABLE core.site ALTER COLUMN site_id ADD GENERATED BY DEFAULT AS IDENTITY 
 
 
 --
--- TOC entry 239 (class 1259 OID 53769113)
+-- TOC entry 239 (class 1259 OID 53780845)
 -- Name: specimen; Type: TABLE; Schema: core; Owner: glosis
 --
 
@@ -1610,7 +1574,7 @@ CREATE TABLE core.specimen (
 ALTER TABLE core.specimen OWNER TO glosis;
 
 --
--- TOC entry 4539 (class 0 OID 0)
+-- TOC entry 4537 (class 0 OID 0)
 -- Dependencies: 239
 -- Name: TABLE specimen; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1619,7 +1583,7 @@ COMMENT ON TABLE core.specimen IS 'Soil Specimen is defined in ISO-28258 as: "a 
 
 
 --
--- TOC entry 4540 (class 0 OID 0)
+-- TOC entry 4538 (class 0 OID 0)
 -- Dependencies: 239
 -- Name: COLUMN specimen.specimen_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1628,7 +1592,7 @@ COMMENT ON COLUMN core.specimen.specimen_id IS 'Synthetic primary key.';
 
 
 --
--- TOC entry 4541 (class 0 OID 0)
+-- TOC entry 4539 (class 0 OID 0)
 -- Dependencies: 239
 -- Name: COLUMN specimen.element_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1637,7 +1601,7 @@ COMMENT ON COLUMN core.specimen.element_id IS 'Foreign key to the associated soi
 
 
 --
--- TOC entry 4542 (class 0 OID 0)
+-- TOC entry 4540 (class 0 OID 0)
 -- Dependencies: 239
 -- Name: COLUMN specimen.specimen_prep_process_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1646,7 +1610,7 @@ COMMENT ON COLUMN core.specimen.specimen_prep_process_id IS 'Foreign key to the 
 
 
 --
--- TOC entry 4543 (class 0 OID 0)
+-- TOC entry 4541 (class 0 OID 0)
 -- Dependencies: 239
 -- Name: COLUMN specimen.organisation_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1655,7 +1619,7 @@ COMMENT ON COLUMN core.specimen.organisation_id IS 'Organisation that is respons
 
 
 --
--- TOC entry 4544 (class 0 OID 0)
+-- TOC entry 4542 (class 0 OID 0)
 -- Dependencies: 239
 -- Name: COLUMN specimen.code; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1664,7 +1628,7 @@ COMMENT ON COLUMN core.specimen.code IS 'External code used to identify the soil
 
 
 --
--- TOC entry 4545 (class 0 OID 0)
+-- TOC entry 4543 (class 0 OID 0)
 -- Dependencies: 239
 -- Name: COLUMN specimen.upper_depth; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1673,7 +1637,7 @@ COMMENT ON COLUMN core.specimen.upper_depth IS 'Upper depth of this soil specime
 
 
 --
--- TOC entry 4546 (class 0 OID 0)
+-- TOC entry 4544 (class 0 OID 0)
 -- Dependencies: 239
 -- Name: COLUMN specimen.lower_depth; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1682,7 +1646,7 @@ COMMENT ON COLUMN core.specimen.lower_depth IS 'Lower depth of this soil specime
 
 
 --
--- TOC entry 240 (class 1259 OID 53769119)
+-- TOC entry 240 (class 1259 OID 53780851)
 -- Name: specimen_prep_process; Type: TABLE; Schema: core; Owner: glosis
 --
 
@@ -1697,7 +1661,7 @@ CREATE TABLE core.specimen_prep_process (
 ALTER TABLE core.specimen_prep_process OWNER TO glosis;
 
 --
--- TOC entry 4547 (class 0 OID 0)
+-- TOC entry 4545 (class 0 OID 0)
 -- Dependencies: 240
 -- Name: TABLE specimen_prep_process; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1706,7 +1670,7 @@ COMMENT ON TABLE core.specimen_prep_process IS 'Describes the preparation proces
 
 
 --
--- TOC entry 4548 (class 0 OID 0)
+-- TOC entry 4546 (class 0 OID 0)
 -- Dependencies: 240
 -- Name: COLUMN specimen_prep_process.specimen_prep_process_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1715,7 +1679,7 @@ COMMENT ON COLUMN core.specimen_prep_process.specimen_prep_process_id IS 'Synthe
 
 
 --
--- TOC entry 4549 (class 0 OID 0)
+-- TOC entry 4547 (class 0 OID 0)
 -- Dependencies: 240
 -- Name: COLUMN specimen_prep_process.specimen_transport_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1724,7 +1688,7 @@ COMMENT ON COLUMN core.specimen_prep_process.specimen_transport_id IS 'Foreign k
 
 
 --
--- TOC entry 4550 (class 0 OID 0)
+-- TOC entry 4548 (class 0 OID 0)
 -- Dependencies: 240
 -- Name: COLUMN specimen_prep_process.specimen_storage_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1733,7 +1697,7 @@ COMMENT ON COLUMN core.specimen_prep_process.specimen_storage_id IS 'Foreign key
 
 
 --
--- TOC entry 4551 (class 0 OID 0)
+-- TOC entry 4549 (class 0 OID 0)
 -- Dependencies: 240
 -- Name: COLUMN specimen_prep_process.definition; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1742,7 +1706,7 @@ COMMENT ON COLUMN core.specimen_prep_process.definition IS 'Further details nece
 
 
 --
--- TOC entry 241 (class 1259 OID 53769125)
+-- TOC entry 241 (class 1259 OID 53780857)
 -- Name: specimen_prep_process_specimen_prep_process_id_seq; Type: SEQUENCE; Schema: core; Owner: glosis
 --
 
@@ -1757,7 +1721,7 @@ ALTER TABLE core.specimen_prep_process ALTER COLUMN specimen_prep_process_id ADD
 
 
 --
--- TOC entry 242 (class 1259 OID 53769127)
+-- TOC entry 242 (class 1259 OID 53780859)
 -- Name: specimen_specimen_id_seq; Type: SEQUENCE; Schema: core; Owner: glosis
 --
 
@@ -1772,7 +1736,7 @@ ALTER TABLE core.specimen ALTER COLUMN specimen_id ADD GENERATED BY DEFAULT AS I
 
 
 --
--- TOC entry 243 (class 1259 OID 53769129)
+-- TOC entry 243 (class 1259 OID 53780861)
 -- Name: specimen_storage; Type: TABLE; Schema: core; Owner: glosis
 --
 
@@ -1786,7 +1750,7 @@ CREATE TABLE core.specimen_storage (
 ALTER TABLE core.specimen_storage OWNER TO glosis;
 
 --
--- TOC entry 4552 (class 0 OID 0)
+-- TOC entry 4550 (class 0 OID 0)
 -- Dependencies: 243
 -- Name: TABLE specimen_storage; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1795,7 +1759,7 @@ COMMENT ON TABLE core.specimen_storage IS 'Modes of storage of a soil Specimen, 
 
 
 --
--- TOC entry 4553 (class 0 OID 0)
+-- TOC entry 4551 (class 0 OID 0)
 -- Dependencies: 243
 -- Name: COLUMN specimen_storage.specimen_storage_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1804,7 +1768,7 @@ COMMENT ON COLUMN core.specimen_storage.specimen_storage_id IS 'Synthetic primar
 
 
 --
--- TOC entry 4554 (class 0 OID 0)
+-- TOC entry 4552 (class 0 OID 0)
 -- Dependencies: 243
 -- Name: COLUMN specimen_storage.label; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1813,7 +1777,7 @@ COMMENT ON COLUMN core.specimen_storage.label IS 'Short label for the storage mo
 
 
 --
--- TOC entry 4555 (class 0 OID 0)
+-- TOC entry 4553 (class 0 OID 0)
 -- Dependencies: 243
 -- Name: COLUMN specimen_storage.definition; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1822,7 +1786,7 @@ COMMENT ON COLUMN core.specimen_storage.definition IS 'Long definition providing
 
 
 --
--- TOC entry 244 (class 1259 OID 53769135)
+-- TOC entry 244 (class 1259 OID 53780867)
 -- Name: specimen_storage_specimen_storage_id_seq; Type: SEQUENCE; Schema: core; Owner: glosis
 --
 
@@ -1837,7 +1801,7 @@ ALTER TABLE core.specimen_storage ALTER COLUMN specimen_storage_id ADD GENERATED
 
 
 --
--- TOC entry 245 (class 1259 OID 53769137)
+-- TOC entry 245 (class 1259 OID 53780869)
 -- Name: specimen_transport; Type: TABLE; Schema: core; Owner: glosis
 --
 
@@ -1851,7 +1815,7 @@ CREATE TABLE core.specimen_transport (
 ALTER TABLE core.specimen_transport OWNER TO glosis;
 
 --
--- TOC entry 4556 (class 0 OID 0)
+-- TOC entry 4554 (class 0 OID 0)
 -- Dependencies: 245
 -- Name: TABLE specimen_transport; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1860,7 +1824,7 @@ COMMENT ON TABLE core.specimen_transport IS 'Modes of transport of a soil Specim
 
 
 --
--- TOC entry 4557 (class 0 OID 0)
+-- TOC entry 4555 (class 0 OID 0)
 -- Dependencies: 245
 -- Name: COLUMN specimen_transport.specimen_transport_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1869,7 +1833,7 @@ COMMENT ON COLUMN core.specimen_transport.specimen_transport_id IS 'Synthetic pr
 
 
 --
--- TOC entry 4558 (class 0 OID 0)
+-- TOC entry 4556 (class 0 OID 0)
 -- Dependencies: 245
 -- Name: COLUMN specimen_transport.label; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1878,7 +1842,7 @@ COMMENT ON COLUMN core.specimen_transport.label IS 'Short label for the transpor
 
 
 --
--- TOC entry 4559 (class 0 OID 0)
+-- TOC entry 4557 (class 0 OID 0)
 -- Dependencies: 245
 -- Name: COLUMN specimen_transport.definition; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1887,7 +1851,7 @@ COMMENT ON COLUMN core.specimen_transport.definition IS 'Long definition providi
 
 
 --
--- TOC entry 246 (class 1259 OID 53769143)
+-- TOC entry 246 (class 1259 OID 53780875)
 -- Name: specimen_transport_specimen_transport_id_seq; Type: SEQUENCE; Schema: core; Owner: glosis
 --
 
@@ -1902,7 +1866,7 @@ ALTER TABLE core.specimen_transport ALTER COLUMN specimen_transport_id ADD GENER
 
 
 --
--- TOC entry 247 (class 1259 OID 53769145)
+-- TOC entry 247 (class 1259 OID 53780877)
 -- Name: surface; Type: TABLE; Schema: core; Owner: glosis
 --
 
@@ -1918,7 +1882,7 @@ CREATE TABLE core.surface (
 ALTER TABLE core.surface OWNER TO glosis;
 
 --
--- TOC entry 4560 (class 0 OID 0)
+-- TOC entry 4558 (class 0 OID 0)
 -- Dependencies: 247
 -- Name: TABLE surface; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1928,7 +1892,7 @@ surfaces.';
 
 
 --
--- TOC entry 4561 (class 0 OID 0)
+-- TOC entry 4559 (class 0 OID 0)
 -- Dependencies: 247
 -- Name: COLUMN surface.surface_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1937,7 +1901,7 @@ COMMENT ON COLUMN core.surface.surface_id IS 'Synthetic primary key.';
 
 
 --
--- TOC entry 4562 (class 0 OID 0)
+-- TOC entry 4560 (class 0 OID 0)
 -- Dependencies: 247
 -- Name: COLUMN surface.super_surface_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1946,7 +1910,7 @@ COMMENT ON COLUMN core.surface.super_surface_id IS 'Hierarchical relation betwee
 
 
 --
--- TOC entry 4563 (class 0 OID 0)
+-- TOC entry 4561 (class 0 OID 0)
 -- Dependencies: 247
 -- Name: COLUMN surface.site_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1955,7 +1919,7 @@ COMMENT ON COLUMN core.surface.site_id IS 'Foreign key to Site table';
 
 
 --
--- TOC entry 4564 (class 0 OID 0)
+-- TOC entry 4562 (class 0 OID 0)
 -- Dependencies: 247
 -- Name: COLUMN surface.shape; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1964,7 +1928,7 @@ COMMENT ON COLUMN core.surface.shape IS 'Site extent expressed with geodetic coo
 
 
 --
--- TOC entry 4565 (class 0 OID 0)
+-- TOC entry 4563 (class 0 OID 0)
 -- Dependencies: 247
 -- Name: COLUMN surface.time_stamp; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1973,7 +1937,7 @@ COMMENT ON COLUMN core.surface.time_stamp IS 'Time stamp of the plot, if known. 
 
 
 --
--- TOC entry 248 (class 1259 OID 53769151)
+-- TOC entry 248 (class 1259 OID 53780883)
 -- Name: surface_individual; Type: TABLE; Schema: core; Owner: glosis
 --
 
@@ -1986,7 +1950,7 @@ CREATE TABLE core.surface_individual (
 ALTER TABLE core.surface_individual OWNER TO glosis;
 
 --
--- TOC entry 4566 (class 0 OID 0)
+-- TOC entry 4564 (class 0 OID 0)
 -- Dependencies: 248
 -- Name: TABLE surface_individual; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -1995,7 +1959,7 @@ COMMENT ON TABLE core.surface_individual IS 'Identifies the individual(s) respon
 
 
 --
--- TOC entry 4567 (class 0 OID 0)
+-- TOC entry 4565 (class 0 OID 0)
 -- Dependencies: 248
 -- Name: COLUMN surface_individual.surface_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -2004,7 +1968,7 @@ COMMENT ON COLUMN core.surface_individual.surface_id IS 'Foreign key to the surf
 
 
 --
--- TOC entry 4568 (class 0 OID 0)
+-- TOC entry 4566 (class 0 OID 0)
 -- Dependencies: 248
 -- Name: COLUMN surface_individual.individual_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -2013,7 +1977,7 @@ COMMENT ON COLUMN core.surface_individual.individual_id IS 'Foreign key to the i
 
 
 --
--- TOC entry 249 (class 1259 OID 53769154)
+-- TOC entry 249 (class 1259 OID 53780886)
 -- Name: surface_surface_id_seq; Type: SEQUENCE; Schema: core; Owner: glosis
 --
 
@@ -2028,7 +1992,7 @@ ALTER TABLE core.surface ALTER COLUMN surface_id ADD GENERATED BY DEFAULT AS IDE
 
 
 --
--- TOC entry 250 (class 1259 OID 53769156)
+-- TOC entry 250 (class 1259 OID 53780888)
 -- Name: thesaurus_desc_element; Type: TABLE; Schema: core; Owner: glosis
 --
 
@@ -2042,7 +2006,7 @@ CREATE TABLE core.thesaurus_desc_element (
 ALTER TABLE core.thesaurus_desc_element OWNER TO glosis;
 
 --
--- TOC entry 4569 (class 0 OID 0)
+-- TOC entry 4567 (class 0 OID 0)
 -- Dependencies: 250
 -- Name: TABLE thesaurus_desc_element; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -2051,7 +2015,7 @@ COMMENT ON TABLE core.thesaurus_desc_element IS 'Vocabularies for the descriptiv
 
 
 --
--- TOC entry 4570 (class 0 OID 0)
+-- TOC entry 4568 (class 0 OID 0)
 -- Dependencies: 250
 -- Name: COLUMN thesaurus_desc_element.thesaurus_desc_element_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -2060,7 +2024,7 @@ COMMENT ON COLUMN core.thesaurus_desc_element.thesaurus_desc_element_id IS 'Synt
 
 
 --
--- TOC entry 4571 (class 0 OID 0)
+-- TOC entry 4569 (class 0 OID 0)
 -- Dependencies: 250
 -- Name: COLUMN thesaurus_desc_element.label; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -2069,7 +2033,7 @@ COMMENT ON COLUMN core.thesaurus_desc_element.label IS 'Short label for this ter
 
 
 --
--- TOC entry 4572 (class 0 OID 0)
+-- TOC entry 4570 (class 0 OID 0)
 -- Dependencies: 250
 -- Name: COLUMN thesaurus_desc_element.uri; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -2078,7 +2042,7 @@ COMMENT ON COLUMN core.thesaurus_desc_element.uri IS 'URI to the corresponding c
 
 
 --
--- TOC entry 251 (class 1259 OID 53769162)
+-- TOC entry 251 (class 1259 OID 53780894)
 -- Name: thesaurus_desc_element_thesaurus_desc_element_id_seq1; Type: SEQUENCE; Schema: core; Owner: glosis
 --
 
@@ -2093,7 +2057,7 @@ ALTER TABLE core.thesaurus_desc_element ALTER COLUMN thesaurus_desc_element_id A
 
 
 --
--- TOC entry 252 (class 1259 OID 53769164)
+-- TOC entry 252 (class 1259 OID 53780896)
 -- Name: thesaurus_desc_plot; Type: TABLE; Schema: core; Owner: glosis
 --
 
@@ -2107,7 +2071,7 @@ CREATE TABLE core.thesaurus_desc_plot (
 ALTER TABLE core.thesaurus_desc_plot OWNER TO glosis;
 
 --
--- TOC entry 4573 (class 0 OID 0)
+-- TOC entry 4571 (class 0 OID 0)
 -- Dependencies: 252
 -- Name: TABLE thesaurus_desc_plot; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -2116,7 +2080,7 @@ COMMENT ON TABLE core.thesaurus_desc_plot IS 'Descriptive properties for the Plo
 
 
 --
--- TOC entry 4574 (class 0 OID 0)
+-- TOC entry 4572 (class 0 OID 0)
 -- Dependencies: 252
 -- Name: COLUMN thesaurus_desc_plot.thesaurus_desc_plot_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -2125,7 +2089,7 @@ COMMENT ON COLUMN core.thesaurus_desc_plot.thesaurus_desc_plot_id IS 'Synthetic 
 
 
 --
--- TOC entry 4575 (class 0 OID 0)
+-- TOC entry 4573 (class 0 OID 0)
 -- Dependencies: 252
 -- Name: COLUMN thesaurus_desc_plot.label; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -2134,7 +2098,7 @@ COMMENT ON COLUMN core.thesaurus_desc_plot.label IS 'Short label for this term';
 
 
 --
--- TOC entry 4576 (class 0 OID 0)
+-- TOC entry 4574 (class 0 OID 0)
 -- Dependencies: 252
 -- Name: COLUMN thesaurus_desc_plot.uri; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -2143,7 +2107,7 @@ COMMENT ON COLUMN core.thesaurus_desc_plot.uri IS 'URI to the corresponding code
 
 
 --
--- TOC entry 253 (class 1259 OID 53769170)
+-- TOC entry 253 (class 1259 OID 53780902)
 -- Name: thesaurus_desc_plot_thesaurus_desc_plot_id_seq1; Type: SEQUENCE; Schema: core; Owner: glosis
 --
 
@@ -2158,7 +2122,7 @@ ALTER TABLE core.thesaurus_desc_plot ALTER COLUMN thesaurus_desc_plot_id ADD GEN
 
 
 --
--- TOC entry 254 (class 1259 OID 53769172)
+-- TOC entry 254 (class 1259 OID 53780904)
 -- Name: thesaurus_desc_profile; Type: TABLE; Schema: core; Owner: glosis
 --
 
@@ -2172,7 +2136,7 @@ CREATE TABLE core.thesaurus_desc_profile (
 ALTER TABLE core.thesaurus_desc_profile OWNER TO glosis;
 
 --
--- TOC entry 4577 (class 0 OID 0)
+-- TOC entry 4575 (class 0 OID 0)
 -- Dependencies: 254
 -- Name: TABLE thesaurus_desc_profile; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -2181,7 +2145,7 @@ COMMENT ON TABLE core.thesaurus_desc_profile IS 'Vocabularies for the descriptiv
 
 
 --
--- TOC entry 4578 (class 0 OID 0)
+-- TOC entry 4576 (class 0 OID 0)
 -- Dependencies: 254
 -- Name: COLUMN thesaurus_desc_profile.thesaurus_desc_profile_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -2190,7 +2154,7 @@ COMMENT ON COLUMN core.thesaurus_desc_profile.thesaurus_desc_profile_id IS 'Synt
 
 
 --
--- TOC entry 4579 (class 0 OID 0)
+-- TOC entry 4577 (class 0 OID 0)
 -- Dependencies: 254
 -- Name: COLUMN thesaurus_desc_profile.label; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -2199,7 +2163,7 @@ COMMENT ON COLUMN core.thesaurus_desc_profile.label IS 'Short label for this ter
 
 
 --
--- TOC entry 4580 (class 0 OID 0)
+-- TOC entry 4578 (class 0 OID 0)
 -- Dependencies: 254
 -- Name: COLUMN thesaurus_desc_profile.uri; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -2208,7 +2172,7 @@ COMMENT ON COLUMN core.thesaurus_desc_profile.uri IS 'URI to the corresponding c
 
 
 --
--- TOC entry 255 (class 1259 OID 53769178)
+-- TOC entry 255 (class 1259 OID 53780910)
 -- Name: thesaurus_desc_profile_thesaurus_desc_profile_id_seq1; Type: SEQUENCE; Schema: core; Owner: glosis
 --
 
@@ -2223,7 +2187,7 @@ ALTER TABLE core.thesaurus_desc_profile ALTER COLUMN thesaurus_desc_profile_id A
 
 
 --
--- TOC entry 256 (class 1259 OID 53769196)
+-- TOC entry 256 (class 1259 OID 53780928)
 -- Name: unit_of_measure; Type: TABLE; Schema: core; Owner: glosis
 --
 
@@ -2237,7 +2201,7 @@ CREATE TABLE core.unit_of_measure (
 ALTER TABLE core.unit_of_measure OWNER TO glosis;
 
 --
--- TOC entry 4581 (class 0 OID 0)
+-- TOC entry 4579 (class 0 OID 0)
 -- Dependencies: 256
 -- Name: TABLE unit_of_measure; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -2246,7 +2210,7 @@ COMMENT ON TABLE core.unit_of_measure IS 'Unit of measure';
 
 
 --
--- TOC entry 4582 (class 0 OID 0)
+-- TOC entry 4580 (class 0 OID 0)
 -- Dependencies: 256
 -- Name: COLUMN unit_of_measure.unit_of_measure_id; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -2255,7 +2219,7 @@ COMMENT ON COLUMN core.unit_of_measure.unit_of_measure_id IS 'Synthetic primary 
 
 
 --
--- TOC entry 4583 (class 0 OID 0)
+-- TOC entry 4581 (class 0 OID 0)
 -- Dependencies: 256
 -- Name: COLUMN unit_of_measure.label; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -2264,7 +2228,7 @@ COMMENT ON COLUMN core.unit_of_measure.label IS 'Short label for this unit of me
 
 
 --
--- TOC entry 4584 (class 0 OID 0)
+-- TOC entry 4582 (class 0 OID 0)
 -- Dependencies: 256
 -- Name: COLUMN unit_of_measure.uri; Type: COMMENT; Schema: core; Owner: glosis
 --
@@ -2273,7 +2237,7 @@ COMMENT ON COLUMN core.unit_of_measure.uri IS 'URI to the corresponding unit of 
 
 
 --
--- TOC entry 257 (class 1259 OID 53769204)
+-- TOC entry 257 (class 1259 OID 53780936)
 -- Name: address; Type: TABLE; Schema: metadata; Owner: glosis
 --
 
@@ -2289,7 +2253,7 @@ CREATE TABLE metadata.address (
 ALTER TABLE metadata.address OWNER TO glosis;
 
 --
--- TOC entry 4585 (class 0 OID 0)
+-- TOC entry 4583 (class 0 OID 0)
 -- Dependencies: 257
 -- Name: TABLE address; Type: COMMENT; Schema: metadata; Owner: glosis
 --
@@ -2298,7 +2262,7 @@ COMMENT ON TABLE metadata.address IS 'Equivalent to the Address class in VCard, 
 
 
 --
--- TOC entry 4586 (class 0 OID 0)
+-- TOC entry 4584 (class 0 OID 0)
 -- Dependencies: 257
 -- Name: COLUMN address.address_id; Type: COMMENT; Schema: metadata; Owner: glosis
 --
@@ -2307,7 +2271,7 @@ COMMENT ON COLUMN metadata.address.address_id IS 'Synthetic primary key.';
 
 
 --
--- TOC entry 4587 (class 0 OID 0)
+-- TOC entry 4585 (class 0 OID 0)
 -- Dependencies: 257
 -- Name: COLUMN address.street_address; Type: COMMENT; Schema: metadata; Owner: glosis
 --
@@ -2316,7 +2280,7 @@ COMMENT ON COLUMN metadata.address.street_address IS 'Street address data proper
 
 
 --
--- TOC entry 4588 (class 0 OID 0)
+-- TOC entry 4586 (class 0 OID 0)
 -- Dependencies: 257
 -- Name: COLUMN address.postal_code; Type: COMMENT; Schema: metadata; Owner: glosis
 --
@@ -2325,7 +2289,7 @@ COMMENT ON COLUMN metadata.address.postal_code IS 'Equivalent to the postal-code
 
 
 --
--- TOC entry 4589 (class 0 OID 0)
+-- TOC entry 4587 (class 0 OID 0)
 -- Dependencies: 257
 -- Name: COLUMN address.locality; Type: COMMENT; Schema: metadata; Owner: glosis
 --
@@ -2334,7 +2298,7 @@ COMMENT ON COLUMN metadata.address.locality IS 'Locality data property in VCard,
 
 
 --
--- TOC entry 4590 (class 0 OID 0)
+-- TOC entry 4588 (class 0 OID 0)
 -- Dependencies: 257
 -- Name: COLUMN address.country; Type: COMMENT; Schema: metadata; Owner: glosis
 --
@@ -2343,7 +2307,7 @@ COMMENT ON COLUMN metadata.address.country IS 'Equivalent to the country data pr
 
 
 --
--- TOC entry 258 (class 1259 OID 53769210)
+-- TOC entry 258 (class 1259 OID 53780942)
 -- Name: address_address_id_seq; Type: SEQUENCE; Schema: metadata; Owner: glosis
 --
 
@@ -2358,7 +2322,7 @@ ALTER TABLE metadata.address ALTER COLUMN address_id ADD GENERATED BY DEFAULT AS
 
 
 --
--- TOC entry 259 (class 1259 OID 53769212)
+-- TOC entry 259 (class 1259 OID 53780944)
 -- Name: individual; Type: TABLE; Schema: metadata; Owner: glosis
 --
 
@@ -2376,7 +2340,7 @@ CREATE TABLE metadata.individual (
 ALTER TABLE metadata.individual OWNER TO glosis;
 
 --
--- TOC entry 4591 (class 0 OID 0)
+-- TOC entry 4589 (class 0 OID 0)
 -- Dependencies: 259
 -- Name: TABLE individual; Type: COMMENT; Schema: metadata; Owner: glosis
 --
@@ -2385,7 +2349,7 @@ COMMENT ON TABLE metadata.individual IS 'Equivalent to the Individual class in V
 
 
 --
--- TOC entry 4592 (class 0 OID 0)
+-- TOC entry 4590 (class 0 OID 0)
 -- Dependencies: 259
 -- Name: COLUMN individual.individual_id; Type: COMMENT; Schema: metadata; Owner: glosis
 --
@@ -2394,7 +2358,7 @@ COMMENT ON COLUMN metadata.individual.individual_id IS 'Synthetic primary key.';
 
 
 --
--- TOC entry 4593 (class 0 OID 0)
+-- TOC entry 4591 (class 0 OID 0)
 -- Dependencies: 259
 -- Name: COLUMN individual.address_id; Type: COMMENT; Schema: metadata; Owner: glosis
 --
@@ -2403,7 +2367,7 @@ COMMENT ON COLUMN metadata.individual.address_id IS 'Foreign key to address asso
 
 
 --
--- TOC entry 4594 (class 0 OID 0)
+-- TOC entry 4592 (class 0 OID 0)
 -- Dependencies: 259
 -- Name: COLUMN individual.name; Type: COMMENT; Schema: metadata; Owner: glosis
 --
@@ -2412,7 +2376,7 @@ COMMENT ON COLUMN metadata.individual.name IS 'Name of the individual, encompass
 
 
 --
--- TOC entry 4595 (class 0 OID 0)
+-- TOC entry 4593 (class 0 OID 0)
 -- Dependencies: 259
 -- Name: COLUMN individual.honorific_title; Type: COMMENT; Schema: metadata; Owner: glosis
 --
@@ -2421,7 +2385,7 @@ COMMENT ON COLUMN metadata.individual.honorific_title IS 'Academic title or hono
 
 
 --
--- TOC entry 4596 (class 0 OID 0)
+-- TOC entry 4594 (class 0 OID 0)
 -- Dependencies: 259
 -- Name: COLUMN individual.email; Type: COMMENT; Schema: metadata; Owner: glosis
 --
@@ -2430,7 +2394,7 @@ COMMENT ON COLUMN metadata.individual.email IS 'Electronic mail address of the i
 
 
 --
--- TOC entry 4597 (class 0 OID 0)
+-- TOC entry 4595 (class 0 OID 0)
 -- Dependencies: 259
 -- Name: COLUMN individual.telephone; Type: COMMENT; Schema: metadata; Owner: glosis
 --
@@ -2439,7 +2403,7 @@ COMMENT ON COLUMN metadata.individual.telephone IS 'Equivalent to the telephone 
 
 
 --
--- TOC entry 4598 (class 0 OID 0)
+-- TOC entry 4596 (class 0 OID 0)
 -- Dependencies: 259
 -- Name: COLUMN individual.url; Type: COMMENT; Schema: metadata; Owner: glosis
 --
@@ -2448,7 +2412,7 @@ COMMENT ON COLUMN metadata.individual.url IS 'Locator to a web page associated w
 
 
 --
--- TOC entry 260 (class 1259 OID 53769218)
+-- TOC entry 260 (class 1259 OID 53780950)
 -- Name: individual_individual_id_seq; Type: SEQUENCE; Schema: metadata; Owner: glosis
 --
 
@@ -2463,7 +2427,7 @@ ALTER TABLE metadata.individual ALTER COLUMN individual_id ADD GENERATED BY DEFA
 
 
 --
--- TOC entry 261 (class 1259 OID 53769220)
+-- TOC entry 261 (class 1259 OID 53780952)
 -- Name: organisation; Type: TABLE; Schema: metadata; Owner: glosis
 --
 
@@ -2481,7 +2445,7 @@ CREATE TABLE metadata.organisation (
 ALTER TABLE metadata.organisation OWNER TO glosis;
 
 --
--- TOC entry 4599 (class 0 OID 0)
+-- TOC entry 4597 (class 0 OID 0)
 -- Dependencies: 261
 -- Name: TABLE organisation; Type: COMMENT; Schema: metadata; Owner: glosis
 --
@@ -2490,7 +2454,7 @@ COMMENT ON TABLE metadata.organisation IS 'Equivalent to the Organisation class 
 
 
 --
--- TOC entry 4600 (class 0 OID 0)
+-- TOC entry 4598 (class 0 OID 0)
 -- Dependencies: 261
 -- Name: COLUMN organisation.organisation_id; Type: COMMENT; Schema: metadata; Owner: glosis
 --
@@ -2499,7 +2463,7 @@ COMMENT ON COLUMN metadata.organisation.organisation_id IS 'Synthetic primary ke
 
 
 --
--- TOC entry 4601 (class 0 OID 0)
+-- TOC entry 4599 (class 0 OID 0)
 -- Dependencies: 261
 -- Name: COLUMN organisation.parent_id; Type: COMMENT; Schema: metadata; Owner: glosis
 --
@@ -2508,7 +2472,7 @@ COMMENT ON COLUMN metadata.organisation.parent_id IS 'Foreign key to the parent 
 
 
 --
--- TOC entry 4602 (class 0 OID 0)
+-- TOC entry 4600 (class 0 OID 0)
 -- Dependencies: 261
 -- Name: COLUMN organisation.address_id; Type: COMMENT; Schema: metadata; Owner: glosis
 --
@@ -2517,7 +2481,7 @@ COMMENT ON COLUMN metadata.organisation.address_id IS 'Foreign key to address as
 
 
 --
--- TOC entry 4603 (class 0 OID 0)
+-- TOC entry 4601 (class 0 OID 0)
 -- Dependencies: 261
 -- Name: COLUMN organisation.name; Type: COMMENT; Schema: metadata; Owner: glosis
 --
@@ -2526,7 +2490,7 @@ COMMENT ON COLUMN metadata.organisation.name IS 'Name of the organisation.';
 
 
 --
--- TOC entry 4604 (class 0 OID 0)
+-- TOC entry 4602 (class 0 OID 0)
 -- Dependencies: 261
 -- Name: COLUMN organisation.email; Type: COMMENT; Schema: metadata; Owner: glosis
 --
@@ -2535,7 +2499,7 @@ COMMENT ON COLUMN metadata.organisation.email IS 'Electronic mail address of the
 
 
 --
--- TOC entry 4605 (class 0 OID 0)
+-- TOC entry 4603 (class 0 OID 0)
 -- Dependencies: 261
 -- Name: COLUMN organisation.telephone; Type: COMMENT; Schema: metadata; Owner: glosis
 --
@@ -2544,7 +2508,7 @@ COMMENT ON COLUMN metadata.organisation.telephone IS 'Equivalent to the telephon
 
 
 --
--- TOC entry 4606 (class 0 OID 0)
+-- TOC entry 4604 (class 0 OID 0)
 -- Dependencies: 261
 -- Name: COLUMN organisation.url; Type: COMMENT; Schema: metadata; Owner: glosis
 --
@@ -2553,7 +2517,7 @@ COMMENT ON COLUMN metadata.organisation.url IS 'Locator to a web page associated
 
 
 --
--- TOC entry 262 (class 1259 OID 53769226)
+-- TOC entry 262 (class 1259 OID 53780958)
 -- Name: organisation_individual; Type: TABLE; Schema: metadata; Owner: glosis
 --
 
@@ -2568,7 +2532,7 @@ CREATE TABLE metadata.organisation_individual (
 ALTER TABLE metadata.organisation_individual OWNER TO glosis;
 
 --
--- TOC entry 4607 (class 0 OID 0)
+-- TOC entry 4605 (class 0 OID 0)
 -- Dependencies: 262
 -- Name: TABLE organisation_individual; Type: COMMENT; Schema: metadata; Owner: glosis
 --
@@ -2577,7 +2541,7 @@ COMMENT ON TABLE metadata.organisation_individual IS 'Relation between Individua
 
 
 --
--- TOC entry 4608 (class 0 OID 0)
+-- TOC entry 4606 (class 0 OID 0)
 -- Dependencies: 262
 -- Name: COLUMN organisation_individual.organisation_id; Type: COMMENT; Schema: metadata; Owner: glosis
 --
@@ -2586,7 +2550,7 @@ COMMENT ON COLUMN metadata.organisation_individual.organisation_id IS 'Foreign k
 
 
 --
--- TOC entry 4609 (class 0 OID 0)
+-- TOC entry 4607 (class 0 OID 0)
 -- Dependencies: 262
 -- Name: COLUMN organisation_individual.organisation_unit_id; Type: COMMENT; Schema: metadata; Owner: glosis
 --
@@ -2595,7 +2559,7 @@ COMMENT ON COLUMN metadata.organisation_individual.organisation_unit_id IS 'Fore
 
 
 --
--- TOC entry 4610 (class 0 OID 0)
+-- TOC entry 4608 (class 0 OID 0)
 -- Dependencies: 262
 -- Name: COLUMN organisation_individual.individual_id; Type: COMMENT; Schema: metadata; Owner: glosis
 --
@@ -2604,7 +2568,7 @@ COMMENT ON COLUMN metadata.organisation_individual.individual_id IS 'Foreign key
 
 
 --
--- TOC entry 4611 (class 0 OID 0)
+-- TOC entry 4609 (class 0 OID 0)
 -- Dependencies: 262
 -- Name: COLUMN organisation_individual.role; Type: COMMENT; Schema: metadata; Owner: glosis
 --
@@ -2613,7 +2577,7 @@ COMMENT ON COLUMN metadata.organisation_individual.role IS 'Role of the individu
 
 
 --
--- TOC entry 263 (class 1259 OID 53769232)
+-- TOC entry 263 (class 1259 OID 53780964)
 -- Name: organisation_organisation_id_seq; Type: SEQUENCE; Schema: metadata; Owner: glosis
 --
 
@@ -2628,7 +2592,7 @@ ALTER TABLE metadata.organisation ALTER COLUMN organisation_id ADD GENERATED BY 
 
 
 --
--- TOC entry 264 (class 1259 OID 53769234)
+-- TOC entry 264 (class 1259 OID 53780966)
 -- Name: organisation_unit; Type: TABLE; Schema: metadata; Owner: glosis
 --
 
@@ -2642,7 +2606,7 @@ CREATE TABLE metadata.organisation_unit (
 ALTER TABLE metadata.organisation_unit OWNER TO glosis;
 
 --
--- TOC entry 4612 (class 0 OID 0)
+-- TOC entry 4610 (class 0 OID 0)
 -- Dependencies: 264
 -- Name: TABLE organisation_unit; Type: COMMENT; Schema: metadata; Owner: glosis
 --
@@ -2651,7 +2615,7 @@ COMMENT ON TABLE metadata.organisation_unit IS 'Captures the data property organ
 
 
 --
--- TOC entry 4613 (class 0 OID 0)
+-- TOC entry 4611 (class 0 OID 0)
 -- Dependencies: 264
 -- Name: COLUMN organisation_unit.organisation_unit_id; Type: COMMENT; Schema: metadata; Owner: glosis
 --
@@ -2660,7 +2624,7 @@ COMMENT ON COLUMN metadata.organisation_unit.organisation_unit_id IS 'Synthetic 
 
 
 --
--- TOC entry 4614 (class 0 OID 0)
+-- TOC entry 4612 (class 0 OID 0)
 -- Dependencies: 264
 -- Name: COLUMN organisation_unit.organisation_id; Type: COMMENT; Schema: metadata; Owner: glosis
 --
@@ -2669,7 +2633,7 @@ COMMENT ON COLUMN metadata.organisation_unit.organisation_id IS 'Foreign key to 
 
 
 --
--- TOC entry 4615 (class 0 OID 0)
+-- TOC entry 4613 (class 0 OID 0)
 -- Dependencies: 264
 -- Name: COLUMN organisation_unit.name; Type: COMMENT; Schema: metadata; Owner: glosis
 --
@@ -2678,7 +2642,7 @@ COMMENT ON COLUMN metadata.organisation_unit.name IS 'Name of the organisation u
 
 
 --
--- TOC entry 265 (class 1259 OID 53769240)
+-- TOC entry 265 (class 1259 OID 53780972)
 -- Name: organisation_unit_organisation_unit_id_seq; Type: SEQUENCE; Schema: metadata; Owner: glosis
 --
 
@@ -2693,7 +2657,7 @@ ALTER TABLE metadata.organisation_unit ALTER COLUMN organisation_unit_id ADD GEN
 
 
 --
--- TOC entry 4363 (class 0 OID 53768927)
+-- TOC entry 4362 (class 0 OID 53780659)
 -- Dependencies: 210
 -- Data for Name: element; Type: TABLE DATA; Schema: core; Owner: glosis
 --
@@ -2703,7 +2667,7 @@ COPY core.element (element_id, profile_id, order_element, upper_depth, lower_dep
 
 
 --
--- TOC entry 4365 (class 0 OID 53768935)
+-- TOC entry 4364 (class 0 OID 53780667)
 -- Dependencies: 212
 -- Data for Name: observation_desc_element; Type: TABLE DATA; Schema: core; Owner: glosis
 --
@@ -3079,7 +3043,7 @@ FAO GfSD 2006	weatheringFragmentsProperty	358
 
 
 --
--- TOC entry 4366 (class 0 OID 53768938)
+-- TOC entry 4365 (class 0 OID 53780670)
 -- Dependencies: 213
 -- Data for Name: observation_desc_plot; Type: TABLE DATA; Schema: core; Owner: glosis
 --
@@ -3760,7 +3724,7 @@ FAO GfSD 2006	rockSizeProperty	446
 
 
 --
--- TOC entry 4367 (class 0 OID 53768941)
+-- TOC entry 4366 (class 0 OID 53780673)
 -- Dependencies: 214
 -- Data for Name: observation_desc_profile; Type: TABLE DATA; Schema: core; Owner: glosis
 --
@@ -3779,13 +3743,14 @@ FAO GfSD 2006	profileDescriptionStatusProperty	5
 
 
 --
--- TOC entry 4368 (class 0 OID 53768958)
+-- TOC entry 4367 (class 0 OID 53780690)
 -- Dependencies: 215
 -- Data for Name: observation_phys_chem; Type: TABLE DATA; Schema: core; Owner: glosis
 --
 
 COPY core.observation_phys_chem (observation_phys_chem_id, property_phys_chem_id, procedure_phys_chem_id, unit_of_measure_id, value_min, value_max) FROM stdin;
 543	pHProperty	pHH2O	pH	1.5	13
+175	Boron (B) - extractable	Extr_ap14	%	0	100
 514	pH - Hydrogen potential	pHH2O	pH	1.5	13
 508	pH - Hydrogen potential	pHCaCl2_ratio1-1	pH	1.5	13
 537	pHProperty	pHCaCl2_ratio1-1	pH	1.5	13
@@ -3810,6 +3775,341 @@ COPY core.observation_phys_chem (observation_phys_chem_id, property_phys_chem_id
 519	pH - Hydrogen potential	pHH2O_ratio1-5	pH	1.5	13
 548	pHProperty	pHH2O_ratio1-5	pH	1.5	13
 520	pH - Hydrogen potential	pHH2O_sat	pH	1.5	13
+635	Clay texture fraction	SaSiCl_2-50-2000u-adj100	%	0	100
+587	Sand texture fraction	SaSiCl_2-50-2000u-adj100	%	0	100
+683	Silt texture fraction	SaSiCl_2-50-2000u-adj100	%	0	100
+619	Clay texture fraction	SaSiCl_2-20-2000u-adj100	%	0	100
+571	Sand texture fraction	SaSiCl_2-20-2000u-adj100	%	0	100
+667	Silt texture fraction	SaSiCl_2-20-2000u-adj100	%	0	100
+620	Clay texture fraction	SaSiCl_2-20-2000u-disp	%	0	100
+572	Sand texture fraction	SaSiCl_2-20-2000u-disp	%	0	100
+668	Silt texture fraction	SaSiCl_2-20-2000u-disp	%	0	100
+621	Clay texture fraction	SaSiCl_2-20-2000u-disp-beaker	%	0	100
+573	Sand texture fraction	SaSiCl_2-20-2000u-disp-beaker	%	0	100
+669	Silt texture fraction	SaSiCl_2-20-2000u-disp-beaker	%	0	100
+622	Clay texture fraction	SaSiCl_2-20-2000u-disp-hydrometer	%	0	100
+574	Sand texture fraction	SaSiCl_2-20-2000u-disp-hydrometer	%	0	100
+670	Silt texture fraction	SaSiCl_2-20-2000u-disp-hydrometer	%	0	100
+623	Clay texture fraction	SaSiCl_2-20-2000u-disp-hydrometer-bouy	%	0	100
+575	Sand texture fraction	SaSiCl_2-20-2000u-disp-hydrometer-bouy	%	0	100
+671	Silt texture fraction	SaSiCl_2-20-2000u-disp-hydrometer-bouy	%	0	100
+624	Clay texture fraction	SaSiCl_2-20-2000u-disp-laser	%	0	100
+576	Sand texture fraction	SaSiCl_2-20-2000u-disp-laser	%	0	100
+672	Silt texture fraction	SaSiCl_2-20-2000u-disp-laser	%	0	100
+625	Clay texture fraction	SaSiCl_2-20-2000u-disp-pipette	%	0	100
+577	Sand texture fraction	SaSiCl_2-20-2000u-disp-pipette	%	0	100
+673	Silt texture fraction	SaSiCl_2-20-2000u-disp-pipette	%	0	100
+626	Clay texture fraction	SaSiCl_2-20-2000u-disp-spec	%	0	100
+578	Sand texture fraction	SaSiCl_2-20-2000u-disp-spec	%	0	100
+493	Nitrogen (N) - total	TotalN_dc-ht-dumas	g/kg	0	1000
+494	Nitrogen (N) - total	TotalN_dc-ht-leco	g/kg	0	1000
+495	Nitrogen (N) - total	TotalN_dc-spec	g/kg	0	1000
+69	electricalConductivityProperty	EC_ratio1-2	dS/m	0	60
+674	Silt texture fraction	SaSiCl_2-20-2000u-disp-spec	%	0	100
+706	Silt texture fraction	SaSiCl_2-64-2000u-disp-spec	%	0	100
+659	Clay texture fraction	SaSiCl_2-64-2000u-fld	%	0	100
+611	Sand texture fraction	SaSiCl_2-64-2000u-fld	%	0	100
+707	Silt texture fraction	SaSiCl_2-64-2000u-fld	%	0	100
+8	Available water capacity - volumetric (FC to WP)	PAWHC_calcul-fc100wp	m³/100 m³	0	100
+9	Available water capacity - volumetric (FC to WP)	PAWHC_calcul-fc200wp	m³/100 m³	0	100
+10	Available water capacity - volumetric (FC to WP)	PAWHC_calcul-fc300wp	m³/100 m³	0	100
+31	carbonInorganicProperty	InOrgC_calcul-caco3	g/kg	0	1000
+32	carbonInorganicProperty	InOrgC_calcul-tc-oc	g/kg	0	1000
+33	Carbon (C) - organic	OrgC_acid-dc	g/kg	0	1000
+34	Carbon (C) - organic	OrgC_acid-dc-ht	g/kg	0	1000
+35	Carbon (C) - organic	OrgC_acid-dc-ht-analyser	g/kg	0	1000
+36	Carbon (C) - organic	OrgC_acid-dc-lt	g/kg	0	1000
+37	Carbon (C) - organic	OrgC_acid-dc-lt-loi	g/kg	0	1000
+38	Carbon (C) - organic	OrgC_acid-dc-mt	g/kg	0	1000
+39	Carbon (C) - organic	OrgC_acid-dc-spec	g/kg	0	1000
+40	Carbon (C) - organic	OrgC_calcul-tc-ic	g/kg	0	1000
+41	Carbon (C) - organic	OrgC_dc	g/kg	0	1000
+42	Carbon (C) - organic	OrgC_dc-ht	g/kg	0	1000
+43	Carbon (C) - organic	OrgC_dc-ht-analyser	g/kg	0	1000
+44	Carbon (C) - organic	OrgC_dc-lt	g/kg	0	1000
+45	Carbon (C) - organic	OrgC_dc-lt-loi	g/kg	0	1000
+46	Carbon (C) - organic	OrgC_dc-mt	g/kg	0	1000
+47	Carbon (C) - organic	OrgC_dc-spec	g/kg	0	1000
+48	Carbon (C) - organic	OrgC_wc	g/kg	0	1000
+49	Carbon (C) - organic	OrgC_wc-cro3-jackson	g/kg	0	1000
+50	Carbon (C) - organic	OrgC_wc-cro3-kalembra	g/kg	0	1000
+51	Carbon (C) - organic	OrgC_wc-cro3-knopp	g/kg	0	1000
+52	Carbon (C) - organic	OrgC_wc-cro3-kurmies	g/kg	0	1000
+53	Carbon (C) - organic	OrgC_wc-cro3-nelson	g/kg	0	1000
+13	bulkDensityFineEarthProperty	BlkDensF_fe-cl-fc	kg/dm³	0.01	2.65
+14	bulkDensityFineEarthProperty	BlkDensF_fe-cl-od	kg/dm³	0.01	2.65
+15	bulkDensityFineEarthProperty	BlkDensF_fe-cl-unkn	kg/dm³	0.01	2.65
+16	bulkDensityFineEarthProperty	BlkDensF_fe-co-fc	kg/dm³	0.01	2.65
+17	bulkDensityFineEarthProperty	BlkDensF_fe-co-od	kg/dm³	0.01	2.65
+18	bulkDensityFineEarthProperty	BlkDensF_fe-co-unkn	kg/dm³	0.01	2.65
+19	bulkDensityFineEarthProperty	BlkDensF_fe-rpl-unkn	kg/dm³	0.01	2.65
+20	bulkDensityFineEarthProperty	BlkDensF_fe-unkn	kg/dm³	0.01	2.65
+21	bulkDensityFineEarthProperty	BlkDensF_fe-unkn-fc	kg/dm³	0.01	2.65
+22	bulkDensityFineEarthProperty	BlkDensF_fe-unkn-od	kg/dm³	0.01	2.65
+1	Acidity - exchangeable	ExchAcid_ph0-kcl1m	cmol/kg	0	100
+2	Acidity - exchangeable	ExchAcid_ph0-nh4cl	cmol/kg	0	100
+3	Acidity - exchangeable	ExchAcid_ph0-unkn	cmol/kg	0	100
+4	Acidity - exchangeable	ExchAcid_ph7-caoac	cmol/kg	0	100
+5	Acidity - exchangeable	ExchAcid_ph7-unkn	cmol/kg	0	100
+6	Acidity - exchangeable	ExchAcid_ph8-bacl2tea	cmol/kg	0	100
+7	Acidity - exchangeable	ExchAcid_ph8-unkn	cmol/kg	0	100
+95	Hydrogen (H+) - exchangeable	ExchBases_ph-unkn-edta	cmol/kg	0	100
+65	effectiveCecProperty	EffCEC_calcul-b	cmol/kg	0	100
+66	effectiveCecProperty	EffCEC_calcul-ba	cmol/kg	0	100
+23	bulkDensityWholeSoilProperty	BlkDensW_we-cl-fc	kg/dm³	0.01	3.6
+24	bulkDensityWholeSoilProperty	BlkDensW_we-cl-od	kg/dm³	0.01	3.6
+25	bulkDensityWholeSoilProperty	BlkDensW_we-cl-unkn	kg/dm³	0.01	3.6
+26	bulkDensityWholeSoilProperty	BlkDensW_we-co-fc	kg/dm³	0.01	3.6
+27	bulkDensityWholeSoilProperty	BlkDensW_we-co-od	kg/dm³	0.01	3.6
+28	bulkDensityWholeSoilProperty	BlkDensW_we-co-unkn	kg/dm³	0.01	3.6
+29	bulkDensityWholeSoilProperty	BlkDensW_we-rpl-unkn	kg/dm³	0.01	3.6
+30	bulkDensityWholeSoilProperty	BlkDensW_we-unkn	kg/dm³	0.01	3.6
+73	manganeseProperty	ExchBases_ph-unkn-edta	cmol/kg	0	1000
+139	Magnesium (Mg++) - exchangeable	ExchBases_ph-unkn-edta	cmol/kg	0	100
+106	Potassium (K+) - exchangeable	ExchBases_ph-unkn-edta	cmol/kg	0	100
+84	Sodium (Na+) - exchangeable %	ExchBases_ph-unkn-edta	cmol/kg	0	100
+117	Aluminium (Al+++) - exchangeable	ExchBases_ph-unkn-edta	cmol/kg	0	100
+251	Magnesium (Mg) - extractable	Extr_ap15	cmol/kg	0	1000
+151	Manganese (Mn) - extractable	Extr_ap15	cmol/kg	0	1000
+226	Potassium (K) - extractable	Extr_ap15	cmol/kg	0	1000
+376	Sodium (Na) - extractable	Extr_ap15	cmol/kg	0	1000
+326	Calcium (Ca++) - extractable	Extr_ap15	cmol/kg	0	1000
+252	Magnesium (Mg) - extractable	Extr_ap20	cmol/kg	0	1000
+152	Manganese (Mn) - extractable	Extr_ap20	cmol/kg	0	1000
+227	Potassium (K) - extractable	Extr_ap20	cmol/kg	0	1000
+377	Sodium (Na) - extractable	Extr_ap20	cmol/kg	0	1000
+327	Calcium (Ca++) - extractable	Extr_ap20	cmol/kg	0	1000
+253	Magnesium (Mg) - extractable	Extr_ap21	cmol/kg	0	1000
+153	Manganese (Mn) - extractable	Extr_ap21	cmol/kg	0	1000
+228	Potassium (K) - extractable	Extr_ap21	cmol/kg	0	1000
+378	Sodium (Na) - extractable	Extr_ap21	cmol/kg	0	1000
+328	Calcium (Ca++) - extractable	Extr_ap21	cmol/kg	0	1000
+254	Magnesium (Mg) - extractable	Extr_c6h8o7-reeuwijk	cmol/kg	0	1000
+154	Manganese (Mn) - extractable	Extr_c6h8o7-reeuwijk	cmol/kg	0	1000
+229	Potassium (K) - extractable	Extr_c6h8o7-reeuwijk	cmol/kg	0	1000
+379	Sodium (Na) - extractable	Extr_c6h8o7-reeuwijk	cmol/kg	0	1000
+329	Calcium (Ca++) - extractable	Extr_c6h8o7-reeuwijk	cmol/kg	0	1000
+255	Magnesium (Mg) - extractable	Extr_cacl2	cmol/kg	0	1000
+155	Manganese (Mn) - extractable	Extr_cacl2	cmol/kg	0	1000
+230	Potassium (K) - extractable	Extr_cacl2	cmol/kg	0	1000
+380	Sodium (Na) - extractable	Extr_cacl2	cmol/kg	0	1000
+330	Calcium (Ca++) - extractable	Extr_cacl2	cmol/kg	0	1000
+256	Magnesium (Mg) - extractable	Extr_capo4	cmol/kg	0	1000
+156	Manganese (Mn) - extractable	Extr_capo4	cmol/kg	0	1000
+231	Potassium (K) - extractable	Extr_capo4	cmol/kg	0	1000
+381	Sodium (Na) - extractable	Extr_capo4	cmol/kg	0	1000
+331	Calcium (Ca++) - extractable	Extr_capo4	cmol/kg	0	1000
+257	Magnesium (Mg) - extractable	Extr_dtpa	cmol/kg	0	1000
+157	Manganese (Mn) - extractable	Extr_dtpa	cmol/kg	0	1000
+232	Potassium (K) - extractable	Extr_dtpa	cmol/kg	0	1000
+382	Sodium (Na) - extractable	Extr_dtpa	cmol/kg	0	1000
+332	Calcium (Ca++) - extractable	Extr_dtpa	cmol/kg	0	1000
+258	Magnesium (Mg) - extractable	Extr_edta	cmol/kg	0	1000
+158	Manganese (Mn) - extractable	Extr_edta	cmol/kg	0	1000
+233	Potassium (K) - extractable	Extr_edta	cmol/kg	0	1000
+383	Sodium (Na) - extractable	Extr_edta	cmol/kg	0	1000
+333	Calcium (Ca++) - extractable	Extr_edta	cmol/kg	0	1000
+259	Magnesium (Mg) - extractable	Extr_h2so4-truog	cmol/kg	0	1000
+159	Manganese (Mn) - extractable	Extr_h2so4-truog	cmol/kg	0	1000
+234	Potassium (K) - extractable	Extr_h2so4-truog	cmol/kg	0	1000
+384	Sodium (Na) - extractable	Extr_h2so4-truog	cmol/kg	0	1000
+334	Calcium (Ca++) - extractable	Extr_h2so4-truog	cmol/kg	0	1000
+260	Magnesium (Mg) - extractable	Extr_hcl-h2so4-nelson	cmol/kg	0	1000
+160	Manganese (Mn) - extractable	Extr_hcl-h2so4-nelson	cmol/kg	0	1000
+235	Potassium (K) - extractable	Extr_hcl-h2so4-nelson	cmol/kg	0	1000
+385	Sodium (Na) - extractable	Extr_hcl-h2so4-nelson	cmol/kg	0	1000
+335	Calcium (Ca++) - extractable	Extr_hcl-h2so4-nelson	cmol/kg	0	1000
+261	Magnesium (Mg) - extractable	Extr_hcl-nh4f-bray1	cmol/kg	0	1000
+161	Manganese (Mn) - extractable	Extr_hcl-nh4f-bray1	cmol/kg	0	1000
+236	Potassium (K) - extractable	Extr_hcl-nh4f-bray1	cmol/kg	0	1000
+386	Sodium (Na) - extractable	Extr_hcl-nh4f-bray1	cmol/kg	0	1000
+336	Calcium (Ca++) - extractable	Extr_hcl-nh4f-bray1	cmol/kg	0	1000
+262	Magnesium (Mg) - extractable	Extr_hcl-nh4f-bray2	cmol/kg	0	1000
+162	Manganese (Mn) - extractable	Extr_hcl-nh4f-bray2	cmol/kg	0	1000
+237	Potassium (K) - extractable	Extr_hcl-nh4f-bray2	cmol/kg	0	1000
+387	Sodium (Na) - extractable	Extr_hcl-nh4f-bray2	cmol/kg	0	1000
+337	Calcium (Ca++) - extractable	Extr_hcl-nh4f-bray2	cmol/kg	0	1000
+263	Magnesium (Mg) - extractable	Extr_hcl-nh4f-kurtz-bray	cmol/kg	0	1000
+163	Manganese (Mn) - extractable	Extr_hcl-nh4f-kurtz-bray	cmol/kg	0	1000
+238	Potassium (K) - extractable	Extr_hcl-nh4f-kurtz-bray	cmol/kg	0	1000
+388	Sodium (Na) - extractable	Extr_hcl-nh4f-kurtz-bray	cmol/kg	0	1000
+338	Calcium (Ca++) - extractable	Extr_hcl-nh4f-kurtz-bray	cmol/kg	0	1000
+264	Magnesium (Mg) - extractable	Extr_hno3	cmol/kg	0	1000
+164	Manganese (Mn) - extractable	Extr_hno3	cmol/kg	0	1000
+239	Potassium (K) - extractable	Extr_hno3	cmol/kg	0	1000
+389	Sodium (Na) - extractable	Extr_hno3	cmol/kg	0	1000
+339	Calcium (Ca++) - extractable	Extr_hno3	cmol/kg	0	1000
+265	Magnesium (Mg) - extractable	Extr_hotwater	cmol/kg	0	1000
+165	Manganese (Mn) - extractable	Extr_hotwater	cmol/kg	0	1000
+240	Potassium (K) - extractable	Extr_hotwater	cmol/kg	0	1000
+390	Sodium (Na) - extractable	Extr_hotwater	cmol/kg	0	1000
+340	Calcium (Ca++) - extractable	Extr_hotwater	cmol/kg	0	1000
+266	Magnesium (Mg) - extractable	Extr_m1	cmol/kg	0	1000
+166	Manganese (Mn) - extractable	Extr_m1	cmol/kg	0	1000
+241	Potassium (K) - extractable	Extr_m1	cmol/kg	0	1000
+391	Sodium (Na) - extractable	Extr_m1	cmol/kg	0	1000
+341	Calcium (Ca++) - extractable	Extr_m1	cmol/kg	0	1000
+267	Magnesium (Mg) - extractable	Extr_m2	cmol/kg	0	1000
+167	Manganese (Mn) - extractable	Extr_m2	cmol/kg	0	1000
+242	Potassium (K) - extractable	Extr_m2	cmol/kg	0	1000
+392	Sodium (Na) - extractable	Extr_m2	cmol/kg	0	1000
+342	Calcium (Ca++) - extractable	Extr_m2	cmol/kg	0	1000
+268	Magnesium (Mg) - extractable	Extr_m3	cmol/kg	0	1000
+168	Manganese (Mn) - extractable	Extr_m3	cmol/kg	0	1000
+243	Potassium (K) - extractable	Extr_m3	cmol/kg	0	1000
+393	Sodium (Na) - extractable	Extr_m3	cmol/kg	0	1000
+343	Calcium (Ca++) - extractable	Extr_m3	cmol/kg	0	1000
+269	Magnesium (Mg) - extractable	Extr_m3-spec	cmol/kg	0	1000
+169	Manganese (Mn) - extractable	Extr_m3-spec	cmol/kg	0	1000
+244	Potassium (K) - extractable	Extr_m3-spec	cmol/kg	0	1000
+394	Sodium (Na) - extractable	Extr_m3-spec	cmol/kg	0	1000
+344	Calcium (Ca++) - extractable	Extr_m3-spec	cmol/kg	0	1000
+270	Magnesium (Mg) - extractable	Extr_nahco3-olsen	cmol/kg	0	1000
+170	Manganese (Mn) - extractable	Extr_nahco3-olsen	cmol/kg	0	1000
+245	Potassium (K) - extractable	Extr_nahco3-olsen	cmol/kg	0	1000
+395	Sodium (Na) - extractable	Extr_nahco3-olsen	cmol/kg	0	1000
+345	Calcium (Ca++) - extractable	Extr_nahco3-olsen	cmol/kg	0	1000
+271	Magnesium (Mg) - extractable	Extr_nahco3-olsen-dabin	cmol/kg	0	1000
+171	Manganese (Mn) - extractable	Extr_nahco3-olsen-dabin	cmol/kg	0	1000
+246	Potassium (K) - extractable	Extr_nahco3-olsen-dabin	cmol/kg	0	1000
+396	Sodium (Na) - extractable	Extr_nahco3-olsen-dabin	cmol/kg	0	1000
+346	Calcium (Ca++) - extractable	Extr_nahco3-olsen-dabin	cmol/kg	0	1000
+272	Magnesium (Mg) - extractable	Extr_naoac-morgan	cmol/kg	0	1000
+172	Manganese (Mn) - extractable	Extr_naoac-morgan	cmol/kg	0	1000
+247	Potassium (K) - extractable	Extr_naoac-morgan	cmol/kg	0	1000
+397	Sodium (Na) - extractable	Extr_naoac-morgan	cmol/kg	0	1000
+347	Calcium (Ca++) - extractable	Extr_naoac-morgan	cmol/kg	0	1000
+273	Magnesium (Mg) - extractable	Extr_nh4-co3-2-ambic1	cmol/kg	0	1000
+173	Manganese (Mn) - extractable	Extr_nh4-co3-2-ambic1	cmol/kg	0	1000
+248	Potassium (K) - extractable	Extr_nh4-co3-2-ambic1	cmol/kg	0	1000
+398	Sodium (Na) - extractable	Extr_nh4-co3-2-ambic1	cmol/kg	0	1000
+348	Calcium (Ca++) - extractable	Extr_nh4-co3-2-ambic1	cmol/kg	0	1000
+274	Magnesium (Mg) - extractable	Extr_nh4ch3ch-oh-cooh-leuven	cmol/kg	0	1000
+174	Manganese (Mn) - extractable	Extr_nh4ch3ch-oh-cooh-leuven	cmol/kg	0	1000
+249	Potassium (K) - extractable	Extr_nh4ch3ch-oh-cooh-leuven	cmol/kg	0	1000
+399	Sodium (Na) - extractable	Extr_nh4ch3ch-oh-cooh-leuven	cmol/kg	0	1000
+299	Sulfur (S) - extractable	Extr_nh4ch3ch-oh-cooh-leuven	%	0	100
+424	Zinc (Zn) - extractable	Extr_nh4ch3ch-oh-cooh-leuven	%	0	100
+449	cadmiumProperty	Extr_nh4ch3ch-oh-cooh-leuven	%	0	100
+224	molybdenumProperty	Extr_nh4ch3ch-oh-cooh-leuven	%	0	100
+482	hydraulicConductivityProperty	KSat_calcul-ptf	cm/h	0	100
+483	hydraulicConductivityProperty	KSat_calcul-ptf-genuchten	cm/h	0	100
+484	hydraulicConductivityProperty	KSat_calcul-ptf-saxton	cm/h	0	100
+485	hydraulicConductivityProperty	Ksat_bhole	cm/h	0	100
+486	hydraulicConductivityProperty	Ksat_column	cm/h	0	100
+487	hydraulicConductivityProperty	Ksat_dblring	cm/h	0	100
+488	hydraulicConductivityProperty	Ksat_invbhole	cm/h	0	100
+565	Phosphorus (P) - retention	RetentP_blakemore	g/hg	0	100
+566	Phosphorus (P) - retention	RetentP_unkn-spec	g/hg	0	100
+567	porosityProperty	Poros_calcul-pf0	m³/100 m³	0	100
+489	Nitrogen (N) - total	TotalN_bremner	g/kg	0	1000
+490	Nitrogen (N) - total	TotalN_calcul	g/kg	0	1000
+491	Nitrogen (N) - total	TotalN_calcul-oc10	g/kg	0	1000
+492	Nitrogen (N) - total	TotalN_dc	g/kg	0	1000
+496	Nitrogen (N) - total	TotalN_h2so4	g/kg	0	1000
+497	Nitrogen (N) - total	TotalN_kjeldahl	g/kg	0	1000
+498	Nitrogen (N) - total	TotalN_kjeldahl-nh4	g/kg	0	1000
+499	Nitrogen (N) - total	TotalN_nelson	g/kg	0	1000
+500	Nitrogen (N) - total	TotalN_tn04	g/kg	0	1000
+501	Nitrogen (N) - total	TotalN_tn06	g/kg	0	1000
+502	Nitrogen (N) - total	TotalN_tn08	g/kg	0	1000
+503	organicMatterProperty	FulAcidC_unkn	g/kg	0	1000
+504	organicMatterProperty	HumAcidC_unkn	g/kg	0	1000
+505	organicMatterProperty	OrgM_calcul-oc1.73	g/kg	0	1000
+506	organicMatterProperty	TotHumC_unkn	g/kg	0	1000
+568	solubleSaltsProperty	SlbAn_calcul-unkn	cmol/L	0	1000
+569	solubleSaltsProperty	SlbCat_calcul-unkn	cmol/L	0	1000
+349	Calcium (Ca++) - extractable	Extr_nh4ch3ch-oh-cooh-leuven	cmol/kg	0	1000
+951	Calcium (Ca++) - total	Total_h2so4	cmol/kg	0	1000
+761	Magnesium (Mg) - total	Total_h2so4	cmol/kg	0	1000
+989	Manganese (Mn) - total	Total_h2so4	cmol/kg	0	1000
+742	Potassium (K) - total	Total_h2so4	cmol/kg	0	1000
+970	Sodium (Na) - total	Total_h2so4	cmol/kg	0	1000
+952	Calcium (Ca++) - total	Total_hcl	cmol/kg	0	1000
+762	Magnesium (Mg) - total	Total_hcl	cmol/kg	0	1000
+990	Manganese (Mn) - total	Total_hcl	cmol/kg	0	1000
+743	Potassium (K) - total	Total_hcl	cmol/kg	0	1000
+971	Sodium (Na) - total	Total_hcl	cmol/kg	0	1000
+953	Calcium (Ca++) - total	Total_hcl-aquaregia	cmol/kg	0	1000
+763	Magnesium (Mg) - total	Total_hcl-aquaregia	cmol/kg	0	1000
+991	Manganese (Mn) - total	Total_hcl-aquaregia	cmol/kg	0	1000
+744	Potassium (K) - total	Total_hcl-aquaregia	cmol/kg	0	1000
+972	Sodium (Na) - total	Total_hcl-aquaregia	cmol/kg	0	1000
+954	Calcium (Ca++) - total	Total_hclo4	cmol/kg	0	1000
+764	Magnesium (Mg) - total	Total_hclo4	cmol/kg	0	1000
+992	Manganese (Mn) - total	Total_hclo4	cmol/kg	0	1000
+745	Potassium (K) - total	Total_hclo4	cmol/kg	0	1000
+973	Sodium (Na) - total	Total_hclo4	cmol/kg	0	1000
+955	Calcium (Ca++) - total	Total_hno3-aquafortis	cmol/kg	0	1000
+765	Magnesium (Mg) - total	Total_hno3-aquafortis	cmol/kg	0	1000
+993	Manganese (Mn) - total	Total_hno3-aquafortis	cmol/kg	0	1000
+746	Potassium (K) - total	Total_hno3-aquafortis	cmol/kg	0	1000
+974	Sodium (Na) - total	Total_hno3-aquafortis	cmol/kg	0	1000
+956	Calcium (Ca++) - total	Total_nh4-6mo7o24	cmol/kg	0	1000
+766	Magnesium (Mg) - total	Total_nh4-6mo7o24	cmol/kg	0	1000
+994	Manganese (Mn) - total	Total_nh4-6mo7o24	cmol/kg	0	1000
+747	Potassium (K) - total	Total_nh4-6mo7o24	cmol/kg	0	1000
+975	Sodium (Na) - total	Total_nh4-6mo7o24	cmol/kg	0	1000
+957	Calcium (Ca++) - total	Total_tp03	cmol/kg	0	1000
+767	Magnesium (Mg) - total	Total_tp03	cmol/kg	0	1000
+995	Manganese (Mn) - total	Total_tp03	cmol/kg	0	1000
+748	Potassium (K) - total	Total_tp03	cmol/kg	0	1000
+976	Sodium (Na) - total	Total_tp03	cmol/kg	0	1000
+958	Calcium (Ca++) - total	Total_tp04	cmol/kg	0	1000
+768	Magnesium (Mg) - total	Total_tp04	cmol/kg	0	1000
+996	Manganese (Mn) - total	Total_tp04	cmol/kg	0	1000
+749	Potassium (K) - total	Total_tp04	cmol/kg	0	1000
+977	Sodium (Na) - total	Total_tp04	cmol/kg	0	1000
+959	Calcium (Ca++) - total	Total_tp05	cmol/kg	0	1000
+769	Magnesium (Mg) - total	Total_tp05	cmol/kg	0	1000
+997	Manganese (Mn) - total	Total_tp05	cmol/kg	0	1000
+750	Potassium (K) - total	Total_tp05	cmol/kg	0	1000
+978	Sodium (Na) - total	Total_tp05	cmol/kg	0	1000
+960	Calcium (Ca++) - total	Total_tp06	cmol/kg	0	1000
+770	Magnesium (Mg) - total	Total_tp06	cmol/kg	0	1000
+998	Manganese (Mn) - total	Total_tp06	cmol/kg	0	1000
+751	Potassium (K) - total	Total_tp06	cmol/kg	0	1000
+979	Sodium (Na) - total	Total_tp06	cmol/kg	0	1000
+961	Calcium (Ca++) - total	Total_tp07	cmol/kg	0	1000
+771	Magnesium (Mg) - total	Total_tp07	cmol/kg	0	1000
+999	Manganese (Mn) - total	Total_tp07	cmol/kg	0	1000
+752	Potassium (K) - total	Total_tp07	cmol/kg	0	1000
+980	Sodium (Na) - total	Total_tp07	cmol/kg	0	1000
+962	Calcium (Ca++) - total	Total_tp08	cmol/kg	0	1000
+772	Magnesium (Mg) - total	Total_tp08	cmol/kg	0	1000
+1000	Manganese (Mn) - total	Total_tp08	cmol/kg	0	1000
+753	Potassium (K) - total	Total_tp08	cmol/kg	0	1000
+981	Sodium (Na) - total	Total_tp08	cmol/kg	0	1000
+963	Calcium (Ca++) - total	Total_tp09	cmol/kg	0	1000
+773	Magnesium (Mg) - total	Total_tp09	cmol/kg	0	1000
+1001	Manganese (Mn) - total	Total_tp09	cmol/kg	0	1000
+754	Potassium (K) - total	Total_tp09	cmol/kg	0	1000
+982	Sodium (Na) - total	Total_tp09	cmol/kg	0	1000
+964	Calcium (Ca++) - total	Total_tp10	cmol/kg	0	1000
+774	Magnesium (Mg) - total	Total_tp10	cmol/kg	0	1000
+1002	Manganese (Mn) - total	Total_tp10	cmol/kg	0	1000
+755	Potassium (K) - total	Total_tp10	cmol/kg	0	1000
+983	Sodium (Na) - total	Total_tp10	cmol/kg	0	1000
+965	Calcium (Ca++) - total	Total_unkn	cmol/kg	0	1000
+775	Magnesium (Mg) - total	Total_unkn	cmol/kg	0	1000
+1003	Manganese (Mn) - total	Total_unkn	cmol/kg	0	1000
+756	Potassium (K) - total	Total_unkn	cmol/kg	0	1000
+984	Sodium (Na) - total	Total_unkn	cmol/kg	0	1000
+966	Calcium (Ca++) - total	Total_xrd	cmol/kg	0	1000
+776	Magnesium (Mg) - total	Total_xrd	cmol/kg	0	1000
+1004	Manganese (Mn) - total	Total_xrd	cmol/kg	0	1000
+757	Potassium (K) - total	Total_xrd	cmol/kg	0	1000
+985	Sodium (Na) - total	Total_xrd	cmol/kg	0	1000
+967	Calcium (Ca++) - total	Total_xrf	cmol/kg	0	1000
+777	Magnesium (Mg) - total	Total_xrf	cmol/kg	0	1000
+1005	Manganese (Mn) - total	Total_xrf	cmol/kg	0	1000
+758	Potassium (K) - total	Total_xrf	cmol/kg	0	1000
+986	Sodium (Na) - total	Total_xrf	cmol/kg	0	1000
+968	Calcium (Ca++) - total	Total_xrf-p	cmol/kg	0	1000
+778	Magnesium (Mg) - total	Total_xrf-p	cmol/kg	0	1000
+1006	Manganese (Mn) - total	Total_xrf-p	cmol/kg	0	1000
+759	Potassium (K) - total	Total_xrf-p	cmol/kg	0	1000
+987	Sodium (Na) - total	Total_xrf-p	cmol/kg	0	1000
 549	pHProperty	pHH2O_sat	pH	1.5	13
 521	pH - Hydrogen potential	pHH2O_unkn-spec	pH	1.5	13
 550	pHProperty	pHH2O_unkn-spec	pH	1.5	13
@@ -3843,40 +4143,11 @@ COPY core.observation_phys_chem (observation_phys_chem_id, property_phys_chem_id
 557	pHProperty	pHKCl_sat	pH	1.5	13
 529	pH - Hydrogen potential	pHNaF	pH	1.5	13
 558	pHProperty	pHNaF	pH	1.5	13
-69	electricalConductivityProperty	EC_ratio1-2	dS/m	0	60
 67	electricalConductivityProperty	EC_ratio1-1	dS/m	0	60
 68	electricalConductivityProperty	EC_ratio1-10	dS/m	0	60
 70	electricalConductivityProperty	EC_ratio1-2.5	dS/m	0	60
 71	electricalConductivityProperty	EC_ratio1-5	dS/m	0	60
 72	electricalConductivityProperty	ECe_sat	dS/m	0	60
-175	Boron (B) - extractable	Extr_ap14	%	0	100
-635	Clay texture fraction	SaSiCl_2-50-2000u-adj100	%	0	100
-587	Sand texture fraction	SaSiCl_2-50-2000u-adj100	%	0	100
-683	Silt texture fraction	SaSiCl_2-50-2000u-adj100	%	0	100
-619	Clay texture fraction	SaSiCl_2-20-2000u-adj100	%	0	100
-571	Sand texture fraction	SaSiCl_2-20-2000u-adj100	%	0	100
-667	Silt texture fraction	SaSiCl_2-20-2000u-adj100	%	0	100
-620	Clay texture fraction	SaSiCl_2-20-2000u-disp	%	0	100
-572	Sand texture fraction	SaSiCl_2-20-2000u-disp	%	0	100
-668	Silt texture fraction	SaSiCl_2-20-2000u-disp	%	0	100
-621	Clay texture fraction	SaSiCl_2-20-2000u-disp-beaker	%	0	100
-573	Sand texture fraction	SaSiCl_2-20-2000u-disp-beaker	%	0	100
-669	Silt texture fraction	SaSiCl_2-20-2000u-disp-beaker	%	0	100
-622	Clay texture fraction	SaSiCl_2-20-2000u-disp-hydrometer	%	0	100
-574	Sand texture fraction	SaSiCl_2-20-2000u-disp-hydrometer	%	0	100
-670	Silt texture fraction	SaSiCl_2-20-2000u-disp-hydrometer	%	0	100
-623	Clay texture fraction	SaSiCl_2-20-2000u-disp-hydrometer-bouy	%	0	100
-575	Sand texture fraction	SaSiCl_2-20-2000u-disp-hydrometer-bouy	%	0	100
-671	Silt texture fraction	SaSiCl_2-20-2000u-disp-hydrometer-bouy	%	0	100
-624	Clay texture fraction	SaSiCl_2-20-2000u-disp-laser	%	0	100
-576	Sand texture fraction	SaSiCl_2-20-2000u-disp-laser	%	0	100
-672	Silt texture fraction	SaSiCl_2-20-2000u-disp-laser	%	0	100
-625	Clay texture fraction	SaSiCl_2-20-2000u-disp-pipette	%	0	100
-577	Sand texture fraction	SaSiCl_2-20-2000u-disp-pipette	%	0	100
-673	Silt texture fraction	SaSiCl_2-20-2000u-disp-pipette	%	0	100
-626	Clay texture fraction	SaSiCl_2-20-2000u-disp-spec	%	0	100
-578	Sand texture fraction	SaSiCl_2-20-2000u-disp-spec	%	0	100
-674	Silt texture fraction	SaSiCl_2-20-2000u-disp-spec	%	0	100
 627	Clay texture fraction	SaSiCl_2-20-2000u-fld	%	0	100
 579	Sand texture fraction	SaSiCl_2-20-2000u-fld	%	0	100
 675	Silt texture fraction	SaSiCl_2-20-2000u-fld	%	0	100
@@ -3915,6 +4186,12 @@ COPY core.observation_phys_chem (observation_phys_chem_id, property_phys_chem_id
 688	Silt texture fraction	SaSiCl_2-50-2000u-disp-laser	%	0	100
 641	Clay texture fraction	SaSiCl_2-50-2000u-disp-pipette	%	0	100
 593	Sand texture fraction	SaSiCl_2-50-2000u-disp-pipette	%	0	100
+873	zincProperty	Total_xrf-p	%	0	100
+969	Calcium (Ca++) - total	Total_xtf-t	cmol/kg	0	1000
+779	Magnesium (Mg) - total	Total_xtf-t	cmol/kg	0	1000
+1007	Manganese (Mn) - total	Total_xtf-t	cmol/kg	0	1000
+760	Potassium (K) - total	Total_xtf-t	cmol/kg	0	1000
+988	Sodium (Na) - total	Total_xtf-t	cmol/kg	0	1000
 689	Silt texture fraction	SaSiCl_2-50-2000u-disp-pipette	%	0	100
 642	Clay texture fraction	SaSiCl_2-50-2000u-disp-spec	%	0	100
 594	Sand texture fraction	SaSiCl_2-50-2000u-disp-spec	%	0	100
@@ -3964,10 +4241,6 @@ COPY core.observation_phys_chem (observation_phys_chem_id, property_phys_chem_id
 658	Clay texture fraction	SaSiCl_2-64-2000u-disp-spec	%	0	100
 610	Sand texture fraction	SaSiCl_2-64-2000u-disp-spec	%	0	100
 351	Iron (Fe) - extractable	Extr_ap15	%	0	100
-706	Silt texture fraction	SaSiCl_2-64-2000u-disp-spec	%	0	100
-659	Clay texture fraction	SaSiCl_2-64-2000u-fld	%	0	100
-611	Sand texture fraction	SaSiCl_2-64-2000u-fld	%	0	100
-707	Silt texture fraction	SaSiCl_2-64-2000u-fld	%	0	100
 660	Clay texture fraction	SaSiCl_2-64-2000u-nodisp	%	0	100
 612	Sand texture fraction	SaSiCl_2-64-2000u-nodisp	%	0	100
 708	Silt texture fraction	SaSiCl_2-64-2000u-nodisp	%	0	100
@@ -4185,10 +4458,6 @@ COPY core.observation_phys_chem (observation_phys_chem_id, property_phys_chem_id
 374	Iron (Fe) - extractable	Extr_nh4ch3ch-oh-cooh-leuven	%	0	100
 474	Phosphorus (P) - extractable	Extr_nh4ch3ch-oh-cooh-leuven	%	0	100
 895	Phosphorus (P) - total	Total_hcl	%	0	100
-299	Sulfur (S) - extractable	Extr_nh4ch3ch-oh-cooh-leuven	%	0	100
-424	Zinc (Zn) - extractable	Extr_nh4ch3ch-oh-cooh-leuven	%	0	100
-449	cadmiumProperty	Extr_nh4ch3ch-oh-cooh-leuven	%	0	100
-224	molybdenumProperty	Extr_nh4ch3ch-oh-cooh-leuven	%	0	100
 199	Boron (B) - extractable	Extr_nh4ch3ch-oh-cooh-leuven	%	0	100
 475	gypsumProperty	CaSO4_gy01	%	0	100
 476	gypsumProperty	CaSO4_gy02	%	0	100
@@ -4365,7 +4634,6 @@ COPY core.observation_phys_chem (observation_phys_chem_id, property_phys_chem_id
 835	Sulfur (S) - total	Total_xrf-p	%	0	100
 892	cadmiumProperty	Total_xrf-p	%	0	100
 797	molybdenumProperty	Total_xrf-p	%	0	100
-873	zincProperty	Total_xrf-p	%	0	100
 816	Boron (B) - total	Total_xrf-p	%	0	100
 931	aluminiumProperty	Total_xtf-t	%	0	100
 855	Copper (Cu) - total	Total_xtf-t	%	0	100
@@ -4376,45 +4644,6 @@ COPY core.observation_phys_chem (observation_phys_chem_id, property_phys_chem_id
 798	molybdenumProperty	Total_xtf-t	%	0	100
 874	zincProperty	Total_xtf-t	%	0	100
 817	Boron (B) - total	Total_xtf-t	%	0	100
-482	hydraulicConductivityProperty	KSat_calcul-ptf	cm/h	0	100
-483	hydraulicConductivityProperty	KSat_calcul-ptf-genuchten	cm/h	0	100
-484	hydraulicConductivityProperty	KSat_calcul-ptf-saxton	cm/h	0	100
-485	hydraulicConductivityProperty	Ksat_bhole	cm/h	0	100
-486	hydraulicConductivityProperty	Ksat_column	cm/h	0	100
-487	hydraulicConductivityProperty	Ksat_dblring	cm/h	0	100
-488	hydraulicConductivityProperty	Ksat_invbhole	cm/h	0	100
-565	Phosphorus (P) - retention	RetentP_blakemore	g/hg	0	100
-566	Phosphorus (P) - retention	RetentP_unkn-spec	g/hg	0	100
-8	Available water capacity - volumetric (FC to WP)	PAWHC_calcul-fc100wp	m³/100 m³	0	100
-9	Available water capacity - volumetric (FC to WP)	PAWHC_calcul-fc200wp	m³/100 m³	0	100
-10	Available water capacity - volumetric (FC to WP)	PAWHC_calcul-fc300wp	m³/100 m³	0	100
-567	porosityProperty	Poros_calcul-pf0	m³/100 m³	0	100
-493	Nitrogen (N) - total	TotalN_dc-ht-dumas	g/kg	0	1000
-494	Nitrogen (N) - total	TotalN_dc-ht-leco	g/kg	0	1000
-495	Nitrogen (N) - total	TotalN_dc-spec	g/kg	0	1000
-31	carbonInorganicProperty	InOrgC_calcul-caco3	g/kg	0	1000
-32	carbonInorganicProperty	InOrgC_calcul-tc-oc	g/kg	0	1000
-33	Carbon (C) - organic	OrgC_acid-dc	g/kg	0	1000
-34	Carbon (C) - organic	OrgC_acid-dc-ht	g/kg	0	1000
-35	Carbon (C) - organic	OrgC_acid-dc-ht-analyser	g/kg	0	1000
-36	Carbon (C) - organic	OrgC_acid-dc-lt	g/kg	0	1000
-37	Carbon (C) - organic	OrgC_acid-dc-lt-loi	g/kg	0	1000
-38	Carbon (C) - organic	OrgC_acid-dc-mt	g/kg	0	1000
-39	Carbon (C) - organic	OrgC_acid-dc-spec	g/kg	0	1000
-40	Carbon (C) - organic	OrgC_calcul-tc-ic	g/kg	0	1000
-41	Carbon (C) - organic	OrgC_dc	g/kg	0	1000
-42	Carbon (C) - organic	OrgC_dc-ht	g/kg	0	1000
-43	Carbon (C) - organic	OrgC_dc-ht-analyser	g/kg	0	1000
-44	Carbon (C) - organic	OrgC_dc-lt	g/kg	0	1000
-45	Carbon (C) - organic	OrgC_dc-lt-loi	g/kg	0	1000
-46	Carbon (C) - organic	OrgC_dc-mt	g/kg	0	1000
-47	Carbon (C) - organic	OrgC_dc-spec	g/kg	0	1000
-48	Carbon (C) - organic	OrgC_wc	g/kg	0	1000
-49	Carbon (C) - organic	OrgC_wc-cro3-jackson	g/kg	0	1000
-50	Carbon (C) - organic	OrgC_wc-cro3-kalembra	g/kg	0	1000
-51	Carbon (C) - organic	OrgC_wc-cro3-knopp	g/kg	0	1000
-52	Carbon (C) - organic	OrgC_wc-cro3-kurmies	g/kg	0	1000
-53	Carbon (C) - organic	OrgC_wc-cro3-nelson	g/kg	0	1000
 54	Carbon (C) - organic	OrgC_wc-cro3-nrcs6a1c	g/kg	0	1000
 55	Carbon (C) - organic	OrgC_wc-cro3-tiurin	g/kg	0	1000
 56	Carbon (C) - organic	OrgC_wc-cro3-walkleyblack	g/kg	0	1000
@@ -4423,21 +4652,6 @@ COPY core.observation_phys_chem (observation_phys_chem_id, property_phys_chem_id
 59	Carbon (C) - total	TotC_dc-ht-analyser	g/kg	0	1000
 60	Carbon (C) - total	TotC_dc-ht-spec	g/kg	0	1000
 61	Carbon (C) - total	TotC_dc-mt	g/kg	0	1000
-489	Nitrogen (N) - total	TotalN_bremner	g/kg	0	1000
-490	Nitrogen (N) - total	TotalN_calcul	g/kg	0	1000
-491	Nitrogen (N) - total	TotalN_calcul-oc10	g/kg	0	1000
-492	Nitrogen (N) - total	TotalN_dc	g/kg	0	1000
-496	Nitrogen (N) - total	TotalN_h2so4	g/kg	0	1000
-497	Nitrogen (N) - total	TotalN_kjeldahl	g/kg	0	1000
-498	Nitrogen (N) - total	TotalN_kjeldahl-nh4	g/kg	0	1000
-499	Nitrogen (N) - total	TotalN_nelson	g/kg	0	1000
-500	Nitrogen (N) - total	TotalN_tn04	g/kg	0	1000
-501	Nitrogen (N) - total	TotalN_tn06	g/kg	0	1000
-502	Nitrogen (N) - total	TotalN_tn08	g/kg	0	1000
-503	organicMatterProperty	FulAcidC_unkn	g/kg	0	1000
-504	organicMatterProperty	HumAcidC_unkn	g/kg	0	1000
-505	organicMatterProperty	OrgM_calcul-oc1.73	g/kg	0	1000
-506	organicMatterProperty	TotHumC_unkn	g/kg	0	1000
 714	totalCarbonateEquivalentProperty	CaCO3_acid-ch3cooh-dc	g/kg	0	1000
 715	totalCarbonateEquivalentProperty	CaCO3_acid-ch3cooh-nodc	g/kg	0	1000
 716	totalCarbonateEquivalentProperty	CaCO3_acid-ch3cooh-unkn	g/kg	0	1000
@@ -4466,9 +4680,6 @@ COPY core.observation_phys_chem (observation_phys_chem_id, property_phys_chem_id
 739	totalCarbonateEquivalentProperty	CaCO3_ca11	g/kg	0	1000
 740	totalCarbonateEquivalentProperty	CaCO3_ca12	g/kg	0	1000
 741	totalCarbonateEquivalentProperty	CaCO3_calcul-tc-oc	g/kg	0	1000
-568	solubleSaltsProperty	SlbAn_calcul-unkn	cmol/L	0	1000
-569	solubleSaltsProperty	SlbCat_calcul-unkn	cmol/L	0	1000
-73	manganeseProperty	ExchBases_ph-unkn-edta	cmol/kg	0	1000
 74	manganeseProperty	ExchBases_ph-unkn-m3	cmol/kg	0	1000
 75	manganeseProperty	ExchBases_ph-unkn-m3-spec	cmol/kg	0	1000
 76	manganeseProperty	ExchBases_ph0-cohex	cmol/kg	0	1000
@@ -4484,234 +4695,6 @@ COPY core.observation_phys_chem (observation_phys_chem_id, property_phys_chem_id
 225	Potassium (K) - extractable	Extr_ap14	cmol/kg	0	1000
 375	Sodium (Na) - extractable	Extr_ap14	cmol/kg	0	1000
 325	Calcium (Ca++) - extractable	Extr_ap14	cmol/kg	0	1000
-251	Magnesium (Mg) - extractable	Extr_ap15	cmol/kg	0	1000
-151	Manganese (Mn) - extractable	Extr_ap15	cmol/kg	0	1000
-226	Potassium (K) - extractable	Extr_ap15	cmol/kg	0	1000
-376	Sodium (Na) - extractable	Extr_ap15	cmol/kg	0	1000
-326	Calcium (Ca++) - extractable	Extr_ap15	cmol/kg	0	1000
-252	Magnesium (Mg) - extractable	Extr_ap20	cmol/kg	0	1000
-152	Manganese (Mn) - extractable	Extr_ap20	cmol/kg	0	1000
-227	Potassium (K) - extractable	Extr_ap20	cmol/kg	0	1000
-377	Sodium (Na) - extractable	Extr_ap20	cmol/kg	0	1000
-327	Calcium (Ca++) - extractable	Extr_ap20	cmol/kg	0	1000
-253	Magnesium (Mg) - extractable	Extr_ap21	cmol/kg	0	1000
-153	Manganese (Mn) - extractable	Extr_ap21	cmol/kg	0	1000
-228	Potassium (K) - extractable	Extr_ap21	cmol/kg	0	1000
-378	Sodium (Na) - extractable	Extr_ap21	cmol/kg	0	1000
-328	Calcium (Ca++) - extractable	Extr_ap21	cmol/kg	0	1000
-254	Magnesium (Mg) - extractable	Extr_c6h8o7-reeuwijk	cmol/kg	0	1000
-154	Manganese (Mn) - extractable	Extr_c6h8o7-reeuwijk	cmol/kg	0	1000
-229	Potassium (K) - extractable	Extr_c6h8o7-reeuwijk	cmol/kg	0	1000
-379	Sodium (Na) - extractable	Extr_c6h8o7-reeuwijk	cmol/kg	0	1000
-329	Calcium (Ca++) - extractable	Extr_c6h8o7-reeuwijk	cmol/kg	0	1000
-255	Magnesium (Mg) - extractable	Extr_cacl2	cmol/kg	0	1000
-155	Manganese (Mn) - extractable	Extr_cacl2	cmol/kg	0	1000
-230	Potassium (K) - extractable	Extr_cacl2	cmol/kg	0	1000
-380	Sodium (Na) - extractable	Extr_cacl2	cmol/kg	0	1000
-330	Calcium (Ca++) - extractable	Extr_cacl2	cmol/kg	0	1000
-256	Magnesium (Mg) - extractable	Extr_capo4	cmol/kg	0	1000
-156	Manganese (Mn) - extractable	Extr_capo4	cmol/kg	0	1000
-231	Potassium (K) - extractable	Extr_capo4	cmol/kg	0	1000
-381	Sodium (Na) - extractable	Extr_capo4	cmol/kg	0	1000
-331	Calcium (Ca++) - extractable	Extr_capo4	cmol/kg	0	1000
-257	Magnesium (Mg) - extractable	Extr_dtpa	cmol/kg	0	1000
-157	Manganese (Mn) - extractable	Extr_dtpa	cmol/kg	0	1000
-232	Potassium (K) - extractable	Extr_dtpa	cmol/kg	0	1000
-382	Sodium (Na) - extractable	Extr_dtpa	cmol/kg	0	1000
-332	Calcium (Ca++) - extractable	Extr_dtpa	cmol/kg	0	1000
-258	Magnesium (Mg) - extractable	Extr_edta	cmol/kg	0	1000
-158	Manganese (Mn) - extractable	Extr_edta	cmol/kg	0	1000
-233	Potassium (K) - extractable	Extr_edta	cmol/kg	0	1000
-383	Sodium (Na) - extractable	Extr_edta	cmol/kg	0	1000
-333	Calcium (Ca++) - extractable	Extr_edta	cmol/kg	0	1000
-259	Magnesium (Mg) - extractable	Extr_h2so4-truog	cmol/kg	0	1000
-159	Manganese (Mn) - extractable	Extr_h2so4-truog	cmol/kg	0	1000
-234	Potassium (K) - extractable	Extr_h2so4-truog	cmol/kg	0	1000
-384	Sodium (Na) - extractable	Extr_h2so4-truog	cmol/kg	0	1000
-334	Calcium (Ca++) - extractable	Extr_h2so4-truog	cmol/kg	0	1000
-260	Magnesium (Mg) - extractable	Extr_hcl-h2so4-nelson	cmol/kg	0	1000
-160	Manganese (Mn) - extractable	Extr_hcl-h2so4-nelson	cmol/kg	0	1000
-235	Potassium (K) - extractable	Extr_hcl-h2so4-nelson	cmol/kg	0	1000
-385	Sodium (Na) - extractable	Extr_hcl-h2so4-nelson	cmol/kg	0	1000
-335	Calcium (Ca++) - extractable	Extr_hcl-h2so4-nelson	cmol/kg	0	1000
-261	Magnesium (Mg) - extractable	Extr_hcl-nh4f-bray1	cmol/kg	0	1000
-161	Manganese (Mn) - extractable	Extr_hcl-nh4f-bray1	cmol/kg	0	1000
-236	Potassium (K) - extractable	Extr_hcl-nh4f-bray1	cmol/kg	0	1000
-386	Sodium (Na) - extractable	Extr_hcl-nh4f-bray1	cmol/kg	0	1000
-336	Calcium (Ca++) - extractable	Extr_hcl-nh4f-bray1	cmol/kg	0	1000
-262	Magnesium (Mg) - extractable	Extr_hcl-nh4f-bray2	cmol/kg	0	1000
-162	Manganese (Mn) - extractable	Extr_hcl-nh4f-bray2	cmol/kg	0	1000
-237	Potassium (K) - extractable	Extr_hcl-nh4f-bray2	cmol/kg	0	1000
-387	Sodium (Na) - extractable	Extr_hcl-nh4f-bray2	cmol/kg	0	1000
-337	Calcium (Ca++) - extractable	Extr_hcl-nh4f-bray2	cmol/kg	0	1000
-263	Magnesium (Mg) - extractable	Extr_hcl-nh4f-kurtz-bray	cmol/kg	0	1000
-163	Manganese (Mn) - extractable	Extr_hcl-nh4f-kurtz-bray	cmol/kg	0	1000
-238	Potassium (K) - extractable	Extr_hcl-nh4f-kurtz-bray	cmol/kg	0	1000
-388	Sodium (Na) - extractable	Extr_hcl-nh4f-kurtz-bray	cmol/kg	0	1000
-338	Calcium (Ca++) - extractable	Extr_hcl-nh4f-kurtz-bray	cmol/kg	0	1000
-264	Magnesium (Mg) - extractable	Extr_hno3	cmol/kg	0	1000
-164	Manganese (Mn) - extractable	Extr_hno3	cmol/kg	0	1000
-239	Potassium (K) - extractable	Extr_hno3	cmol/kg	0	1000
-389	Sodium (Na) - extractable	Extr_hno3	cmol/kg	0	1000
-339	Calcium (Ca++) - extractable	Extr_hno3	cmol/kg	0	1000
-265	Magnesium (Mg) - extractable	Extr_hotwater	cmol/kg	0	1000
-165	Manganese (Mn) - extractable	Extr_hotwater	cmol/kg	0	1000
-240	Potassium (K) - extractable	Extr_hotwater	cmol/kg	0	1000
-390	Sodium (Na) - extractable	Extr_hotwater	cmol/kg	0	1000
-340	Calcium (Ca++) - extractable	Extr_hotwater	cmol/kg	0	1000
-266	Magnesium (Mg) - extractable	Extr_m1	cmol/kg	0	1000
-166	Manganese (Mn) - extractable	Extr_m1	cmol/kg	0	1000
-241	Potassium (K) - extractable	Extr_m1	cmol/kg	0	1000
-391	Sodium (Na) - extractable	Extr_m1	cmol/kg	0	1000
-341	Calcium (Ca++) - extractable	Extr_m1	cmol/kg	0	1000
-267	Magnesium (Mg) - extractable	Extr_m2	cmol/kg	0	1000
-167	Manganese (Mn) - extractable	Extr_m2	cmol/kg	0	1000
-242	Potassium (K) - extractable	Extr_m2	cmol/kg	0	1000
-392	Sodium (Na) - extractable	Extr_m2	cmol/kg	0	1000
-342	Calcium (Ca++) - extractable	Extr_m2	cmol/kg	0	1000
-268	Magnesium (Mg) - extractable	Extr_m3	cmol/kg	0	1000
-168	Manganese (Mn) - extractable	Extr_m3	cmol/kg	0	1000
-243	Potassium (K) - extractable	Extr_m3	cmol/kg	0	1000
-393	Sodium (Na) - extractable	Extr_m3	cmol/kg	0	1000
-343	Calcium (Ca++) - extractable	Extr_m3	cmol/kg	0	1000
-269	Magnesium (Mg) - extractable	Extr_m3-spec	cmol/kg	0	1000
-169	Manganese (Mn) - extractable	Extr_m3-spec	cmol/kg	0	1000
-244	Potassium (K) - extractable	Extr_m3-spec	cmol/kg	0	1000
-394	Sodium (Na) - extractable	Extr_m3-spec	cmol/kg	0	1000
-344	Calcium (Ca++) - extractable	Extr_m3-spec	cmol/kg	0	1000
-270	Magnesium (Mg) - extractable	Extr_nahco3-olsen	cmol/kg	0	1000
-170	Manganese (Mn) - extractable	Extr_nahco3-olsen	cmol/kg	0	1000
-245	Potassium (K) - extractable	Extr_nahco3-olsen	cmol/kg	0	1000
-395	Sodium (Na) - extractable	Extr_nahco3-olsen	cmol/kg	0	1000
-345	Calcium (Ca++) - extractable	Extr_nahco3-olsen	cmol/kg	0	1000
-271	Magnesium (Mg) - extractable	Extr_nahco3-olsen-dabin	cmol/kg	0	1000
-171	Manganese (Mn) - extractable	Extr_nahco3-olsen-dabin	cmol/kg	0	1000
-246	Potassium (K) - extractable	Extr_nahco3-olsen-dabin	cmol/kg	0	1000
-396	Sodium (Na) - extractable	Extr_nahco3-olsen-dabin	cmol/kg	0	1000
-346	Calcium (Ca++) - extractable	Extr_nahco3-olsen-dabin	cmol/kg	0	1000
-272	Magnesium (Mg) - extractable	Extr_naoac-morgan	cmol/kg	0	1000
-172	Manganese (Mn) - extractable	Extr_naoac-morgan	cmol/kg	0	1000
-247	Potassium (K) - extractable	Extr_naoac-morgan	cmol/kg	0	1000
-397	Sodium (Na) - extractable	Extr_naoac-morgan	cmol/kg	0	1000
-347	Calcium (Ca++) - extractable	Extr_naoac-morgan	cmol/kg	0	1000
-273	Magnesium (Mg) - extractable	Extr_nh4-co3-2-ambic1	cmol/kg	0	1000
-173	Manganese (Mn) - extractable	Extr_nh4-co3-2-ambic1	cmol/kg	0	1000
-248	Potassium (K) - extractable	Extr_nh4-co3-2-ambic1	cmol/kg	0	1000
-398	Sodium (Na) - extractable	Extr_nh4-co3-2-ambic1	cmol/kg	0	1000
-348	Calcium (Ca++) - extractable	Extr_nh4-co3-2-ambic1	cmol/kg	0	1000
-274	Magnesium (Mg) - extractable	Extr_nh4ch3ch-oh-cooh-leuven	cmol/kg	0	1000
-174	Manganese (Mn) - extractable	Extr_nh4ch3ch-oh-cooh-leuven	cmol/kg	0	1000
-249	Potassium (K) - extractable	Extr_nh4ch3ch-oh-cooh-leuven	cmol/kg	0	1000
-399	Sodium (Na) - extractable	Extr_nh4ch3ch-oh-cooh-leuven	cmol/kg	0	1000
-349	Calcium (Ca++) - extractable	Extr_nh4ch3ch-oh-cooh-leuven	cmol/kg	0	1000
-951	Calcium (Ca++) - total	Total_h2so4	cmol/kg	0	1000
-761	Magnesium (Mg) - total	Total_h2so4	cmol/kg	0	1000
-989	Manganese (Mn) - total	Total_h2so4	cmol/kg	0	1000
-742	Potassium (K) - total	Total_h2so4	cmol/kg	0	1000
-970	Sodium (Na) - total	Total_h2so4	cmol/kg	0	1000
-952	Calcium (Ca++) - total	Total_hcl	cmol/kg	0	1000
-762	Magnesium (Mg) - total	Total_hcl	cmol/kg	0	1000
-990	Manganese (Mn) - total	Total_hcl	cmol/kg	0	1000
-743	Potassium (K) - total	Total_hcl	cmol/kg	0	1000
-971	Sodium (Na) - total	Total_hcl	cmol/kg	0	1000
-953	Calcium (Ca++) - total	Total_hcl-aquaregia	cmol/kg	0	1000
-763	Magnesium (Mg) - total	Total_hcl-aquaregia	cmol/kg	0	1000
-991	Manganese (Mn) - total	Total_hcl-aquaregia	cmol/kg	0	1000
-744	Potassium (K) - total	Total_hcl-aquaregia	cmol/kg	0	1000
-972	Sodium (Na) - total	Total_hcl-aquaregia	cmol/kg	0	1000
-954	Calcium (Ca++) - total	Total_hclo4	cmol/kg	0	1000
-764	Magnesium (Mg) - total	Total_hclo4	cmol/kg	0	1000
-992	Manganese (Mn) - total	Total_hclo4	cmol/kg	0	1000
-745	Potassium (K) - total	Total_hclo4	cmol/kg	0	1000
-973	Sodium (Na) - total	Total_hclo4	cmol/kg	0	1000
-955	Calcium (Ca++) - total	Total_hno3-aquafortis	cmol/kg	0	1000
-765	Magnesium (Mg) - total	Total_hno3-aquafortis	cmol/kg	0	1000
-993	Manganese (Mn) - total	Total_hno3-aquafortis	cmol/kg	0	1000
-746	Potassium (K) - total	Total_hno3-aquafortis	cmol/kg	0	1000
-974	Sodium (Na) - total	Total_hno3-aquafortis	cmol/kg	0	1000
-956	Calcium (Ca++) - total	Total_nh4-6mo7o24	cmol/kg	0	1000
-766	Magnesium (Mg) - total	Total_nh4-6mo7o24	cmol/kg	0	1000
-994	Manganese (Mn) - total	Total_nh4-6mo7o24	cmol/kg	0	1000
-747	Potassium (K) - total	Total_nh4-6mo7o24	cmol/kg	0	1000
-975	Sodium (Na) - total	Total_nh4-6mo7o24	cmol/kg	0	1000
-957	Calcium (Ca++) - total	Total_tp03	cmol/kg	0	1000
-767	Magnesium (Mg) - total	Total_tp03	cmol/kg	0	1000
-995	Manganese (Mn) - total	Total_tp03	cmol/kg	0	1000
-748	Potassium (K) - total	Total_tp03	cmol/kg	0	1000
-976	Sodium (Na) - total	Total_tp03	cmol/kg	0	1000
-958	Calcium (Ca++) - total	Total_tp04	cmol/kg	0	1000
-768	Magnesium (Mg) - total	Total_tp04	cmol/kg	0	1000
-996	Manganese (Mn) - total	Total_tp04	cmol/kg	0	1000
-749	Potassium (K) - total	Total_tp04	cmol/kg	0	1000
-977	Sodium (Na) - total	Total_tp04	cmol/kg	0	1000
-959	Calcium (Ca++) - total	Total_tp05	cmol/kg	0	1000
-769	Magnesium (Mg) - total	Total_tp05	cmol/kg	0	1000
-997	Manganese (Mn) - total	Total_tp05	cmol/kg	0	1000
-750	Potassium (K) - total	Total_tp05	cmol/kg	0	1000
-978	Sodium (Na) - total	Total_tp05	cmol/kg	0	1000
-960	Calcium (Ca++) - total	Total_tp06	cmol/kg	0	1000
-770	Magnesium (Mg) - total	Total_tp06	cmol/kg	0	1000
-998	Manganese (Mn) - total	Total_tp06	cmol/kg	0	1000
-751	Potassium (K) - total	Total_tp06	cmol/kg	0	1000
-979	Sodium (Na) - total	Total_tp06	cmol/kg	0	1000
-961	Calcium (Ca++) - total	Total_tp07	cmol/kg	0	1000
-771	Magnesium (Mg) - total	Total_tp07	cmol/kg	0	1000
-999	Manganese (Mn) - total	Total_tp07	cmol/kg	0	1000
-752	Potassium (K) - total	Total_tp07	cmol/kg	0	1000
-980	Sodium (Na) - total	Total_tp07	cmol/kg	0	1000
-962	Calcium (Ca++) - total	Total_tp08	cmol/kg	0	1000
-772	Magnesium (Mg) - total	Total_tp08	cmol/kg	0	1000
-1000	Manganese (Mn) - total	Total_tp08	cmol/kg	0	1000
-753	Potassium (K) - total	Total_tp08	cmol/kg	0	1000
-981	Sodium (Na) - total	Total_tp08	cmol/kg	0	1000
-963	Calcium (Ca++) - total	Total_tp09	cmol/kg	0	1000
-773	Magnesium (Mg) - total	Total_tp09	cmol/kg	0	1000
-1001	Manganese (Mn) - total	Total_tp09	cmol/kg	0	1000
-754	Potassium (K) - total	Total_tp09	cmol/kg	0	1000
-982	Sodium (Na) - total	Total_tp09	cmol/kg	0	1000
-964	Calcium (Ca++) - total	Total_tp10	cmol/kg	0	1000
-774	Magnesium (Mg) - total	Total_tp10	cmol/kg	0	1000
-1002	Manganese (Mn) - total	Total_tp10	cmol/kg	0	1000
-755	Potassium (K) - total	Total_tp10	cmol/kg	0	1000
-983	Sodium (Na) - total	Total_tp10	cmol/kg	0	1000
-965	Calcium (Ca++) - total	Total_unkn	cmol/kg	0	1000
-775	Magnesium (Mg) - total	Total_unkn	cmol/kg	0	1000
-1003	Manganese (Mn) - total	Total_unkn	cmol/kg	0	1000
-756	Potassium (K) - total	Total_unkn	cmol/kg	0	1000
-984	Sodium (Na) - total	Total_unkn	cmol/kg	0	1000
-966	Calcium (Ca++) - total	Total_xrd	cmol/kg	0	1000
-776	Magnesium (Mg) - total	Total_xrd	cmol/kg	0	1000
-1004	Manganese (Mn) - total	Total_xrd	cmol/kg	0	1000
-757	Potassium (K) - total	Total_xrd	cmol/kg	0	1000
-985	Sodium (Na) - total	Total_xrd	cmol/kg	0	1000
-967	Calcium (Ca++) - total	Total_xrf	cmol/kg	0	1000
-777	Magnesium (Mg) - total	Total_xrf	cmol/kg	0	1000
-1005	Manganese (Mn) - total	Total_xrf	cmol/kg	0	1000
-758	Potassium (K) - total	Total_xrf	cmol/kg	0	1000
-986	Sodium (Na) - total	Total_xrf	cmol/kg	0	1000
-968	Calcium (Ca++) - total	Total_xrf-p	cmol/kg	0	1000
-778	Magnesium (Mg) - total	Total_xrf-p	cmol/kg	0	1000
-1006	Manganese (Mn) - total	Total_xrf-p	cmol/kg	0	1000
-759	Potassium (K) - total	Total_xrf-p	cmol/kg	0	1000
-987	Sodium (Na) - total	Total_xrf-p	cmol/kg	0	1000
-969	Calcium (Ca++) - total	Total_xtf-t	cmol/kg	0	1000
-779	Magnesium (Mg) - total	Total_xtf-t	cmol/kg	0	1000
-1007	Manganese (Mn) - total	Total_xtf-t	cmol/kg	0	1000
-760	Potassium (K) - total	Total_xtf-t	cmol/kg	0	1000
-988	Sodium (Na) - total	Total_xtf-t	cmol/kg	0	1000
-1	Acidity - exchangeable	ExchAcid_ph0-kcl1m	cmol/kg	0	100
-2	Acidity - exchangeable	ExchAcid_ph0-nh4cl	cmol/kg	0	100
-3	Acidity - exchangeable	ExchAcid_ph0-unkn	cmol/kg	0	100
-4	Acidity - exchangeable	ExchAcid_ph7-caoac	cmol/kg	0	100
-5	Acidity - exchangeable	ExchAcid_ph7-unkn	cmol/kg	0	100
-6	Acidity - exchangeable	ExchAcid_ph8-bacl2tea	cmol/kg	0	100
-7	Acidity - exchangeable	ExchAcid_ph8-unkn	cmol/kg	0	100
-95	Hydrogen (H+) - exchangeable	ExchBases_ph-unkn-edta	cmol/kg	0	100
-139	Magnesium (Mg++) - exchangeable	ExchBases_ph-unkn-edta	cmol/kg	0	100
-106	Potassium (K+) - exchangeable	ExchBases_ph-unkn-edta	cmol/kg	0	100
-27	bulkDensityWholeSoilProperty	BlkDensW_we-co-od	kg/dm³	0.01	3.6
-84	Sodium (Na+) - exchangeable %	ExchBases_ph-unkn-edta	cmol/kg	0	100
-117	Aluminium (Al+++) - exchangeable	ExchBases_ph-unkn-edta	cmol/kg	0	100
 128	Calcium (Ca++) - exchangeable	ExchBases_ph-unkn-edta	cmol/kg	0	100
 96	Hydrogen (H+) - exchangeable	ExchBases_ph-unkn-m3	cmol/kg	0	100
 140	Magnesium (Mg++) - exchangeable	ExchBases_ph-unkn-m3	cmol/kg	0	100
@@ -4773,30 +4756,11 @@ COPY core.observation_phys_chem (observation_phys_chem_id, property_phys_chem_id
 94	Sodium (Na+) - exchangeable %	ExchBases_ph8-unkn	cmol/kg	0	100
 127	Aluminium (Al+++) - exchangeable	ExchBases_ph8-unkn	cmol/kg	0	100
 138	Calcium (Ca++) - exchangeable	ExchBases_ph8-unkn	cmol/kg	0	100
-65	effectiveCecProperty	EffCEC_calcul-b	cmol/kg	0	100
-66	effectiveCecProperty	EffCEC_calcul-ba	cmol/kg	0	100
-13	bulkDensityFineEarthProperty	BlkDensF_fe-cl-fc	kg/dm³	0.01	2.65
-14	bulkDensityFineEarthProperty	BlkDensF_fe-cl-od	kg/dm³	0.01	2.65
-15	bulkDensityFineEarthProperty	BlkDensF_fe-cl-unkn	kg/dm³	0.01	2.65
-16	bulkDensityFineEarthProperty	BlkDensF_fe-co-fc	kg/dm³	0.01	2.65
-17	bulkDensityFineEarthProperty	BlkDensF_fe-co-od	kg/dm³	0.01	2.65
-18	bulkDensityFineEarthProperty	BlkDensF_fe-co-unkn	kg/dm³	0.01	2.65
-19	bulkDensityFineEarthProperty	BlkDensF_fe-rpl-unkn	kg/dm³	0.01	2.65
-20	bulkDensityFineEarthProperty	BlkDensF_fe-unkn	kg/dm³	0.01	2.65
-21	bulkDensityFineEarthProperty	BlkDensF_fe-unkn-fc	kg/dm³	0.01	2.65
-22	bulkDensityFineEarthProperty	BlkDensF_fe-unkn-od	kg/dm³	0.01	2.65
-23	bulkDensityWholeSoilProperty	BlkDensW_we-cl-fc	kg/dm³	0.01	3.6
-24	bulkDensityWholeSoilProperty	BlkDensW_we-cl-od	kg/dm³	0.01	3.6
-25	bulkDensityWholeSoilProperty	BlkDensW_we-cl-unkn	kg/dm³	0.01	3.6
-26	bulkDensityWholeSoilProperty	BlkDensW_we-co-fc	kg/dm³	0.01	3.6
-28	bulkDensityWholeSoilProperty	BlkDensW_we-co-unkn	kg/dm³	0.01	3.6
-29	bulkDensityWholeSoilProperty	BlkDensW_we-rpl-unkn	kg/dm³	0.01	3.6
-30	bulkDensityWholeSoilProperty	BlkDensW_we-unkn	kg/dm³	0.01	3.6
 \.
 
 
 --
--- TOC entry 4369 (class 0 OID 53768966)
+-- TOC entry 4368 (class 0 OID 53780698)
 -- Dependencies: 216
 -- Data for Name: plot; Type: TABLE DATA; Schema: core; Owner: glosis
 --
@@ -4806,7 +4770,7 @@ COPY core.plot (plot_id, site_id, plot_code, altitude, time_stamp, map_sheet_cod
 
 
 --
--- TOC entry 4370 (class 0 OID 53768975)
+-- TOC entry 4369 (class 0 OID 53780707)
 -- Dependencies: 217
 -- Data for Name: plot_individual; Type: TABLE DATA; Schema: core; Owner: glosis
 --
@@ -4816,7 +4780,7 @@ COPY core.plot_individual (plot_id, individual_id) FROM stdin;
 
 
 --
--- TOC entry 4372 (class 0 OID 53768980)
+-- TOC entry 4371 (class 0 OID 53780712)
 -- Dependencies: 219
 -- Data for Name: procedure_desc; Type: TABLE DATA; Schema: core; Owner: glosis
 --
@@ -4827,7 +4791,7 @@ FAO GfSD 2006	Food and Agriculture Organisation of the United Nations, Guideline
 
 
 --
--- TOC entry 4373 (class 0 OID 53768988)
+-- TOC entry 4372 (class 0 OID 53780720)
 -- Dependencies: 220
 -- Data for Name: procedure_phys_chem; Type: TABLE DATA; Schema: core; Owner: glosis
 --
@@ -5135,7 +5099,7 @@ SaSiCl_2-64-2000u-nodisp-spec	SaSiCl_2-64-2000u-nodisp	http://w3id.org/glosis/mo
 
 
 --
--- TOC entry 4374 (class 0 OID 53768996)
+-- TOC entry 4373 (class 0 OID 53780728)
 -- Dependencies: 221
 -- Data for Name: profile; Type: TABLE DATA; Schema: core; Owner: glosis
 --
@@ -5145,7 +5109,7 @@ COPY core.profile (profile_id, plot_id, surface_id, profile_code) FROM stdin;
 
 
 --
--- TOC entry 4376 (class 0 OID 53769005)
+-- TOC entry 4375 (class 0 OID 53780737)
 -- Dependencies: 223
 -- Data for Name: project; Type: TABLE DATA; Schema: core; Owner: glosis
 --
@@ -5155,7 +5119,7 @@ COPY core.project (project_id, name) FROM stdin;
 
 
 --
--- TOC entry 4377 (class 0 OID 53769011)
+-- TOC entry 4376 (class 0 OID 53780743)
 -- Dependencies: 224
 -- Data for Name: project_organisation; Type: TABLE DATA; Schema: core; Owner: glosis
 --
@@ -5165,7 +5129,7 @@ COPY core.project_organisation (project_id, organisation_id) FROM stdin;
 
 
 --
--- TOC entry 4379 (class 0 OID 53769016)
+-- TOC entry 4378 (class 0 OID 53780748)
 -- Dependencies: 226
 -- Data for Name: project_related; Type: TABLE DATA; Schema: core; Owner: glosis
 --
@@ -5175,7 +5139,7 @@ COPY core.project_related (project_source_id, project_target_id, role) FROM stdi
 
 
 --
--- TOC entry 4380 (class 0 OID 53769022)
+-- TOC entry 4379 (class 0 OID 53780754)
 -- Dependencies: 227
 -- Data for Name: property_desc_element; Type: TABLE DATA; Schema: core; Owner: glosis
 --
@@ -5268,7 +5232,7 @@ weatheringFragmentsProperty	http://w3id.org/glosis/model/common/weatheringFragme
 
 
 --
--- TOC entry 4381 (class 0 OID 53769030)
+-- TOC entry 4380 (class 0 OID 53780762)
 -- Dependencies: 228
 -- Data for Name: property_desc_plot; Type: TABLE DATA; Schema: core; Owner: glosis
 --
@@ -5341,7 +5305,7 @@ textureProperty	http://w3id.org/glosis/model/common/textureProperty
 
 
 --
--- TOC entry 4382 (class 0 OID 53769038)
+-- TOC entry 4381 (class 0 OID 53780770)
 -- Dependencies: 229
 -- Data for Name: property_desc_profile; Type: TABLE DATA; Schema: core; Owner: glosis
 --
@@ -5362,7 +5326,7 @@ soilDepthSampledProperty	http://w3id.org/glosis/model/common/soilDepthSampledPro
 
 
 --
--- TOC entry 4383 (class 0 OID 53769062)
+-- TOC entry 4382 (class 0 OID 53780794)
 -- Dependencies: 230
 -- Data for Name: property_phys_chem; Type: TABLE DATA; Schema: core; Owner: glosis
 --
@@ -5429,7 +5393,7 @@ Calcium (Ca++) - extractable	http://w3id.org/glosis/model/codelists/physioChemic
 
 
 --
--- TOC entry 4384 (class 0 OID 53769070)
+-- TOC entry 4383 (class 0 OID 53780802)
 -- Dependencies: 231
 -- Data for Name: result_desc_element; Type: TABLE DATA; Schema: core; Owner: glosis
 --
@@ -5439,7 +5403,7 @@ COPY core.result_desc_element (element_id, property_desc_element_id, thesaurus_d
 
 
 --
--- TOC entry 4385 (class 0 OID 53769073)
+-- TOC entry 4384 (class 0 OID 53780805)
 -- Dependencies: 232
 -- Data for Name: result_desc_plot; Type: TABLE DATA; Schema: core; Owner: glosis
 --
@@ -5449,7 +5413,7 @@ COPY core.result_desc_plot (plot_id, property_desc_plot_id, thesaurus_desc_plot_
 
 
 --
--- TOC entry 4386 (class 0 OID 53769076)
+-- TOC entry 4385 (class 0 OID 53780808)
 -- Dependencies: 233
 -- Data for Name: result_desc_profile; Type: TABLE DATA; Schema: core; Owner: glosis
 --
@@ -5459,7 +5423,7 @@ COPY core.result_desc_profile (profile_id, property_desc_profile_id, thesaurus_d
 
 
 --
--- TOC entry 4387 (class 0 OID 53769082)
+-- TOC entry 4386 (class 0 OID 53780814)
 -- Dependencies: 234
 -- Data for Name: result_desc_surface; Type: TABLE DATA; Schema: core; Owner: glosis
 --
@@ -5469,7 +5433,7 @@ COPY core.result_desc_surface (surface_id, property_desc_plot_id, thesaurus_desc
 
 
 --
--- TOC entry 4388 (class 0 OID 53769085)
+-- TOC entry 4387 (class 0 OID 53780817)
 -- Dependencies: 235
 -- Data for Name: result_phys_chem; Type: TABLE DATA; Schema: core; Owner: glosis
 --
@@ -5479,7 +5443,7 @@ COPY core.result_phys_chem (result_phys_chem_id, observation_phys_chem_id, speci
 
 
 --
--- TOC entry 4422 (class 0 OID 53770383)
+-- TOC entry 4421 (class 0 OID 53782079)
 -- Dependencies: 269
 -- Data for Name: result_spectral; Type: TABLE DATA; Schema: core; Owner: glosis
 --
@@ -5489,7 +5453,7 @@ COPY core.result_spectral (result_spectral_id, observation_phys_chem_id, specime
 
 
 --
--- TOC entry 4389 (class 0 OID 53769101)
+-- TOC entry 4388 (class 0 OID 53780833)
 -- Dependencies: 236
 -- Data for Name: site; Type: TABLE DATA; Schema: core; Owner: glosis
 --
@@ -5499,7 +5463,7 @@ COPY core.site (site_id, site_code, typical_profile, "position", extent) FROM st
 
 
 --
--- TOC entry 4390 (class 0 OID 53769108)
+-- TOC entry 4389 (class 0 OID 53780840)
 -- Dependencies: 237
 -- Data for Name: site_project; Type: TABLE DATA; Schema: core; Owner: glosis
 --
@@ -5509,7 +5473,7 @@ COPY core.site_project (site_id, project_id) FROM stdin;
 
 
 --
--- TOC entry 4392 (class 0 OID 53769113)
+-- TOC entry 4391 (class 0 OID 53780845)
 -- Dependencies: 239
 -- Data for Name: specimen; Type: TABLE DATA; Schema: core; Owner: glosis
 --
@@ -5519,7 +5483,7 @@ COPY core.specimen (specimen_id, element_id, specimen_prep_process_id, organisat
 
 
 --
--- TOC entry 4393 (class 0 OID 53769119)
+-- TOC entry 4392 (class 0 OID 53780851)
 -- Dependencies: 240
 -- Data for Name: specimen_prep_process; Type: TABLE DATA; Schema: core; Owner: glosis
 --
@@ -5529,7 +5493,7 @@ COPY core.specimen_prep_process (specimen_prep_process_id, specimen_transport_id
 
 
 --
--- TOC entry 4396 (class 0 OID 53769129)
+-- TOC entry 4395 (class 0 OID 53780861)
 -- Dependencies: 243
 -- Data for Name: specimen_storage; Type: TABLE DATA; Schema: core; Owner: glosis
 --
@@ -5539,7 +5503,7 @@ COPY core.specimen_storage (specimen_storage_id, label, definition) FROM stdin;
 
 
 --
--- TOC entry 4398 (class 0 OID 53769137)
+-- TOC entry 4397 (class 0 OID 53780869)
 -- Dependencies: 245
 -- Data for Name: specimen_transport; Type: TABLE DATA; Schema: core; Owner: glosis
 --
@@ -5549,7 +5513,7 @@ COPY core.specimen_transport (specimen_transport_id, label, definition) FROM std
 
 
 --
--- TOC entry 4400 (class 0 OID 53769145)
+-- TOC entry 4399 (class 0 OID 53780877)
 -- Dependencies: 247
 -- Data for Name: surface; Type: TABLE DATA; Schema: core; Owner: glosis
 --
@@ -5559,7 +5523,7 @@ COPY core.surface (surface_id, super_surface_id, site_id, shape, time_stamp) FRO
 
 
 --
--- TOC entry 4401 (class 0 OID 53769151)
+-- TOC entry 4400 (class 0 OID 53780883)
 -- Dependencies: 248
 -- Data for Name: surface_individual; Type: TABLE DATA; Schema: core; Owner: glosis
 --
@@ -5569,7 +5533,7 @@ COPY core.surface_individual (surface_id, individual_id) FROM stdin;
 
 
 --
--- TOC entry 4403 (class 0 OID 53769156)
+-- TOC entry 4402 (class 0 OID 53780888)
 -- Dependencies: 250
 -- Data for Name: thesaurus_desc_element; Type: TABLE DATA; Schema: core; Owner: glosis
 --
@@ -5937,7 +5901,7 @@ COPY core.thesaurus_desc_element (thesaurus_desc_element_id, label, uri) FROM st
 
 
 --
--- TOC entry 4405 (class 0 OID 53769164)
+-- TOC entry 4404 (class 0 OID 53780896)
 -- Dependencies: 252
 -- Data for Name: thesaurus_desc_plot; Type: TABLE DATA; Schema: core; Owner: glosis
 --
@@ -6412,7 +6376,7 @@ COPY core.thesaurus_desc_plot (thesaurus_desc_plot_id, label, uri) FROM stdin;
 
 
 --
--- TOC entry 4407 (class 0 OID 53769172)
+-- TOC entry 4406 (class 0 OID 53780904)
 -- Dependencies: 254
 -- Data for Name: thesaurus_desc_profile; Type: TABLE DATA; Schema: core; Owner: glosis
 --
@@ -6431,7 +6395,7 @@ COPY core.thesaurus_desc_profile (thesaurus_desc_profile_id, label, uri) FROM st
 
 
 --
--- TOC entry 4409 (class 0 OID 53769196)
+-- TOC entry 4408 (class 0 OID 53780928)
 -- Dependencies: 256
 -- Data for Name: unit_of_measure; Type: TABLE DATA; Schema: core; Owner: glosis
 --
@@ -6451,7 +6415,7 @@ m³/100 m³	Cubic metre per one hundred cubic metre	http://w3id.org/glosis/model
 
 
 --
--- TOC entry 4410 (class 0 OID 53769204)
+-- TOC entry 4409 (class 0 OID 53780936)
 -- Dependencies: 257
 -- Data for Name: address; Type: TABLE DATA; Schema: metadata; Owner: glosis
 --
@@ -6461,7 +6425,7 @@ COPY metadata.address (address_id, street_address, postal_code, locality, countr
 
 
 --
--- TOC entry 4412 (class 0 OID 53769212)
+-- TOC entry 4411 (class 0 OID 53780944)
 -- Dependencies: 259
 -- Data for Name: individual; Type: TABLE DATA; Schema: metadata; Owner: glosis
 --
@@ -6471,7 +6435,7 @@ COPY metadata.individual (individual_id, address_id, name, honorific_title, emai
 
 
 --
--- TOC entry 4414 (class 0 OID 53769220)
+-- TOC entry 4413 (class 0 OID 53780952)
 -- Dependencies: 261
 -- Data for Name: organisation; Type: TABLE DATA; Schema: metadata; Owner: glosis
 --
@@ -6481,7 +6445,7 @@ COPY metadata.organisation (organisation_id, parent_id, address_id, name, email,
 
 
 --
--- TOC entry 4415 (class 0 OID 53769226)
+-- TOC entry 4414 (class 0 OID 53780958)
 -- Dependencies: 262
 -- Data for Name: organisation_individual; Type: TABLE DATA; Schema: metadata; Owner: glosis
 --
@@ -6491,7 +6455,7 @@ COPY metadata.organisation_individual (organisation_id, organisation_unit_id, in
 
 
 --
--- TOC entry 4417 (class 0 OID 53769234)
+-- TOC entry 4416 (class 0 OID 53780966)
 -- Dependencies: 264
 -- Data for Name: organisation_unit; Type: TABLE DATA; Schema: metadata; Owner: glosis
 --
@@ -6501,7 +6465,7 @@ COPY metadata.organisation_unit (organisation_unit_id, organisation_id, name) FR
 
 
 --
--- TOC entry 4023 (class 0 OID 53768161)
+-- TOC entry 4022 (class 0 OID 53779894)
 -- Dependencies: 206
 -- Data for Name: spatial_ref_sys; Type: TABLE DATA; Schema: public; Owner: glosis
 --
@@ -6511,7 +6475,7 @@ COPY public.spatial_ref_sys (srid, auth_name, auth_srid, srtext, proj4text) FROM
 
 
 --
--- TOC entry 4616 (class 0 OID 0)
+-- TOC entry 4614 (class 0 OID 0)
 -- Dependencies: 211
 -- Name: element_element_id_seq; Type: SEQUENCE SET; Schema: core; Owner: glosis
 --
@@ -6520,7 +6484,7 @@ SELECT pg_catalog.setval('core.element_element_id_seq', 1, false);
 
 
 --
--- TOC entry 4617 (class 0 OID 0)
+-- TOC entry 4615 (class 0 OID 0)
 -- Dependencies: 266
 -- Name: observation_phys_chem_element_observation_phys_chem_element_seq; Type: SEQUENCE SET; Schema: core; Owner: glosis
 --
@@ -6529,7 +6493,7 @@ SELECT pg_catalog.setval('core.observation_phys_chem_element_observation_phys_ch
 
 
 --
--- TOC entry 4618 (class 0 OID 0)
+-- TOC entry 4616 (class 0 OID 0)
 -- Dependencies: 218
 -- Name: plot_plot_id_seq; Type: SEQUENCE SET; Schema: core; Owner: glosis
 --
@@ -6538,7 +6502,7 @@ SELECT pg_catalog.setval('core.plot_plot_id_seq', 1, false);
 
 
 --
--- TOC entry 4619 (class 0 OID 0)
+-- TOC entry 4617 (class 0 OID 0)
 -- Dependencies: 222
 -- Name: profile_profile_id_seq; Type: SEQUENCE SET; Schema: core; Owner: glosis
 --
@@ -6547,7 +6511,7 @@ SELECT pg_catalog.setval('core.profile_profile_id_seq', 1, false);
 
 
 --
--- TOC entry 4620 (class 0 OID 0)
+-- TOC entry 4618 (class 0 OID 0)
 -- Dependencies: 225
 -- Name: project_project_id_seq; Type: SEQUENCE SET; Schema: core; Owner: glosis
 --
@@ -6556,7 +6520,7 @@ SELECT pg_catalog.setval('core.project_project_id_seq', 1, false);
 
 
 --
--- TOC entry 4621 (class 0 OID 0)
+-- TOC entry 4619 (class 0 OID 0)
 -- Dependencies: 267
 -- Name: result_phys_chem_specimen_result_phys_chem_specimen_id_seq; Type: SEQUENCE SET; Schema: core; Owner: glosis
 --
@@ -6565,7 +6529,7 @@ SELECT pg_catalog.setval('core.result_phys_chem_specimen_result_phys_chem_specim
 
 
 --
--- TOC entry 4622 (class 0 OID 0)
+-- TOC entry 4620 (class 0 OID 0)
 -- Dependencies: 268
 -- Name: result_spectral_result_spectral_id_seq; Type: SEQUENCE SET; Schema: core; Owner: glosis
 --
@@ -6574,7 +6538,7 @@ SELECT pg_catalog.setval('core.result_spectral_result_spectral_id_seq', 1, false
 
 
 --
--- TOC entry 4623 (class 0 OID 0)
+-- TOC entry 4621 (class 0 OID 0)
 -- Dependencies: 238
 -- Name: site_site_id_seq; Type: SEQUENCE SET; Schema: core; Owner: glosis
 --
@@ -6583,7 +6547,7 @@ SELECT pg_catalog.setval('core.site_site_id_seq', 1, false);
 
 
 --
--- TOC entry 4624 (class 0 OID 0)
+-- TOC entry 4622 (class 0 OID 0)
 -- Dependencies: 241
 -- Name: specimen_prep_process_specimen_prep_process_id_seq; Type: SEQUENCE SET; Schema: core; Owner: glosis
 --
@@ -6592,7 +6556,7 @@ SELECT pg_catalog.setval('core.specimen_prep_process_specimen_prep_process_id_se
 
 
 --
--- TOC entry 4625 (class 0 OID 0)
+-- TOC entry 4623 (class 0 OID 0)
 -- Dependencies: 242
 -- Name: specimen_specimen_id_seq; Type: SEQUENCE SET; Schema: core; Owner: glosis
 --
@@ -6601,7 +6565,7 @@ SELECT pg_catalog.setval('core.specimen_specimen_id_seq', 1, false);
 
 
 --
--- TOC entry 4626 (class 0 OID 0)
+-- TOC entry 4624 (class 0 OID 0)
 -- Dependencies: 244
 -- Name: specimen_storage_specimen_storage_id_seq; Type: SEQUENCE SET; Schema: core; Owner: glosis
 --
@@ -6610,7 +6574,7 @@ SELECT pg_catalog.setval('core.specimen_storage_specimen_storage_id_seq', 1, fal
 
 
 --
--- TOC entry 4627 (class 0 OID 0)
+-- TOC entry 4625 (class 0 OID 0)
 -- Dependencies: 246
 -- Name: specimen_transport_specimen_transport_id_seq; Type: SEQUENCE SET; Schema: core; Owner: glosis
 --
@@ -6619,7 +6583,7 @@ SELECT pg_catalog.setval('core.specimen_transport_specimen_transport_id_seq', 1,
 
 
 --
--- TOC entry 4628 (class 0 OID 0)
+-- TOC entry 4626 (class 0 OID 0)
 -- Dependencies: 249
 -- Name: surface_surface_id_seq; Type: SEQUENCE SET; Schema: core; Owner: glosis
 --
@@ -6628,7 +6592,7 @@ SELECT pg_catalog.setval('core.surface_surface_id_seq', 1, false);
 
 
 --
--- TOC entry 4629 (class 0 OID 0)
+-- TOC entry 4627 (class 0 OID 0)
 -- Dependencies: 251
 -- Name: thesaurus_desc_element_thesaurus_desc_element_id_seq1; Type: SEQUENCE SET; Schema: core; Owner: glosis
 --
@@ -6637,7 +6601,7 @@ SELECT pg_catalog.setval('core.thesaurus_desc_element_thesaurus_desc_element_id_
 
 
 --
--- TOC entry 4630 (class 0 OID 0)
+-- TOC entry 4628 (class 0 OID 0)
 -- Dependencies: 253
 -- Name: thesaurus_desc_plot_thesaurus_desc_plot_id_seq1; Type: SEQUENCE SET; Schema: core; Owner: glosis
 --
@@ -6646,7 +6610,7 @@ SELECT pg_catalog.setval('core.thesaurus_desc_plot_thesaurus_desc_plot_id_seq1',
 
 
 --
--- TOC entry 4631 (class 0 OID 0)
+-- TOC entry 4629 (class 0 OID 0)
 -- Dependencies: 255
 -- Name: thesaurus_desc_profile_thesaurus_desc_profile_id_seq1; Type: SEQUENCE SET; Schema: core; Owner: glosis
 --
@@ -6655,7 +6619,7 @@ SELECT pg_catalog.setval('core.thesaurus_desc_profile_thesaurus_desc_profile_id_
 
 
 --
--- TOC entry 4632 (class 0 OID 0)
+-- TOC entry 4630 (class 0 OID 0)
 -- Dependencies: 258
 -- Name: address_address_id_seq; Type: SEQUENCE SET; Schema: metadata; Owner: glosis
 --
@@ -6664,7 +6628,7 @@ SELECT pg_catalog.setval('metadata.address_address_id_seq', 1, false);
 
 
 --
--- TOC entry 4633 (class 0 OID 0)
+-- TOC entry 4631 (class 0 OID 0)
 -- Dependencies: 260
 -- Name: individual_individual_id_seq; Type: SEQUENCE SET; Schema: metadata; Owner: glosis
 --
@@ -6673,7 +6637,7 @@ SELECT pg_catalog.setval('metadata.individual_individual_id_seq', 1, false);
 
 
 --
--- TOC entry 4634 (class 0 OID 0)
+-- TOC entry 4632 (class 0 OID 0)
 -- Dependencies: 263
 -- Name: organisation_organisation_id_seq; Type: SEQUENCE SET; Schema: metadata; Owner: glosis
 --
@@ -6682,7 +6646,7 @@ SELECT pg_catalog.setval('metadata.organisation_organisation_id_seq', 1, false);
 
 
 --
--- TOC entry 4635 (class 0 OID 0)
+-- TOC entry 4633 (class 0 OID 0)
 -- Dependencies: 265
 -- Name: organisation_unit_organisation_unit_id_seq; Type: SEQUENCE SET; Schema: metadata; Owner: glosis
 --
@@ -6691,7 +6655,7 @@ SELECT pg_catalog.setval('metadata.organisation_unit_organisation_unit_id_seq', 
 
 
 --
--- TOC entry 4042 (class 2606 OID 53769270)
+-- TOC entry 4041 (class 2606 OID 53781005)
 -- Name: element element_pkey; Type: CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -6700,7 +6664,7 @@ ALTER TABLE ONLY core.element
 
 
 --
--- TOC entry 4046 (class 2606 OID 53770074)
+-- TOC entry 4045 (class 2606 OID 53781770)
 -- Name: observation_desc_element observation_desc_element_pkey; Type: CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -6709,7 +6673,7 @@ ALTER TABLE ONLY core.observation_desc_element
 
 
 --
--- TOC entry 4048 (class 2606 OID 53770086)
+-- TOC entry 4047 (class 2606 OID 53781782)
 -- Name: observation_desc_plot observation_desc_plot_pkey; Type: CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -6718,7 +6682,7 @@ ALTER TABLE ONLY core.observation_desc_plot
 
 
 --
--- TOC entry 4050 (class 2606 OID 53770098)
+-- TOC entry 4049 (class 2606 OID 53781794)
 -- Name: observation_desc_profile observation_desc_profile_pkey; Type: CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -6727,7 +6691,7 @@ ALTER TABLE ONLY core.observation_desc_profile
 
 
 --
--- TOC entry 4052 (class 2606 OID 53769292)
+-- TOC entry 4051 (class 2606 OID 53781027)
 -- Name: observation_phys_chem observation_phys_chem_pkey; Type: CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -6736,7 +6700,7 @@ ALTER TABLE ONLY core.observation_phys_chem
 
 
 --
--- TOC entry 4054 (class 2606 OID 53770334)
+-- TOC entry 4053 (class 2606 OID 53782030)
 -- Name: observation_phys_chem observation_phys_chem_property_phys_chem_id_procedure_phys__key; Type: CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -6745,7 +6709,7 @@ ALTER TABLE ONLY core.observation_phys_chem
 
 
 --
--- TOC entry 4060 (class 2606 OID 53769982)
+-- TOC entry 4059 (class 2606 OID 53781678)
 -- Name: plot_individual plot_individual_pkey; Type: CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -6754,7 +6718,7 @@ ALTER TABLE ONLY core.plot_individual
 
 
 --
--- TOC entry 4056 (class 2606 OID 53769300)
+-- TOC entry 4055 (class 2606 OID 53781035)
 -- Name: plot plot_pkey; Type: CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -6763,7 +6727,7 @@ ALTER TABLE ONLY core.plot
 
 
 --
--- TOC entry 4062 (class 2606 OID 53770210)
+-- TOC entry 4061 (class 2606 OID 53781906)
 -- Name: procedure_desc procedure_desc_pkey; Type: CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -6772,7 +6736,7 @@ ALTER TABLE ONLY core.procedure_desc
 
 
 --
--- TOC entry 4064 (class 2606 OID 53769797)
+-- TOC entry 4063 (class 2606 OID 53781532)
 -- Name: procedure_desc procedure_desc_uri_key; Type: CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -6781,7 +6745,7 @@ ALTER TABLE ONLY core.procedure_desc
 
 
 --
--- TOC entry 4066 (class 2606 OID 53770309)
+-- TOC entry 4065 (class 2606 OID 53782005)
 -- Name: procedure_phys_chem procedure_phys_chem_pkey; Type: CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -6790,7 +6754,7 @@ ALTER TABLE ONLY core.procedure_phys_chem
 
 
 --
--- TOC entry 4070 (class 2606 OID 53769308)
+-- TOC entry 4069 (class 2606 OID 53781043)
 -- Name: profile profile_pkey; Type: CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -6799,7 +6763,7 @@ ALTER TABLE ONLY core.profile
 
 
 --
--- TOC entry 4078 (class 2606 OID 53769312)
+-- TOC entry 4077 (class 2606 OID 53781047)
 -- Name: project_organisation project_organisation_pkey; Type: CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -6808,7 +6772,7 @@ ALTER TABLE ONLY core.project_organisation
 
 
 --
--- TOC entry 4074 (class 2606 OID 53769314)
+-- TOC entry 4073 (class 2606 OID 53781049)
 -- Name: project project_pkey; Type: CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -6817,7 +6781,7 @@ ALTER TABLE ONLY core.project
 
 
 --
--- TOC entry 4080 (class 2606 OID 53769984)
+-- TOC entry 4079 (class 2606 OID 53781680)
 -- Name: project_related project_related_pkey; Type: CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -6826,7 +6790,7 @@ ALTER TABLE ONLY core.project_related
 
 
 --
--- TOC entry 4082 (class 2606 OID 53770041)
+-- TOC entry 4081 (class 2606 OID 53781737)
 -- Name: property_desc_element property_desc_element_pkey; Type: CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -6835,7 +6799,7 @@ ALTER TABLE ONLY core.property_desc_element
 
 
 --
--- TOC entry 4086 (class 2606 OID 53770052)
+-- TOC entry 4085 (class 2606 OID 53781748)
 -- Name: property_desc_plot property_desc_plot_pkey; Type: CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -6844,7 +6808,7 @@ ALTER TABLE ONLY core.property_desc_plot
 
 
 --
--- TOC entry 4090 (class 2606 OID 53770063)
+-- TOC entry 4089 (class 2606 OID 53781759)
 -- Name: property_desc_profile property_desc_profile_pkey; Type: CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -6853,7 +6817,7 @@ ALTER TABLE ONLY core.property_desc_profile
 
 
 --
--- TOC entry 4094 (class 2606 OID 53770283)
+-- TOC entry 4093 (class 2606 OID 53781979)
 -- Name: property_phys_chem property_phys_chem_pkey; Type: CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -6862,7 +6826,7 @@ ALTER TABLE ONLY core.property_phys_chem
 
 
 --
--- TOC entry 4098 (class 2606 OID 53770122)
+-- TOC entry 4097 (class 2606 OID 53781818)
 -- Name: result_desc_element result_desc_element_pkey; Type: CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -6871,7 +6835,7 @@ ALTER TABLE ONLY core.result_desc_element
 
 
 --
--- TOC entry 4100 (class 2606 OID 53770134)
+-- TOC entry 4099 (class 2606 OID 53781830)
 -- Name: result_desc_plot result_desc_plot_pkey; Type: CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -6880,7 +6844,7 @@ ALTER TABLE ONLY core.result_desc_plot
 
 
 --
--- TOC entry 4102 (class 2606 OID 53770158)
+-- TOC entry 4101 (class 2606 OID 53781854)
 -- Name: result_desc_profile result_desc_profile_pkey; Type: CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -6889,7 +6853,7 @@ ALTER TABLE ONLY core.result_desc_profile
 
 
 --
--- TOC entry 4104 (class 2606 OID 53770146)
+-- TOC entry 4103 (class 2606 OID 53781842)
 -- Name: result_desc_surface result_desc_surface_pkey; Type: CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -6898,7 +6862,7 @@ ALTER TABLE ONLY core.result_desc_surface
 
 
 --
--- TOC entry 4106 (class 2606 OID 53769332)
+-- TOC entry 4105 (class 2606 OID 53781067)
 -- Name: result_phys_chem result_numerical_specimen_pkey; Type: CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -6907,7 +6871,7 @@ ALTER TABLE ONLY core.result_phys_chem
 
 
 --
--- TOC entry 4108 (class 2606 OID 53770024)
+-- TOC entry 4107 (class 2606 OID 53781720)
 -- Name: result_phys_chem result_phys_chem_specimen_observation_phys_chem_id_specimen_key; Type: CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -6916,7 +6880,7 @@ ALTER TABLE ONLY core.result_phys_chem
 
 
 --
--- TOC entry 4171 (class 2606 OID 53770392)
+-- TOC entry 4170 (class 2606 OID 53782088)
 -- Name: result_spectral result_spectral_observation_phys_chem_id_specimen_key; Type: CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -6925,7 +6889,7 @@ ALTER TABLE ONLY core.result_spectral
 
 
 --
--- TOC entry 4174 (class 2606 OID 53770390)
+-- TOC entry 4173 (class 2606 OID 53782086)
 -- Name: result_spectral result_spectral_pkey; Type: CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -6934,7 +6898,7 @@ ALTER TABLE ONLY core.result_spectral
 
 
 --
--- TOC entry 4110 (class 2606 OID 53769344)
+-- TOC entry 4109 (class 2606 OID 53781079)
 -- Name: site site_pkey; Type: CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -6943,7 +6907,7 @@ ALTER TABLE ONLY core.site
 
 
 --
--- TOC entry 4114 (class 2606 OID 53769346)
+-- TOC entry 4113 (class 2606 OID 53781081)
 -- Name: site_project site_project_pkey; Type: CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -6952,7 +6916,7 @@ ALTER TABLE ONLY core.site_project
 
 
 --
--- TOC entry 4116 (class 2606 OID 53769833)
+-- TOC entry 4115 (class 2606 OID 53781568)
 -- Name: specimen specimen_code_key; Type: CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -6961,7 +6925,7 @@ ALTER TABLE ONLY core.specimen
 
 
 --
--- TOC entry 4118 (class 2606 OID 53769350)
+-- TOC entry 4117 (class 2606 OID 53781085)
 -- Name: specimen specimen_pkey; Type: CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -6970,7 +6934,7 @@ ALTER TABLE ONLY core.specimen
 
 
 --
--- TOC entry 4120 (class 2606 OID 53769835)
+-- TOC entry 4119 (class 2606 OID 53781570)
 -- Name: specimen_prep_process specimen_prep_process_definition_key; Type: CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -6979,7 +6943,7 @@ ALTER TABLE ONLY core.specimen_prep_process
 
 
 --
--- TOC entry 4122 (class 2606 OID 53769354)
+-- TOC entry 4121 (class 2606 OID 53781089)
 -- Name: specimen_prep_process specimen_prep_process_pkey; Type: CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -6988,7 +6952,7 @@ ALTER TABLE ONLY core.specimen_prep_process
 
 
 --
--- TOC entry 4124 (class 2606 OID 53769837)
+-- TOC entry 4123 (class 2606 OID 53781572)
 -- Name: specimen_storage specimen_storage_definition_key; Type: CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -6997,7 +6961,7 @@ ALTER TABLE ONLY core.specimen_storage
 
 
 --
--- TOC entry 4126 (class 2606 OID 53769358)
+-- TOC entry 4125 (class 2606 OID 53781093)
 -- Name: specimen_storage specimen_storage_pkey; Type: CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7006,7 +6970,7 @@ ALTER TABLE ONLY core.specimen_storage
 
 
 --
--- TOC entry 4130 (class 2606 OID 53769841)
+-- TOC entry 4129 (class 2606 OID 53781576)
 -- Name: specimen_transport specimen_transport_definition_key; Type: CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7015,7 +6979,7 @@ ALTER TABLE ONLY core.specimen_transport
 
 
 --
--- TOC entry 4132 (class 2606 OID 53769362)
+-- TOC entry 4131 (class 2606 OID 53781097)
 -- Name: specimen_transport specimen_transport_pkey; Type: CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7024,7 +6988,7 @@ ALTER TABLE ONLY core.specimen_transport
 
 
 --
--- TOC entry 4140 (class 2606 OID 53769996)
+-- TOC entry 4139 (class 2606 OID 53781692)
 -- Name: surface_individual surface_individual_pkey; Type: CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7033,7 +6997,7 @@ ALTER TABLE ONLY core.surface_individual
 
 
 --
--- TOC entry 4136 (class 2606 OID 53769366)
+-- TOC entry 4135 (class 2606 OID 53781101)
 -- Name: surface surface_pkey; Type: CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7042,7 +7006,7 @@ ALTER TABLE ONLY core.surface
 
 
 --
--- TOC entry 4142 (class 2606 OID 53769368)
+-- TOC entry 4141 (class 2606 OID 53781103)
 -- Name: thesaurus_desc_element thesaurus_desc_element_pkey; Type: CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7051,7 +7015,7 @@ ALTER TABLE ONLY core.thesaurus_desc_element
 
 
 --
--- TOC entry 4146 (class 2606 OID 53769370)
+-- TOC entry 4145 (class 2606 OID 53781105)
 -- Name: thesaurus_desc_plot thesaurus_desc_plot_pkey; Type: CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7060,7 +7024,7 @@ ALTER TABLE ONLY core.thesaurus_desc_plot
 
 
 --
--- TOC entry 4150 (class 2606 OID 53769372)
+-- TOC entry 4149 (class 2606 OID 53781107)
 -- Name: thesaurus_desc_profile thesaurus_desc_profile_pkey; Type: CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7069,7 +7033,7 @@ ALTER TABLE ONLY core.thesaurus_desc_profile
 
 
 --
--- TOC entry 4154 (class 2606 OID 53770257)
+-- TOC entry 4153 (class 2606 OID 53781953)
 -- Name: unit_of_measure unit_of_measure_pkey; Type: CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7078,7 +7042,7 @@ ALTER TABLE ONLY core.unit_of_measure
 
 
 --
--- TOC entry 4044 (class 2606 OID 53769380)
+-- TOC entry 4043 (class 2606 OID 53781115)
 -- Name: element unq_element_profile_order_element; Type: CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7087,7 +7051,7 @@ ALTER TABLE ONLY core.element
 
 
 --
--- TOC entry 4058 (class 2606 OID 53769793)
+-- TOC entry 4057 (class 2606 OID 53781528)
 -- Name: plot unq_plot_code; Type: CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7096,7 +7060,7 @@ ALTER TABLE ONLY core.plot
 
 
 --
--- TOC entry 4068 (class 2606 OID 53769801)
+-- TOC entry 4067 (class 2606 OID 53781536)
 -- Name: procedure_phys_chem unq_procedure_phys_chem_uri; Type: CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7105,7 +7069,7 @@ ALTER TABLE ONLY core.procedure_phys_chem
 
 
 --
--- TOC entry 4072 (class 2606 OID 53769803)
+-- TOC entry 4071 (class 2606 OID 53781538)
 -- Name: profile unq_profile_code; Type: CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7114,7 +7078,7 @@ ALTER TABLE ONLY core.profile
 
 
 --
--- TOC entry 4076 (class 2606 OID 53769807)
+-- TOC entry 4075 (class 2606 OID 53781542)
 -- Name: project unq_project_name; Type: CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7123,7 +7087,7 @@ ALTER TABLE ONLY core.project
 
 
 --
--- TOC entry 4084 (class 2606 OID 53769811)
+-- TOC entry 4083 (class 2606 OID 53781546)
 -- Name: property_desc_element unq_property_desc_element_uri; Type: CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7132,7 +7096,7 @@ ALTER TABLE ONLY core.property_desc_element
 
 
 --
--- TOC entry 4088 (class 2606 OID 53769815)
+-- TOC entry 4087 (class 2606 OID 53781550)
 -- Name: property_desc_plot unq_property_desc_plot_uri; Type: CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7141,7 +7105,7 @@ ALTER TABLE ONLY core.property_desc_plot
 
 
 --
--- TOC entry 4092 (class 2606 OID 53769819)
+-- TOC entry 4091 (class 2606 OID 53781554)
 -- Name: property_desc_profile unq_property_desc_profile_uri; Type: CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7150,7 +7114,7 @@ ALTER TABLE ONLY core.property_desc_profile
 
 
 --
--- TOC entry 4096 (class 2606 OID 53769829)
+-- TOC entry 4095 (class 2606 OID 53781564)
 -- Name: property_phys_chem unq_property_phys_chem_uri; Type: CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7159,7 +7123,7 @@ ALTER TABLE ONLY core.property_phys_chem
 
 
 --
--- TOC entry 4112 (class 2606 OID 53769831)
+-- TOC entry 4111 (class 2606 OID 53781566)
 -- Name: site unq_site_code; Type: CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7168,7 +7132,7 @@ ALTER TABLE ONLY core.site
 
 
 --
--- TOC entry 4128 (class 2606 OID 53769839)
+-- TOC entry 4127 (class 2606 OID 53781574)
 -- Name: specimen_storage unq_specimen_storage_label; Type: CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7177,7 +7141,7 @@ ALTER TABLE ONLY core.specimen_storage
 
 
 --
--- TOC entry 4134 (class 2606 OID 53769843)
+-- TOC entry 4133 (class 2606 OID 53781578)
 -- Name: specimen_transport unq_specimen_transport_label; Type: CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7186,7 +7150,7 @@ ALTER TABLE ONLY core.specimen_transport
 
 
 --
--- TOC entry 4138 (class 2606 OID 53769430)
+-- TOC entry 4137 (class 2606 OID 53781165)
 -- Name: surface unq_surface_super; Type: CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7195,7 +7159,7 @@ ALTER TABLE ONLY core.surface
 
 
 --
--- TOC entry 4144 (class 2606 OID 53769845)
+-- TOC entry 4143 (class 2606 OID 53781580)
 -- Name: thesaurus_desc_element unq_thesaurus_desc_element_uri; Type: CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7204,7 +7168,7 @@ ALTER TABLE ONLY core.thesaurus_desc_element
 
 
 --
--- TOC entry 4148 (class 2606 OID 53769847)
+-- TOC entry 4147 (class 2606 OID 53781582)
 -- Name: thesaurus_desc_plot unq_thesaurus_desc_plot_uri; Type: CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7213,7 +7177,7 @@ ALTER TABLE ONLY core.thesaurus_desc_plot
 
 
 --
--- TOC entry 4152 (class 2606 OID 53769849)
+-- TOC entry 4151 (class 2606 OID 53781584)
 -- Name: thesaurus_desc_profile unq_thesaurus_desc_profile_uri; Type: CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7222,7 +7186,7 @@ ALTER TABLE ONLY core.thesaurus_desc_profile
 
 
 --
--- TOC entry 4156 (class 2606 OID 53769855)
+-- TOC entry 4155 (class 2606 OID 53781590)
 -- Name: unit_of_measure unq_unit_of_measure_uri; Type: CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7231,7 +7195,7 @@ ALTER TABLE ONLY core.unit_of_measure
 
 
 --
--- TOC entry 4158 (class 2606 OID 53769444)
+-- TOC entry 4157 (class 2606 OID 53781179)
 -- Name: address address_pkey; Type: CONSTRAINT; Schema: metadata; Owner: glosis
 --
 
@@ -7240,7 +7204,7 @@ ALTER TABLE ONLY metadata.address
 
 
 --
--- TOC entry 4160 (class 2606 OID 53769446)
+-- TOC entry 4159 (class 2606 OID 53781181)
 -- Name: individual individual_pkey; Type: CONSTRAINT; Schema: metadata; Owner: glosis
 --
 
@@ -7249,7 +7213,7 @@ ALTER TABLE ONLY metadata.individual
 
 
 --
--- TOC entry 4164 (class 2606 OID 53769448)
+-- TOC entry 4163 (class 2606 OID 53781183)
 -- Name: organisation_individual organisation_individual_individual_id_organisation_id_key; Type: CONSTRAINT; Schema: metadata; Owner: glosis
 --
 
@@ -7258,7 +7222,7 @@ ALTER TABLE ONLY metadata.organisation_individual
 
 
 --
--- TOC entry 4162 (class 2606 OID 53769450)
+-- TOC entry 4161 (class 2606 OID 53781185)
 -- Name: organisation organisation_pkey; Type: CONSTRAINT; Schema: metadata; Owner: glosis
 --
 
@@ -7267,7 +7231,7 @@ ALTER TABLE ONLY metadata.organisation
 
 
 --
--- TOC entry 4166 (class 2606 OID 53769857)
+-- TOC entry 4165 (class 2606 OID 53781592)
 -- Name: organisation_unit organisation_unit_name_organisation_id_key; Type: CONSTRAINT; Schema: metadata; Owner: glosis
 --
 
@@ -7276,7 +7240,7 @@ ALTER TABLE ONLY metadata.organisation_unit
 
 
 --
--- TOC entry 4168 (class 2606 OID 53769454)
+-- TOC entry 4167 (class 2606 OID 53781189)
 -- Name: organisation_unit organisation_unit_pkey; Type: CONSTRAINT; Schema: metadata; Owner: glosis
 --
 
@@ -7285,7 +7249,7 @@ ALTER TABLE ONLY metadata.organisation_unit
 
 
 --
--- TOC entry 4169 (class 1259 OID 53770408)
+-- TOC entry 4168 (class 1259 OID 53782104)
 -- Name: result_spectral_observation_phys_chem_id_idx; Type: INDEX; Schema: core; Owner: glosis
 --
 
@@ -7293,7 +7257,7 @@ CREATE INDEX result_spectral_observation_phys_chem_id_idx ON core.result_spectra
 
 
 --
--- TOC entry 4172 (class 1259 OID 53770409)
+-- TOC entry 4171 (class 1259 OID 53782105)
 -- Name: result_spectral_payload_idx; Type: INDEX; Schema: core; Owner: glosis
 --
 
@@ -7301,24 +7265,24 @@ CREATE INDEX result_spectral_payload_idx ON core.result_spectral USING gin (payl
 
 
 --
--- TOC entry 4231 (class 2620 OID 53769456)
--- Name: result_phys_chem trg_check_result_value_specimen; Type: TRIGGER; Schema: core; Owner: glosis
+-- TOC entry 4230 (class 2620 OID 53782107)
+-- Name: result_phys_chem trg_check_result_value; Type: TRIGGER; Schema: core; Owner: glosis
 --
 
-CREATE TRIGGER trg_check_result_value_specimen BEFORE INSERT OR UPDATE ON core.result_phys_chem FOR EACH ROW EXECUTE FUNCTION core.check_result_value_specimen();
-
-
---
--- TOC entry 4636 (class 0 OID 0)
--- Dependencies: 4231
--- Name: TRIGGER trg_check_result_value_specimen ON result_phys_chem; Type: COMMENT; Schema: core; Owner: glosis
---
-
-COMMENT ON TRIGGER trg_check_result_value_specimen ON core.result_phys_chem IS 'Verifies if the value assigned to the result is valid. See the function core.ceck_result_value function for implementation.';
+CREATE TRIGGER trg_check_result_value BEFORE INSERT OR UPDATE ON core.result_phys_chem FOR EACH ROW EXECUTE FUNCTION core.check_result_value();
 
 
 --
--- TOC entry 4198 (class 2606 OID 53769467)
+-- TOC entry 4634 (class 0 OID 0)
+-- Dependencies: 4230
+-- Name: TRIGGER trg_check_result_value ON result_phys_chem; Type: COMMENT; Schema: core; Owner: glosis
+--
+
+COMMENT ON TRIGGER trg_check_result_value ON core.result_phys_chem IS 'Verifies if the value assigned to the result is valid. See the function core.ceck_result_value function for implementation.';
+
+
+--
+-- TOC entry 4197 (class 2606 OID 53781202)
 -- Name: result_desc_element fk_element; Type: FK CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7327,7 +7291,7 @@ ALTER TABLE ONLY core.result_desc_element
 
 
 --
--- TOC entry 4219 (class 2606 OID 53769472)
+-- TOC entry 4218 (class 2606 OID 53781207)
 -- Name: surface_individual fk_individual; Type: FK CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7336,7 +7300,7 @@ ALTER TABLE ONLY core.surface_individual
 
 
 --
--- TOC entry 4189 (class 2606 OID 53769477)
+-- TOC entry 4188 (class 2606 OID 53781212)
 -- Name: plot_individual fk_individual; Type: FK CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7345,7 +7309,7 @@ ALTER TABLE ONLY core.plot_individual
 
 
 --
--- TOC entry 4212 (class 2606 OID 53769502)
+-- TOC entry 4211 (class 2606 OID 53781237)
 -- Name: specimen fk_organisation; Type: FK CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7354,7 +7318,7 @@ ALTER TABLE ONLY core.specimen
 
 
 --
--- TOC entry 4194 (class 2606 OID 53769507)
+-- TOC entry 4193 (class 2606 OID 53781242)
 -- Name: project_organisation fk_organisation; Type: FK CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7363,7 +7327,7 @@ ALTER TABLE ONLY core.project_organisation
 
 
 --
--- TOC entry 4190 (class 2606 OID 53769517)
+-- TOC entry 4189 (class 2606 OID 53781252)
 -- Name: plot_individual fk_plot; Type: FK CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7372,7 +7336,7 @@ ALTER TABLE ONLY core.plot_individual
 
 
 --
--- TOC entry 4192 (class 2606 OID 53769522)
+-- TOC entry 4191 (class 2606 OID 53781257)
 -- Name: profile fk_plot; Type: FK CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7381,7 +7345,7 @@ ALTER TABLE ONLY core.profile
 
 
 --
--- TOC entry 4200 (class 2606 OID 53769527)
+-- TOC entry 4199 (class 2606 OID 53781262)
 -- Name: result_desc_plot fk_plot; Type: FK CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7390,7 +7354,7 @@ ALTER TABLE ONLY core.result_desc_plot
 
 
 --
--- TOC entry 4175 (class 2606 OID 53769567)
+-- TOC entry 4174 (class 2606 OID 53781302)
 -- Name: element fk_profile; Type: FK CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7399,7 +7363,7 @@ ALTER TABLE ONLY core.element
 
 
 --
--- TOC entry 4202 (class 2606 OID 53769572)
+-- TOC entry 4201 (class 2606 OID 53781307)
 -- Name: result_desc_profile fk_profile; Type: FK CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7408,7 +7372,7 @@ ALTER TABLE ONLY core.result_desc_profile
 
 
 --
--- TOC entry 4209 (class 2606 OID 53769577)
+-- TOC entry 4208 (class 2606 OID 53781312)
 -- Name: site fk_profile; Type: FK CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7417,7 +7381,7 @@ ALTER TABLE ONLY core.site
 
 
 --
--- TOC entry 4210 (class 2606 OID 53769582)
+-- TOC entry 4209 (class 2606 OID 53781317)
 -- Name: site_project fk_project; Type: FK CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7426,7 +7390,7 @@ ALTER TABLE ONLY core.site_project
 
 
 --
--- TOC entry 4195 (class 2606 OID 53769587)
+-- TOC entry 4194 (class 2606 OID 53781322)
 -- Name: project_organisation fk_project; Type: FK CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7435,7 +7399,7 @@ ALTER TABLE ONLY core.project_organisation
 
 
 --
--- TOC entry 4196 (class 2606 OID 53769592)
+-- TOC entry 4195 (class 2606 OID 53781327)
 -- Name: project_related fk_project_source; Type: FK CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7444,7 +7408,7 @@ ALTER TABLE ONLY core.project_related
 
 
 --
--- TOC entry 4197 (class 2606 OID 53769597)
+-- TOC entry 4196 (class 2606 OID 53781332)
 -- Name: project_related fk_project_target; Type: FK CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7453,7 +7417,7 @@ ALTER TABLE ONLY core.project_related
 
 
 --
--- TOC entry 4217 (class 2606 OID 53769637)
+-- TOC entry 4216 (class 2606 OID 53781372)
 -- Name: surface fk_site; Type: FK CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7462,7 +7426,7 @@ ALTER TABLE ONLY core.surface
 
 
 --
--- TOC entry 4188 (class 2606 OID 53769642)
+-- TOC entry 4187 (class 2606 OID 53781377)
 -- Name: plot fk_site; Type: FK CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7471,7 +7435,7 @@ ALTER TABLE ONLY core.plot
 
 
 --
--- TOC entry 4211 (class 2606 OID 53769647)
+-- TOC entry 4210 (class 2606 OID 53781382)
 -- Name: site_project fk_site; Type: FK CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7480,7 +7444,7 @@ ALTER TABLE ONLY core.site_project
 
 
 --
--- TOC entry 4206 (class 2606 OID 53769657)
+-- TOC entry 4205 (class 2606 OID 53781392)
 -- Name: result_phys_chem fk_specimen; Type: FK CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7489,7 +7453,7 @@ ALTER TABLE ONLY core.result_phys_chem
 
 
 --
--- TOC entry 4228 (class 2606 OID 53770393)
+-- TOC entry 4227 (class 2606 OID 53782089)
 -- Name: result_spectral fk_specimen; Type: FK CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7498,7 +7462,7 @@ ALTER TABLE ONLY core.result_spectral
 
 
 --
--- TOC entry 4213 (class 2606 OID 53769662)
+-- TOC entry 4212 (class 2606 OID 53781397)
 -- Name: specimen fk_specimen_prep_process; Type: FK CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7507,7 +7471,7 @@ ALTER TABLE ONLY core.specimen
 
 
 --
--- TOC entry 4215 (class 2606 OID 53769667)
+-- TOC entry 4214 (class 2606 OID 53781402)
 -- Name: specimen_prep_process fk_specimen_storage; Type: FK CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7516,7 +7480,7 @@ ALTER TABLE ONLY core.specimen_prep_process
 
 
 --
--- TOC entry 4216 (class 2606 OID 53769672)
+-- TOC entry 4215 (class 2606 OID 53781407)
 -- Name: specimen_prep_process fk_specimen_transport; Type: FK CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7525,7 +7489,7 @@ ALTER TABLE ONLY core.specimen_prep_process
 
 
 --
--- TOC entry 4193 (class 2606 OID 53769677)
+-- TOC entry 4192 (class 2606 OID 53781412)
 -- Name: profile fk_surface; Type: FK CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7534,7 +7498,7 @@ ALTER TABLE ONLY core.profile
 
 
 --
--- TOC entry 4204 (class 2606 OID 53769682)
+-- TOC entry 4203 (class 2606 OID 53781417)
 -- Name: result_desc_surface fk_surface; Type: FK CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7543,7 +7507,7 @@ ALTER TABLE ONLY core.result_desc_surface
 
 
 --
--- TOC entry 4220 (class 2606 OID 53769687)
+-- TOC entry 4219 (class 2606 OID 53781422)
 -- Name: surface_individual fk_surface; Type: FK CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7552,7 +7516,7 @@ ALTER TABLE ONLY core.surface_individual
 
 
 --
--- TOC entry 4218 (class 2606 OID 53769692)
+-- TOC entry 4217 (class 2606 OID 53781427)
 -- Name: surface fk_surface; Type: FK CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7561,7 +7525,7 @@ ALTER TABLE ONLY core.surface
 
 
 --
--- TOC entry 4176 (class 2606 OID 53769697)
+-- TOC entry 4175 (class 2606 OID 53781432)
 -- Name: observation_desc_element fk_thesaurus_desc_element; Type: FK CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7570,7 +7534,7 @@ ALTER TABLE ONLY core.observation_desc_element
 
 
 --
--- TOC entry 4179 (class 2606 OID 53769702)
+-- TOC entry 4178 (class 2606 OID 53781437)
 -- Name: observation_desc_plot fk_thesaurus_desc_plot; Type: FK CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7579,7 +7543,7 @@ ALTER TABLE ONLY core.observation_desc_plot
 
 
 --
--- TOC entry 4182 (class 2606 OID 53769707)
+-- TOC entry 4181 (class 2606 OID 53781442)
 -- Name: observation_desc_profile fk_thesaurus_desc_profile; Type: FK CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7588,7 +7552,7 @@ ALTER TABLE ONLY core.observation_desc_profile
 
 
 --
--- TOC entry 4177 (class 2606 OID 53770241)
+-- TOC entry 4176 (class 2606 OID 53781937)
 -- Name: observation_desc_element observation_desc_element_procedure_desc_id_fkey; Type: FK CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7597,7 +7561,7 @@ ALTER TABLE ONLY core.observation_desc_element
 
 
 --
--- TOC entry 4178 (class 2606 OID 53770169)
+-- TOC entry 4177 (class 2606 OID 53781865)
 -- Name: observation_desc_element observation_desc_element_property_desc_element_id_fkey; Type: FK CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7606,7 +7570,7 @@ ALTER TABLE ONLY core.observation_desc_element
 
 
 --
--- TOC entry 4180 (class 2606 OID 53770246)
+-- TOC entry 4179 (class 2606 OID 53781942)
 -- Name: observation_desc_plot observation_desc_plot_procedure_desc_id_fkey; Type: FK CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7615,7 +7579,7 @@ ALTER TABLE ONLY core.observation_desc_plot
 
 
 --
--- TOC entry 4181 (class 2606 OID 53770174)
+-- TOC entry 4180 (class 2606 OID 53781870)
 -- Name: observation_desc_plot observation_desc_plot_property_desc_plot_id_fkey; Type: FK CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7624,7 +7588,7 @@ ALTER TABLE ONLY core.observation_desc_plot
 
 
 --
--- TOC entry 4183 (class 2606 OID 53770251)
+-- TOC entry 4182 (class 2606 OID 53781947)
 -- Name: observation_desc_profile observation_desc_profile_procedure_desc_id_fkey; Type: FK CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7633,7 +7597,7 @@ ALTER TABLE ONLY core.observation_desc_profile
 
 
 --
--- TOC entry 4184 (class 2606 OID 53770179)
+-- TOC entry 4183 (class 2606 OID 53781875)
 -- Name: observation_desc_profile observation_desc_profile_property_desc_profile_id_fkey; Type: FK CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7642,7 +7606,7 @@ ALTER TABLE ONLY core.observation_desc_profile
 
 
 --
--- TOC entry 4185 (class 2606 OID 53770343)
+-- TOC entry 4184 (class 2606 OID 53782039)
 -- Name: observation_phys_chem observation_phys_chem_procedure_phys_chem_id_fkey; Type: FK CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7651,7 +7615,7 @@ ALTER TABLE ONLY core.observation_phys_chem
 
 
 --
--- TOC entry 4186 (class 2606 OID 53770303)
+-- TOC entry 4185 (class 2606 OID 53781999)
 -- Name: observation_phys_chem observation_phys_chem_property_phys_chem_id_fkey; Type: FK CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7660,7 +7624,7 @@ ALTER TABLE ONLY core.observation_phys_chem
 
 
 --
--- TOC entry 4187 (class 2606 OID 53770277)
+-- TOC entry 4186 (class 2606 OID 53781973)
 -- Name: observation_phys_chem observation_phys_chem_unit_of_measure_id_fkey; Type: FK CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7669,7 +7633,7 @@ ALTER TABLE ONLY core.observation_phys_chem
 
 
 --
--- TOC entry 4191 (class 2606 OID 53770328)
+-- TOC entry 4190 (class 2606 OID 53782024)
 -- Name: procedure_phys_chem procedure_phys_chem_broader_id_fkey; Type: FK CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7678,7 +7642,7 @@ ALTER TABLE ONLY core.procedure_phys_chem
 
 
 --
--- TOC entry 4199 (class 2606 OID 53770189)
+-- TOC entry 4198 (class 2606 OID 53781885)
 -- Name: result_desc_element result_desc_element_property_desc_element_id_thesaurus_des_fkey; Type: FK CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7687,7 +7651,7 @@ ALTER TABLE ONLY core.result_desc_element
 
 
 --
--- TOC entry 4201 (class 2606 OID 53770194)
+-- TOC entry 4200 (class 2606 OID 53781890)
 -- Name: result_desc_plot result_desc_plot_property_desc_plot_id_thesaurus_desc_plot_fkey; Type: FK CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7696,7 +7660,7 @@ ALTER TABLE ONLY core.result_desc_plot
 
 
 --
--- TOC entry 4203 (class 2606 OID 53770204)
+-- TOC entry 4202 (class 2606 OID 53781900)
 -- Name: result_desc_profile result_desc_profile_property_desc_profile_id_thesaurus_des_fkey; Type: FK CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7705,7 +7669,7 @@ ALTER TABLE ONLY core.result_desc_profile
 
 
 --
--- TOC entry 4205 (class 2606 OID 53770199)
+-- TOC entry 4204 (class 2606 OID 53781895)
 -- Name: result_desc_surface result_desc_surface_property_desc_plot_id_thesaurus_desc_p_fkey; Type: FK CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7714,7 +7678,7 @@ ALTER TABLE ONLY core.result_desc_surface
 
 
 --
--- TOC entry 4207 (class 2606 OID 53769958)
+-- TOC entry 4206 (class 2606 OID 53781654)
 -- Name: result_phys_chem result_phys_chem_specimen_individual_id_fkey; Type: FK CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7723,7 +7687,7 @@ ALTER TABLE ONLY core.result_phys_chem
 
 
 --
--- TOC entry 4208 (class 2606 OID 53770025)
+-- TOC entry 4207 (class 2606 OID 53781721)
 -- Name: result_phys_chem result_phys_chem_specimen_observation_phys_chem_id_fkey; Type: FK CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7732,7 +7696,7 @@ ALTER TABLE ONLY core.result_phys_chem
 
 
 --
--- TOC entry 4229 (class 2606 OID 53770398)
+-- TOC entry 4228 (class 2606 OID 53782094)
 -- Name: result_spectral result_spectral_individual_id_fkey; Type: FK CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7741,7 +7705,7 @@ ALTER TABLE ONLY core.result_spectral
 
 
 --
--- TOC entry 4230 (class 2606 OID 53770403)
+-- TOC entry 4229 (class 2606 OID 53782099)
 -- Name: result_spectral result_spectral_observation_phys_chem_id_fkey; Type: FK CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7750,7 +7714,7 @@ ALTER TABLE ONLY core.result_spectral
 
 
 --
--- TOC entry 4214 (class 2606 OID 53770348)
+-- TOC entry 4213 (class 2606 OID 53782044)
 -- Name: specimen specimen_element_id_fkey; Type: FK CONSTRAINT; Schema: core; Owner: glosis
 --
 
@@ -7759,7 +7723,7 @@ ALTER TABLE ONLY core.specimen
 
 
 --
--- TOC entry 4221 (class 2606 OID 53769757)
+-- TOC entry 4220 (class 2606 OID 53781492)
 -- Name: individual fk_address; Type: FK CONSTRAINT; Schema: metadata; Owner: glosis
 --
 
@@ -7768,7 +7732,7 @@ ALTER TABLE ONLY metadata.individual
 
 
 --
--- TOC entry 4222 (class 2606 OID 53769762)
+-- TOC entry 4221 (class 2606 OID 53781497)
 -- Name: organisation fk_address; Type: FK CONSTRAINT; Schema: metadata; Owner: glosis
 --
 
@@ -7777,7 +7741,7 @@ ALTER TABLE ONLY metadata.organisation
 
 
 --
--- TOC entry 4224 (class 2606 OID 53769767)
+-- TOC entry 4223 (class 2606 OID 53781502)
 -- Name: organisation_individual fk_individual; Type: FK CONSTRAINT; Schema: metadata; Owner: glosis
 --
 
@@ -7786,7 +7750,7 @@ ALTER TABLE ONLY metadata.organisation_individual
 
 
 --
--- TOC entry 4225 (class 2606 OID 53769772)
+-- TOC entry 4224 (class 2606 OID 53781507)
 -- Name: organisation_individual fk_organisation; Type: FK CONSTRAINT; Schema: metadata; Owner: glosis
 --
 
@@ -7795,7 +7759,7 @@ ALTER TABLE ONLY metadata.organisation_individual
 
 
 --
--- TOC entry 4227 (class 2606 OID 53769777)
+-- TOC entry 4226 (class 2606 OID 53781512)
 -- Name: organisation_unit fk_organisation; Type: FK CONSTRAINT; Schema: metadata; Owner: glosis
 --
 
@@ -7804,7 +7768,7 @@ ALTER TABLE ONLY metadata.organisation_unit
 
 
 --
--- TOC entry 4226 (class 2606 OID 53769782)
+-- TOC entry 4225 (class 2606 OID 53781517)
 -- Name: organisation_individual fk_organisation_unit; Type: FK CONSTRAINT; Schema: metadata; Owner: glosis
 --
 
@@ -7813,7 +7777,7 @@ ALTER TABLE ONLY metadata.organisation_individual
 
 
 --
--- TOC entry 4223 (class 2606 OID 53769953)
+-- TOC entry 4222 (class 2606 OID 53781649)
 -- Name: organisation organisation_parent_id_fkey; Type: FK CONSTRAINT; Schema: metadata; Owner: glosis
 --
 
@@ -7822,7 +7786,7 @@ ALTER TABLE ONLY metadata.organisation
 
 
 --
--- TOC entry 4430 (class 0 OID 0)
+-- TOC entry 4429 (class 0 OID 0)
 -- Dependencies: 7
 -- Name: SCHEMA public; Type: ACL; Schema: -; Owner: postgres
 --
@@ -7832,7 +7796,7 @@ GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
 --
--- TOC entry 4529 (class 0 OID 0)
+-- TOC entry 4527 (class 0 OID 0)
 -- Dependencies: 269
 -- Name: TABLE result_spectral; Type: ACL; Schema: core; Owner: glosis
 --
@@ -7841,7 +7805,7 @@ GRANT SELECT ON TABLE core.result_spectral TO glosis_r;
 
 
 --
--- TOC entry 2817 (class 826 OID 53770379)
+-- TOC entry 2816 (class 826 OID 53782075)
 -- Name: DEFAULT PRIVILEGES FOR TABLES; Type: DEFAULT ACL; Schema: core; Owner: glosis
 --
 
@@ -7849,14 +7813,14 @@ ALTER DEFAULT PRIVILEGES FOR ROLE glosis IN SCHEMA core GRANT SELECT ON TABLES T
 
 
 --
--- TOC entry 2818 (class 826 OID 53770380)
+-- TOC entry 2817 (class 826 OID 53782076)
 -- Name: DEFAULT PRIVILEGES FOR TABLES; Type: DEFAULT ACL; Schema: metadata; Owner: glosis
 --
 
 ALTER DEFAULT PRIVILEGES FOR ROLE glosis IN SCHEMA metadata GRANT SELECT ON TABLES TO glosis_r;
 
 
--- Completed on 2024-12-12 12:33:08 CET
+-- Completed on 2024-12-12 15:25:05 CET
 
 --
 -- PostgreSQL database dump complete
