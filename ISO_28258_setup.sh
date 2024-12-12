@@ -1,6 +1,8 @@
-# psql -h localhost -p 5432 -d postgres -U postgres -c "CREATE ROLE glosis WITH LOGIN SUPERUSER INHERIT CREATEDB CREATEROLE NOREPLICATION NOBYPASSRLS PASSWORD 'XXXXXXX' "
-# psql -h localhost -p 5432 -d postgres -U glosis -c "CREATE ROLE glosis_r WITH LOGIN NOSUPERUSER NOCREATEDB NOCREATEROLE INHERIT LOGIN NOREPLICATION NOBYPASSRLS PASSWORD 'glosis' "
-psql -h localhost -p 5432 -d postgres -U glosis -c "DROP DATABASE IF EXISTS iso28258"
+psql -h localhost -p 5432 -d postgres -U postgres -c "DROP DATABASE IF EXISTS iso28258"
+psql -h localhost -p 5432 -d postgres -U postgres -c "DROP ROLE glosis"
+psql -h localhost -p 5432 -d postgres -U postgres -c "DROP ROLE glosis_r"
+psql -h localhost -p 5432 -d postgres -U postgres -c "CREATE ROLE glosis WITH LOGIN SUPERUSER INHERIT CREATEDB CREATEROLE NOREPLICATION NOBYPASSRLS PASSWORD 'xxxxxxxxxx'"
+psql -h localhost -p 5432 -d postgres -U postgres -c "CREATE ROLE glosis_r WITH LOGIN NOSUPERUSER INHERIT NOCREATEDB NOCREATEROLE NOREPLICATION NOBYPASSRLS PASSWORD 'xxxxxxxxxx'"
 psql -h localhost -p 5432 -d postgres -U glosis -c "CREATE DATABASE iso28258"
 psql -h localhost -p 5432 -d iso28258 -U glosis -c "CREATE EXTENSION postgis"
 psql -h localhost -p 5432 -d iso28258 -U glosis -f /home/carva014/Work/Code/FAO/glosis-db/ISO_28258_v1.5_changed.sql
@@ -25,7 +27,6 @@ psql -h localhost -p 5432 -d iso28258 -U glosis -f /home/carva014/Work/Code/FAO/
 psql -h localhost -p 5432 -d iso28258 -U glosis -f /home/carva014/Work/Code/FAO/glosis-db/Changes/mod_019.sql
 psql -h localhost -p 5432 -d iso28258 -U glosis -f /home/carva014/Work/Code/FAO/glosis-db/Changes/mod_020.sql
 psql -h localhost -p 5432 -d iso28258 -U glosis -f /home/carva014/Work/Code/FAO/glosis-db/Changes/mod_021.sql
-
 
 # dump iso28258 database per schema
 date=`date +%Y-%m-%d`
