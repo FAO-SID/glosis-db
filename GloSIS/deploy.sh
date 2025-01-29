@@ -31,7 +31,7 @@ psql -h localhost -p 5432 -d iso28258 -U glosis -f /home/carva014/Work/Code/FAO/
 psql -h localhost -p 5432 -d iso28258 -U glosis -f /home/carva014/Work/Code/FAO/glosis-db/GloSIS/Changes/mod_023.sql
 psql -h localhost -p 5432 -d iso28258 -U glosis -f /home/carva014/Work/Code/FAO/glosis-db/GloSIS/Changes/mod_024.sql
 
-# dump iso28258 database per schema
+# Dump iso28258 database
 date=`date +%Y-%m-%d`
 pg_dump -h localhost \
         -p 5432 \
@@ -49,4 +49,5 @@ pg_dump -h localhost \
         -v \
         -f /home/carva014/Work/Code/FAO/glosis-db/GloSIS/ISO_28258_v_latest.sql
 
+# Export table with codelists of properties, procedures, units and alowed valu range
 psql -h localhost -p 5432 -d iso28258 -U glosis -c "\COPY (SELECT property_phys_chem_id, procedure_phys_chem_id, unit_of_measure_id, value_min, value_max FROM core.observation_phys_chem ORDER BY 1, 2) TO '/home/carva014/Work/Code/FAO/glosis-db/GloSIS/observation_phys_chem_code_list.csv' WITH CSV HEADER"
