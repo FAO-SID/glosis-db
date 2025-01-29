@@ -122,87 +122,145 @@ psql -h localhost -p 5432 -d sislac -U eloi -c "
 
 
 psql -h localhost -p 5432 -d sislac -U eloi -c "
-        DROP TABLE IF EXISTS sislac_specimen_result;
-        DROP TABLE IF EXISTS sislac_plot;
+        DROP TABLE IF EXISTS result;
+        DROP TABLE IF EXISTS layer;
+        DROP TABLE IF EXISTS profile;
+        DROP TABLE IF EXISTS dataset;
         
-        CREATE TABLE sislac_plot (
-                sislac_plot_id int4 NOT NULL,
-                plot_identifier text NOT NULL,
+        -- Dataset
+        CREATE TABLE dataset (
+                dataset_id text NOT NULL,
+                name text,
+                description text,
+	CONSTRAINT dataset_pkey PRIMARY KEY (dataset_id));
+
+        INSERT INTO dataset (dataset_id, name)
+        VALUES ('SISLAC', 'Sistema de Informacion de Suelos de America Latina y Caribe');
+
+
+        -- Profile
+        CREATE TABLE profile (
+                profile_id int4 NOT NULL,
+                dataset_id text NOT NULL,
+                profile_code text NOT NULL,
                 country_code text NULL,
-                tipo text NULL,
+                profile_type text NULL,
                 fecha text NULL,
-                orden text NULL,
-                "source" text NULL,
-                contact text NULL,
-                license text NULL,
-                perfil_duplicado bool DEFAULT false NULL,
-                tier int4 NULL,
-                s_vegetacion text NULL,
-                s_observaciones text NULL,
-                s_uso_tierra text NULL,
-                s_relieve text NULL,
-                s_permeabilidad text NULL,
-                s_escurrimiento text NULL,
-                s_pendiente text NULL,
-                s_drenaje text NULL,
+                sampling_date date,
+                usda_soil_taxonomy_order text NULL,
+                dataset_source text NULL,
+                dataset_contact text NULL,
+                dataset_license text NULL,
                 geom geometry(point, 4326),
-	CONSTRAINT sislac_plot_pkey PRIMARY KEY (sislac_plot_id));
+	CONSTRAINT profile_pkey PRIMARY KEY (profile_id),
+        CONSTRAINT fk_dataset FOREIGN KEY (dataset_id) REFERENCES dataset(dataset_id));
 
-        CREATE TABLE sislac_specimen_result (
-                sislac_specimen_result_id int4 NOT NULL,
-                sislac_plot_id int4 NOT NULL,
-                plot_identifier text NULL,
-                layer_identifier text NULL,
-                top int4 NULL,
-                bottom int4 NULL,
-                designation text NULL,
-                bulk_density float8 NULL,
-                ca_co3 float8 NULL,
-                coarse_fragments float8 NULL,
-                ecec float8 NULL,
-                conductivity float8 NULL,
-                organic_carbon float8 NULL,
-                ph float8 NULL,
-                clay int4 NULL,
-                silt int4 NULL,
-                sand int4 NULL,
-                water_retention float8 NULL,
-                n float8 NULL,
-                p float8 NULL,
-                k float8 NULL,
-                ca float8 NULL,
-                mg float8 NULL,
-                s float8 NULL,
-                fe float8 NULL,
-                mn float8 NULL,
-                zn float8 NULL,
-                cu float8 NULL,
-                b float8 NULL,
-                mo float8 NULL,
-                cl float8 NULL,
-                co3 float8 NULL,
-                humedad text NULL,
-                textura text NULL,
-                cons_seco text NULL,
-                cons_humedo text NULL,
-                estruc_tipo text NULL,
-                estruc_clase text NULL,
-                estruc_grado text NULL,
-	CONSTRAINT sislac_specimen_result_pkey PRIMARY KEY (sislac_specimen_result_id),
-        CONSTRAINT fk_sislac_plot FOREIGN KEY (sislac_plot_id) REFERENCES sislac_plot(sislac_plot_id));
-        
-        INSERT INTO sislac_plot
-        SELECT DISTINCT profile_id, profile_identifier, country_code, tipo, fecha, orden, "source", contact, license, perfil_duplicado, tier, s_vegetacion, s_observaciones, s_uso_tierra, s_relieve, s_permeabilidad, s_escurrimiento, s_pendiente, s_drenaje, geom
+        INSERT INTO profile (profile_id, dataset_id, profile_code, country_code, profile_type, fecha, sampling_date, usda_soil_taxonomy_order, dataset_source, dataset_contact, dataset_license, geom)
+        SELECT DISTINCT profile_id, 'SISLAC', profile_identifier, country_code, tipo, fecha, NULL::date, orden, "source", contact, license, geom
         FROM sislac_zenodo;
-        
-        INSERT INTO sislac_specimen_result
-        SELECT layer_id, profile_id, profile_identifier, layer_identifier, top, bottom, designation, bulk_density, 
-                ca_co3, coarse_fragments, ecec, conductivity, organic_carbon, ph, clay, silt, sand, water_retention, 
-                n, p, k, ca, mg, s, fe, mn, zn, cu, b, mo, cl, co3, 
-                humedad, textura, cons_seco, cons_humedo, estruc_tipo, estruc_clase, estruc_grado
-        FROM sislac_zenodo;"
 
+        UPDATE profile SET sampling_date = (split_part(fecha,'/',3)||'-'||split_part(fecha,'/',2)||'-'||split_part(fecha,'/',1))::date WHERE fecha != '01/01/1900';
+        ALTER TABLE profile DROP COLUMN fecha;
+        UPDATE profile SET profile_type = 'TrialPit' WHERE profile_type ILIKE 'perfil de suelo';
+        UPDATE profile SET profile_type = 'Borehole' WHERE profile_type ILIKE 'barrenada';
+        UPDATE profile SET usda_soil_taxonomy_order = NULL WHERE usda_soil_taxonomy_order IN ('NA','S/D');
+        UPDATE profile SET country_code = 'AN' WHERE country_code = 'ANT';
+        UPDATE profile SET country_code = 'AR' WHERE country_code = 'ARG';
+        UPDATE profile SET country_code = 'BZ' WHERE country_code = 'BLZ';
+        UPDATE profile SET country_code = 'BO' WHERE country_code = 'BOL';
+        UPDATE profile SET country_code = 'BR' WHERE country_code = 'BRA';
+        UPDATE profile SET country_code = 'BB' WHERE country_code = 'BRB';
+        UPDATE profile SET country_code = 'CL' WHERE country_code = 'CHL';
+        UPDATE profile SET country_code = 'CO' WHERE country_code = 'COL';
+        UPDATE profile SET country_code = 'CR' WHERE country_code = 'CRI';
+        UPDATE profile SET country_code = 'CU' WHERE country_code = 'CUB';
+        UPDATE profile SET country_code = 'DO' WHERE country_code = 'DOM';
+        UPDATE profile SET country_code = 'EC' WHERE country_code = 'ECU';
+        UPDATE profile SET country_code = 'GT' WHERE country_code = 'GTM';
+        UPDATE profile SET country_code = 'GF' WHERE country_code = 'GUF';
+        UPDATE profile SET country_code = 'GY' WHERE country_code = 'GUY';
+        UPDATE profile SET country_code = 'HN' WHERE country_code = 'HND';
+        UPDATE profile SET country_code = 'JM' WHERE country_code = 'JAM';
+        UPDATE profile SET country_code = 'MX' WHERE country_code = 'MEX';
+        UPDATE profile SET country_code = 'NI' WHERE country_code = 'NIC';
+        UPDATE profile SET country_code = 'PA' WHERE country_code = 'PAN';
+        UPDATE profile SET country_code = 'PE' WHERE country_code = 'PER';
+        UPDATE profile SET country_code = 'PR' WHERE country_code = 'PRI';
+        UPDATE profile SET country_code = 'SV' WHERE country_code = 'SLV';
+        UPDATE profile SET country_code = 'SR' WHERE country_code = 'SUR';
+        UPDATE profile SET country_code = 'TT' WHERE country_code = 'TTO';
+        UPDATE profile SET country_code = 'UY' WHERE country_code = 'URY';
+        UPDATE profile SET country_code = 'VE' WHERE country_code = 'VEN';
+        UPDATE profile SET country_code = 'VI' WHERE country_code = 'VIR';
+
+
+        -- Layer
+        CREATE TABLE layer (
+                layer_id int4 NOT NULL,
+                profile_id int4 NOT NULL,
+                layer_code text NULL,
+                upper_depth int4 NULL,
+                lower_depth int4 NULL,
+                designation text NULL,
+        CONSTRAINT layer_pkey PRIMARY KEY (layer_id),
+        CONSTRAINT fk_profile FOREIGN KEY (profile_id) REFERENCES profile(profile_id));
+
+        INSERT INTO layer
+        SELECT layer_id, profile_id, layer_identifier, top, bottom, designation
+        FROM sislac_zenodo;
+
+        UPDATE layer SET designation = NULL WHERE designation IN ('S/D','Sin nombre');
+        UPDATE layer SET designation = trim(designation) WHERE designation IS NOt NULL;
+
+
+        -- Result
+        CREATE TABLE result (
+                result_id serial,
+                layer_id int4 NOT NULL,
+                property text NOT NULL,
+                glosis_property text NULL,
+                glosis_procedure text NULL,
+                glosis_unit text NULL,
+                value text NOT NULL,
+        CONSTRAINT result_pkey PRIMARY KEY (result_id),
+        CONSTRAINT fk_layer FOREIGN KEY (layer_id) REFERENCES layer(layer_id));
+
+        INSERT INTO result (layer_id, glosis_property, glosis_unit, glosis_procedure, property, value) SELECT layer_id, NULL, NULL, NULL, 'bulk_density', bulk_density FROM sislac_zenodo WHERE bulk_density IS NOT NULL;
+        INSERT INTO result (layer_id, glosis_property, glosis_unit, glosis_procedure, property, value) SELECT layer_id, NULL, NULL, NULL, 'ca_co3', ca_co3 FROM sislac_zenodo WHERE ca_co3 IS NOT NULL;
+        INSERT INTO result (layer_id, glosis_property, glosis_unit, glosis_procedure, property, value) SELECT layer_id, 'Coarse fragments', '%', NULL, 'coarse_fragments', coarse_fragments FROM sislac_zenodo WHERE coarse_fragments IS NOT NULL;
+        INSERT INTO result (layer_id, glosis_property, glosis_unit, glosis_procedure, property, value) SELECT layer_id, 'effectiveCecProperty', 'cmol/kg', NULL, 'ecec', ecec FROM sislac_zenodo WHERE ecec IS NOT NULL;
+        INSERT INTO result (layer_id, glosis_property, glosis_unit, glosis_procedure, property, value) SELECT layer_id, 'electricalConductivityProperty', 'dS/m', NULL, 'conductivity', conductivity FROM sislac_zenodo WHERE conductivity IS NOT NULL;
+        INSERT INTO result (layer_id, glosis_property, glosis_unit, glosis_procedure, property, value) SELECT layer_id, 'Carbon (C) - organic', 'g/kg', NULL, 'organic_carbon', organic_carbon FROM sislac_zenodo WHERE organic_carbon IS NOT NULL;
+        INSERT INTO result (layer_id, glosis_property, glosis_unit, glosis_procedure, property, value) SELECT layer_id, 'pH - Hydrogen potential', 'pH', NULL, 'ph', ph FROM sislac_zenodo WHERE ph IS NOT NULL;
+        INSERT INTO result (layer_id, glosis_property, glosis_unit, glosis_procedure, property, value) SELECT layer_id, 'Clay texture fraction', '%', NULL, 'clay', clay FROM sislac_zenodo WHERE clay IS NOT NULL;
+        INSERT INTO result (layer_id, glosis_property, glosis_unit, glosis_procedure, property, value) SELECT layer_id, 'Silt texture fraction', '%', NULL, 'silt', silt FROM sislac_zenodo WHERE silt IS NOT NULL;
+        INSERT INTO result (layer_id, glosis_property, glosis_unit, glosis_procedure, property, value) SELECT layer_id, 'Sand texture fraction', '%', NULL, 'sand', sand FROM sislac_zenodo WHERE sand IS NOT NULL;
+        INSERT INTO result (layer_id, glosis_property, glosis_unit, glosis_procedure, property, value) SELECT layer_id, NULL, NULL, NULL, 'water_retention', water_retention FROM sislac_zenodo WHERE water_retention IS NOT NULL;
+        INSERT INTO result (layer_id, glosis_property, glosis_unit, glosis_procedure, property, value) SELECT layer_id, 'Nitrogen (N) - total', 'g/kg', NULL, 'n', n FROM sislac_zenodo WHERE n IS NOT NULL;
+        INSERT INTO result (layer_id, glosis_property, glosis_unit, glosis_procedure, property, value) SELECT layer_id, 'Phosphorus (P) - total', '%', NULL, 'p', p FROM sislac_zenodo WHERE p IS NOT NULL;
+        INSERT INTO result (layer_id, glosis_property, glosis_unit, glosis_procedure, property, value) SELECT layer_id, 'Potassium (K) - total', 'cmol/kg', NULL, 'k', k FROM sislac_zenodo WHERE k IS NOT NULL;
+        INSERT INTO result (layer_id, glosis_property, glosis_unit, glosis_procedure, property, value) SELECT layer_id, 'Calcium (Ca++) - total', 'cmol/kg', NULL, 'ca', ca FROM sislac_zenodo WHERE ca IS NOT NULL;
+        INSERT INTO result (layer_id, glosis_property, glosis_unit, glosis_procedure, property, value) SELECT layer_id, 'Magnesium (Mg) - total', 'cmol/kg', NULL, 'mg', mg FROM sislac_zenodo WHERE mg IS NOT NULL;
+        INSERT INTO result (layer_id, glosis_property, glosis_unit, glosis_procedure, property, value) SELECT layer_id, 'Sulfur (S) - total', '%', NULL, 's', s FROM sislac_zenodo WHERE s IS NOT NULL;
+        INSERT INTO result (layer_id, glosis_property, glosis_unit, glosis_procedure, property, value) SELECT layer_id, 'Iron (Fe) - total', '%', NULL, 'fe', fe FROM sislac_zenodo WHERE fe IS NOT NULL;
+        INSERT INTO result (layer_id, glosis_property, glosis_unit, glosis_procedure, property, value) SELECT layer_id, 'Manganese (Mn) - total', 'cmol/kg', NULL, 'mn', mn FROM sislac_zenodo WHERE mn IS NOT NULL;
+        INSERT INTO result (layer_id, glosis_property, glosis_unit, glosis_procedure, property, value) SELECT layer_id, NULL, NULL, NULL, 'zn', zn FROM sislac_zenodo WHERE zn IS NOT NULL;
+        INSERT INTO result (layer_id, glosis_property, glosis_unit, glosis_procedure, property, value) SELECT layer_id, 'Copper (Cu) - total', '%', NULL, 'cu', cu FROM sislac_zenodo WHERE cu IS NOT NULL;
+        INSERT INTO result (layer_id, glosis_property, glosis_unit, glosis_procedure, property, value) SELECT layer_id, 'Boron (B) - total', '%', NULL, 'b', b FROM sislac_zenodo WHERE b IS NOT NULL;
+        INSERT INTO result (layer_id, glosis_property, glosis_unit, glosis_procedure, property, value) SELECT layer_id, NULL, NULL, NULL, 'mo', mo FROM sislac_zenodo WHERE mo IS NOT NULL;
+        INSERT INTO result (layer_id, glosis_property, glosis_unit, glosis_procedure, property, value) SELECT layer_id, NULL, NULL, NULL, 'cl', cl FROM sislac_zenodo WHERE cl IS NOT NULL;
+        INSERT INTO result (layer_id, glosis_property, glosis_unit, glosis_procedure, property, value) SELECT layer_id, NULL, NULL, NULL, 'co3', co3 FROM sislac_zenodo WHERE co3 IS NOT NULL;
+        INSERT INTO result (layer_id, glosis_property, glosis_unit, glosis_procedure, property, value) SELECT layer_id, NULL, NULL, NULL, 'humedad', humedad FROM sislac_zenodo WHERE humedad IS NOT NULL AND humedad = 'S/D';
+        INSERT INTO result (layer_id, glosis_property, glosis_unit, glosis_procedure, property, value) SELECT layer_id, NULL, NULL, NULL, 'textura', textura FROM sislac_zenodo WHERE textura IS NOT NULL AND textura = 'S/D';
+        INSERT INTO result (layer_id, glosis_property, glosis_unit, glosis_procedure, property, value) SELECT layer_id, NULL, NULL, NULL, 'cons_seco', cons_seco FROM sislac_zenodo WHERE cons_seco IS NOT NULL AND cons_seco = 'S/D';
+        INSERT INTO result (layer_id, glosis_property, glosis_unit, glosis_procedure, property, value) SELECT layer_id, NULL, NULL, NULL, 'cons_humedo', cons_humedo FROM sislac_zenodo WHERE cons_humedo IS NOT NULL AND cons_humedo = 'S/D';
+        INSERT INTO result (layer_id, glosis_property, glosis_unit, glosis_procedure, property, value) SELECT layer_id, NULL, NULL, NULL, 'estruc_tipo', estruc_tipo FROM sislac_zenodo WHERE estruc_tipo IS NOT NULL AND estruc_tipo = 'S/D';
+        INSERT INTO result (layer_id, glosis_property, glosis_unit, glosis_procedure, property, value) SELECT layer_id, NULL, NULL, NULL, 'estruc_clase', estruc_clase FROM sislac_zenodo WHERE estruc_clase IS NOT NULL AND estruc_clase = 'S/D';
+        INSERT INTO result (layer_id, glosis_property, glosis_unit, glosis_procedure, property, value) SELECT layer_id, NULL, NULL, NULL, 'estruc_grado', estruc_grado FROM sislac_zenodo WHERE estruc_grado IS NOT NULL AND estruc_grado = 'S/D';
+        "
 
 # Export tables from PostgreSQL to gpkg
-ogr2ogr -f GPKG /home/carva014/Work/Code/FAO/glosis-db/SISLAC/SISLAC.gpkg PG:'host=localhost user=eloi dbname=sislac' -nln sislac_plot sislac_plot
-ogr2ogr -f GPKG /home/carva014/Work/Code/FAO/glosis-db/SISLAC/SISLAC.gpkg PG:'host=localhost user=eloi dbname=sislac' -update -nln sislac_specimen_result sislac_specimen_result
+ogr2ogr -f GPKG /home/carva014/Work/Code/FAO/glosis-db/SISLAC/SISLAC.gpkg PG:'host=localhost user=eloi dbname=sislac' -nln dataset dataset
+ogr2ogr -f GPKG /home/carva014/Work/Code/FAO/glosis-db/SISLAC/SISLAC.gpkg PG:'host=localhost user=eloi dbname=sislac' -update -nln profile profile
+ogr2ogr -f GPKG /home/carva014/Work/Code/FAO/glosis-db/SISLAC/SISLAC.gpkg PG:'host=localhost user=eloi dbname=sislac' -update -nln layer layer
+ogr2ogr -f GPKG /home/carva014/Work/Code/FAO/glosis-db/SISLAC/SISLAC.gpkg PG:'host=localhost user=eloi dbname=sislac' -update -nln result result
