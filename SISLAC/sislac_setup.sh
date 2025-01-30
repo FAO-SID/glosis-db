@@ -134,8 +134,8 @@ psql -h localhost -p 5432 -d sislac -U eloi -c "
                 description text,
 	CONSTRAINT dataset_pkey PRIMARY KEY (dataset_id));
 
-        INSERT INTO dataset (dataset_id, name)
-        VALUES ('SISLAC', 'Sistema de Informacion de Suelos de America Latina y Caribe');
+        INSERT INTO dataset (dataset_id, name, description)
+        VALUES ('SISLAC', 'Soil Information System for Latin American and the Caribbean', 'https://doi.org/10.5194/essd-16-1229-2024');
 
 
         -- Profile
@@ -217,50 +217,69 @@ psql -h localhost -p 5432 -d sislac -U eloi -c "
         CREATE TABLE result (
                 result_id serial,
                 layer_id int4 NOT NULL,
-                property text NOT NULL,
-                glosis_property text NULL,
-                glosis_procedure text NULL,
-                glosis_unit text NULL,
+                property_source text NOT NULL,
+                property_pretty_name text NULL,
+                glosis_property_uri text NULL,
+                glosis_procedure_uri text NULL,
+                unit text NULL,
                 value text NOT NULL,
         CONSTRAINT result_pkey PRIMARY KEY (result_id),
         CONSTRAINT fk_layer FOREIGN KEY (layer_id) REFERENCES layer(layer_id));
 
-        INSERT INTO result (layer_id, glosis_property, glosis_unit, glosis_procedure, property, value) SELECT layer_id, NULL, NULL, NULL, 'bulk_density', bulk_density FROM sislac_zenodo WHERE bulk_density IS NOT NULL;
-        INSERT INTO result (layer_id, glosis_property, glosis_unit, glosis_procedure, property, value) SELECT layer_id, NULL, NULL, NULL, 'ca_co3', ca_co3 FROM sislac_zenodo WHERE ca_co3 IS NOT NULL;
-        INSERT INTO result (layer_id, glosis_property, glosis_unit, glosis_procedure, property, value) SELECT layer_id, 'Coarse fragments', '%', NULL, 'coarse_fragments', coarse_fragments FROM sislac_zenodo WHERE coarse_fragments IS NOT NULL;
-        INSERT INTO result (layer_id, glosis_property, glosis_unit, glosis_procedure, property, value) SELECT layer_id, 'effectiveCecProperty', 'cmol/kg', NULL, 'ecec', ecec FROM sislac_zenodo WHERE ecec IS NOT NULL;
-        INSERT INTO result (layer_id, glosis_property, glosis_unit, glosis_procedure, property, value) SELECT layer_id, 'electricalConductivityProperty', 'dS/m', NULL, 'conductivity', conductivity FROM sislac_zenodo WHERE conductivity IS NOT NULL;
-        INSERT INTO result (layer_id, glosis_property, glosis_unit, glosis_procedure, property, value) SELECT layer_id, 'Carbon (C) - organic', 'g/kg', NULL, 'organic_carbon', organic_carbon FROM sislac_zenodo WHERE organic_carbon IS NOT NULL;
-        INSERT INTO result (layer_id, glosis_property, glosis_unit, glosis_procedure, property, value) SELECT layer_id, 'pH - Hydrogen potential', 'pH', NULL, 'ph', ph FROM sislac_zenodo WHERE ph IS NOT NULL;
-        INSERT INTO result (layer_id, glosis_property, glosis_unit, glosis_procedure, property, value) SELECT layer_id, 'Clay texture fraction', '%', NULL, 'clay', clay FROM sislac_zenodo WHERE clay IS NOT NULL;
-        INSERT INTO result (layer_id, glosis_property, glosis_unit, glosis_procedure, property, value) SELECT layer_id, 'Silt texture fraction', '%', NULL, 'silt', silt FROM sislac_zenodo WHERE silt IS NOT NULL;
-        INSERT INTO result (layer_id, glosis_property, glosis_unit, glosis_procedure, property, value) SELECT layer_id, 'Sand texture fraction', '%', NULL, 'sand', sand FROM sislac_zenodo WHERE sand IS NOT NULL;
-        INSERT INTO result (layer_id, glosis_property, glosis_unit, glosis_procedure, property, value) SELECT layer_id, NULL, NULL, NULL, 'water_retention', water_retention FROM sislac_zenodo WHERE water_retention IS NOT NULL;
-        INSERT INTO result (layer_id, glosis_property, glosis_unit, glosis_procedure, property, value) SELECT layer_id, 'Nitrogen (N) - total', 'g/kg', NULL, 'n', n FROM sislac_zenodo WHERE n IS NOT NULL;
-        INSERT INTO result (layer_id, glosis_property, glosis_unit, glosis_procedure, property, value) SELECT layer_id, 'Phosphorus (P) - total', '%', NULL, 'p', p FROM sislac_zenodo WHERE p IS NOT NULL;
-        INSERT INTO result (layer_id, glosis_property, glosis_unit, glosis_procedure, property, value) SELECT layer_id, 'Potassium (K) - total', 'cmol/kg', NULL, 'k', k FROM sislac_zenodo WHERE k IS NOT NULL;
-        INSERT INTO result (layer_id, glosis_property, glosis_unit, glosis_procedure, property, value) SELECT layer_id, 'Calcium (Ca++) - total', 'cmol/kg', NULL, 'ca', ca FROM sislac_zenodo WHERE ca IS NOT NULL;
-        INSERT INTO result (layer_id, glosis_property, glosis_unit, glosis_procedure, property, value) SELECT layer_id, 'Magnesium (Mg) - total', 'cmol/kg', NULL, 'mg', mg FROM sislac_zenodo WHERE mg IS NOT NULL;
-        INSERT INTO result (layer_id, glosis_property, glosis_unit, glosis_procedure, property, value) SELECT layer_id, 'Sulfur (S) - total', '%', NULL, 's', s FROM sislac_zenodo WHERE s IS NOT NULL;
-        INSERT INTO result (layer_id, glosis_property, glosis_unit, glosis_procedure, property, value) SELECT layer_id, 'Iron (Fe) - total', '%', NULL, 'fe', fe FROM sislac_zenodo WHERE fe IS NOT NULL;
-        INSERT INTO result (layer_id, glosis_property, glosis_unit, glosis_procedure, property, value) SELECT layer_id, 'Manganese (Mn) - total', 'cmol/kg', NULL, 'mn', mn FROM sislac_zenodo WHERE mn IS NOT NULL;
-        INSERT INTO result (layer_id, glosis_property, glosis_unit, glosis_procedure, property, value) SELECT layer_id, NULL, NULL, NULL, 'zn', zn FROM sislac_zenodo WHERE zn IS NOT NULL;
-        INSERT INTO result (layer_id, glosis_property, glosis_unit, glosis_procedure, property, value) SELECT layer_id, 'Copper (Cu) - total', '%', NULL, 'cu', cu FROM sislac_zenodo WHERE cu IS NOT NULL;
-        INSERT INTO result (layer_id, glosis_property, glosis_unit, glosis_procedure, property, value) SELECT layer_id, 'Boron (B) - total', '%', NULL, 'b', b FROM sislac_zenodo WHERE b IS NOT NULL;
-        INSERT INTO result (layer_id, glosis_property, glosis_unit, glosis_procedure, property, value) SELECT layer_id, NULL, NULL, NULL, 'mo', mo FROM sislac_zenodo WHERE mo IS NOT NULL;
-        INSERT INTO result (layer_id, glosis_property, glosis_unit, glosis_procedure, property, value) SELECT layer_id, NULL, NULL, NULL, 'cl', cl FROM sislac_zenodo WHERE cl IS NOT NULL;
-        INSERT INTO result (layer_id, glosis_property, glosis_unit, glosis_procedure, property, value) SELECT layer_id, NULL, NULL, NULL, 'co3', co3 FROM sislac_zenodo WHERE co3 IS NOT NULL;
-        INSERT INTO result (layer_id, glosis_property, glosis_unit, glosis_procedure, property, value) SELECT layer_id, NULL, NULL, NULL, 'humedad', humedad FROM sislac_zenodo WHERE humedad IS NOT NULL AND humedad = 'S/D';
-        INSERT INTO result (layer_id, glosis_property, glosis_unit, glosis_procedure, property, value) SELECT layer_id, NULL, NULL, NULL, 'textura', textura FROM sislac_zenodo WHERE textura IS NOT NULL AND textura = 'S/D';
-        INSERT INTO result (layer_id, glosis_property, glosis_unit, glosis_procedure, property, value) SELECT layer_id, NULL, NULL, NULL, 'cons_seco', cons_seco FROM sislac_zenodo WHERE cons_seco IS NOT NULL AND cons_seco = 'S/D';
-        INSERT INTO result (layer_id, glosis_property, glosis_unit, glosis_procedure, property, value) SELECT layer_id, NULL, NULL, NULL, 'cons_humedo', cons_humedo FROM sislac_zenodo WHERE cons_humedo IS NOT NULL AND cons_humedo = 'S/D';
-        INSERT INTO result (layer_id, glosis_property, glosis_unit, glosis_procedure, property, value) SELECT layer_id, NULL, NULL, NULL, 'estruc_tipo', estruc_tipo FROM sislac_zenodo WHERE estruc_tipo IS NOT NULL AND estruc_tipo = 'S/D';
-        INSERT INTO result (layer_id, glosis_property, glosis_unit, glosis_procedure, property, value) SELECT layer_id, NULL, NULL, NULL, 'estruc_clase', estruc_clase FROM sislac_zenodo WHERE estruc_clase IS NOT NULL AND estruc_clase = 'S/D';
-        INSERT INTO result (layer_id, glosis_property, glosis_unit, glosis_procedure, property, value) SELECT layer_id, NULL, NULL, NULL, 'estruc_grado', estruc_grado FROM sislac_zenodo WHERE estruc_grado IS NOT NULL AND estruc_grado = 'S/D';
+        INSERT INTO result (layer_id, glosis_property_uri, property_pretty_name, unit, glosis_procedure_uri, property_source, value) SELECT layer_id, NULL, 'Bulk density', NULL, NULL, 'bulk_density', bulk_density FROM sislac_zenodo WHERE bulk_density IS NOT NULL;
+        INSERT INTO result (layer_id, glosis_property_uri, property_pretty_name, unit, glosis_procedure_uri, property_source, value) SELECT layer_id, 'http://w3id.org/glosis/model/layerhorizon/carbonInorganicProperty', 'Carbon (C) - inorganic', '%', NULL, 'ca_co3', ca_co3 FROM sislac_zenodo WHERE ca_co3 IS NOT NULL;
+        INSERT INTO result (layer_id, glosis_property_uri, property_pretty_name, unit, glosis_procedure_uri, property_source, value) SELECT layer_id, 'http://w3id.org/glosis/model/layerhorizon/coarseFragmentsProperty', 'Coarse fragments', '%', NULL, 'coarse_fragments', coarse_fragments FROM sislac_zenodo WHERE coarse_fragments IS NOT NULL;
+        INSERT INTO result (layer_id, glosis_property_uri, property_pretty_name, unit, glosis_procedure_uri, property_source, value) SELECT layer_id, 'http://w3id.org/glosis/model/layerhorizon/effectiveCecProperty', 'Effective CEC', NULL, NULL, 'ecec', ecec FROM sislac_zenodo WHERE ecec IS NOT NULL;
+        INSERT INTO result (layer_id, glosis_property_uri, property_pretty_name, unit, glosis_procedure_uri, property_source, value) SELECT layer_id, 'http://w3id.org/glosis/model/layerhorizon/electricalConductivityProperty', 'Electrical conductivity', NULL, NULL, 'conductivity', conductivity FROM sislac_zenodo WHERE conductivity IS NOT NULL;
+        INSERT INTO result (layer_id, glosis_property_uri, property_pretty_name, unit, glosis_procedure_uri, property_source, value) SELECT layer_id, 'http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Carorg', 'Carbon (C) - organic', '%', NULL, 'organic_carbon', organic_carbon FROM sislac_zenodo WHERE organic_carbon IS NOT NULL;
+        INSERT INTO result (layer_id, glosis_property_uri, property_pretty_name, unit, glosis_procedure_uri, property_source, value) SELECT layer_id, 'http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-pH', 'pH - Hydrogen potential', 'pH', NULL, 'ph', ph FROM sislac_zenodo WHERE ph IS NOT NULL;
+        INSERT INTO result (layer_id, glosis_property_uri, property_pretty_name, unit, glosis_procedure_uri, property_source, value) SELECT layer_id, 'http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Textclay', 'Clay texture fraction', '%', NULL, 'clay', clay FROM sislac_zenodo WHERE clay IS NOT NULL;
+        INSERT INTO result (layer_id, glosis_property_uri, property_pretty_name, unit, glosis_procedure_uri, property_source, value) SELECT layer_id, 'http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Textsilt', 'Silt texture fraction', '%', NULL, 'silt', silt FROM sislac_zenodo WHERE silt IS NOT NULL;
+        INSERT INTO result (layer_id, glosis_property_uri, property_pretty_name, unit, glosis_procedure_uri, property_source, value) SELECT layer_id, 'http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Textsand', 'Sand texture fraction', '%', NULL, 'sand', sand FROM sislac_zenodo WHERE sand IS NOT NULL;
+        INSERT INTO result (layer_id, glosis_property_uri, property_pretty_name, unit, glosis_procedure_uri, property_source, value) SELECT layer_id, NULL, 'Water retention', '%', NULL, 'water_retention', water_retention FROM sislac_zenodo WHERE water_retention IS NOT NULL;
+        INSERT INTO result (layer_id, glosis_property_uri, property_pretty_name, unit, glosis_procedure_uri, property_source, value) SELECT layer_id, NULL, 'Nitrogen (N)', NULL, NULL, 'n', n FROM sislac_zenodo WHERE n IS NOT NULL;
+        INSERT INTO result (layer_id, glosis_property_uri, property_pretty_name, unit, glosis_procedure_uri, property_source, value) SELECT layer_id, NULL, 'Phosphorus (P)', NULL, NULL, 'p', p FROM sislac_zenodo WHERE p IS NOT NULL;
+        INSERT INTO result (layer_id, glosis_property_uri, property_pretty_name, unit, glosis_procedure_uri, property_source, value) SELECT layer_id, NULL, 'Potassium (K)', NULL, NULL, 'k', k FROM sislac_zenodo WHERE k IS NOT NULL;
+        INSERT INTO result (layer_id, glosis_property_uri, property_pretty_name, unit, glosis_procedure_uri, property_source, value) SELECT layer_id, NULL, 'Calcium (Ca++)', NULL, NULL, 'ca', ca FROM sislac_zenodo WHERE ca IS NOT NULL;
+        INSERT INTO result (layer_id, glosis_property_uri, property_pretty_name, unit, glosis_procedure_uri, property_source, value) SELECT layer_id, NULL, 'Magnesium (Mg)', NULL, NULL, 'mg', mg FROM sislac_zenodo WHERE mg IS NOT NULL;
+        INSERT INTO result (layer_id, glosis_property_uri, property_pretty_name, unit, glosis_procedure_uri, property_source, value) SELECT layer_id, NULL, 'Sulfur (S)', NULL, NULL, 's', s FROM sislac_zenodo WHERE s IS NOT NULL;
+        INSERT INTO result (layer_id, glosis_property_uri, property_pretty_name, unit, glosis_procedure_uri, property_source, value) SELECT layer_id, NULL, 'Iron (Fe)', NULL, NULL, 'fe', fe FROM sislac_zenodo WHERE fe IS NOT NULL;
+        INSERT INTO result (layer_id, glosis_property_uri, property_pretty_name, unit, glosis_procedure_uri, property_source, value) SELECT layer_id, NULL, 'Manganese (Mn)', NULL, NULL, 'mn', mn FROM sislac_zenodo WHERE mn IS NOT NULL;
+        INSERT INTO result (layer_id, glosis_property_uri, property_pretty_name, unit, glosis_procedure_uri, property_source, value) SELECT layer_id, NULL, 'Zinc (Zn)', NULL, NULL, 'zn', zn FROM sislac_zenodo WHERE zn IS NOT NULL;
+        INSERT INTO result (layer_id, glosis_property_uri, property_pretty_name, unit, glosis_procedure_uri, property_source, value) SELECT layer_id, NULL, 'Copper (Cu)', NULL, NULL, 'cu', cu FROM sislac_zenodo WHERE cu IS NOT NULL;
+        INSERT INTO result (layer_id, glosis_property_uri, property_pretty_name, unit, glosis_procedure_uri, property_source, value) SELECT layer_id, NULL, 'Boron (B)', NULL, NULL, 'b', b FROM sislac_zenodo WHERE b IS NOT NULL;
+        INSERT INTO result (layer_id, glosis_property_uri, property_pretty_name, unit, glosis_procedure_uri, property_source, value) SELECT layer_id, NULL, '?', NULL, NULL, 'mo', mo FROM sislac_zenodo WHERE mo IS NOT NULL; -- EMPTY COLUMN!
+        INSERT INTO result (layer_id, glosis_property_uri, property_pretty_name, unit, glosis_procedure_uri, property_source, value) SELECT layer_id, NULL, '?', NULL, NULL, 'cl', cl FROM sislac_zenodo WHERE cl IS NOT NULL; -- EMPTY COLUMN!
+        INSERT INTO result (layer_id, glosis_property_uri, property_pretty_name, unit, glosis_procedure_uri, property_source, value) SELECT layer_id, NULL, '?', NULL, NULL, 'co3', co3 FROM sislac_zenodo WHERE co3 IS NOT NULL;
+        INSERT INTO result (layer_id, glosis_property_uri, property_pretty_name, unit, glosis_procedure_uri, property_source, value) SELECT layer_id, NULL, 'Humidity descriptive', NULL, NULL, 'humedad', humedad FROM sislac_zenodo WHERE humedad IS NOT NULL AND humedad != 'S/D';
+        INSERT INTO result (layer_id, glosis_property_uri, property_pretty_name, unit, glosis_procedure_uri, property_source, value) SELECT layer_id, NULL, 'Texture descriptive', NULL, NULL, 'textura', textura FROM sislac_zenodo WHERE textura IS NOT NULL AND textura != 'S/D';
+        INSERT INTO result (layer_id, glosis_property_uri, property_pretty_name, unit, glosis_procedure_uri, property_source, value) SELECT layer_id, NULL, 'Consistency dry descriptive', NULL, NULL, 'cons_seco', cons_seco FROM sislac_zenodo WHERE cons_seco IS NOT NULL AND cons_seco != 'S/D';
+        INSERT INTO result (layer_id, glosis_property_uri, property_pretty_name, unit, glosis_procedure_uri, property_source, value) SELECT layer_id, NULL, 'Consistency wet descriptive', NULL, NULL, 'cons_humedo', cons_humedo FROM sislac_zenodo WHERE cons_humedo IS NOT NULL AND cons_humedo != 'S/D';
+        INSERT INTO result (layer_id, glosis_property_uri, property_pretty_name, unit, glosis_procedure_uri, property_source, value) SELECT layer_id, NULL, 'Structure type descriptive', NULL, NULL, 'estruc_tipo', estruc_tipo FROM sislac_zenodo WHERE estruc_tipo IS NOT NULL AND estruc_tipo != 'S/D';
+        INSERT INTO result (layer_id, glosis_property_uri, property_pretty_name, unit, glosis_procedure_uri, property_source, value) SELECT layer_id, NULL, 'Structure class descriptive', NULL, NULL, 'estruc_clase', estruc_clase FROM sislac_zenodo WHERE estruc_clase IS NOT NULL AND estruc_clase != 'S/D';
+        INSERT INTO result (layer_id, glosis_property_uri, property_pretty_name, unit, glosis_procedure_uri, property_source, value) SELECT layer_id, NULL, 'Structure grade descriptive', NULL, NULL, 'estruc_grado', estruc_grado FROM sislac_zenodo WHERE estruc_grado IS NOT NULL AND estruc_grado != 'S/D';
         "
 
+psql -h localhost -p 5432 -d sislac -U eloi -c "
+        SELECT DISTINCT property_source, property_pretty_name, unit, glosis_property_uri
+        FROM result
+        ORDER BY property_pretty_name, property_source"
+
+psql -h localhost -p 5432 -d sislac -U eloi -c "
+        SELECT l.upper_depth AS top, l.lower_depth AS bottom, r.property_pretty_name AS property, r.unit, r.value
+        FROM layer AS l
+        LEFT JOIN result AS r ON r.layer_id = l.layer_id
+        WHERE l.profile_id = 1    -- << the ID of the clicked point in the map by the user
+        ORDER BY r.property_pretty_name, l.upper_depth"
+
+psql -h localhost -p 5432 -d sislac -U eloi -c "
+        SELECT count(*) FROM profile;
+        SELECT dataset_source, count(*) FROM profile GROUP BY dataset_source ORDER BY count(*) DESC;
+        SELECT country_code, count(*) FROM profile GROUP BY country_code ORDER BY count(*) DESC;"
+
+
 # Export tables from PostgreSQL to gpkg
-ogr2ogr -f GPKG /home/carva014/Work/Code/FAO/glosis-db/SISLAC/SISLAC.gpkg PG:'host=localhost user=eloi dbname=sislac' -nln dataset dataset
-ogr2ogr -f GPKG /home/carva014/Work/Code/FAO/glosis-db/SISLAC/SISLAC.gpkg PG:'host=localhost user=eloi dbname=sislac' -update -nln profile profile
-ogr2ogr -f GPKG /home/carva014/Work/Code/FAO/glosis-db/SISLAC/SISLAC.gpkg PG:'host=localhost user=eloi dbname=sislac' -update -nln layer layer
-ogr2ogr -f GPKG /home/carva014/Work/Code/FAO/glosis-db/SISLAC/SISLAC.gpkg PG:'host=localhost user=eloi dbname=sislac' -update -nln result result
+ogr2ogr -f GPKG /home/carva014/Downloads/SISLAC.gpkg PG:'host=localhost user=eloi dbname=sislac' -nln dataset dataset
+ogr2ogr -f GPKG /home/carva014/Downloads/SISLAC.gpkg PG:'host=localhost user=eloi dbname=sislac' -update -nln profile profile
+ogr2ogr -f GPKG /home/carva014/Downloads/SISLAC.gpkg PG:'host=localhost user=eloi dbname=sislac' -update -nln layer layer
+ogr2ogr -f GPKG /home/carva014/Downloads/SISLAC.gpkg PG:'host=localhost user=eloi dbname=sislac' -update -nln result result
