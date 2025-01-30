@@ -283,3 +283,8 @@ ogr2ogr -f GPKG /home/carva014/Downloads/SISLAC.gpkg PG:'host=localhost user=elo
 ogr2ogr -f GPKG /home/carva014/Downloads/SISLAC.gpkg PG:'host=localhost user=eloi dbname=sislac' -update -nln profile profile
 ogr2ogr -f GPKG /home/carva014/Downloads/SISLAC.gpkg PG:'host=localhost user=eloi dbname=sislac' -update -nln layer layer
 ogr2ogr -f GPKG /home/carva014/Downloads/SISLAC.gpkg PG:'host=localhost user=eloi dbname=sislac' -update -nln result result
+
+
+# Export results to CSV
+psql -h localhost -p 5432 -d sislac -U eloi -c "\copy (SELECT * FROM sislac_zenodo WHERE country_code='SUR' ORDER BY source, profile_identifier, top, bottom) 
+        TO '/home/carva014/Downloads/SISLAC_Suriname.csv' WITH csv header"
