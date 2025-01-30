@@ -279,12 +279,19 @@ psql -h localhost -p 5432 -d sislac -U eloi -c "
 
 
 # Export tables from PostgreSQL to gpkg
-ogr2ogr -f GPKG /home/carva014/Downloads/SISLAC.gpkg PG:'host=localhost user=eloi dbname=sislac' -nln dataset dataset
-ogr2ogr -f GPKG /home/carva014/Downloads/SISLAC.gpkg PG:'host=localhost user=eloi dbname=sislac' -update -nln profile profile
-ogr2ogr -f GPKG /home/carva014/Downloads/SISLAC.gpkg PG:'host=localhost user=eloi dbname=sislac' -update -nln layer layer
-ogr2ogr -f GPKG /home/carva014/Downloads/SISLAC.gpkg PG:'host=localhost user=eloi dbname=sislac' -update -nln result result
+ogr2ogr -f GPKG /home/carva014/Work/Code/FAO/glosis-db/SISLAC/SISLAC.gpkg PG:'host=localhost user=eloi dbname=sislac' -nln dataset dataset
+ogr2ogr -f GPKG /home/carva014/Work/Code/FAO/glosis-db/SISLAC/SISLAC.gpkg PG:'host=localhost user=eloi dbname=sislac' -update -nln profile profile
+ogr2ogr -f GPKG /home/carva014/Work/Code/FAO/glosis-db/SISLAC/SISLAC.gpkg PG:'host=localhost user=eloi dbname=sislac' -update -nln layer layer
+ogr2ogr -f GPKG /home/carva014/Work/Code/FAO/glosis-db/SISLAC/SISLAC.gpkg PG:'host=localhost user=eloi dbname=sislac' -update -nln result result
 
 
 # Export results to CSV
+psql -h localhost -p 5432 -d sislac -U eloi -c "\copy (SELECT * FROM dataset) TO '/home/carva014/Work/Code/FAO/glosis-db/SISLAC/SISLAC_dataset.csv' WITH csv header"
+psql -h localhost -p 5432 -d sislac -U eloi -c "\copy (SELECT * FROM profile) TO '/home/carva014/Work/Code/FAO/glosis-db/SISLAC/SISLAC_profile.csv' WITH csv header"
+psql -h localhost -p 5432 -d sislac -U eloi -c "\copy (SELECT * FROM layer) TO '/home/carva014/Work/Code/FAO/glosis-db/SISLAC/SISLAC_layer.csv' WITH csv header"
+psql -h localhost -p 5432 -d sislac -U eloi -c "\copy (SELECT * FROM result) TO '/home/carva014/Work/Code/FAO/glosis-db/SISLAC/SISLAC_result.csv' WITH csv header"
+
+
+# Request
 psql -h localhost -p 5432 -d sislac -U eloi -c "\copy (SELECT * FROM sislac_zenodo WHERE country_code='SUR' ORDER BY source, profile_identifier, top, bottom) 
         TO '/home/carva014/Downloads/SISLAC_Suriname.csv' WITH csv header"
