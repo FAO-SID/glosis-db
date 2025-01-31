@@ -135,7 +135,7 @@ psql -h localhost -p 5432 -d sislac -U eloi -c "
 	CONSTRAINT dataset_pkey PRIMARY KEY (dataset_id));
 
         INSERT INTO dataset (dataset_id, name, description)
-        VALUES ('SISLAC', 'Soil Information System for Latin American and the Caribbean', 'https://doi.org/10.5194/essd-16-1229-2024');
+        VALUES ('SISLAC', 'Soil Information System for Latin American and the Caribbean', 'https://doi.org/10.5194/essd-16-1229-2024, https://zenodo.org/records/7876731');
 
 
         -- Profile
@@ -272,26 +272,22 @@ psql -h localhost -p 5432 -d sislac -U eloi -c "
         WHERE l.profile_id = 1    -- << the ID of the clicked point in the map by the user
         ORDER BY r.property_pretty_name, l.upper_depth"
 
-psql -h localhost -p 5432 -d sislac -U eloi -c "
-        SELECT count(*) FROM profile;
-        SELECT dataset_source, count(*) FROM profile GROUP BY dataset_source ORDER BY count(*) DESC;
-        SELECT country_code, count(*) FROM profile GROUP BY country_code ORDER BY count(*) DESC;"
-
 
 # Export tables from PostgreSQL to gpkg
-ogr2ogr -f GPKG /home/carva014/Work/Code/FAO/glosis-db/SISLAC/SISLAC.gpkg PG:'host=localhost user=eloi dbname=sislac' -nln dataset dataset
-ogr2ogr -f GPKG /home/carva014/Work/Code/FAO/glosis-db/SISLAC/SISLAC.gpkg PG:'host=localhost user=eloi dbname=sislac' -update -nln profile profile
-ogr2ogr -f GPKG /home/carva014/Work/Code/FAO/glosis-db/SISLAC/SISLAC.gpkg PG:'host=localhost user=eloi dbname=sislac' -update -nln layer layer
-ogr2ogr -f GPKG /home/carva014/Work/Code/FAO/glosis-db/SISLAC/SISLAC.gpkg PG:'host=localhost user=eloi dbname=sislac' -update -nln result result
+cd /home/carva014/Work/Code/FAO/glosis-db/SISLAC/
+ogr2ogr -f GPKG SISLAC.gpkg PG:'host=localhost user=eloi dbname=sislac' -nln dataset dataset
+ogr2ogr -f GPKG SISLAC.gpkg PG:'host=localhost user=eloi dbname=sislac' -update -nln profile profile
+ogr2ogr -f GPKG SISLAC.gpkg PG:'host=localhost user=eloi dbname=sislac' -update -nln layer layer
+ogr2ogr -f GPKG SISLAC.gpkg PG:'host=localhost user=eloi dbname=sislac' -update -nln result result
+zip SISLAC_gpkg.zip SISLAC.gpkg
+rm SISLAC.gpkg
 
 
 # Export results to CSV
-psql -h localhost -p 5432 -d sislac -U eloi -c "\copy (SELECT * FROM dataset) TO '/home/carva014/Work/Code/FAO/glosis-db/SISLAC/SISLAC_dataset.csv' WITH csv header"
-psql -h localhost -p 5432 -d sislac -U eloi -c "\copy (SELECT * FROM profile) TO '/home/carva014/Work/Code/FAO/glosis-db/SISLAC/SISLAC_profile.csv' WITH csv header"
-psql -h localhost -p 5432 -d sislac -U eloi -c "\copy (SELECT * FROM layer) TO '/home/carva014/Work/Code/FAO/glosis-db/SISLAC/SISLAC_layer.csv' WITH csv header"
-psql -h localhost -p 5432 -d sislac -U eloi -c "\copy (SELECT * FROM result) TO '/home/carva014/Work/Code/FAO/glosis-db/SISLAC/SISLAC_result.csv' WITH csv header"
-
-
-# Request
-psql -h localhost -p 5432 -d sislac -U eloi -c "\copy (SELECT * FROM sislac_zenodo WHERE country_code='SUR' ORDER BY source, profile_identifier, top, bottom) 
-        TO '/home/carva014/Downloads/SISLAC_Suriname.csv' WITH csv header"
+cd /home/carva014/Work/Code/FAO/glosis-db/SISLAC/
+psql -h localhost -p 5432 -d sislac -U eloi -c "\copy (SELECT * FROM dataset) TO 'SISLAC_dataset.csv' WITH csv header"
+psql -h localhost -p 5432 -d sislac -U eloi -c "\copy (SELECT profile_id, dataset_id, profile_code, country_code, profile_type, sampling_date, usda_soil_taxonomy_order, dataset_source, dataset_contact, dataset_license, ST_Y(geom) lat, ST_X(geom) long FROM profile) TO 'SISLAC_profile.csv' WITH csv header"
+psql -h localhost -p 5432 -d sislac -U eloi -c "\copy (SELECT * FROM layer) TO 'SISLAC_layer.csv' WITH csv header"
+psql -h localhost -p 5432 -d sislac -U eloi -c "\copy (SELECT * FROM result) TO 'SISLAC_result.csv' WITH csv header"
+zip SISLAC_csv.zip *.csv
+rm *.csv

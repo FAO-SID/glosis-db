@@ -1,17 +1,18 @@
 DROP SCHEMA IF EXISTS metadata_iso CASCADE;
 CREATE SCHEMA metadata_iso;
-ALTER SCHEMA metadata_iso OWNER TO geodesk_geonetwork;
-COMMENT ON SCHEMA metadata_iso IS 'Schema for GeoDesk metadata';
-GRANT USAGE ON SCHEMA metadata_iso TO geodesk_r;
+ALTER SCHEMA metadata_iso OWNER TO glosis;
+COMMENT ON SCHEMA metadata_iso IS 'Schema for glosis metadata';
+GRANT USAGE ON SCHEMA metadata_iso TO glosis_r;
 
 
 CREATE TABLE metadata_iso.dataset (
     dataset_id text NOT NULL,
     dataset_name text,
+    dataset_description text,
     complete boolean
 );
-ALTER TABLE metadata_iso.dataset OWNER TO geodesk_geonetwork;
-GRANT SELECT ON TABLE metadata_iso.dataset TO geodesk_r;
+ALTER TABLE metadata_iso.dataset OWNER TO glosis;
+GRANT SELECT ON TABLE metadata_iso.dataset TO glosis_r;
 
 
 CREATE TABLE metadata_iso.version (
@@ -65,8 +66,8 @@ CREATE TABLE metadata_iso.version (
     -- CONSTRAINT version_status_check CHECK ((status = ANY (ARRAY['Completed'::text, 'Historical archive'::text, 'Obsolete'::text, 'On going'::text, 'Planned'::text, 'Required'::text, 'Under development'::text]))),
     -- CONSTRAINT version_representation_type_check CHECK ((representation_type = ANY (ARRAY['Grid'::text, 'Vector'::text, 'Tabular'::text])))
 );
-ALTER TABLE metadata_iso.version OWNER TO geodesk_geonetwork;
-GRANT SELECT ON TABLE metadata_iso.version TO geodesk_r;
+ALTER TABLE metadata_iso.version OWNER TO glosis;
+GRANT SELECT ON TABLE metadata_iso.version TO glosis_r;
 
 
 CREATE TABLE metadata_iso.layer (
@@ -117,8 +118,8 @@ CREATE TABLE metadata_iso.layer (
     resample_method text,
     json text
 );
-ALTER TABLE metadata_iso.layer OWNER TO geodesk_geonetwork;
-GRANT SELECT ON TABLE metadata_iso.layer TO geodesk_r;
+ALTER TABLE metadata_iso.layer OWNER TO glosis;
+GRANT SELECT ON TABLE metadata_iso.layer TO glosis_r;
 COMMENT ON COLUMN metadata_iso.layer.geo_transform IS 'X Origin (top left corner), X pixel size (W-E pizel resolution), Rotation (0 if north is up), Y Origin (top left corner), Rotation (0 if north is up), -Y pixel size (N-S pixel resolution)';
 
 
@@ -132,8 +133,8 @@ CREATE TABLE metadata_iso.ver_x_org_x_ind (
     individual_id text
     -- CONSTRAINT contact_tag_check CHECK ((tag = ANY (ARRAY['Author'::text, 'Custodian'::text, 'Distributor'::text, 'Originator'::text, 'Owner'::text, 'Point of contact'::text, 'Principal investigator'::text, 'Processor'::text, 'Publisher'::text, 'Resource provider'::text, 'User'::text])))
 );
-ALTER TABLE metadata_iso.ver_x_org_x_ind OWNER TO geodesk_geonetwork;
-GRANT SELECT ON TABLE metadata_iso.ver_x_org_x_ind TO geodesk_r;
+ALTER TABLE metadata_iso.ver_x_org_x_ind OWNER TO glosis;
+GRANT SELECT ON TABLE metadata_iso.ver_x_org_x_ind TO glosis_r;
 
 
 CREATE TABLE metadata_iso.organisation (
@@ -147,16 +148,16 @@ CREATE TABLE metadata_iso.organisation (
     phone text,
     facsimile text
 );
-ALTER TABLE metadata_iso.organisation OWNER TO geodesk_geonetwork;
-GRANT SELECT ON TABLE metadata_iso.organisation TO geodesk_r;
+ALTER TABLE metadata_iso.organisation OWNER TO glosis;
+GRANT SELECT ON TABLE metadata_iso.organisation TO glosis_r;
 
 
 CREATE TABLE metadata_iso.individual (
     individual_id text NOT NULL,
     email text    
 );
-ALTER TABLE metadata_iso.individual OWNER TO geodesk_geonetwork;
-GRANT SELECT ON TABLE metadata_iso.individual TO geodesk_r;
+ALTER TABLE metadata_iso.individual OWNER TO glosis;
+GRANT SELECT ON TABLE metadata_iso.individual TO glosis_r;
 
 
 CREATE TABLE metadata_iso.url (
@@ -169,8 +170,8 @@ CREATE TABLE metadata_iso.url (
     valid text
     -- CONSTRAINT url_protocol_check CHECK ((protocol = ANY (ARRAY['link'::text, 'ftp'::text, 'wms'::text, 'wcs'::text, 'wfs'::text])))
 );
-ALTER TABLE metadata_iso.url OWNER TO geodesk_geonetwork;
-GRANT SELECT ON TABLE metadata_iso.url TO geodesk_r;
+ALTER TABLE metadata_iso.url OWNER TO glosis;
+GRANT SELECT ON TABLE metadata_iso.url TO glosis_r;
 
 
 ALTER TABLE metadata_iso.dataset ADD PRIMARY KEY (dataset_id);
