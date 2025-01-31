@@ -283,7 +283,7 @@ zip SISLAC_gpkg.zip SISLAC.gpkg
 rm SISLAC.gpkg
 
 
-# Export results to CSV
+# Export tables from PostgreSQL CSV
 cd /home/carva014/Work/Code/FAO/glosis-db/SISLAC/
 psql -h localhost -p 5432 -d sislac -U eloi -c "\copy (SELECT * FROM dataset) TO 'SISLAC_dataset.csv' WITH csv header"
 psql -h localhost -p 5432 -d sislac -U eloi -c "\copy (SELECT profile_id, dataset_id, profile_code, country_code, profile_type, sampling_date, usda_soil_taxonomy_order, dataset_source, dataset_contact, dataset_license, ST_Y(geom) lat, ST_X(geom) long FROM profile) TO 'SISLAC_profile.csv' WITH csv header"
