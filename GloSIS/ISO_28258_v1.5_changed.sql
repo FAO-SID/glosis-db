@@ -1038,8 +1038,8 @@ COMMENT ON COLUMN core.project.project_id IS 'Synthetic primary key.';
 --
 
 CREATE TABLE core.project_organisation (
-    project_id integer NOT NULL,
-    organisation_id integer NOT NULL
+    organisation_id integer NOT NULL,
+    project_id integer NOT NULL
 );
 
 
@@ -1891,8 +1891,8 @@ COMMENT ON COLUMN core.site.extent IS 'Site extent expressed with geodetic coord
 --
 
 CREATE TABLE core.site_project (
-    site_id integer NOT NULL,
-    project_id integer NOT NULL
+    project_id integer NOT NULL,
+    site_id integer NOT NULL
 );
 
 
