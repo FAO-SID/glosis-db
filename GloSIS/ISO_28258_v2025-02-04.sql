@@ -7778,7 +7778,7 @@ ALTER DEFAULT PRIVILEGES FOR ROLE glosis IN SCHEMA core GRANT SELECT ON TABLES T
 ALTER DEFAULT PRIVILEGES FOR ROLE glosis IN SCHEMA metadata GRANT SELECT ON TABLES TO glosis_r;
 
 
--- Completed on 2025-02-04 10:07:53 CET
+-- Completed on 2025-02-04 10:07:52 CET
 
 --
 -- PostgreSQL database dump complete

@@ -30,6 +30,7 @@ psql -h localhost -p 5432 -d iso28258 -U glosis -f /home/carva014/Work/Code/FAO/
 psql -h localhost -p 5432 -d iso28258 -U glosis -f /home/carva014/Work/Code/FAO/glosis-db/GloSIS/Changes/mod_022.sql
 psql -h localhost -p 5432 -d iso28258 -U glosis -f /home/carva014/Work/Code/FAO/glosis-db/GloSIS/Changes/mod_023.sql
 psql -h localhost -p 5432 -d iso28258 -U glosis -f /home/carva014/Work/Code/FAO/glosis-db/GloSIS/Changes/mod_024.sql
+psql -h localhost -p 5432 -d iso28258 -U glosis -f /home/carva014/Work/Code/FAO/glosis-db/GloSIS/Changes/mod_025.sql
 
 # Dump iso28258 database
 date=`date +%Y-%m-%d`

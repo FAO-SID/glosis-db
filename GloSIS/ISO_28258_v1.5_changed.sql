@@ -7427,7 +7427,7 @@ ALTER TABLE ONLY core.project
 --
 
 ALTER TABLE ONLY core.project_organisation
-    ADD CONSTRAINT project_organisation_pkey PRIMARY KEY (project_id, organisation_id);
+    ADD CONSTRAINT project_organisation_pkey PRIMARY KEY (organisation_id, project_id);
 
 
 --
@@ -7580,7 +7580,7 @@ ALTER TABLE ONLY core.site
 --
 
 ALTER TABLE ONLY core.site_project
-    ADD CONSTRAINT site_project_pkey PRIMARY KEY (site_id, project_id);
+    ADD CONSTRAINT site_project_pkey PRIMARY KEY (project_id, site_id);
 
 
 --
