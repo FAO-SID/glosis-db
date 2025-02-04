@@ -67,57 +67,57 @@ ALTER TABLE metadata.version OWNER TO glosis;
 GRANT SELECT ON TABLE metadata.version TO glosis_r;
 
 
-CREATE TABLE metadata.layer (
-    dataset_id text NOT NULL,
-    version text NOT NULL,
-    layer text NOT NULL,
-    file_name text NOT NULL,
-    file_mode text,
-    file_ino integer,
-    file_dev integer,
-    file_nlink integer,
-    file_uid integer,
-    file_gid integer,
-    file_size bigint,
-    file_size_pretty text,
-    file_atime timestamp without time zone,
-    file_mtime timestamp without time zone,
-    file_ctime timestamp without time zone,
-    format text,
-    raster_size_row integer,
-    raster_size_col integer,
-    coordinate_system smallint,
-    spatial_reference text,
-    spatial_reference_proj text,
-    projection text,
-    geo_transform text,
-    origin_x text,
-    pixel_size text,
-    metadata text,
-    compression text,
-    corner_coordinates_center text,
-    n_bands smallint,
-    band_number smallint,
-    band_block text,
-    data_type_id text,
-    band_size_row integer,
-    band_size_col integer,
-    scale text,
-    stats_minimum numeric(10,3),
-    stats_maximum numeric(10,3),
-    stats_mean numeric(10,3),
-    stats_std_dev numeric(10,3),
-    no_data_value integer,
-    overviews text,
-    color_table text,
-    root_file text,
-    mask_value integer,
-    resample_method text,
-    json text
-);
-ALTER TABLE metadata.layer OWNER TO glosis;
-GRANT SELECT ON TABLE metadata.layer TO glosis_r;
-COMMENT ON COLUMN metadata.layer.geo_transform IS 'X Origin (top left corner), X pixel size (W-E pizel resolution), Rotation (0 if north is up), Y Origin (top left corner), Rotation (0 if north is up), -Y pixel size (N-S pixel resolution)';
+-- CREATE TABLE metadata.layer (
+--     dataset_id text NOT NULL,
+--     version text NOT NULL,
+--     layer text NOT NULL,
+--     file_name text NOT NULL,
+--     file_mode text,
+--     file_ino integer,
+--     file_dev integer,
+--     file_nlink integer,
+--     file_uid integer,
+--     file_gid integer,
+--     file_size bigint,
+--     file_size_pretty text,
+--     file_atime timestamp without time zone,
+--     file_mtime timestamp without time zone,
+--     file_ctime timestamp without time zone,
+--     format text,
+--     raster_size_row integer,
+--     raster_size_col integer,
+--     coordinate_system smallint,
+--     spatial_reference text,
+--     spatial_reference_proj text,
+--     projection text,
+--     geo_transform text,
+--     origin_x text,
+--     pixel_size text,
+--     metadata text,
+--     compression text,
+--     corner_coordinates_center text,
+--     n_bands smallint,
+--     band_number smallint,
+--     band_block text,
+--     data_type_id text,
+--     band_size_row integer,
+--     band_size_col integer,
+--     scale text,
+--     stats_minimum numeric(10,3),
+--     stats_maximum numeric(10,3),
+--     stats_mean numeric(10,3),
+--     stats_std_dev numeric(10,3),
+--     no_data_value integer,
+--     overviews text,
+--     color_table text,
+--     root_file text,
+--     mask_value integer,
+--     resample_method text,
+--     json text
+-- );
+-- ALTER TABLE metadata.layer OWNER TO glosis;
+-- GRANT SELECT ON TABLE metadata.layer TO glosis_r;
+-- COMMENT ON COLUMN metadata.layer.geo_transform IS 'X Origin (top left corner), X pixel size (W-E pizel resolution), Rotation (0 if north is up), Y Origin (top left corner), Rotation (0 if north is up), -Y pixel size (N-S pixel resolution)';
 
 
 CREATE TABLE metadata.ver_x_org_x_ind (
@@ -174,7 +174,7 @@ GRANT SELECT ON TABLE metadata.url TO glosis_r;
 ALTER TABLE metadata.dataset ADD PRIMARY KEY (dataset_id);
 ALTER TABLE metadata.version ADD PRIMARY KEY (dataset_id, version);
 ALTER TABLE metadata.version ADD UNIQUE (file_identifier);
-ALTER TABLE metadata.layer ADD PRIMARY KEY (dataset_id, version, layer);
+-- ALTER TABLE metadata.layer ADD PRIMARY KEY (dataset_id, version, layer);
 ALTER TABLE metadata.ver_x_org_x_ind ADD PRIMARY KEY (dataset_id, version, tag, role, position, organisation_id, individual_id);
 ALTER TABLE metadata.organisation ADD PRIMARY KEY (organisation_id);
 ALTER TABLE metadata.individual ADD PRIMARY KEY (individual_id);
@@ -185,5 +185,5 @@ ALTER TABLE metadata.ver_x_org_x_ind ADD FOREIGN KEY (individual_id) REFERENCES 
 ALTER TABLE metadata.ver_x_org_x_ind ADD FOREIGN KEY (organisation_id) REFERENCES metadata.organisation(organisation_id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE metadata.ver_x_org_x_ind ADD FOREIGN KEY (dataset_id, version) REFERENCES metadata.version(dataset_id, version) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE metadata.url ADD FOREIGN KEY (dataset_id, version) REFERENCES metadata.version(dataset_id, version) ON UPDATE CASCADE ON DELETE CASCADE;
-ALTER TABLE metadata.layer ADD FOREIGN KEY (dataset_id, version) REFERENCES metadata.version(dataset_id, version) ON UPDATE CASCADE ON DELETE CASCADE;
+-- ALTER TABLE metadata.layer ADD FOREIGN KEY (dataset_id, version) REFERENCES metadata.version(dataset_id, version) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE metadata.version ADD FOREIGN KEY (dataset_id) REFERENCES metadata.dataset(dataset_id) ON UPDATE CASCADE ON DELETE CASCADE;
