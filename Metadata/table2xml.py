@@ -38,7 +38,7 @@ def bake_xml(dataset_id, version, template, output):
     
     # iterate variables
     sql = f''' SELECT version 
-              FROM metadata_iso.version
+              FROM metadata.version
               WHERE dataset_id='{dataset_id}' 
                 AND version='{version}'
               ORDER BY version
@@ -49,9 +49,9 @@ def bake_xml(dataset_id, version, template, output):
         version = row[0]
     
         
-        # read metadata from table metadata_iso.dataset
+        # read metadata from table metadata.dataset
         sql = f'''SELECT dataset_id, dataset_name
-                 FROM metadata_iso.dataset 
+                 FROM metadata.dataset 
                  WHERE dataset_id='{dataset_id}' '''
         cur.execute(sql)
         row = cur.fetchone()
@@ -59,7 +59,7 @@ def bake_xml(dataset_id, version, template, output):
         dataset_name = 'UNKNOWN' if row[1] == None else str(row[1])
         
         
-        # read metadata from table metadata_iso.version
+        # read metadata from table metadata.version
         sql = f'''SELECT folder,
                         file_identifier, 
                         parent_identifier,
@@ -100,7 +100,7 @@ def bake_xml(dataset_id, version, template, output):
                         lineage_statement, 
                         lineage_source_uuidref, 
                         lineage_source_title
-                 FROM metadata_iso.version 
+                 FROM metadata.version 
                  WHERE dataset_id='{dataset_id}' 
                    AND version='{version}' '''
         cur.execute(sql)
@@ -255,9 +255,9 @@ def bake_xml(dataset_id, version, template, output):
                         v.tag, 
                         v.role, 
                         v.position
-                 FROM metadata_iso.ver_x_org_x_ind v
-                 LEFT JOIN metadata_iso.organisation o ON o.organisation_id = v.organisation_id
-                 LEFT JOIN metadata_iso.individual i ON i.individual_id = v.individual_id
+                 FROM metadata.ver_x_org_x_ind v
+                 LEFT JOIN metadata.organisation o ON o.organisation_id = v.organisation_id
+                 LEFT JOIN metadata.individual i ON i.individual_id = v.individual_id
                  WHERE v.dataset_id = '{dataset_id}'
                    AND v.version ='{version}'
                    AND v.tag = 'contact'
@@ -351,9 +351,9 @@ def bake_xml(dataset_id, version, template, output):
                         v.tag, 
                         v.role, 
                         v.position
-                 FROM metadata_iso.ver_x_org_x_ind v
-                 LEFT JOIN metadata_iso.organisation o ON o.organisation_id = v.organisation_id
-                 LEFT JOIN metadata_iso.individual i ON i.individual_id = v.individual_id
+                 FROM metadata.ver_x_org_x_ind v
+                 LEFT JOIN metadata.organisation o ON o.organisation_id = v.organisation_id
+                 LEFT JOIN metadata.individual i ON i.individual_id = v.individual_id
                  WHERE v.dataset_id = '{dataset_id}'
                    AND v.version ='{version}'
                    AND v.tag = 'pointOfContact'
@@ -434,7 +434,7 @@ def bake_xml(dataset_id, version, template, output):
         # online_resource
         online_resource = ''
         sql = f'''SELECT url, protocol, url_name
-                 FROM metadata_iso.url
+                 FROM metadata.url
                  WHERE dataset_id='{dataset_id}' 
                    AND version='{version}'
                    AND protocol IN ('OGC:WMS','OGC:WMTS','WWW:LINK-1.0-http--link', 'WWW:LINK-1.0-http--related')
@@ -542,7 +542,7 @@ Specific dataset & version (3):
     if what == '1':
         # All datasets
         sql = ''' SELECT dataset_id, version 
-                  FROM metadata_iso.version
+                  FROM metadata.version
                   ORDER BY dataset_id, version
                   --LIMIT 500
               '''
@@ -561,7 +561,7 @@ Specific dataset & version (3):
     if what == '2':
         # Specific dataset
         sql = ''' SELECT dataset_id
-                  FROM metadata_iso.version
+                  FROM metadata.version
                   ORDER BY dataset_id
               '''
         cur.execute(sql)
@@ -571,7 +571,7 @@ Specific dataset & version (3):
             print(dataset_id)
         dataset_id = input('\nDataset: ')
         sql = f''' SELECT dataset_id, version 
-                  FROM metadata_iso.version
+                  FROM metadata.version
                   WHERE dataset_id='{dataset_id}' 
                   ORDER BY dataset_id, version
               '''
@@ -589,7 +589,7 @@ Specific dataset & version (3):
     if what == '3':
         # Specific dataset & version
         sql = ''' SELECT dataset_id 
-                  FROM metadata_iso.dataset
+                  FROM metadata.dataset
                   ORDER BY dataset_id
               '''
         cur.execute(sql)
@@ -602,7 +602,7 @@ Specific dataset & version (3):
     
         # choose version
         sql = f''' SELECT version 
-                  FROM metadata_iso.version
+                  FROM metadata.version
                   WHERE dataset_id='{dataset_id}' 
                   ORDER BY version
               '''
@@ -618,8 +618,8 @@ Specific dataset & version (3):
 
 
 # variables
-template='/home/carva014/Work/Code/applied-spatial-research/Geodesk/geonetwork_migration/metadata_iso/template.xml'
-output='/home/carva014/Work/Code/applied-spatial-research/Geodesk/geonetwork_migration/metadata_iso/output'
+template='/home/carva014/Work/Code/applied-spatial-research/Geodesk/geonetwork_migration/metadata/template.xml'
+output='/home/carva014/Work/Code/applied-spatial-research/Geodesk/geonetwork_migration/metadata/output'
 
 
 
