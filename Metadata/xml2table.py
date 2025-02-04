@@ -411,7 +411,7 @@ def extract_data(limit):
 
 
 # open db connection
-conn = psycopg2.connect("host='localhost' port='5432' dbname='wenr' user='glosis'")
+conn = psycopg2.connect("host='localhost' port='5432' dbname='iso19139' user='glosis'")
 cur = conn.cursor()
 
 # reset db schema

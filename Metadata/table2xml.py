@@ -618,14 +618,11 @@ Specific dataset & version (3):
 
 
 # variables
-template='/home/carva014/Work/Code/applied-spatial-research/Geodesk/geonetwork_migration/metadata/template.xml'
-output='/home/carva014/Work/Code/applied-spatial-research/Geodesk/geonetwork_migration/metadata/output'
-
-
+template='/home/carva014/Work/Code/FAO/glosis-db/Metadata/template.xml'
+output='/home/carva014/Work/Code/FAO/glosis-db/Metadata/output'
 
 # open db connection
-conn = psycopg2.connect("host='ppostgres12_si.cdbe.wurnet.nl' port='5432' dbname='prod_geodesk_geonetwork' user='geodesk_geonetwork'")
-# conn = psycopg2.connect("host='localhost' port='5432' dbname='wenr' user='wenr'")
+conn = psycopg2.connect("host='localhost' port='5432' dbname='iso19139' user='glosis'")
 cur = conn.cursor()
 
 # run function
