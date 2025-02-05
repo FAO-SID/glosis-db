@@ -388,7 +388,7 @@ CREATE TABLE metadata.layer (
   citation_rs_identifier_code_space text,
   citation_md_identifier_code text,
   abstract text,
-  status text,
+  status text DEFAULT 'Completed',
   md_browse_graphic text,
   keyword_theme text[],
   keyword_place text[],
@@ -396,7 +396,7 @@ CREATE TABLE metadata.layer (
   access_constraints text,
   use_constraints text,
   other_constraints text,
-  spatial_representation_type_code text DEFAULT 'grid',
+  spatial_representation_type_code text DEFAULT 'Grid',
   distance_uom text,
   distance text,
   topic_category text[],
@@ -411,7 +411,6 @@ CREATE TABLE metadata.layer (
   lineage_statement text,
   lineage_source_uuidref text,
   lineage_source_title text,
-  representation_type text,
   presentation_form text DEFAULT 'mapDigital',
   -- extra metadata
   compression text,
@@ -432,7 +431,7 @@ CREATE TABLE metadata.layer (
   n_bands integer,
   metadata text,
   CONSTRAINT layer_status_check CHECK ((status = ANY (ARRAY['Completed', 'Historical archive', 'Obsolete', 'On going', 'Planned', 'Required', 'Under development']))),
-  CONSTRAINT layer_representation_type_check CHECK ((representation_type = ANY (ARRAY['Grid', 'Vector', 'Tabular'])))
+  CONSTRAINT layer_spatial_representation_type_code_check CHECK ((spatial_representation_type_code = ANY (ARRAY['Grid', 'Vector', 'Tabular'])))
 );
 ALTER TABLE metadata.layer OWNER TO glosis;
 GRANT SELECT ON TABLE metadata.layer TO glosis_r;
@@ -481,8 +480,7 @@ CREATE TABLE metadata.layer_csv (
   color_table text,
   root_file text,
   mask_value integer,
-  resample_method text,
-  json text
+  resample_method text
 );
 ALTER TABLE metadata.layer_csv OWNER TO glosis;
 GRANT SELECT ON TABLE metadata.layer_csv TO glosis_r;
