@@ -50,10 +50,10 @@ END # MAP';
     new_row text;
 
 BEGIN
-    FOR rec IN SELECT dataset_id, version, title, epsg::text, units, extent FROM metadata.version ORDER BY dataset_id, version
+    FOR rec IN SELECT project_id, version, title, epsg::text, units, extent FROM metadata.version ORDER BY project_id, version
     LOOP
 	
-      FOR sub_rec IN SELECT value, color, (opacity*100)::int AS opacity, label FROM metadata.layer_category WHERE dataset_id = rec.dataset_id AND version = rec.version AND publish IS TRUE ORDER BY value
+      FOR sub_rec IN SELECT value, color, (opacity*100)::int AS opacity, label FROM metadata.layer_category WHERE project_id = rec.project_id AND version = rec.version AND publish IS TRUE ORDER BY value
     	LOOP
 
     		SELECT E'\n      CLASS
@@ -80,9 +80,9 @@ BEGIN
 												  , 'LAYER_EXTENT', rec.extent)
 												  , 'LAYER_UNITS', rec.units)
 												  , 'LAYER_EPSG', rec.epsg)
-												  , 'LAYER_PROJECT', rec.dataset_id)
+												  , 'LAYER_PROJECT', rec.project_id)
 												  , 'LAYER_ID', rec.layer_id) || part_2 || part_3
-			WHERE dataset_id = rec.dataset_id AND version = rec.version;
+			WHERE project_id = rec.project_id AND version = rec.version;
 		  SELECT '' INTO part_2;
 		  SELECT '' INTO new_row;
 		  
@@ -254,10 +254,10 @@ DECLARE
   <blendMode>0</blendMode>
 </qgis>';
 BEGIN
-    FOR rec IN SELECT dataset_id, version FROM metadata.version ORDER BY dataset_id, version
+    FOR rec IN SELECT project_id, version, layer FROM metadata.layer ORDER BY project_id, version
     LOOP
 	
-      FOR sub_rec IN SELECT code, value, color, (opacity*255)::int AS alpha, label FROM metadata.layer_category WHERE dataset_id = rec.dataset_id AND version = rec.version AND publish IS TRUE ORDER BY value
+      FOR sub_rec IN SELECT code, value, color, (opacity*255)::int AS alpha, label FROM metadata.layer_category WHERE project_id = rec.project_id AND version = rec.version AND publish IS TRUE ORDER BY value
     	LOOP
 
 			SELECT E'\n        <paletteEntry value="' ||sub_rec.value|| '" color="' ||sub_rec.color|| '" alpha="' ||sub_rec.alpha|| '" label="' ||sub_rec.code||' - '||sub_rec.label|| '"/>' INTO new_row;
@@ -266,7 +266,7 @@ BEGIN
 		
 		END LOOP;
 		
-		  UPDATE metadata.version SET qml = part_1 || part_2 || part_3 WHERE dataset_id = rec.dataset_id AND version = rec.version;
+		  UPDATE metadata.version SET qml = part_1 || part_2 || part_3 WHERE project_id = rec.project_id AND version = rec.version;
 		  SELECT '' INTO part_2;
 		  SELECT '' INTO new_row;
 		  
@@ -314,10 +314,10 @@ DECLARE
   </UserLayer>
 </StyledLayerDescriptor>';
 BEGIN
-    FOR rec IN SELECT dataset_id, version FROM metadata.version ORDER BY dataset_id, version
+    FOR rec IN SELECT project_id, version, layer FROM metadata.layer ORDER BY project_id, version
     LOOP
 	
-      FOR sub_rec IN SELECT code, value, color, opacity, label FROM metadata.layer_category WHERE dataset_id = rec.dataset_id AND version = rec.version AND publish IS TRUE ORDER BY value
+      FOR sub_rec IN SELECT code, value, color, opacity, label FROM metadata.layer_category WHERE project_id = rec.project_id AND version = rec.version AND publish IS TRUE ORDER BY value
     	LOOP
 		
 			SELECT E'\n             <sld:ColorMapEntry quantity="' ||sub_rec.value|| '" color="' ||sub_rec.color|| '" opacity="' ||sub_rec.opacity|| '" label="' ||sub_rec.code||' - '||sub_rec.label|| '"/>' INTO new_row;
@@ -326,7 +326,7 @@ BEGIN
 		
 		END LOOP;
 		
-		  UPDATE metadata.version SET sld = replace(part_1,'LAYER_NAME',rec.layer_id) || part_2 || part_3 WHERE dataset_id = rec.dataset_id AND version = rec.version;
+		  UPDATE metadata.version SET sld = replace(part_1,'LAYER_NAME',rec.layer_id) || part_2 || part_3 WHERE project_id = rec.project_id AND version = rec.version;
 		  SELECT '' INTO part_2;
 		  SELECT '' INTO new_row;
 		  
@@ -341,183 +341,211 @@ ALTER FUNCTION metadata.sld() OWNER TO glosis;
 --        TABLE         --
 --------------------------
 
-CREATE TABLE metadata.dataset (
-    dataset_id text NOT NULL,
-    dataset_name text,
-    dataset_description text,
-    complete boolean
+CREATE TABLE metadata.project (
+  project_id text NOT NULL,
+  project_name text,
+  project_description text
 );
-ALTER TABLE metadata.dataset OWNER TO glosis;
-GRANT SELECT ON TABLE metadata.dataset TO glosis_r;
+ALTER TABLE metadata.project OWNER TO glosis;
+GRANT SELECT ON TABLE metadata.project TO glosis_r;
 
 
-CREATE TABLE metadata.version (
-    dataset_id text NOT NULL,
-    version text NOT NULL,
-    folder text,
-    file_identifier uuid DEFAULT public.uuid_generate_v1(),
-    language_code text,
-    parent_identifier uuid,
-    metadata_standard_name text,
-    metadata_standard_version text,
-    reference_system_identifier_code text,
-    reference_system_identifier_code_space text,
-    title text,
-    creation_date date,
-    publication_date date,
-    revision_date date,
-    edition text,
-    citation_rs_identifier_code text,
-    citation_rs_identifier_code_space text,
-    citation_md_identifier_code text,
-    abstract text,
-    status text,
-    md_browse_graphic text,
-    keyword_theme text[],
-    keyword_place text[],
-    keyword_stratum text[],
-    access_constraints text,
-    use_constraints text,
-    other_constraints text,
-    spatial_representation_type_code text,
-    distance_uom text,
-    distance text,
-    topic_category text[],
-    time_period_begin date,
-    time_period_end date,
-    west_bound_longitude numeric(4,1),
-    east_bound_longitude numeric(4,1),
-    south_bound_latitude numeric(4,1),
-    north_bound_latitude numeric(4,1),
-    distribution_format text,
-    scope_code text DEFAULT 'dataset'::text,
-    lineage_statement text,
-    lineage_source_uuidref text,
-    lineage_source_title text,
-    representation_type text,
-    presentation_form text DEFAULT 'mapDigital'::text,
-    CONSTRAINT version_status_check CHECK ((status = ANY (ARRAY['Completed'::text, 'Historical archive'::text, 'Obsolete'::text, 'On going'::text, 'Planned'::text, 'Required'::text, 'Under development'::text]))),
-    CONSTRAINT version_representation_type_check CHECK ((representation_type = ANY (ARRAY['Grid'::text, 'Vector'::text, 'Tabular'::text])))
+CREATE TABLE metadata.mapset (
+  project_id text NOT NULL,
+  mapset_id text NOT NULL,
+  agg_by text,
+  map text,
+  qml text,
+  sld text,
+  xml text,
+  CONSTRAINT version_status_check CHECK ((agg_by = ANY (ARRAY['depth'::text, 'time'::text])))
 );
-ALTER TABLE metadata.version OWNER TO glosis;
-GRANT SELECT ON TABLE metadata.version TO glosis_r;
+ALTER TABLE metadata.mapset OWNER TO glosis;
+GRANT SELECT ON TABLE metadata.mapset TO glosis_r;
 
 
 CREATE TABLE metadata.layer (
-    dataset_id text NOT NULL,
-    version text NOT NULL,
-    layer text NOT NULL,
-    file_name text NOT NULL,
-    file_mode text,
-    file_ino integer,
-    file_dev integer,
-    file_nlink integer,
-    file_uid integer,
-    file_gid integer,
-    file_size bigint,
-    file_size_pretty text,
-    file_atime timestamp without time zone,
-    file_mtime timestamp without time zone,
-    file_ctime timestamp without time zone,
-    format text,
-    raster_size_row integer,
-    raster_size_col integer,
-    coordinate_system smallint,
-    spatial_reference text,
-    spatial_reference_proj text,
-    projection text,
-    geo_transform text,
-    origin_x text,
-    pixel_size text,
-    metadata text,
-    compression text,
-    corner_coordinates_center text,
-    n_bands smallint,
-    band_number smallint,
-    band_block text,
-    data_type_id text,
-    band_size_row integer,
-    band_size_col integer,
-    scale text,
-    stats_minimum numeric(10,3),
-    stats_maximum numeric(10,3),
-    stats_mean numeric(10,3),
-    stats_std_dev numeric(10,3),
-    no_data_value integer,
-    overviews text,
-    color_table text,
-    root_file text,
-    mask_value integer,
-    resample_method text,
-    json text
+  mapset_id text NOT NULL,
+  layer_id text NOT NULL,
+  file_path text NOT NULL,
+  file_name text NOT NULL,
+  file_size integer,
+  file_size_pretty text,
+  file_extension text,
+  file_identifier uuid DEFAULT public.uuid_generate_v1(),
+  language_code text DEFAULT 'eng',
+  parent_identifier uuid,
+  metadata_standard_name text DEFAULT 'ISO 19115/19139',
+  metadata_standard_version text DEFAULT '1.0',
+  reference_system_identifier_code text,
+  reference_system_identifier_code_space text DEFAULT 'EPSG',
+  title text,
+  creation_date date,
+  publication_date date,
+  revision_date date,
+  edition text,
+  citation_rs_identifier_code text,
+  citation_rs_identifier_code_space text,
+  citation_md_identifier_code text,
+  abstract text,
+  status text,
+  md_browse_graphic text,
+  keyword_theme text[],
+  keyword_place text[],
+  keyword_stratum text[],
+  access_constraints text,
+  use_constraints text,
+  other_constraints text,
+  spatial_representation_type_code text DEFAULT 'grid',
+  distance_uom text,
+  distance text,
+  topic_category text[],
+  time_period_begin date,
+  time_period_end date,
+  west_bound_longitude numeric(4,1),
+  east_bound_longitude numeric(4,1),
+  south_bound_latitude numeric(4,1),
+  north_bound_latitude numeric(4,1),
+  distribution_format text,
+  scope_code text DEFAULT 'project',
+  lineage_statement text,
+  lineage_source_uuidref text,
+  lineage_source_title text,
+  representation_type text,
+  presentation_form text DEFAULT 'mapDigital',
+  -- extra metadata
+  compression text,
+  raster_size_x real,
+  raster_size_y real,
+  pixel_size_x real,
+  pixel_size_y real,
+  origin_x real,
+  origin_y real,
+  spatial_reference text,
+  data_type text,
+  no_data_value float,
+  stats_minimum real,
+  stats_maximum real,
+  stats_mean real,
+  stats_std_dev real,
+  scale text,
+  n_bands integer,
+  metadata text,
+  CONSTRAINT layer_status_check CHECK ((status = ANY (ARRAY['Completed', 'Historical archive', 'Obsolete', 'On going', 'Planned', 'Required', 'Under development']))),
+  CONSTRAINT layer_representation_type_check CHECK ((representation_type = ANY (ARRAY['Grid', 'Vector', 'Tabular'])))
 );
 ALTER TABLE metadata.layer OWNER TO glosis;
 GRANT SELECT ON TABLE metadata.layer TO glosis_r;
-COMMENT ON COLUMN metadata.layer.geo_transform IS 'X Origin (top left corner), X pixel size (W-E pizel resolution), Rotation (0 if north is up), Y Origin (top left corner), Rotation (0 if north is up), -Y pixel size (N-S pixel resolution)';
+
+
+CREATE TABLE metadata.layer_csv (
+  layer_csv_id text NOT NULL,
+  file_name text NOT NULL,
+  file_mode text,
+  file_ino integer,
+  file_dev integer,
+  file_nlink integer,
+  file_uid integer,
+  file_gid integer,
+  file_size bigint,
+  file_size_pretty text,
+  file_atime timestamp without time zone,
+  file_mtime timestamp without time zone,
+  file_ctime timestamp without time zone,
+  format text,
+  raster_size_row integer,
+  raster_size_col integer,
+  coordinate_system smallint,
+  spatial_reference text,
+  spatial_reference_proj text,
+  projection text,
+  geo_transform text,
+  origin_x text,
+  pixel_size text,
+  metadata text,
+  compression text,
+  corner_coordinates_center text,
+  n_bands smallint,
+  band_number smallint,
+  band_block text,
+  data_type_id text,
+  band_size_row integer,
+  band_size_col integer,
+  scale text,
+  stats_minimum numeric(10,3),
+  stats_maximum numeric(10,3),
+  stats_mean numeric(10,3),
+  stats_std_dev numeric(10,3),
+  no_data_value integer,
+  overviews text,
+  color_table text,
+  root_file text,
+  mask_value integer,
+  resample_method text,
+  json text
+);
+ALTER TABLE metadata.layer_csv OWNER TO glosis;
+GRANT SELECT ON TABLE metadata.layer_csv TO glosis_r;
 
 
 CREATE TABLE IF NOT EXISTS metadata.layer_category
 (   
-    dataset_id text NOT NULL,
-    version text NOT NULL,
-    layer text NOT NULL,
-    value smallint NOT NULL,
-    code text COLLATE pg_catalog."default" NOT NULL,
-    label text COLLATE pg_catalog."default" NOT NULL,
-    color text COLLATE pg_catalog."default" NOT NULL,
-    opacity real NOT NULL,
-    publish boolean NOT NULL
+  layer_id text NOT NULL,
+  value smallint NOT NULL,
+  code text COLLATE pg_catalog."default" NOT NULL,
+  label text COLLATE pg_catalog."default" NOT NULL,
+  color text COLLATE pg_catalog."default" NOT NULL,
+  opacity real NOT NULL,
+  publish boolean NOT NULL
 );
 ALTER TABLE metadata.layer_category OWNER TO glosis;
 GRANT SELECT ON TABLE metadata.layer_category TO glosis_r;
 
 
 CREATE TABLE metadata.ver_x_org_x_ind (
-    dataset_id text NOT NULL,
-    version text NOT NULL,
-    tag text,
-    role text,
-    position text,
-    organisation_id text NOT NULL,
-    individual_id text
-    CONSTRAINT contact_tag_check CHECK ((tag = ANY (ARRAY['Author'::text, 'Custodian'::text, 'Distributor'::text, 'Originator'::text, 'Owner'::text, 'Point of contact'::text, 'Principal investigator'::text, 'Processor'::text, 'Publisher'::text, 'Resource provider'::text, 'User'::text])))
+  layer_id text NOT NULL,
+  tag text,
+  role text,
+  position text,
+  organisation_id text NOT NULL,
+  individual_id text
+  CONSTRAINT contact_tag_check CHECK ((tag = ANY (ARRAY['Author'::text, 'Custodian'::text, 'Distributor'::text, 'Originator'::text, 'Owner'::text, 'Point of contact'::text, 'Principal investigator'::text, 'Processor'::text, 'Publisher'::text, 'Resource provider'::text, 'User'::text])))
 );
 ALTER TABLE metadata.ver_x_org_x_ind OWNER TO glosis;
 GRANT SELECT ON TABLE metadata.ver_x_org_x_ind TO glosis_r;
 
 
 CREATE TABLE metadata.organisation (
-    organisation_id text NOT NULL,
-    url text,
-    email text,
-    country text,
-    city text,
-    postal_code text,
-    delivery_point text,
-    phone text,
-    facsimile text
+  organisation_id text NOT NULL,
+  url text,
+  email text,
+  country text,
+  city text,
+  postal_code text,
+  delivery_point text,
+  phone text,
+  facsimile text
 );
 ALTER TABLE metadata.organisation OWNER TO glosis;
 GRANT SELECT ON TABLE metadata.organisation TO glosis_r;
 
 
 CREATE TABLE metadata.individual (
-    individual_id text NOT NULL,
-    email text    
+  individual_id text NOT NULL,
+  email text    
 );
 ALTER TABLE metadata.individual OWNER TO glosis;
 GRANT SELECT ON TABLE metadata.individual TO glosis_r;
 
 
 CREATE TABLE metadata.url (
-    url_id serial,
-    dataset_id text NOT NULL,
-    version text NOT NULL,
-    protocol text,
-    url text NOT NULL,
-    url_name text,
-    valid text
-    CONSTRAINT url_protocol_check CHECK ((protocol = ANY (ARRAY['link'::text, 'ftp'::text, 'wms'::text, 'wcs'::text, 'wfs'::text])))
+  url_id serial,
+  layer_id text NOT NULL,
+  protocol text,
+  url text NOT NULL,
+  url_name text,
+  valid text
+  CONSTRAINT url_protocol_check CHECK ((protocol = ANY (ARRAY['link'::text, 'ftp'::text, 'wms'::text, 'wcs'::text, 'wfs'::text])))
 );
 ALTER TABLE metadata.url OWNER TO glosis;
 GRANT SELECT ON TABLE metadata.url TO glosis_r;
@@ -527,12 +555,14 @@ GRANT SELECT ON TABLE metadata.url TO glosis_r;
 --     PRIMARY KEY      --
 --------------------------
 
-ALTER TABLE metadata.dataset ADD PRIMARY KEY (dataset_id);
-ALTER TABLE metadata.version ADD PRIMARY KEY (dataset_id, version);
-ALTER TABLE metadata.version ADD UNIQUE (file_identifier);
-ALTER TABLE metadata.layer ADD PRIMARY KEY (dataset_id, version, layer);
-ALTER TABLE metadata.layer_category ADD PRIMARY KEY (dataset_id, version, layer, value);
-ALTER TABLE metadata.ver_x_org_x_ind ADD PRIMARY KEY (dataset_id, version, tag, role, position, organisation_id, individual_id);
+ALTER TABLE metadata.project ADD PRIMARY KEY (project_id);
+ALTER TABLE metadata.mapset ADD PRIMARY KEY (mapset_id);
+ALTER TABLE metadata.layer ADD PRIMARY KEY (layer_id);
+ALTER TABLE metadata.layer ADD UNIQUE (file_identifier);
+ALTER TABLE metadata.layer ADD UNIQUE (file_path, file_name);
+ALTER TABLE metadata.layer_csv ADD PRIMARY KEY (layer_csv_id);
+ALTER TABLE metadata.layer_category ADD PRIMARY KEY (layer_id, value);
+ALTER TABLE metadata.ver_x_org_x_ind ADD PRIMARY KEY (layer_id, tag, role, position, organisation_id, individual_id);
 ALTER TABLE metadata.organisation ADD PRIMARY KEY (organisation_id);
 ALTER TABLE metadata.individual ADD PRIMARY KEY (individual_id);
 ALTER TABLE metadata.url ADD PRIMARY KEY (url_id);
@@ -544,31 +574,32 @@ ALTER TABLE metadata.url ADD PRIMARY KEY (url_id);
 
 ALTER TABLE metadata.ver_x_org_x_ind ADD FOREIGN KEY (individual_id) REFERENCES metadata.individual(individual_id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE metadata.ver_x_org_x_ind ADD FOREIGN KEY (organisation_id) REFERENCES metadata.organisation(organisation_id) ON UPDATE CASCADE ON DELETE CASCADE;
-ALTER TABLE metadata.ver_x_org_x_ind ADD FOREIGN KEY (dataset_id, version) REFERENCES metadata.version(dataset_id, version) ON UPDATE CASCADE ON DELETE CASCADE;
-ALTER TABLE metadata.url ADD FOREIGN KEY (dataset_id, version) REFERENCES metadata.version(dataset_id, version) ON UPDATE CASCADE ON DELETE CASCADE;
-ALTER TABLE metadata.layer ADD FOREIGN KEY (dataset_id, version) REFERENCES metadata.version(dataset_id, version) ON UPDATE CASCADE ON DELETE CASCADE;
-ALTER TABLE metadata.layer_category ADD FOREIGN KEY (dataset_id, version, layer) REFERENCES metadata.layer(dataset_id, version, layer) ON UPDATE CASCADE ON DELETE CASCADE;
-ALTER TABLE metadata.version ADD FOREIGN KEY (dataset_id) REFERENCES metadata.dataset(dataset_id) ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE metadata.ver_x_org_x_ind ADD FOREIGN KEY (layer_id) REFERENCES metadata.layer(layer_id) ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE metadata.url ADD FOREIGN KEY (layer_id) REFERENCES metadata.layer(layer_id) ON UPDATE CASCADE ON DELETE CASCADE;
+-- ALTER TABLE metadata.layer_csv ADD FOREIGN KEY (layer_csv_id) REFERENCES metadata.layer(layer_id) ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE metadata.layer_category ADD FOREIGN KEY (layer_id) REFERENCES metadata.layer(layer_id) ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE metadata.layer ADD FOREIGN KEY (mapset_id) REFERENCES metadata.mapset(mapset_id) ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE metadata.mapset ADD FOREIGN KEY (project_id) REFERENCES metadata.project(project_id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --------------------------
 --       TRIGGER        --
 --------------------------
 
-CREATE TRIGGER map
-    AFTER INSERT OR DELETE OR UPDATE 
-    ON metadata.layer_category
-    FOR EACH STATEMENT
-    EXECUTE FUNCTION metadata.map();
+-- CREATE TRIGGER map
+--   AFTER INSERT OR DELETE OR UPDATE 
+--   ON metadata.layer_category
+--   FOR EACH STATEMENT
+--   EXECUTE FUNCTION metadata.map();
 
-CREATE TRIGGER qml
-    AFTER INSERT OR DELETE OR UPDATE 
-    ON metadata.layer_category
-    FOR EACH STATEMENT
-    EXECUTE FUNCTION metadata.qml();
+-- CREATE TRIGGER qml
+--   AFTER INSERT OR DELETE OR UPDATE 
+--   ON metadata.layer_category
+--   FOR EACH STATEMENT
+--   EXECUTE FUNCTION metadata.qml();
 
-CREATE TRIGGER sld
-    AFTER INSERT OR DELETE OR UPDATE 
-    ON metadata.layer_category
-    FOR EACH STATEMENT
-    EXECUTE FUNCTION metadata.sld();
+-- CREATE TRIGGER sld
+--   AFTER INSERT OR DELETE OR UPDATE 
+--   ON metadata.layer_category
+--   FOR EACH STATEMENT
+--   EXECUTE FUNCTION metadata.sld();
