@@ -366,13 +366,13 @@ GRANT SELECT ON TABLE metadata.mapset TO glosis_r;
 
 CREATE TABLE metadata.layer (
   mapset_id text NOT NULL,
-  layer_id text NOT NULL,
   file_path text NOT NULL,
-  file_name text NOT NULL,
+  layer_id text NOT NULL,
+  file_extension text,
   file_size integer,
   file_size_pretty text,
-  file_extension text,
   file_identifier uuid DEFAULT public.uuid_generate_v1(),
+  bucket text,
   language_code text DEFAULT 'eng',
   parent_identifier uuid,
   metadata_standard_name text DEFAULT 'ISO 19115/19139',
@@ -388,18 +388,20 @@ CREATE TABLE metadata.layer (
   citation_rs_identifier_code_space text,
   citation_md_identifier_code text,
   abstract text,
-  status text DEFAULT 'Completed',
+  status text DEFAULT 'completed',
+  update_frequency text DEFAULT 'asNeeded',
   md_browse_graphic text,
   keyword_theme text[],
   keyword_place text[],
   keyword_stratum text[],
-  access_constraints text,
-  use_constraints text,
+  access_constraints text DEFAULT 'copyright',
+  use_constraints text DEFAULT 'license',
   other_constraints text,
-  spatial_representation_type_code text DEFAULT 'Grid',
+  spatial_representation_type_code text DEFAULT 'grid',
+  presentation_form text DEFAULT 'mapDigital',
   distance_uom text,
   distance text,
-  topic_category text[],
+  topic_category text[] DEFAULT '{geoscientificInformation,environment}'::text[],
   time_period_begin date,
   time_period_end date,
   west_bound_longitude numeric(4,1),
@@ -411,7 +413,6 @@ CREATE TABLE metadata.layer (
   lineage_statement text,
   lineage_source_uuidref text,
   lineage_source_title text,
-  presentation_form text DEFAULT 'mapDigital',
   -- extra metadata
   compression text,
   raster_size_x real,
@@ -429,61 +430,59 @@ CREATE TABLE metadata.layer (
   stats_std_dev real,
   scale text,
   n_bands integer,
-  metadata text,
-  CONSTRAINT layer_status_check CHECK ((status = ANY (ARRAY['Completed', 'Historical archive', 'Obsolete', 'On going', 'Planned', 'Required', 'Under development']))),
-  CONSTRAINT layer_spatial_representation_type_code_check CHECK ((spatial_representation_type_code = ANY (ARRAY['Grid', 'Vector', 'Tabular'])))
+  metadata text[],
+  note text,
+  CONSTRAINT layer_status_check CHECK ((status = ANY (ARRAY['completed', 'historicalArchive', 'obsolete', 'onGoing', 'planned', 'required', 'underDevelopment']))),
+  CONSTRAINT layer_update_frequency_check CHECK ((update_frequency = ANY (ARRAY['continual', 'daily', 'weekly', 'fortnightly', 'monthly', 'quarterly', 'biannually','annually','asNeeded','irregular','notPlanned','unknown']))),
+  CONSTRAINT layer_access_constraints_check CHECK ((access_constraints = ANY (ARRAY['copyright', 'patent', 'patentPending', 'trademark', 'license', 'intellectualPropertyRights', 'restricted','otherRestrictions']))),
+  CONSTRAINT layer_use_constraints_check CHECK ((use_constraints = ANY (ARRAY['copyright', 'patent', 'patentPending', 'trademark', 'license', 'intellectualPropertyRights', 'restricted','otherRestrictions']))),
+  CONSTRAINT layer_spatial_representation_type_code_check CHECK ((spatial_representation_type_code = ANY (ARRAY['grid', 'vector', 'textTable', 'tin', 'stereoModel', 'video']))),
+  CONSTRAINT layer_presentation_form_check CHECK ((presentation_form = ANY (ARRAY['mapDigital', 'tableDigital', 'mapHardcopy', 'atlasHardcopy']))),
+  CONSTRAINT layer_distance_uom_check CHECK ((distance_uom = ANY (ARRAY['m', 'km', 'deg'])))
 );
 ALTER TABLE metadata.layer OWNER TO glosis;
 GRANT SELECT ON TABLE metadata.layer TO glosis_r;
 
 
-CREATE TABLE metadata.layer_csv (
-  layer_csv_id text NOT NULL,
-  file_name text NOT NULL,
-  file_mode text,
-  file_ino integer,
-  file_dev integer,
-  file_nlink integer,
-  file_uid integer,
-  file_gid integer,
-  file_size bigint,
-  file_size_pretty text,
-  file_atime timestamp without time zone,
-  file_mtime timestamp without time zone,
-  file_ctime timestamp without time zone,
-  format text,
-  raster_size_row integer,
-  raster_size_col integer,
-  coordinate_system smallint,
-  spatial_reference text,
-  spatial_reference_proj text,
-  projection text,
-  geo_transform text,
-  origin_x text,
-  pixel_size text,
-  metadata text,
-  compression text,
-  corner_coordinates_center text,
-  n_bands smallint,
-  band_number smallint,
-  band_block text,
-  data_type_id text,
-  band_size_row integer,
-  band_size_col integer,
-  scale text,
-  stats_minimum numeric(10,3),
-  stats_maximum numeric(10,3),
-  stats_mean numeric(10,3),
-  stats_std_dev numeric(10,3),
-  no_data_value integer,
-  overviews text,
-  color_table text,
-  root_file text,
-  mask_value integer,
-  resample_method text
+CREATE TABLE metadata.layer_manual_metadata (
+  note text,
+  project_id text NOT NULL,
+  file_name_source text,
+  layer_id text NOT NULL,
+  bucket text,
+  file_identifier text,
+  title text,
+  creation_date text,
+  revision_date text,
+  publication_date text,
+  abstract text,
+  to_drop text,
+  keyword_theme text[],
+  keyword_place text[],
+  keyword_stratum text[],
+  topic_category text[],
+  update_frequency text,
+  access_constraints text,
+  use_constraints text,
+  other_constraints text,
+  distance_uom text,
+  time_period_begin text,
+  time_period_end text,
+  organisation_id text,
+  url text,
+  organisation_email text,
+  country text,
+  city text,
+  postal_code text,
+  delivery_point text,
+  individual_id text,
+  email text,
+  tag text,
+  role text,
+  position text
 );
-ALTER TABLE metadata.layer_csv OWNER TO glosis;
-GRANT SELECT ON TABLE metadata.layer_csv TO glosis_r;
+ALTER TABLE metadata.layer_manual_metadata OWNER TO glosis;
+GRANT SELECT ON TABLE metadata.layer_manual_metadata TO glosis_r;
 
 
 CREATE TABLE IF NOT EXISTS metadata.layer_category
@@ -507,7 +506,7 @@ CREATE TABLE metadata.ver_x_org_x_ind (
   position text,
   organisation_id text NOT NULL,
   individual_id text
-  CONSTRAINT contact_tag_check CHECK ((tag = ANY (ARRAY['Author'::text, 'Custodian'::text, 'Distributor'::text, 'Originator'::text, 'Owner'::text, 'Point of contact'::text, 'Principal investigator'::text, 'Processor'::text, 'Publisher'::text, 'Resource provider'::text, 'User'::text])))
+  CONSTRAINT contact_tag_check CHECK ((tag = ANY (ARRAY['author', 'custodian', 'distributor', 'originator', 'owner', 'point of contact', 'principal investigator', 'processor', 'publisher', 'resource provider', 'user'])))
 );
 ALTER TABLE metadata.ver_x_org_x_ind OWNER TO glosis;
 GRANT SELECT ON TABLE metadata.ver_x_org_x_ind TO glosis_r;
@@ -557,8 +556,7 @@ ALTER TABLE metadata.project ADD PRIMARY KEY (project_id);
 ALTER TABLE metadata.mapset ADD PRIMARY KEY (mapset_id);
 ALTER TABLE metadata.layer ADD PRIMARY KEY (layer_id);
 ALTER TABLE metadata.layer ADD UNIQUE (file_identifier);
-ALTER TABLE metadata.layer ADD UNIQUE (file_path, file_name);
-ALTER TABLE metadata.layer_csv ADD PRIMARY KEY (layer_csv_id);
+ALTER TABLE metadata.layer_manual_metadata ADD PRIMARY KEY (layer_id);
 ALTER TABLE metadata.layer_category ADD PRIMARY KEY (layer_id, value);
 ALTER TABLE metadata.ver_x_org_x_ind ADD PRIMARY KEY (layer_id, tag, role, position, organisation_id, individual_id);
 ALTER TABLE metadata.organisation ADD PRIMARY KEY (organisation_id);
@@ -574,7 +572,6 @@ ALTER TABLE metadata.ver_x_org_x_ind ADD FOREIGN KEY (individual_id) REFERENCES 
 ALTER TABLE metadata.ver_x_org_x_ind ADD FOREIGN KEY (organisation_id) REFERENCES metadata.organisation(organisation_id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE metadata.ver_x_org_x_ind ADD FOREIGN KEY (layer_id) REFERENCES metadata.layer(layer_id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE metadata.url ADD FOREIGN KEY (layer_id) REFERENCES metadata.layer(layer_id) ON UPDATE CASCADE ON DELETE CASCADE;
--- ALTER TABLE metadata.layer_csv ADD FOREIGN KEY (layer_csv_id) REFERENCES metadata.layer(layer_id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE metadata.layer_category ADD FOREIGN KEY (layer_id) REFERENCES metadata.layer(layer_id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE metadata.layer ADD FOREIGN KEY (mapset_id) REFERENCES metadata.mapset(mapset_id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE metadata.mapset ADD FOREIGN KEY (project_id) REFERENCES metadata.project(project_id) ON UPDATE CASCADE ON DELETE CASCADE;

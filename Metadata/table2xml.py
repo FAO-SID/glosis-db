@@ -77,7 +77,8 @@ def bake_xml(dataset_id, version, template, output):
                         citation_rs_identifier_code_space,
                         citation_md_identifier_code, 
                         abstract, 
-                        status, 
+                        status,
+                        update_frequency,
                         md_browse_graphic, 
                         keyword_theme, 
                         keyword_place, 
@@ -85,7 +86,8 @@ def bake_xml(dataset_id, version, template, output):
                         access_constraints, 
                         use_constraints, 
                         other_constraints, 
-                        spatial_representation_type_code, 
+                        spatial_representation_type_code,
+                        presentation_form,
                         distance_uom, 
                         distance, 
                         topic_category, 
@@ -123,6 +125,7 @@ def bake_xml(dataset_id, version, template, output):
         citation_md_identifier_code = 'UNKNOWN' if row[15] == None else str(row[15])
         abstract = 'UNKNOWN' if row[16] == None else str(row[16])
         status = 'UNKNOWN' if row[17] == None else str(row[17])
+        update_frequency = 'UNKNOWN' if row[17] == None else str(row[17])
         md_browse_graphic = 'UNKNOWN' if row[18] == None else str(row[18])
         keyword_theme = 'UNKNOWN' if row[19] == None else str(row[19])
         keyword_place = 'UNKNOWN' if row[20] == None else str(row[20])
@@ -131,6 +134,7 @@ def bake_xml(dataset_id, version, template, output):
         use_constraints = 'UNKNOWN' if row[23] == None else str(row[23])
         other_constraints = 'UNKNOWN' if row[24] == None else str(row[24])
         spatial_representation_type_code = 'UNKNOWN' if row[25] == None else str(row[25])
+        presentation_form = 'UNKNOWN' if row[25] == None else str(row[25])
         distance_uom = 'UNKNOWN' if row[26] == None else str(row[26])
         distance = '0' if row[27] == None else str(row[27])
         topic_category = 'UNKNOWN' if row[28] == None else str(row[28])
@@ -491,6 +495,7 @@ def bake_xml(dataset_id, version, template, output):
         replace['***citation_md_identifier_code***'] = citation_md_identifier_code
         replace['***abstract***'] = abstract
         replace['***status***'] = status
+        replace['***update_frequency***'] = update_frequency
         replace['***point_of_contact_ci_responsible_party_xml***'] = point_of_contact_ci_responsible_party_xml
         replace['***md_browse_graphic***'] = '%s' % md_browse_graphic
         replace['***keyword_theme_xml***'] = keyword_theme_xml
@@ -500,6 +505,7 @@ def bake_xml(dataset_id, version, template, output):
         replace['***use_constraints***'] = use_constraints
         replace['***other_constraints***'] = other_constraints
         replace['***spatial_representation_type_code***'] = spatial_representation_type_code
+        replace['***presentation_form***'] = presentation_form
         replace['***resolution***'] = resolution
         replace['***topic_category_xml***'] = topic_category_xml
         replace['***time_period_begin***'] = time_period_begin

@@ -6,6 +6,8 @@ import psycopg2
 from osgeo import gdal, osr
 import math
 
+gdal.UseExceptions()  # Explicitly enable exceptions
+
 def transform_to_wgs84(x, y, source_srs):
     """Transform coordinates from source projection to EPSG:4326 (lat/lon)."""
     target_srs = osr.SpatialReference()
@@ -24,10 +26,10 @@ def convert_size(size_bytes):
    s = round(size_bytes / p, 2)
    return "%s %s" % (s, size_name[i])
 
-def spatial_data_scan(project_id, rootdir):
+def spatial_data_scan(project_id, project_name, rootdir):
 
     # insert project
-    sql = f"INSERT INTO metadata.project(project_id) VALUES('{project_id}') ON CONFLICT (project_id) DO NOTHING"
+    sql = f"INSERT INTO metadata.project(project_id, project_name) VALUES('{project_id}','{project_name}') ON CONFLICT (project_id) DO NOTHING"
     cur.execute(sql)
 
     # iterate files
@@ -53,11 +55,11 @@ def spatial_data_scan(project_id, rootdir):
 
                 # insert mapset and layer
                 print (file_name)
-                sql = f"DELETE FROM metadata.mapset WHERE project_id='{project_id}' AND mapset_id='{file_name}'"
+                sql = f"DELETE FROM metadata.mapset WHERE mapset_id='{file_name[:-4]}'"
                 cur.execute(sql)
                 sql = f"INSERT INTO metadata.mapset(mapset_id, project_id, agg_by) VALUES('{file_name[:-4]}', '{project_id}', 'depth')"
                 cur.execute(sql)
-                sql = f"INSERT INTO metadata.layer(mapset_id, layer_id, file_path, file_name, file_size, file_size_pretty, file_extension) VALUES('{file_name[:-4]}','{file_name[:-4]}','{file_path}','{file_name}','{file_size}','{file_size_pretty}','{file_extension}')"
+                sql = f"INSERT INTO metadata.layer(mapset_id, file_path, layer_id, file_extension, file_size, file_size_pretty) VALUES('{file_name[:-4]}','{file_path}','{file_name[:-4]}','{file_extension}','{file_size}','{file_size_pretty}')"
                 cur.execute(sql)
 
                 # open file with GDAL
@@ -73,8 +75,9 @@ def spatial_data_scan(project_id, rootdir):
                 dic_gdal_num['raster_size_x'] = src_ds.RasterXSize
                 dic_gdal_num['raster_size_y'] = src_ds.RasterYSize
                 geo_transform = src_ds.GetGeoTransform()
-                dic_gdal_num['pixel_size_x'] = geo_transform[1]
-                dic_gdal_num['pixel_size_y'] = geo_transform[5]
+                dic_gdal_num['distance'] = abs(geo_transform[1])
+                dic_gdal_num['pixel_size_x'] = abs(geo_transform[1])
+                dic_gdal_num['pixel_size_y'] = abs(geo_transform[5])
                 dic_gdal_num['origin_x'] = geo_transform[0]
                 dic_gdal_num['origin_y'] = geo_transform[3]
 
@@ -110,7 +113,7 @@ def spatial_data_scan(project_id, rootdir):
 
                     # band info
                     dic_gdal_text['data_type']    = gdal.GetDataTypeName(src_band.DataType)
-                    dic_gdal_num['no_data_value'] = src_band.GetNoDataValue()
+                    dic_gdal_num['no_data_value'] = src_band.GetNoDataValue() if str(src_band.GetNoDataValue()) != 'nan' else -123456789
                     dic_gdal_num['stats_minimum'] = stats[0]
                     dic_gdal_num['stats_maximum'] = stats[1]
                     dic_gdal_num['stats_mean']    = stats[2] if str(stats[2]) != 'nan' else -123456789
@@ -119,31 +122,94 @@ def spatial_data_scan(project_id, rootdir):
 
                     # insert text data
                     for key, value in dic_gdal_text.items():
-                        sql = f"UPDATE metadata.layer SET {key} = '{value}' WHERE file_name = '{file_name}' AND file_path = '{file_path}'"
+                        sql = f"UPDATE metadata.layer SET {key} = '{value}' WHERE layer_id = '{file_name[:-4]}' AND file_path = '{file_path}'"
                         cur.execute(sql)
 
                     # insert num data
                     for key, value in dic_gdal_num.items():
-                        sql = f"UPDATE metadata.layer SET {key} = {value} WHERE file_name = '{file_name}' AND file_path = '{file_path}'"
+                        sql = f"UPDATE metadata.layer SET {key} = {value} WHERE layer_id = '{file_name[:-4]}' AND file_path = '{file_path}'"
                         cur.execute(sql)
 
             # commit changes in the DB per file
             conn.commit()
-
-# variables
-project_id = 'GSOC'
-rootdir = '/home/carva014/Downloads/FAO/SIS/PH/Original/GSOCseq/'
 
 # open db connection
 conn = psycopg2.connect("host='localhost' port='5432' dbname='iso19139' user='glosis'")
 cur = conn.cursor()
 
 # run function
-spatial_data_scan(project_id, rootdir)
+project_id = 'Soil Properties'
+project_name = 'Digital Soil Mapping Activity on Soil Properties in 2024'
+rootdir = '/home/carva014/Downloads/FAO/SIS/PH/Original/Soil_Properties/'
+layer_manual_metadata = '/home/carva014/Downloads/FAO/SIS/PH/Original/Soil_Properties/PH-metadata.csv'
+
+spatial_data_scan(project_id, project_name, rootdir)
 sql = """UPDATE metadata.layer SET compression = NULL WHERE compression='None';
          UPDATE metadata.layer SET stats_mean = NULL WHERE stats_mean=-123456789;
-         UPDATE metadata.layer SET stats_std_dev = NULL WHERE stats_std_dev=-123456789;"""
+         UPDATE metadata.layer SET stats_std_dev = NULL WHERE stats_std_dev=-123456789;
+         UPDATE metadata.layer SET no_data_value = NULL WHERE no_data_value=-123456789;"""
 cur.execute(sql)
+if len(layer_manual_metadata) > 1:
+    sql = "TRUNCATE metadata.layer_manual_metadata"
+    cur.execute(sql)
+    with open(layer_manual_metadata, "r") as file:
+        cur.copy_expert("COPY metadata.layer_manual_metadata FROM STDIN WITH DELIMITER E'\t' CSV HEADER", file)
+    
+    sql = "UPDATE metadata.layer_manual_metadata SET layer_id = split_part(layer_id,'.',1)"
+    cur.execute(sql)
+    
+    sql = """UPDATE metadata.layer l
+            SET note = m.note,
+                title = m.title,
+                creation_date = m.creation_date::date,
+                revision_date = m.revision_date::date,
+                publication_date = m.publication_date::date,
+                abstract = m.abstract || '\n' || m.to_drop,
+                keyword_theme = m.keyword_theme,
+                keyword_place = m.keyword_place,
+                keyword_stratum = m.keyword_stratum,
+                topic_category = m.topic_category,
+                update_frequency = m.update_frequency,
+                access_constraints = m.access_constraints,
+                use_constraints = m.use_constraints,
+                other_constraints = m.other_constraints,
+                distance_uom = m.distance_uom,
+                time_period_begin = m.time_period_begin::date,
+                time_period_end = m.time_period_end::date
+            FROM metadata.layer_manual_metadata m
+            WHERE l.layer_id = m.layer_id"""
+    cur.execute(sql)
+
+    # unique mapset_id
+    sql = "UPDATE metadata.mapset SET mapset_id = substring(mapset_id,0,14) || split_part(mapset_id,'-',6) WHERE mapset_id ILIKE '%0-30%'"
+    cur.execute(sql)
+    sql = "UPDATE metadata.layer SET mapset_id = substring(mapset_id,0,14) || split_part(mapset_id,'-',6) WHERE mapset_id ILIKE '%30-60%'"
+    cur.execute(sql)
+    sql = "DELETE FROM metadata.mapset WHERE mapset_id NOT IN (SELECT mapset_id FROM metadata.layer)"
+    cur.execute(sql)
+    sql = "DELETE FROM metadata.project WHERE project_id NOT IN (SELECT project_id FROM metadata.mapset)"
+    cur.execute(sql)
+
+    # insert organisation
+    sql = """INSERT INTO metadata.organisation (organisation_id, url, email, country, city, postal_code, delivery_point)
+            SELECT DISTINCT organisation_id, url, organisation_email, country, city, postal_code, delivery_point
+            FROM metadata.layer_manual_metadata
+            ON CONFLICT (organisation_id) DO NOTHING"""
+    cur.execute(sql)
+
+    # insert individual
+    sql = """INSERT INTO metadata.individual (individual_id, email)
+            SELECT DISTINCT individual_id, email
+            FROM metadata.layer_manual_metadata
+            ON CONFLICT (individual_id) DO NOTHING"""
+    cur.execute(sql)
+
+    # insert ver_x_org_x_ind
+    sql = """INSERT INTO metadata.ver_x_org_x_ind (layer_id, tag, "role", "position", organisation_id, individual_id)
+            SELECT DISTINCT l.layer_id, m.tag, m.role, m.position, m.organisation_id, m.individual_id
+            FROM metadata.layer l
+            LEFT JOIN metadata.layer_manual_metadata m ON  m.layer_id = l.layer_id"""
+    cur.execute(sql)
 
 # close db connection
 conn.commit()
