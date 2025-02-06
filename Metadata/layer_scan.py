@@ -164,10 +164,12 @@ if len(layer_manual_metadata) > 1:
                 creation_date = m.creation_date::date,
                 revision_date = m.revision_date::date,
                 publication_date = m.publication_date::date,
+                citation_md_identifier_code = m.citation_md_identifier_code,
+                citation_md_identifier_code_space = m.citation_md_identifier_code_space,
                 abstract = m.abstract || '\n' || m.to_drop,
                 keyword_theme = m.keyword_theme,
                 keyword_place = m.keyword_place,
-                keyword_stratum = m.keyword_stratum,
+                keyword_discipline = m.keyword_discipline,
                 topic_category = m.topic_category,
                 update_frequency = m.update_frequency,
                 access_constraints = m.access_constraints,
@@ -175,7 +177,8 @@ if len(layer_manual_metadata) > 1:
                 other_constraints = m.other_constraints,
                 distance_uom = m.distance_uom,
                 time_period_begin = m.time_period_begin::date,
-                time_period_end = m.time_period_end::date
+                time_period_end = m.time_period_end::date,
+                lineage_statement = m.lineage_statement
             FROM metadata.layer_manual_metadata m
             WHERE l.layer_id = m.layer_id"""
     cur.execute(sql)
@@ -188,6 +191,11 @@ if len(layer_manual_metadata) > 1:
     sql = "DELETE FROM metadata.mapset WHERE mapset_id NOT IN (SELECT mapset_id FROM metadata.layer)"
     cur.execute(sql)
     sql = "DELETE FROM metadata.project WHERE project_id NOT IN (SELECT project_id FROM metadata.mapset)"
+    cur.execute(sql)
+
+    # if citation_md_identifier_code has no DOI, put UUID
+    sql = """UPDATE metadata.layer SET citation_md_identifier_code_space = 'uuid' WHERE citation_md_identifier_code IS NULL;
+            UPDATE metadata.layer SET citation_md_identifier_code = file_identifier WHERE citation_md_identifier_code IS NULL;"""
     cur.execute(sql)
 
     # insert organisation
@@ -206,7 +214,11 @@ if len(layer_manual_metadata) > 1:
 
     # insert ver_x_org_x_ind
     sql = """INSERT INTO metadata.ver_x_org_x_ind (layer_id, tag, "role", "position", organisation_id, individual_id)
-            SELECT DISTINCT l.layer_id, m.tag, m.role, m.position, m.organisation_id, m.individual_id
+            SELECT DISTINCT l.layer_id, 'contact', 'resourceProvider', m.position, m.organisation_id, m.individual_id
+            FROM metadata.layer l
+            LEFT JOIN metadata.layer_manual_metadata m ON  m.layer_id = l.layer_id
+                UNION
+            SELECT DISTINCT l.layer_id, 'pointOfContact', 'author', m.position, m.organisation_id, m.individual_id
             FROM metadata.layer l
             LEFT JOIN metadata.layer_manual_metadata m ON  m.layer_id = l.layer_id"""
     cur.execute(sql)

@@ -371,10 +371,10 @@ CREATE TABLE metadata.layer (
   file_extension text,
   file_size integer,
   file_size_pretty text,
+  parent_identifier uuid,
   file_identifier uuid DEFAULT public.uuid_generate_v1(),
   bucket text,
   language_code text DEFAULT 'eng',
-  parent_identifier uuid,
   metadata_standard_name text DEFAULT 'ISO 19115/19139',
   metadata_standard_version text DEFAULT '1.0',
   reference_system_identifier_code text,
@@ -384,16 +384,15 @@ CREATE TABLE metadata.layer (
   publication_date date,
   revision_date date,
   edition text,
-  citation_rs_identifier_code text,
-  citation_rs_identifier_code_space text,
   citation_md_identifier_code text,
+  citation_md_identifier_code_space text,
   abstract text,
   status text DEFAULT 'completed',
   update_frequency text DEFAULT 'asNeeded',
   md_browse_graphic text,
   keyword_theme text[],
   keyword_place text[],
-  keyword_stratum text[],
+  keyword_discipline text[],
   access_constraints text DEFAULT 'copyright',
   use_constraints text DEFAULT 'license',
   other_constraints text,
@@ -432,6 +431,7 @@ CREATE TABLE metadata.layer (
   n_bands integer,
   metadata text[],
   note text,
+  CONSTRAINT layer_citation_md_identifier_code_space_check CHECK ((citation_md_identifier_code_space = ANY (ARRAY['doi', 'uuid']))),
   CONSTRAINT layer_status_check CHECK ((status = ANY (ARRAY['completed', 'historicalArchive', 'obsolete', 'onGoing', 'planned', 'required', 'underDevelopment']))),
   CONSTRAINT layer_update_frequency_check CHECK ((update_frequency = ANY (ARRAY['continual', 'daily', 'weekly', 'fortnightly', 'monthly', 'quarterly', 'biannually','annually','asNeeded','irregular','notPlanned','unknown']))),
   CONSTRAINT layer_access_constraints_check CHECK ((access_constraints = ANY (ARRAY['copyright', 'patent', 'patentPending', 'trademark', 'license', 'intellectualPropertyRights', 'restricted','otherRestrictions']))),
@@ -459,7 +459,7 @@ CREATE TABLE metadata.layer_manual_metadata (
   to_drop text,
   keyword_theme text[],
   keyword_place text[],
-  keyword_stratum text[],
+  keyword_discipline text[],
   topic_category text[],
   update_frequency text,
   access_constraints text,
@@ -468,6 +468,9 @@ CREATE TABLE metadata.layer_manual_metadata (
   distance_uom text,
   time_period_begin text,
   time_period_end text,
+  citation_md_identifier_code text,
+  citation_md_identifier_code_space text,
+  lineage_statement text,
   organisation_id text,
   url text,
   organisation_email text,
@@ -477,8 +480,6 @@ CREATE TABLE metadata.layer_manual_metadata (
   delivery_point text,
   individual_id text,
   email text,
-  tag text,
-  role text,
   position text
 );
 ALTER TABLE metadata.layer_manual_metadata OWNER TO glosis;
@@ -506,7 +507,8 @@ CREATE TABLE metadata.ver_x_org_x_ind (
   position text,
   organisation_id text NOT NULL,
   individual_id text
-  CONSTRAINT contact_tag_check CHECK ((tag = ANY (ARRAY['author', 'custodian', 'distributor', 'originator', 'owner', 'point of contact', 'principal investigator', 'processor', 'publisher', 'resource provider', 'user'])))
+  CONSTRAINT contact_tag_check CHECK ((tag = ANY (ARRAY['contact', 'pointOfContact'])))
+  CONSTRAINT contact_role_check CHECK ((role = ANY (ARRAY['author', 'custodian', 'distributor', 'originator', 'owner', 'pointOfContact', 'principalInvestigator', 'processor', 'publisher', 'resourceProvider', 'user'])))
 );
 ALTER TABLE metadata.ver_x_org_x_ind OWNER TO glosis;
 GRANT SELECT ON TABLE metadata.ver_x_org_x_ind TO glosis_r;

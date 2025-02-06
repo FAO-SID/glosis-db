@@ -27,7 +27,7 @@ def multireplace(string, replacements):
 
 
 
-def bake_xml(dataset_id, version, template, output):
+def bake_xml(project_id, template, output):
     
     
     # vars
@@ -37,32 +37,22 @@ def bake_xml(dataset_id, version, template, output):
     
     
     # iterate variables
-    sql = f''' SELECT version 
-              FROM metadata.version
-              WHERE dataset_id='{dataset_id}' 
-                AND version='{version}'
-              ORDER BY version
+    sql = f'''SELECT l.layer_id
+              FROM metadata.project p
+              LEFT JOIN metadata.mapset m ON m.project_id = p.project_id 
+              LEFT JOIN metadata.layer l ON l.mapset_id = m.mapset_id 
+              WHERE p.project_id = '{project_id}'
+              ORDER BY l.layer_id
           '''
     cur.execute(sql)
     rows = cur.fetchall()
     for row in rows:
-        version = row[0]
+        layer_id = row[0]
     
-        
-        # read metadata from table metadata.dataset
-        sql = f'''SELECT dataset_id, dataset_name
-                 FROM metadata.dataset 
-                 WHERE dataset_id='{dataset_id}' '''
-        cur.execute(sql)
-        row = cur.fetchone()
-        dataset_id = 'UNKNOWN' if row[0] == None else str(row[0])
-        dataset_name = 'UNKNOWN' if row[1] == None else str(row[1])
-        
-        
-        # read metadata from table metadata.version
-        sql = f'''SELECT folder,
-                        file_identifier, 
+        # read metadata from table metadata.layer
+        sql = f'''SELECT file_path, 
                         parent_identifier,
+                        file_identifier,
                         language_code, 
                         metadata_standard_name, 
                         metadata_standard_version, 
@@ -73,16 +63,15 @@ def bake_xml(dataset_id, version, template, output):
                         publication_date, 
                         revision_date, 
                         edition, 
-                        citation_rs_identifier_code, 
-                        citation_rs_identifier_code_space,
                         citation_md_identifier_code, 
+                        citation_md_identifier_code_space,
                         abstract, 
                         status,
                         update_frequency,
                         md_browse_graphic, 
                         keyword_theme, 
                         keyword_place, 
-                        keyword_stratum, 
+                        keyword_discipline, 
                         access_constraints, 
                         use_constraints, 
                         other_constraints, 
@@ -102,15 +91,15 @@ def bake_xml(dataset_id, version, template, output):
                         lineage_statement, 
                         lineage_source_uuidref, 
                         lineage_source_title
-                 FROM metadata.version 
-                 WHERE dataset_id='{dataset_id}' 
-                   AND version='{version}' '''
+                 FROM metadata.layer 
+                 WHERE layer_id='{layer_id}' '''
         cur.execute(sql)
         row = cur.fetchone()
-        folder = 'UNKNOWN' if row[0] == None else str(row[0])
-        file_identifier = 'UNKNOWN' if row[1] == None else str(row[1])
-        language_code = 'UNKNOWN' if row[2] == None else str(row[2])
-        parent_identifier = 'UNKNOWN' if row[3] == None else str(row[3])
+
+        file_path = 'UNKNOWN' if row[0] == None else str(row[0])
+        parent_identifier = 'UNKNOWN' if row[1] == None else str(row[1])
+        file_identifier = 'UNKNOWN' if row[2] == None else str(row[2])
+        language_code = 'UNKNOWN' if row[3] == None else str(row[3])
         metadata_standard_name = 'UNKNOWN' if row[4] == None else str(row[4])
         metadata_standard_version = 'UNKNOWN' if row[5] == None else str(row[5])
         reference_system_identifier_code = '-1' if row[6] == None else str(row[6])
@@ -120,35 +109,34 @@ def bake_xml(dataset_id, version, template, output):
         publication_date = '1900-01-01' if row[10] == None else str(row[10])
         revision_date = '1900-01-01' if row[11] == None else str(row[11])
         edition = 'UNKNOWN' if row[12] == None else str(row[12])
-        citation_rs_identifier_code = 'UNKNOWN' if row[13] == None else str(row[13])
-        citation_rs_identifier_code_space = 'UNKNOWN' if row[14] == None else str(row[14])
-        citation_md_identifier_code = 'UNKNOWN' if row[15] == None else str(row[15])
-        abstract = 'UNKNOWN' if row[16] == None else str(row[16])
-        status = 'UNKNOWN' if row[17] == None else str(row[17])
+        citation_md_identifier_code = 'UNKNOWN' if row[13] == None else str(row[13])
+        citation_md_identifier_code_space = 'UNKNOWN' if row[14] == None else str(row[14])
+        abstract = 'UNKNOWN' if row[15] == None else str(row[15])
+        status = 'UNKNOWN' if row[16] == None else str(row[16])
         update_frequency = 'UNKNOWN' if row[17] == None else str(row[17])
         md_browse_graphic = 'UNKNOWN' if row[18] == None else str(row[18])
         keyword_theme = 'UNKNOWN' if row[19] == None else str(row[19])
         keyword_place = 'UNKNOWN' if row[20] == None else str(row[20])
-        keyword_stratum = 'UNKNOWN' if row[21] == None else str(row[21])
+        keyword_discipline = 'UNKNOWN' if row[21] == None else str(row[21])
         access_constraints = 'UNKNOWN' if row[22] == None else str(row[22])
         use_constraints = 'UNKNOWN' if row[23] == None else str(row[23])
         other_constraints = 'UNKNOWN' if row[24] == None else str(row[24])
         spatial_representation_type_code = 'UNKNOWN' if row[25] == None else str(row[25])
-        presentation_form = 'UNKNOWN' if row[25] == None else str(row[25])
-        distance_uom = 'UNKNOWN' if row[26] == None else str(row[26])
-        distance = '0' if row[27] == None else str(row[27])
-        topic_category = 'UNKNOWN' if row[28] == None else str(row[28])
-        time_period_begin = '1900-01-01' if row[29] == None else str(row[29])
-        time_period_end = '1900-01-01' if row[30] == None else str(row[30])
-        west_bound_longitude = '0' if row[31] == None else str(row[31])
-        east_bound_longitude = '0' if row[32] == None else str(row[32])
-        south_bound_latitude = '0' if row[33] == None else str(row[33])
-        north_bound_latitude = '0' if row[34] == None else str(row[34])
-        distribution_format = 'UNKNOWN' if row[35] == None else str(row[35])
-        scope_code = 'UNKNOWN' if row[36] == None else str(row[36])
-        lineage_statement = 'UNKNOWN' if row[37] == None else str(row[37])
-        lineage_source_uuidref = 'UNKNOWN' if row[38] == None else str(row[38])
-        lineage_source_title = 'UNKNOWN' if row[39] == None else str(row[39])
+        presentation_form = 'UNKNOWN' if row[26] == None else str(row[26])
+        distance_uom = 'UNKNOWN' if row[27] == None else str(row[27])
+        distance = '0' if row[28] == None else str(row[28])
+        topic_category = 'UNKNOWN' if row[29] == None else str(row[29])
+        time_period_begin = '1900-01-01' if row[30] == None else str(row[30])
+        time_period_end = '1900-01-01' if row[31] == None else str(row[31])
+        west_bound_longitude = '0' if row[32] == None else str(row[32])
+        east_bound_longitude = '0' if row[33] == None else str(row[33])
+        south_bound_latitude = '0' if row[34] == None else str(row[34])
+        north_bound_latitude = '0' if row[35] == None else str(row[35])
+        distribution_format = 'UNKNOWN' if row[36] == None else str(row[36])
+        scope_code = 'UNKNOWN' if row[37] == None else str(row[37])
+        lineage_statement = 'UNKNOWN' if row[38] == None else str(row[38])
+        lineage_source_uuidref = 'UNKNOWN' if row[39] == None else str(row[39])
+        lineage_source_title = 'UNKNOWN' if row[40] == None else str(row[40])
 
 
         # editon
@@ -160,19 +148,19 @@ def bake_xml(dataset_id, version, template, output):
           </gmd:edition>'''
 
 
-        # citation_rs_identifier
-        citation_rs_identifier_xml = ''
-        if citation_rs_identifier_code != 'UNKNOWN':
-            citation_rs_identifier_xml = f'''
+        # citation_md_identifier
+        citation_md_identifier_xml = ''
+        if citation_md_identifier_code != 'UNKNOWN':
+            citation_md_identifier_xml = f'''
           <gmd:identifier>
-           <gmd:RS_Identifier>
+           <gmd:MD_Identifier>
             <gmd:code>
-             <gco:CharacterString>{citation_rs_identifier_code}</gco:CharacterString>
+             <gco:CharacterString>{citation_md_identifier_code}</gco:CharacterString>
             </gmd:code>
             <gmd:codeSpace>
-             <gco:CharacterString>{citation_rs_identifier_code_space}</gco:CharacterString>
+             <gco:CharacterString>{citation_md_identifier_code_space}</gco:CharacterString>
             </gmd:codeSpace>
-           </gmd:RS_Identifier>
+           </gmd:MD_Identifier>
           </gmd:identifier>'''
 
 
@@ -188,16 +176,16 @@ def bake_xml(dataset_id, version, template, output):
             keyword_theme_xml = keyword_theme_xml + keyword_theme_part
         
         
-        # keyword_stratum, must be seperated by coma
-        keyword_stratum_xml = ''
-        # if keyword_stratum != 'UNKNOWN':
-        for k in keyword_stratum.split(','):
+        # keyword_discipline, must be seperated by coma
+        keyword_discipline_xml = ''
+        # if keyword_discipline != 'UNKNOWN':
+        for k in keyword_discipline.split(','):
             k = k.strip("[]'")
-            keyword_stratum_part = f'''
+            keyword_discipline_part = f'''
           <gmd:keyword>
             <gco:CharacterString>{k}</gco:CharacterString>
           </gmd:keyword>'''
-            keyword_stratum_xml = keyword_stratum_xml + keyword_stratum_part
+            keyword_discipline_xml = keyword_discipline_xml + keyword_discipline_part
         
         
         # keyword_place, must be seperated by coma
@@ -227,15 +215,15 @@ def bake_xml(dataset_id, version, template, output):
               </gmd:denominator>
             </gmd:MD_RepresentativeFraction>
           </gmd:equivalentScale>'''
-        else:
-            resolution = ''
 
         
         # topic_category, must be seperated by coma
         topic_category_xml = ''
         # if topic_category != 'UNKNOWN':
         for k in topic_category.split(','):
-            k = k.strip("[]'")
+            k = k.strip(" ")
+            k = k.strip("[]")
+            k = k.strip("'")
             topic_category_part = f'''
       <gmd:topicCategory>
         <gmd:MD_TopicCategoryCode>{k}</gmd:MD_TopicCategoryCode>
@@ -262,8 +250,7 @@ def bake_xml(dataset_id, version, template, output):
                  FROM metadata.ver_x_org_x_ind v
                  LEFT JOIN metadata.organisation o ON o.organisation_id = v.organisation_id
                  LEFT JOIN metadata.individual i ON i.individual_id = v.individual_id
-                 WHERE v.dataset_id = '{dataset_id}'
-                   AND v.version ='{version}'
+                 WHERE v.layer_id ='{layer_id}'
                    AND v.tag = 'contact'
                  ORDER BY i.individual_id'''
         cur.execute(sql)
@@ -283,6 +270,7 @@ def bake_xml(dataset_id, version, template, output):
             tag = row[11]
             role = row[12]
             position = row[13]
+
             contact_ci_responsible_party_part = f'''
   <gmd:contact>
     <gmd:CI_ResponsibleParty>
@@ -332,7 +320,7 @@ def bake_xml(dataset_id, version, template, output):
         </gmd:CI_Contact>
       </gmd:contactInfo>
       <gmd:role>
-        <gmd:CI_RoleCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_RoleCode" codeListValue="{role}" />
+        <gmd:CI_RoleCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_RoleCode" codeListValue="metadataProvider" />
       </gmd:role>
     </gmd:CI_ResponsibleParty>
   </gmd:contact>'''
@@ -358,8 +346,7 @@ def bake_xml(dataset_id, version, template, output):
                  FROM metadata.ver_x_org_x_ind v
                  LEFT JOIN metadata.organisation o ON o.organisation_id = v.organisation_id
                  LEFT JOIN metadata.individual i ON i.individual_id = v.individual_id
-                 WHERE v.dataset_id = '{dataset_id}'
-                   AND v.version ='{version}'
+                 WHERE v.layer_id ='{layer_id}'
                    AND v.tag = 'pointOfContact'
                  ORDER BY i.individual_id'''
         cur.execute(sql)
@@ -379,6 +366,7 @@ def bake_xml(dataset_id, version, template, output):
             tag = row[11]
             role = row[12]
             position = row[13]
+
             point_of_contact_ci_responsible_party_part = f'''
           <gmd:pointOfContact>
             <gmd:CI_ResponsibleParty>
@@ -439,8 +427,7 @@ def bake_xml(dataset_id, version, template, output):
         online_resource = ''
         sql = f'''SELECT url, protocol, url_name
                  FROM metadata.url
-                 WHERE dataset_id='{dataset_id}' 
-                   AND version='{version}'
+                 WHERE layer_id='{layer_id}'
                    AND protocol IN ('OGC:WMS','OGC:WMTS','WWW:LINK-1.0-http--link', 'WWW:LINK-1.0-http--related')
                  ORDER BY protocol, url'''
         cur.execute(sql)
@@ -455,6 +442,7 @@ def bake_xml(dataset_id, version, template, output):
                 function = 'download'
             else:
                 function = 'UNKNOWN'
+            
             online_resource_part = f'''
           <gmd:onLine>
             <gmd:CI_OnlineResource>
@@ -491,15 +479,14 @@ def bake_xml(dataset_id, version, template, output):
         replace['***creation_date***'] = creation_date
         replace['***publication_date***'] = publication_date
         replace['***edition_xml***'] = edition_xml
-        replace['***citation_rs_identifier_xml***'] = citation_rs_identifier_xml
-        replace['***citation_md_identifier_code***'] = citation_md_identifier_code
+        replace['***citation_md_identifier_xml***'] = citation_md_identifier_xml
         replace['***abstract***'] = abstract
         replace['***status***'] = status
         replace['***update_frequency***'] = update_frequency
         replace['***point_of_contact_ci_responsible_party_xml***'] = point_of_contact_ci_responsible_party_xml
         replace['***md_browse_graphic***'] = '%s' % md_browse_graphic
         replace['***keyword_theme_xml***'] = keyword_theme_xml
-        replace['***keyword_stratum_xml***'] = keyword_stratum_xml
+        replace['***keyword_discipline_xml***'] = keyword_discipline_xml
         replace['***keyword_place_xml***'] = keyword_place_xml
         replace['***access_constraints***'] = access_constraints
         replace['***use_constraints***'] = use_constraints
@@ -530,6 +517,7 @@ def bake_xml(dataset_id, version, template, output):
         # close files
         open_file.close
         write_file.close
+        print(layer_id)
 
 
     # close database connection
@@ -537,102 +525,17 @@ def bake_xml(dataset_id, version, template, output):
     return
 
 
-def dataset_version():
-    what = input('''\nAll datasets (1)
-Specific dataset (2)
-Specific dataset & version (3):
-''')
-    
-    print('\n')
-    count = 0
-    if what == '1':
-        # All datasets
-        sql = ''' SELECT dataset_id, version 
-                  FROM metadata.version
-                  ORDER BY dataset_id, version
-                  --LIMIT 500
-              '''
-        cur.execute(sql)
-        rows = cur.fetchall()
-        for row in rows:
-            dataset_id = row[0]
-            version   = row[1]
-            count = count + 1
-            print(count,'\t',dataset_id)
-            
-            # create xml
-            bake_xml(dataset_id, version, template, output)
-    
-    
-    if what == '2':
-        # Specific dataset
-        sql = ''' SELECT dataset_id
-                  FROM metadata.version
-                  ORDER BY dataset_id
-              '''
-        cur.execute(sql)
-        rows = cur.fetchall()
-        for row in rows:
-            dataset_id = row[0]
-            print(dataset_id)
-        dataset_id = input('\nDataset: ')
-        sql = f''' SELECT dataset_id, version 
-                  FROM metadata.version
-                  WHERE dataset_id='{dataset_id}' 
-                  ORDER BY dataset_id, version
-              '''
-        cur.execute(sql)
-        rows = cur.fetchall()
-        for row in rows:
-            dataset_id = row[0]
-            version   = row[1]
-            print(dataset_id, version)
-            
-            # create xml
-            bake_xml(dataset_id, version, template, output)
-        
-    
-    if what == '3':
-        # Specific dataset & version
-        sql = ''' SELECT dataset_id 
-                  FROM metadata.dataset
-                  ORDER BY dataset_id
-              '''
-        cur.execute(sql)
-        rows = cur.fetchall()
-        for row in rows:
-            dataset_id = row[0]
-            print(dataset_id)
-        dataset_id = input('\nDataset: ')
-    
-    
-        # choose version
-        sql = f''' SELECT version 
-                  FROM metadata.version
-                  WHERE dataset_id='{dataset_id}' 
-                  ORDER BY version
-              '''
-        cur.execute(sql)
-        rows = cur.fetchall()
-        for row in rows:
-            version = row[0]
-            print(version)
-        version = input('\nVersion: ')
-        
-        # create xml
-        bake_xml(dataset_id, version, template, output)
-
-
-# variables
-template='/home/carva014/Work/Code/FAO/glosis-db/Metadata/template.xml'
-output='/home/carva014/Work/Code/FAO/glosis-db/Metadata/output'
-
 # open db connection
 conn = psycopg2.connect("host='localhost' port='5432' dbname='iso19139' user='glosis'")
 cur = conn.cursor()
 
+
 # run function
-dataset_version()
+template='/home/carva014/Work/Code/FAO/glosis-db/Metadata/template.xml'
+output='/home/carva014/Work/Code/FAO/glosis-db/Metadata/output'
+project_id='Soil Properties'
+bake_xml(project_id, template, output)
+
 
 # close db connection
 conn.commit()
