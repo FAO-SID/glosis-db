@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gmd:MD_Metadata xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:srv="http://www.isotc211.org/2005/srv" xmlns:gmx="http://www.isotc211.org/2005/gmx" xmlns:gts="http://www.isotc211.org/2005/gts" xmlns:gsr="http://www.isotc211.org/2005/gsr" xmlns:gmi="http://www.isotc211.org/2005/gmi" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:geonet="http://www.fao.org/geonetwork" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.isotc211.org/2005/gmd http://schemas.opengis.net/csw/2.0.2/profiles/apiso/1.0.0/apiso.xsd">
   <gmd:fileIdentifier>
-    <gco:CharacterString>af33d110-e4af-11ef-9255-4532dc11e953</gco:CharacterString>
+    <gco:CharacterString>f9945242-e540-11ef-983f-d59a95547d5a</gco:CharacterString>
   </gmd:fileIdentifier>
   <gmd:language>
     <gmd:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/" codeListValue="eng" />
@@ -92,7 +92,7 @@
       <gmd:citation>
         <gmd:CI_Citation>
           <gmd:title>
-            <gco:CharacterString>Soil available Phosphorus (Philippines - 30 to 60 cm - 250 m)</gco:CharacterString>
+            <gco:CharacterString>Soil available Phosphorus (Philippines - 0 to 30 cm – 250 m)</gco:CharacterString>
           </gmd:title>
           <gmd:date>
             <gmd:CI_Date>
@@ -117,7 +117,7 @@
           <gmd:identifier>
            <gmd:MD_Identifier>
             <gmd:code>
-             <gco:CharacterString>af33d110-e4af-11ef-9255-4532dc11e953</gco:CharacterString>
+             <gco:CharacterString>f9945242-e540-11ef-983f-d59a95547d5a</gco:CharacterString>
             </gmd:code>
             <gmd:codeSpace>
              <gco:CharacterString>uuid</gco:CharacterString>
@@ -127,8 +127,8 @@
         </gmd:CI_Citation>
       </gmd:citation>
       <gmd:abstract>
-        <gco:CharacterString>Soil available phosphorus value derived from soil samples collected from 30-60 cm depth
-range derived = 3.64-30.63</gco:CharacterString>
+        <gco:CharacterString>Soil available phosphorus value derived from soil samples collected from 0-30 cm depth
+range derived = 6.53-35.50</gco:CharacterString>
       </gmd:abstract>
       <gmd:status>
         <gmd:MD_ProgressCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#MD_ProgressCode" codeListValue="completed" />
@@ -212,7 +212,7 @@ range derived = 3.64-30.63</gco:CharacterString>
       <gmd:descriptiveKeywords>
         <gmd:MD_Keywords>
           <gmd:keyword>
-            <gco:CharacterString>Soil Science</gco:CharacterString>
+            <gco:CharacterString>soil</gco:CharacterString>
           </gmd:keyword>
           <gmd:type>
             <gmd:MD_KeywordTypeCode codeList="http://www.isotc211.org/2005/resources/codeList.xml#MD_KeywordTypeCode" codeListValue="discipline" />
@@ -346,7 +346,7 @@ range derived = 3.64-30.63</gco:CharacterString>
       <gmd:lineage>
         <gmd:LI_Lineage>
           <gmd:statement>
-            <gco:CharacterString>say something abot the software or methods used. Or point to a website where this is dicribed</gco:CharacterString>
+            <gco:CharacterString>UNKNOWN</gco:CharacterString>
           </gmd:statement>
         </gmd:LI_Lineage>
       </gmd:lineage>

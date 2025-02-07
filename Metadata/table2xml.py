@@ -148,10 +148,26 @@ def bake_xml(project_id, template, output):
           </gmd:edition>'''
 
 
-        # citation_md_identifier
-        citation_md_identifier_xml = ''
+        # citation_md_identifier uuid
+        citation_md_identifier_uuid_xml = ''
+        if file_identifier != 'UNKNOWN':
+            citation_md_identifier_uuid_xml = f'''
+          <gmd:identifier>
+           <gmd:MD_Identifier>
+            <gmd:code>
+             <gco:CharacterString>{file_identifier}</gco:CharacterString>
+            </gmd:code>
+            <gmd:codeSpace>
+             <gco:CharacterString>uuid</gco:CharacterString>
+            </gmd:codeSpace>
+           </gmd:MD_Identifier>
+          </gmd:identifier>'''
+
+
+        # citation_md_identifier doi
+        citation_md_identifier_doi_xml = ''
         if citation_md_identifier_code != 'UNKNOWN':
-            citation_md_identifier_xml = f'''
+            citation_md_identifier_doi_xml = f'''
           <gmd:identifier>
            <gmd:MD_Identifier>
             <gmd:code>
@@ -186,8 +202,8 @@ def bake_xml(project_id, template, output):
             <gco:CharacterString>{k}</gco:CharacterString>
           </gmd:keyword>'''
             keyword_discipline_xml = keyword_discipline_xml + keyword_discipline_part
-        
-        
+
+
         # keyword_place, must be seperated by coma
         keyword_place_xml = ''
         # if keyword_place != 'UNKNOWN':
@@ -216,7 +232,7 @@ def bake_xml(project_id, template, output):
             </gmd:MD_RepresentativeFraction>
           </gmd:equivalentScale>'''
 
-        
+
         # topic_category, must be seperated by coma
         topic_category_xml = ''
         # if topic_category != 'UNKNOWN':
@@ -479,7 +495,8 @@ def bake_xml(project_id, template, output):
         replace['***creation_date***'] = creation_date
         replace['***publication_date***'] = publication_date
         replace['***edition_xml***'] = edition_xml
-        replace['***citation_md_identifier_xml***'] = citation_md_identifier_xml
+        replace['***citation_md_identifier_uuid_xml***'] = citation_md_identifier_uuid_xml
+        replace['***citation_md_identifier_doi_xml***'] = citation_md_identifier_doi_xml
         replace['***abstract***'] = abstract
         replace['***status***'] = status
         replace['***update_frequency***'] = update_frequency
@@ -510,7 +527,7 @@ def bake_xml(project_id, template, output):
         # replace string
         open_file = open(template, 'r')
         read_file = open_file.read()
-        write_file = open(output+'/%s.xml' % file_identifier,'w')
+        write_file = open(output+'/%s.xml' % layer_id,'w')
         write_file.write(multireplace(read_file, replace))
 
         

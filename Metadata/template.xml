@@ -61,7 +61,7 @@
                 <gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
               </gmd:dateType>
             </gmd:CI_Date>
-          </gmd:date>***edition_xml******citation_md_identifier_xml***
+          </gmd:date>***edition_xml******citation_md_identifier_uuid_xml******citation_md_identifier_doi_xml***
         </gmd:CI_Citation>
       </gmd:citation>
       <gmd:abstract>

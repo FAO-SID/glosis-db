@@ -1,0 +1,147 @@
+MAP
+  NAME "LGN2021_mskbrp"
+  EXTENT -40000 300000 300000 650000
+  UNITS METERS
+  SHAPEPATH "./"
+  SIZE 800 600
+  IMAGETYPE "PNG24"
+  PROJECTION
+      "init=epsg:28992"
+  END # PROJECTION
+  WEB
+      METADATA
+          "ows_title" "LGN web-service" 
+          "ows_enable_request" "*" 
+          "ows_srs" "EPSG:4326 EPSG:28992 EPSG:3857"
+          "ows_getfeatureinfo_formatlist" "text/plain,text/html,application/json,geojson,application/vnd.ogc.gml,gml"
+		  "wms_feature_info_mime_type" "text/plain,text/html"
+      END # METADATA
+  END # WEB
+  LAYER
+      TEMPLATE "getfeatureinfo_template.tmpl"
+      NAME "LGN2021_mskbrp"
+      DATA "LGN2021_mskbrp.tif"
+      TYPE RASTER
+      STATUS ON
+      CLASS
+          NAME "1 - agrarisch gras"
+          EXPRESSION "1"
+          STYLE
+              COLOR "#73df1f"
+			  OPACITY 100
+          END # STYLE
+      END # CLASS
+      CLASS
+          NAME "2 - maïs"
+          EXPRESSION "2"
+          STYLE
+              COLOR "#e89919"
+			  OPACITY 100
+          END # STYLE
+      END # CLASS
+      CLASS
+          NAME "3 - aardappelen"
+          EXPRESSION "3"
+          STYLE
+              COLOR "#b26600"
+			  OPACITY 100
+          END # STYLE
+      END # CLASS
+      CLASS
+          NAME "4 - bieten"
+          EXPRESSION "4"
+          STYLE
+              COLOR "#e51f7f"
+			  OPACITY 100
+          END # STYLE
+      END # CLASS
+      CLASS
+          NAME "5 - granen"
+          EXPRESSION "5"
+          STYLE
+              COLOR "#ffff00"
+			  OPACITY 100
+          END # STYLE
+      END # CLASS
+      CLASS
+          NAME "6 - overige landbouwgewassen"
+          EXPRESSION "6"
+          STYLE
+              COLOR "#ff00c5"
+			  OPACITY 100
+          END # STYLE
+      END # CLASS
+      CLASS
+          NAME "9 - boomgaarden"
+          EXPRESSION "9"
+          STYLE
+              COLOR "#3cef45"
+			  OPACITY 100
+          END # STYLE
+      END # CLASS
+      CLASS
+          NAME "10 - bloembollen"
+          EXPRESSION "10"
+          STYLE
+              COLOR "#ac81a8"
+			  OPACITY 100
+          END # STYLE
+      END # CLASS
+      CLASS
+          NAME "11 - loofbos"
+          EXPRESSION "11"
+          STYLE
+              COLOR "#33c800"
+			  OPACITY 100
+          END # STYLE
+      END # CLASS
+      CLASS
+          NAME "16 - zoet water"
+          EXPRESSION "16"
+          STYLE
+              COLOR "#2473ff"
+			  OPACITY 100
+          END # STYLE
+      END # CLASS
+      CLASS
+          NAME "42 - rietvegetatie"
+          EXPRESSION "42"
+          STYLE
+              COLOR "#ffa500"
+			  OPACITY 100
+          END # STYLE
+      END # CLASS
+      CLASS
+          NAME "45 - natuurgraslanden"
+          EXPRESSION "45"
+          STYLE
+              COLOR "#b6b639"
+			  OPACITY 100
+          END # STYLE
+      END # CLASS
+      CLASS
+          NAME "61 - boomkwekerijen"
+          EXPRESSION "61"
+          STYLE
+              COLOR "#ffb3a8"
+			  OPACITY 100
+          END # STYLE
+      END # CLASS
+      CLASS
+          NAME "62 - fruitkwekerijen"
+          EXPRESSION "62"
+          STYLE
+              COLOR "#e3ff70"
+			  OPACITY 100
+          END # STYLE
+      END # CLASS
+      CLASS
+          NAME "451 - natuurgraslanden"
+          EXPRESSION "451"
+          STYLE
+              COLOR "#b6b639"
+			  OPACITY 100
+          END # STYLE
+      END # CLASS
+  END # LAYER
+END # MAP
