@@ -50,7 +50,7 @@ def bake_xml(project_id, template, output):
         mapset_id = row[0]
     
         # read metadata from table metadata.mapset
-        sql = f'''SELECT dimension_des, 
+        sql = f'''SELECT parent_identifier, 
                         parent_identifier,
                         file_identifier,
                         language_code, 
@@ -96,7 +96,7 @@ def bake_xml(project_id, template, output):
         cur.execute(sql)
         row = cur.fetchone()
 
-        dimension_des = 'UNKNOWN' if row[0] == None else str(row[0])
+        parent_identifier = 'UNKNOWN' if row[0] == None else str(row[0])
         parent_identifier = 'UNKNOWN' if row[1] == None else str(row[1])
         file_identifier = 'UNKNOWN' if row[2] == None else str(row[2])
         language_code = 'UNKNOWN' if row[3] == None else str(row[3])
@@ -548,8 +548,9 @@ cur = conn.cursor()
 # run function
 template='/home/carva014/Work/Code/FAO/glosis-db/Metadata/template.xml'
 output='/home/carva014/Work/Code/FAO/glosis-db/Metadata/output'
-project_id='SOILP'
-bake_xml(project_id, template, output)
+bake_xml('GSAS', template, output)
+bake_xml('GSOCS', template, output)
+bake_xml('SOILP', template, output)
 
 
 # close db connection

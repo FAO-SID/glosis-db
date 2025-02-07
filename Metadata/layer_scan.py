@@ -26,11 +26,7 @@ def convert_size(size_bytes):
    s = round(size_bytes / p, 2)
    return "%s %s" % (s, size_name[i])
 
-def spatial_data_scan(project_id, project_name, rootdir):
-
-    # insert project
-    sql = f"INSERT INTO metadata.project(project_id, project_name) VALUES('{project_id}','{project_name}') ON CONFLICT (project_id) DO NOTHING"
-    cur.execute(sql)
+def spatial_data_scan(rootdir):
 
     # iterate files
     for subdir, dirs, files in os.walk(rootdir):
@@ -43,6 +39,7 @@ def spatial_data_scan(project_id, project_name, rootdir):
             # get path
             file_name = str(file)
             layer_id = file_name[:-4]
+            project_id = layer_id.split('-')[1]
             mapset_id = '-'.join(layer_id.split('-')[:4])
             file_path = str(subdir)
             path = os.path.join(subdir, file)
@@ -54,6 +51,10 @@ def spatial_data_scan(project_id, project_name, rootdir):
             file_extension   = os.path.splitext(file)[-1].lstrip('.').lower()
 
             if os.path.splitext(file)[-1].lstrip('.').lower() in ['asc', 'ecw', 'grb', 'rb2', 'hdf', 'jpg', 'nc', 'tif']:
+
+                # insert project
+                sql = f"INSERT INTO metadata.project(project_id) VALUES('{project_id}') ON CONFLICT (project_id) DO NOTHING"
+                cur.execute(sql)
 
                 # insert mapset and layer
                 print (file_name)
@@ -138,12 +139,11 @@ conn = psycopg2.connect("host='localhost' port='5432' dbname='iso19139' user='gl
 cur = conn.cursor()
 
 # run function
-project_id = 'SOILP'
-project_name = 'Digital Soil Mapping Activity on Soil Properties in 2024'
-rootdir = '/home/carva014/Downloads/FAO/SIS/PH/Original/SOILP/'
-layer_manual_metadata = '/home/carva014/Downloads/FAO/SIS/PH/Original/SOILP/metadata.xlsx - metadata.tsv'
+rootdir = '/home/carva014/Downloads/FAO/SIS/PH/Processed'
+layer_manual_metadata = '/home/carva014/Downloads/FAO/SIS/PH/metadata.xlsx - metadata.tsv'
 
-spatial_data_scan(project_id, project_name, rootdir)
+spatial_data_scan(rootdir)
+
 sql = """UPDATE metadata.layer SET compression = NULL WHERE compression='None';
          UPDATE metadata.layer SET stats_mean = NULL WHERE stats_mean=-123456789;
          UPDATE metadata.layer SET stats_std_dev = NULL WHERE stats_std_dev=-123456789;
@@ -154,9 +154,6 @@ if len(layer_manual_metadata) > 1:
     cur.execute(sql)
     with open(layer_manual_metadata, "r") as file:
         cur.copy_expert("COPY metadata.layer_manual_metadata FROM STDIN WITH DELIMITER E'\t' CSV HEADER", file)
-
-    sql = "UPDATE metadata.layer_manual_metadata SET layer_id = split_part(layer_id,'.',1)"
-    cur.execute(sql)
     
     # update table mapset with scann GeoTIFFs
     sql = """UPDATE metadata.mapset mp
@@ -177,7 +174,7 @@ if len(layer_manual_metadata) > 1:
                 creation_date = m.creation_date::date,
                 revision_date = m.revision_date::date,
                 publication_date = m.publication_date::date,
-                abstract = m.abstract || '\n' || m.to_drop,
+                abstract = m.abstract,
                 keyword_theme = m.keyword_theme,
                 keyword_place = m.keyword_place,
                 update_frequency = m.update_frequency,

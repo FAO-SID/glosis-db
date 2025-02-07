@@ -398,15 +398,15 @@ CREATE TABLE metadata.mapset (
   qml text,
   sld text,
   xml text,
-  CONSTRAINT version_status_check CHECK ((dimension = ANY (ARRAY['depth'::text, 'time'::text]))),
-  CONSTRAINT layer_citation_md_identifier_code_space_check CHECK ((citation_md_identifier_code_space = ANY (ARRAY['doi', 'uuid']))),
-  CONSTRAINT layer_status_check CHECK ((status = ANY (ARRAY['completed', 'historicalArchive', 'obsolete', 'onGoing', 'planned', 'required', 'underDevelopment']))),
-  CONSTRAINT layer_update_frequency_check CHECK ((update_frequency = ANY (ARRAY['continual', 'daily', 'weekly', 'fortnightly', 'monthly', 'quarterly', 'biannually','annually','asNeeded','irregular','notPlanned','unknown']))),
-  CONSTRAINT layer_access_constraints_check CHECK ((access_constraints = ANY (ARRAY['copyright', 'patent', 'patentPending', 'trademark', 'license', 'intellectualPropertyRights', 'restricted','otherRestrictions']))),
-  CONSTRAINT layer_use_constraints_check CHECK ((use_constraints = ANY (ARRAY['copyright', 'patent', 'patentPending', 'trademark', 'license', 'intellectualPropertyRights', 'restricted','otherRestrictions']))),
-  CONSTRAINT layer_spatial_representation_type_code_check CHECK ((spatial_representation_type_code = ANY (ARRAY['grid', 'vector', 'textTable', 'tin', 'stereoModel', 'video']))),
-  CONSTRAINT layer_presentation_form_check CHECK ((presentation_form = ANY (ARRAY['mapDigital', 'tableDigital', 'mapHardcopy', 'atlasHardcopy']))),
-  CONSTRAINT layer_distance_uom_check CHECK ((distance_uom = ANY (ARRAY['m', 'km', 'deg'])))
+  CONSTRAINT mapset_dimension_check CHECK ((dimension = ANY (ARRAY['depth'::text, 'time'::text]))),
+  CONSTRAINT mapset_citation_md_identifier_code_space_check CHECK ((citation_md_identifier_code_space = ANY (ARRAY['doi', 'uuid']))),
+  CONSTRAINT mapset_status_check CHECK ((status = ANY (ARRAY['completed', 'historicalArchive', 'obsolete', 'onGoing', 'planned', 'required', 'underDevelopment']))),
+  CONSTRAINT mapset_update_frequency_check CHECK ((update_frequency = ANY (ARRAY['continual', 'daily', 'weekly', 'fortnightly', 'monthly', 'quarterly', 'biannually','annually','asNeeded','irregular','notPlanned','unknown']))),
+  CONSTRAINT mapset_access_constraints_check CHECK ((access_constraints = ANY (ARRAY['copyright', 'patent', 'patentPending', 'trademark', 'license', 'intellectualPropertyRights', 'restricted','otherRestrictions']))),
+  CONSTRAINT mapset_use_constraints_check CHECK ((use_constraints = ANY (ARRAY['copyright', 'patent', 'patentPending', 'trademark', 'license', 'intellectualPropertyRights', 'restricted','otherRestrictions']))),
+  CONSTRAINT mapset_spatial_representation_type_code_check CHECK ((spatial_representation_type_code = ANY (ARRAY['grid', 'vector', 'textTable', 'tin', 'stereoModel', 'video']))),
+  CONSTRAINT mapset_presentation_form_check CHECK ((presentation_form = ANY (ARRAY['mapDigital', 'tableDigital', 'mapHardcopy', 'atlasHardcopy']))),
+  CONSTRAINT mapset_distance_uom_check CHECK ((distance_uom = ANY (ARRAY['m', 'km', 'deg'])))
 );
 ALTER TABLE metadata.mapset OWNER TO glosis;
 GRANT SELECT ON TABLE metadata.mapset TO glosis_r;
@@ -506,8 +506,8 @@ CREATE TABLE metadata.ver_x_org_x_ind (
   position text,
   organisation_id text NOT NULL,
   individual_id text
-  CONSTRAINT contact_tag_check CHECK ((tag = ANY (ARRAY['contact', 'pointOfContact'])))
-  CONSTRAINT contact_role_check CHECK ((role = ANY (ARRAY['author', 'custodian', 'distributor', 'originator', 'owner', 'pointOfContact', 'principalInvestigator', 'processor', 'publisher', 'resourceProvider', 'user'])))
+  CONSTRAINT ver_x_org_x_ind_tag_check CHECK ((tag = ANY (ARRAY['contact', 'pointOfContact'])))
+  CONSTRAINT ver_x_org_x_ind_role_check CHECK ((role = ANY (ARRAY['author', 'custodian', 'distributor', 'originator', 'owner', 'pointOfContact', 'principalInvestigator', 'processor', 'publisher', 'resourceProvider', 'user'])))
 );
 ALTER TABLE metadata.ver_x_org_x_ind OWNER TO glosis;
 GRANT SELECT ON TABLE metadata.ver_x_org_x_ind TO glosis_r;
@@ -557,7 +557,7 @@ ALTER TABLE metadata.project ADD PRIMARY KEY (project_id);
 ALTER TABLE metadata.mapset ADD PRIMARY KEY (mapset_id);
 ALTER TABLE metadata.mapset ADD UNIQUE (file_identifier);
 ALTER TABLE metadata.layer ADD PRIMARY KEY (layer_id);
-ALTER TABLE metadata.layer_manual_metadata ADD PRIMARY KEY (layer_id);
+ALTER TABLE metadata.layer_manual_metadata ADD PRIMARY KEY (mapset_id);
 ALTER TABLE metadata.layer_category ADD PRIMARY KEY (mapset_id, value);
 ALTER TABLE metadata.ver_x_org_x_ind ADD PRIMARY KEY (mapset_id, tag, role, position, organisation_id, individual_id);
 ALTER TABLE metadata.organisation ADD PRIMARY KEY (organisation_id);
