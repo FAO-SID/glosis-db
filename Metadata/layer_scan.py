@@ -42,6 +42,8 @@ def spatial_data_scan(project_id, project_name, rootdir):
 
             # get path
             file_name = str(file)
+            layer_id = file_name[:-4]
+            mapset_id = '-'.join(layer_id.split('-')[:4])
             file_path = str(subdir)
             path = os.path.join(subdir, file)
 
@@ -55,11 +57,9 @@ def spatial_data_scan(project_id, project_name, rootdir):
 
                 # insert mapset and layer
                 print (file_name)
-                sql = f"DELETE FROM metadata.mapset WHERE mapset_id='{file_name[:-4]}'"
+                sql = f"INSERT INTO metadata.mapset(mapset_id, project_id) VALUES('{mapset_id}', '{project_id}') ON CONFLICT (mapset_id) DO NOTHING"
                 cur.execute(sql)
-                sql = f"INSERT INTO metadata.mapset(mapset_id, project_id, agg_by) VALUES('{file_name[:-4]}', '{project_id}', 'depth')"
-                cur.execute(sql)
-                sql = f"INSERT INTO metadata.layer(mapset_id, file_path, layer_id, file_extension, file_size, file_size_pretty) VALUES('{file_name[:-4]}','{file_path}','{file_name[:-4]}','{file_extension}','{file_size}','{file_size_pretty}')"
+                sql = f"INSERT INTO metadata.layer(mapset_id, file_path, layer_id, file_extension, file_size, file_size_pretty) VALUES('{mapset_id}','{file_path}','{layer_id}','{file_extension}','{file_size}','{file_size_pretty}')"
                 cur.execute(sql)
 
                 # open file with GDAL
@@ -122,12 +122,12 @@ def spatial_data_scan(project_id, project_name, rootdir):
 
                     # insert text data
                     for key, value in dic_gdal_text.items():
-                        sql = f"UPDATE metadata.layer SET {key} = '{value}' WHERE layer_id = '{file_name[:-4]}' AND file_path = '{file_path}'"
+                        sql = f"UPDATE metadata.layer SET {key} = '{value}' WHERE layer_id = '{layer_id}' AND file_path = '{file_path}'"
                         cur.execute(sql)
 
                     # insert num data
                     for key, value in dic_gdal_num.items():
-                        sql = f"UPDATE metadata.layer SET {key} = {value} WHERE layer_id = '{file_name[:-4]}' AND file_path = '{file_path}'"
+                        sql = f"UPDATE metadata.layer SET {key} = {value} WHERE layer_id = '{layer_id}' AND file_path = '{file_path}'"
                         cur.execute(sql)
 
             # commit changes in the DB per file
@@ -138,7 +138,7 @@ conn = psycopg2.connect("host='localhost' port='5432' dbname='iso19139' user='gl
 cur = conn.cursor()
 
 # run function
-project_id = 'Soil Properties'
+project_id = 'SOILP'
 project_name = 'Digital Soil Mapping Activity on Soil Properties in 2024'
 rootdir = '/home/carva014/Downloads/FAO/SIS/PH/Original/SOILP/'
 layer_manual_metadata = '/home/carva014/Downloads/FAO/SIS/PH/Original/SOILP/metadata.xlsx - metadata.tsv'
@@ -158,13 +158,25 @@ if len(layer_manual_metadata) > 1:
     sql = "UPDATE metadata.layer_manual_metadata SET layer_id = split_part(layer_id,'.',1)"
     cur.execute(sql)
     
-    sql = """UPDATE metadata.layer l
-            SET note = m.note,
-                title = m.title,
+    # update table mapset with scann GeoTIFFs
+    sql = """UPDATE metadata.mapset mp
+            SET reference_system_identifier_code = l.reference_system_identifier_code,
+                distance = l.distance,
+                west_bound_longitude = l.west_bound_longitude,
+                east_bound_longitude = l.east_bound_longitude,
+                south_bound_latitude = l.south_bound_latitude,
+                north_bound_latitude = l.north_bound_latitude,
+                distribution_format = l.distribution_format
+            FROM metadata.layer l
+            WHERE mp.mapset_id = l.mapset_id"""
+    cur.execute(sql)
+
+    # update table mapset with manual metadata
+    sql = """UPDATE metadata.mapset mp
+            SET title = m.title,
                 creation_date = m.creation_date::date,
                 revision_date = m.revision_date::date,
                 publication_date = m.publication_date::date,
-                citation_md_identifier_code = m.citation_md_identifier_code,
                 abstract = m.abstract || '\n' || m.to_drop,
                 keyword_theme = m.keyword_theme,
                 keyword_place = m.keyword_place,
@@ -175,20 +187,12 @@ if len(layer_manual_metadata) > 1:
                 distance_uom = m.distance_uom,
                 time_period_begin = m.time_period_begin::date,
                 time_period_end = m.time_period_end::date,
+                citation_md_identifier_code = m.citation_md_identifier_code,
                 lineage_statement = m.lineage_statement
             FROM metadata.layer_manual_metadata m
-            WHERE l.layer_id = m.layer_id"""
+            WHERE mp.mapset_id = m.mapset_id"""
     cur.execute(sql)
 
-    # unique mapset_id
-    sql = "UPDATE metadata.mapset SET mapset_id = substring(mapset_id,0,14) || split_part(mapset_id,'-',6) WHERE mapset_id ILIKE '%0-30%'"
-    cur.execute(sql)
-    sql = "UPDATE metadata.layer SET mapset_id = substring(mapset_id,0,14) || split_part(mapset_id,'-',6) WHERE mapset_id ILIKE '%30-60%'"
-    cur.execute(sql)
-    sql = "DELETE FROM metadata.mapset WHERE mapset_id NOT IN (SELECT mapset_id FROM metadata.layer)"
-    cur.execute(sql)
-    sql = "DELETE FROM metadata.project WHERE project_id NOT IN (SELECT project_id FROM metadata.mapset)"
-    cur.execute(sql)
 
     # insert organisation
     sql = """INSERT INTO metadata.organisation (organisation_id, url, email, country, city, postal_code, delivery_point)
@@ -205,15 +209,15 @@ if len(layer_manual_metadata) > 1:
     cur.execute(sql)
 
     # insert ver_x_org_x_ind
-    sql = """INSERT INTO metadata.ver_x_org_x_ind (layer_id, tag, "role", "position", organisation_id, individual_id)
-            SELECT DISTINCT l.layer_id, 'contact', 'resourceProvider', m.position, m.organisation_id, m.individual_id
+    sql = """INSERT INTO metadata.ver_x_org_x_ind (mapset_id, tag, "role", "position", organisation_id, individual_id)
+            SELECT DISTINCT l.mapset_id, 'contact', 'resourceProvider', m.position, m.organisation_id, m.individual_id
             FROM metadata.layer l
-            LEFT JOIN metadata.layer_manual_metadata m ON  m.layer_id = l.layer_id
+            LEFT JOIN metadata.layer_manual_metadata m ON  m.mapset_id = l.mapset_id
                 UNION
-            SELECT DISTINCT l.layer_id, 'pointOfContact', 'author', m.position, m.organisation_id, m.individual_id
+            SELECT DISTINCT l.mapset_id, 'pointOfContact', 'author', m.position, m.organisation_id, m.individual_id
             FROM metadata.layer l
-            LEFT JOIN metadata.layer_manual_metadata m ON  m.layer_id = l.layer_id
-            ON CONFLICT (layer_id, tag, role, "position", organisation_id, individual_id) DO NOTHING"""
+            LEFT JOIN metadata.layer_manual_metadata m ON  m.mapset_id = l.mapset_id
+            ON CONFLICT (mapset_id, tag, role, "position", organisation_id, individual_id) DO NOTHING"""
     cur.execute(sql)
 
 # close db connection

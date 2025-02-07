@@ -37,20 +37,20 @@ def bake_xml(project_id, template, output):
     
     
     # iterate variables
-    sql = f'''SELECT l.layer_id
+    sql = f'''SELECT l.mapset_id
               FROM metadata.project p
               LEFT JOIN metadata.mapset m ON m.project_id = p.project_id 
-              LEFT JOIN metadata.layer l ON l.mapset_id = m.mapset_id 
+              LEFT JOIN metadata.mapset l ON l.mapset_id = m.mapset_id 
               WHERE p.project_id = '{project_id}'
-              ORDER BY l.layer_id
+              ORDER BY l.mapset_id
           '''
     cur.execute(sql)
     rows = cur.fetchall()
     for row in rows:
-        layer_id = row[0]
+        mapset_id = row[0]
     
-        # read metadata from table metadata.layer
-        sql = f'''SELECT file_path, 
+        # read metadata from table metadata.mapset
+        sql = f'''SELECT dimension_des, 
                         parent_identifier,
                         file_identifier,
                         language_code, 
@@ -91,12 +91,12 @@ def bake_xml(project_id, template, output):
                         lineage_statement, 
                         lineage_source_uuidref, 
                         lineage_source_title
-                 FROM metadata.layer 
-                 WHERE layer_id='{layer_id}' '''
+                 FROM metadata.mapset 
+                 WHERE mapset_id='{mapset_id}' '''
         cur.execute(sql)
         row = cur.fetchone()
 
-        file_path = 'UNKNOWN' if row[0] == None else str(row[0])
+        dimension_des = 'UNKNOWN' if row[0] == None else str(row[0])
         parent_identifier = 'UNKNOWN' if row[1] == None else str(row[1])
         file_identifier = 'UNKNOWN' if row[2] == None else str(row[2])
         language_code = 'UNKNOWN' if row[3] == None else str(row[3])
@@ -135,8 +135,6 @@ def bake_xml(project_id, template, output):
         distribution_format = 'UNKNOWN' if row[36] == None else str(row[36])
         scope_code = 'UNKNOWN' if row[37] == None else str(row[37])
         lineage_statement = 'UNKNOWN' if row[38] == None else str(row[38])
-        lineage_source_uuidref = 'UNKNOWN' if row[39] == None else str(row[39])
-        lineage_source_title = 'UNKNOWN' if row[40] == None else str(row[40])
 
 
         # editon
@@ -266,7 +264,7 @@ def bake_xml(project_id, template, output):
                  FROM metadata.ver_x_org_x_ind v
                  LEFT JOIN metadata.organisation o ON o.organisation_id = v.organisation_id
                  LEFT JOIN metadata.individual i ON i.individual_id = v.individual_id
-                 WHERE v.layer_id ='{layer_id}'
+                 WHERE v.mapset_id ='{mapset_id}'
                    AND v.tag = 'contact'
                  ORDER BY i.individual_id'''
         cur.execute(sql)
@@ -362,7 +360,7 @@ def bake_xml(project_id, template, output):
                  FROM metadata.ver_x_org_x_ind v
                  LEFT JOIN metadata.organisation o ON o.organisation_id = v.organisation_id
                  LEFT JOIN metadata.individual i ON i.individual_id = v.individual_id
-                 WHERE v.layer_id ='{layer_id}'
+                 WHERE v.mapset_id ='{mapset_id}'
                    AND v.tag = 'pointOfContact'
                  ORDER BY i.individual_id'''
         cur.execute(sql)
@@ -443,7 +441,7 @@ def bake_xml(project_id, template, output):
         online_resource = ''
         sql = f'''SELECT url, protocol, url_name
                  FROM metadata.url
-                 WHERE layer_id='{layer_id}'
+                 WHERE mapset_id='{mapset_id}'
                    AND protocol IN ('OGC:WMS','OGC:WMTS','WWW:LINK-1.0-http--link', 'WWW:LINK-1.0-http--related')
                  ORDER BY protocol, url'''
         cur.execute(sql)
@@ -527,14 +525,14 @@ def bake_xml(project_id, template, output):
         # replace string
         open_file = open(template, 'r')
         read_file = open_file.read()
-        write_file = open(output+'/%s.xml' % layer_id,'w')
+        write_file = open(output+'/%s.xml' % mapset_id,'w')
         write_file.write(multireplace(read_file, replace))
 
         
         # close files
         open_file.close
         write_file.close
-        print(layer_id)
+        print(mapset_id)
 
 
     # close database connection
@@ -550,7 +548,7 @@ cur = conn.cursor()
 # run function
 template='/home/carva014/Work/Code/FAO/glosis-db/Metadata/template.xml'
 output='/home/carva014/Work/Code/FAO/glosis-db/Metadata/output'
-project_id='Soil Properties'
+project_id='SOILP'
 bake_xml(project_id, template, output)
 
 

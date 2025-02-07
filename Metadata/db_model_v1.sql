@@ -353,7 +353,24 @@ GRANT SELECT ON TABLE metadata.project TO glosis_r;
 CREATE TABLE metadata.mapset (
   project_id text NOT NULL,
   mapset_id text NOT NULL,
-  dimension text DEFAULT 'depth',
+  dimension text,
+  map text,
+  qml text,
+  sld text,
+  xml text,
+  CONSTRAINT version_status_check CHECK ((dimension = ANY (ARRAY['depth'::text, 'time'::text])))
+);
+ALTER TABLE metadata.mapset OWNER TO glosis;
+GRANT SELECT ON TABLE metadata.mapset TO glosis_r;
+
+
+CREATE TABLE metadata.layer (
+  mapset_id text NOT NULL,
+  file_path text NOT NULL,
+  layer_id text NOT NULL,
+  file_extension text,
+  file_size integer,
+  file_size_pretty text,
   parent_identifier uuid,
   file_identifier uuid DEFAULT public.uuid_generate_v1(),
   language_code text DEFAULT 'eng',
@@ -394,41 +411,6 @@ CREATE TABLE metadata.mapset (
   lineage_statement text,
   lineage_source_uuidref text,
   lineage_source_title text,
-  map text,
-  qml text,
-  sld text,
-  xml text,
-  CONSTRAINT version_status_check CHECK ((dimension = ANY (ARRAY['depth'::text, 'time'::text]))),
-  CONSTRAINT layer_citation_md_identifier_code_space_check CHECK ((citation_md_identifier_code_space = ANY (ARRAY['doi', 'uuid']))),
-  CONSTRAINT layer_status_check CHECK ((status = ANY (ARRAY['completed', 'historicalArchive', 'obsolete', 'onGoing', 'planned', 'required', 'underDevelopment']))),
-  CONSTRAINT layer_update_frequency_check CHECK ((update_frequency = ANY (ARRAY['continual', 'daily', 'weekly', 'fortnightly', 'monthly', 'quarterly', 'biannually','annually','asNeeded','irregular','notPlanned','unknown']))),
-  CONSTRAINT layer_access_constraints_check CHECK ((access_constraints = ANY (ARRAY['copyright', 'patent', 'patentPending', 'trademark', 'license', 'intellectualPropertyRights', 'restricted','otherRestrictions']))),
-  CONSTRAINT layer_use_constraints_check CHECK ((use_constraints = ANY (ARRAY['copyright', 'patent', 'patentPending', 'trademark', 'license', 'intellectualPropertyRights', 'restricted','otherRestrictions']))),
-  CONSTRAINT layer_spatial_representation_type_code_check CHECK ((spatial_representation_type_code = ANY (ARRAY['grid', 'vector', 'textTable', 'tin', 'stereoModel', 'video']))),
-  CONSTRAINT layer_presentation_form_check CHECK ((presentation_form = ANY (ARRAY['mapDigital', 'tableDigital', 'mapHardcopy', 'atlasHardcopy']))),
-  CONSTRAINT layer_distance_uom_check CHECK ((distance_uom = ANY (ARRAY['m', 'km', 'deg'])))
-);
-ALTER TABLE metadata.mapset OWNER TO glosis;
-GRANT SELECT ON TABLE metadata.mapset TO glosis_r;
-
-
-CREATE TABLE metadata.layer (
-  mapset_id text NOT NULL,
-  dimension_des text,
-  file_path text NOT NULL,
-  layer_id text NOT NULL,
-  file_extension text,
-  file_size integer,
-  file_size_pretty text,
-  reference_layer boolean DEFAULT FALSE,
-  -- from layer_scan.py
-  reference_system_identifier_code text,
-  distance text,
-  west_bound_longitude numeric(4,1),
-  east_bound_longitude numeric(4,1),
-  south_bound_latitude numeric(4,1),
-  north_bound_latitude numeric(4,1),
-  distribution_format text,
   -- extra metadata
   compression text,
   raster_size_x real,
@@ -446,19 +428,34 @@ CREATE TABLE metadata.layer (
   stats_std_dev real,
   scale text,
   n_bands integer,
-  metadata text[]
+  metadata text[],
+  note text,
+  CONSTRAINT layer_citation_md_identifier_code_space_check CHECK ((citation_md_identifier_code_space = ANY (ARRAY['doi', 'uuid']))),
+  CONSTRAINT layer_status_check CHECK ((status = ANY (ARRAY['completed', 'historicalArchive', 'obsolete', 'onGoing', 'planned', 'required', 'underDevelopment']))),
+  CONSTRAINT layer_update_frequency_check CHECK ((update_frequency = ANY (ARRAY['continual', 'daily', 'weekly', 'fortnightly', 'monthly', 'quarterly', 'biannually','annually','asNeeded','irregular','notPlanned','unknown']))),
+  CONSTRAINT layer_access_constraints_check CHECK ((access_constraints = ANY (ARRAY['copyright', 'patent', 'patentPending', 'trademark', 'license', 'intellectualPropertyRights', 'restricted','otherRestrictions']))),
+  CONSTRAINT layer_use_constraints_check CHECK ((use_constraints = ANY (ARRAY['copyright', 'patent', 'patentPending', 'trademark', 'license', 'intellectualPropertyRights', 'restricted','otherRestrictions']))),
+  CONSTRAINT layer_spatial_representation_type_code_check CHECK ((spatial_representation_type_code = ANY (ARRAY['grid', 'vector', 'textTable', 'tin', 'stereoModel', 'video']))),
+  CONSTRAINT layer_presentation_form_check CHECK ((presentation_form = ANY (ARRAY['mapDigital', 'tableDigital', 'mapHardcopy', 'atlasHardcopy']))),
+  CONSTRAINT layer_distance_uom_check CHECK ((distance_uom = ANY (ARRAY['m', 'km', 'deg'])))
 );
 ALTER TABLE metadata.layer OWNER TO glosis;
 GRANT SELECT ON TABLE metadata.layer TO glosis_r;
 
 
 CREATE TABLE metadata.layer_manual_metadata (
+  note text,
+  project_id text,
+  file_name_source text,
+  layer_id text NOT NULL,
   mapset_id	text,
+  dimension_des text,
   title text,
   creation_date text,
   revision_date text,
   publication_date text,
   abstract text,
+  to_drop text,
   keyword_theme text[],
   keyword_place text[],
   update_frequency text,
@@ -487,7 +484,7 @@ GRANT SELECT ON TABLE metadata.layer_manual_metadata TO glosis_r;
 
 CREATE TABLE IF NOT EXISTS metadata.layer_category
 (   
-  mapset_id text NOT NULL,
+  layer_id text NOT NULL,
   value smallint NOT NULL,
   code text COLLATE pg_catalog."default" NOT NULL,
   label text COLLATE pg_catalog."default" NOT NULL,
@@ -500,7 +497,7 @@ GRANT SELECT ON TABLE metadata.layer_category TO glosis_r;
 
 
 CREATE TABLE metadata.ver_x_org_x_ind (
-  mapset_id text NOT NULL,
+  layer_id text NOT NULL,
   tag text,
   role text,
   position text,
@@ -538,7 +535,7 @@ GRANT SELECT ON TABLE metadata.individual TO glosis_r;
 
 CREATE TABLE metadata.url (
   url_id serial,
-  mapset_id text NOT NULL,
+  layer_id text NOT NULL,
   protocol text,
   url text NOT NULL,
   url_name text,
@@ -555,11 +552,11 @@ GRANT SELECT ON TABLE metadata.url TO glosis_r;
 
 ALTER TABLE metadata.project ADD PRIMARY KEY (project_id);
 ALTER TABLE metadata.mapset ADD PRIMARY KEY (mapset_id);
-ALTER TABLE metadata.mapset ADD UNIQUE (file_identifier);
 ALTER TABLE metadata.layer ADD PRIMARY KEY (layer_id);
+ALTER TABLE metadata.layer ADD UNIQUE (file_identifier);
 ALTER TABLE metadata.layer_manual_metadata ADD PRIMARY KEY (layer_id);
-ALTER TABLE metadata.layer_category ADD PRIMARY KEY (mapset_id, value);
-ALTER TABLE metadata.ver_x_org_x_ind ADD PRIMARY KEY (mapset_id, tag, role, position, organisation_id, individual_id);
+ALTER TABLE metadata.layer_category ADD PRIMARY KEY (layer_id, value);
+ALTER TABLE metadata.ver_x_org_x_ind ADD PRIMARY KEY (layer_id, tag, role, position, organisation_id, individual_id);
 ALTER TABLE metadata.organisation ADD PRIMARY KEY (organisation_id);
 ALTER TABLE metadata.individual ADD PRIMARY KEY (individual_id);
 ALTER TABLE metadata.url ADD PRIMARY KEY (url_id);
@@ -571,9 +568,9 @@ ALTER TABLE metadata.url ADD PRIMARY KEY (url_id);
 
 ALTER TABLE metadata.ver_x_org_x_ind ADD FOREIGN KEY (individual_id) REFERENCES metadata.individual(individual_id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE metadata.ver_x_org_x_ind ADD FOREIGN KEY (organisation_id) REFERENCES metadata.organisation(organisation_id) ON UPDATE CASCADE ON DELETE CASCADE;
-ALTER TABLE metadata.ver_x_org_x_ind ADD FOREIGN KEY (mapset_id) REFERENCES metadata.mapset(mapset_id) ON UPDATE CASCADE ON DELETE CASCADE;
-ALTER TABLE metadata.url ADD FOREIGN KEY (mapset_id) REFERENCES metadata.mapset(mapset_id) ON UPDATE CASCADE ON DELETE CASCADE;
-ALTER TABLE metadata.layer_category ADD FOREIGN KEY (mapset_id) REFERENCES metadata.mapset(mapset_id) ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE metadata.ver_x_org_x_ind ADD FOREIGN KEY (layer_id) REFERENCES metadata.layer(layer_id) ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE metadata.url ADD FOREIGN KEY (layer_id) REFERENCES metadata.layer(layer_id) ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE metadata.layer_category ADD FOREIGN KEY (layer_id) REFERENCES metadata.layer(layer_id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE metadata.layer ADD FOREIGN KEY (mapset_id) REFERENCES metadata.mapset(mapset_id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE metadata.mapset ADD FOREIGN KEY (project_id) REFERENCES metadata.project(project_id) ON UPDATE CASCADE ON DELETE CASCADE;
 
