@@ -226,7 +226,7 @@ def bake_xml(project_id, template, output):
           <gmd:distance>
             <gco:Distance uom="{distance_uom}">{distance}</gco:Distance>
           </gmd:distance>'''
-        if spatial_representation_type_code == 'vector':
+        elif spatial_representation_type_code == 'vector':
             resolution = f'''
           <gmd:equivalentScale>
             <gmd:MD_RepresentativeFraction>
