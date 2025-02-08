@@ -528,11 +528,16 @@ def bake_xml(project_id, template, output):
         replace['***lineage_statement***'] = lineage_statement
         
 
-        # replace string
+        # write xml to file
         open_file = open(template, 'r')
         read_file = open_file.read()
         write_file = open(output+'/%s.xml' % mapset_id,'w')
         write_file.write(multireplace(read_file, replace))
+
+
+        # write xml in db
+        sql = f"UPDATE metadata.mapset SET xml = '{multireplace(read_file, replace)}' WHERE mapset_id = '{mapset_id}'"
+        cur.execute(sql)
 
         
         # close files
