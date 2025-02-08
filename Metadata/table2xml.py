@@ -458,7 +458,7 @@ def bake_xml(project_id, template, output):
             url_name   = row[2]
             if protocol in ('OGC:WMS','OGC:WMTS'):
                 function = 'information'
-            if protocol in ('WWW:LINK-1.0-http--link', 'WWW:LINK-1.0-http--related'):
+            elif protocol in ('WWW:LINK-1.0-http--link', 'WWW:LINK-1.0-http--related'):
                 function = 'download'
             else:
                 function = 'UNKNOWN'

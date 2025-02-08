@@ -220,15 +220,15 @@ if len(layer_manual_metadata) > 1:
 
     # insert url
     sql = """INSERT INTO metadata.url (mapset_id, protocol, url, url_name)
-            SELECT DISTINCT mapset_id, 'link', url_paper, 'Scientific paper' FROM metadata.layer_manual_metadata WHERE url_paper IS NOT NULL
+            SELECT DISTINCT mapset_id, 'WWW:LINK-1.0-http--link', url_paper, 'Scientific paper' FROM metadata.layer_manual_metadata WHERE url_paper IS NOT NULL
                 UNION
-            SELECT DISTINCT mapset_id, 'link', url_project, 'Project webpage' FROM metadata.layer_manual_metadata WHERE url_project IS NOT NULL
+            SELECT DISTINCT mapset_id, 'WWW:LINK-1.0-http--link', url_project, 'Project webpage' FROM metadata.layer_manual_metadata WHERE url_project IS NOT NULL
                 UNION
-            SELECT m.mapset_id, 'link', 'https://storage.googleapis.com/fao-gismgr-glosis-data/DATA/GLOSIS/MAP/'||l.layer_id||'.'||l.file_extension , 'Download '||l.dimension_des 
+            SELECT m.mapset_id, 'WWW:LINK-1.0-http--link', 'https://storage.googleapis.com/fao-gismgr-glosis-data/DATA/GLOSIS/MAP/'||l.layer_id||'.'||l.file_extension , 'Download '||l.dimension_des 
             FROM metadata.layer_manual_metadata m
             LEFT JOIN metadata.layer l ON l.mapset_id = m.mapset_id
                 UNION
-            SELECT mapset_id, 'wms', 'https://data.apps.fao.org/map/wmts/wmts?layer=fao-gismgr/GLOSIS/maps/'||mapset_id||'&tilematrixset=EPSG:900913&Service=WMTS&request=GetCapabilities', 'Web Map Tile Service'
+            SELECT mapset_id, 'OGC:WMTS', 'https://data.apps.fao.org/map/wmts/wmts?layer=fao-gismgr/GLOSIS/maps/'||mapset_id||'&tilematrixset=EPSG:900913&Service=WMTS&request=GetCapabilities', 'Web Map Tile Service'
             FROM metadata.layer_manual_metadata
             ON CONFLICT (mapset_id, protocol, url) DO NOTHING"""
     cur.execute(sql)

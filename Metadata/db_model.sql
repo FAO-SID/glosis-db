@@ -543,7 +543,7 @@ CREATE TABLE metadata.url (
   protocol text NOT NULL,
   url text NOT NULL,
   url_name text NOT NULL
-  CONSTRAINT url_protocol_check CHECK ((protocol = ANY (ARRAY['link', 'ftp', 'wms', 'wcs', 'wfs'])))
+  CONSTRAINT url_protocol_check CHECK ((protocol = ANY (ARRAY['OGC:WMS','OGC:WMTS','WWW:LINK-1.0-http--link', 'WWW:LINK-1.0-http--related'])))
 );
 ALTER TABLE metadata.url OWNER TO glosis;
 GRANT SELECT ON TABLE metadata.url TO glosis_r;
