@@ -238,12 +238,3 @@ if len(layer_manual_metadata) > 1:
 conn.commit()
 cur.close()
 conn.close()
-
-# https://bodemdata.nl/geoserver/gwc/service/wmts?REQUEST=GetCapabilities
-# https://data.apps.fao.org/map/wmts/wmts?layer=fao-gismgr/GLOSIS/maps/PH-SOIL-OC-030&tilematrixset=EPSG:900913&Service=WMTS&request=GetCapabilities
-
-# https://data.apps.fao.org/map/wmts/wmts?layer=fao-gismgr/GSOCSEQ/mapsets/SOCS&tilematrixset=EPSG:900913&Service=WMTS&request=GetTile&Version=1.0.0&Format=image/png&TileMatrix={z}&TileCol={y}&TileRow={x}&layertype=Image
-# https://data.apps.fao.org/map/wmts/wmts?layer=fao-gismgr/GLOSIS/maps/PH-SOIL-OC-030&tilematrixset=EPSG:900913&Service=WMTS&request=GetTile&Version=1.0.0&Format=image/png&TileMatrix={z}&TileCol={y}&TileRow={x}&layertype=Image
-
-# https://console.cloud.google.com/storage/browser/fao-gismgr-gsocseq-data/DATA/GSOCSEQ/MAPSET/SOCS
-# https://storage.googleapis.com/fao-gismgr-glosis-data/DATA/GLOSIS/MAP/GLOSIS.PH-SOIL-PH-030.tif
