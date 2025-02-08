@@ -60,7 +60,8 @@ def spatial_data_scan(rootdir):
                 print (file_name)
                 sql = f"INSERT INTO metadata.mapset(mapset_id, project_id) VALUES('{mapset_id}', '{project_id}') ON CONFLICT (mapset_id) DO NOTHING"
                 cur.execute(sql)
-                sql = f"INSERT INTO metadata.layer(mapset_id, file_path, layer_id, file_extension, file_size, file_size_pretty) VALUES('{mapset_id}','{file_path}','{layer_id}','{file_extension}','{file_size}','{file_size_pretty}')"
+                dimension_des = layer_id.split('-')[4] + ' to ' + layer_id.split('-')[5] + ' cm'
+                sql = f"INSERT INTO metadata.layer(mapset_id, dimension_des, file_path, layer_id, file_extension, file_size, file_size_pretty) VALUES('{mapset_id}', '{dimension_des}','{file_path}','{layer_id}','{file_extension}','{file_size}','{file_size_pretty}')"
                 cur.execute(sql)
 
                 # open file with GDAL
@@ -217,7 +218,32 @@ if len(layer_manual_metadata) > 1:
             ON CONFLICT (mapset_id, tag, role, "position", organisation_id, individual_id) DO NOTHING"""
     cur.execute(sql)
 
+    # insert url
+    sql = """INSERT INTO metadata.url (mapset_id, protocol, url, url_name)
+            SELECT DISTINCT mapset_id, 'link', url_paper, 'Scientific paper' FROM metadata.layer_manual_metadata WHERE url_paper IS NOT NULL
+                UNION
+            SELECT DISTINCT mapset_id, 'link', url_project, 'Project webpage' FROM metadata.layer_manual_metadata WHERE url_project IS NOT NULL
+                UNION
+            SELECT m.mapset_id, 'link', 'https://storage.googleapis.com/fao-gismgr-glosis-data/DATA/GLOSIS/MAP/'||l.layer_id||'.'||l.file_extension , 'Download '||l.dimension_des 
+            FROM metadata.layer_manual_metadata m
+            LEFT JOIN metadata.layer l ON l.mapset_id = m.mapset_id
+                UNION
+            SELECT mapset_id, 'wms', 'https://data.apps.fao.org/map/wmts/wmts?layer=fao-gismgr/GLOSIS/maps/'||mapset_id||'&tilematrixset=EPSG:900913&Service=WMTS&request=GetCapabilities', 'Web Map Tile Service'
+            FROM metadata.layer_manual_metadata
+            ON CONFLICT (mapset_id, protocol, url) DO NOTHING"""
+    cur.execute(sql)
+
+
 # close db connection
 conn.commit()
 cur.close()
 conn.close()
+
+# https://bodemdata.nl/geoserver/gwc/service/wmts?REQUEST=GetCapabilities
+# https://data.apps.fao.org/map/wmts/wmts?layer=fao-gismgr/GLOSIS/maps/PH-SOIL-OC-030&tilematrixset=EPSG:900913&Service=WMTS&request=GetCapabilities
+
+# https://data.apps.fao.org/map/wmts/wmts?layer=fao-gismgr/GSOCSEQ/mapsets/SOCS&tilematrixset=EPSG:900913&Service=WMTS&request=GetTile&Version=1.0.0&Format=image/png&TileMatrix={z}&TileCol={y}&TileRow={x}&layertype=Image
+# https://data.apps.fao.org/map/wmts/wmts?layer=fao-gismgr/GLOSIS/maps/PH-SOIL-OC-030&tilematrixset=EPSG:900913&Service=WMTS&request=GetTile&Version=1.0.0&Format=image/png&TileMatrix={z}&TileCol={y}&TileRow={x}&layertype=Image
+
+# https://console.cloud.google.com/storage/browser/fao-gismgr-gsocseq-data/DATA/GSOCSEQ/MAPSET/SOCS
+# https://storage.googleapis.com/fao-gismgr-glosis-data/DATA/GLOSIS/MAP/GLOSIS.PH-SOIL-PH-030.tif

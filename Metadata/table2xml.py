@@ -182,7 +182,9 @@ def bake_xml(project_id, template, output):
         keyword_theme_xml = ''
         # if keyword_theme != 'UNKNOWN':
         for k in keyword_theme.split(','):
-            k = k.strip("[]'")
+            k = k.strip(" ")
+            k = k.strip("[]")
+            k = k.strip("'")
             keyword_theme_part = f'''
           <gmd:keyword>
             <gco:CharacterString>{k}</gco:CharacterString>
@@ -194,7 +196,9 @@ def bake_xml(project_id, template, output):
         keyword_discipline_xml = ''
         # if keyword_discipline != 'UNKNOWN':
         for k in keyword_discipline.split(','):
-            k = k.strip("[]'")
+            k = k.strip(" ")
+            k = k.strip("[]")
+            k = k.strip("'")
             keyword_discipline_part = f'''
           <gmd:keyword>
             <gco:CharacterString>{k}</gco:CharacterString>
@@ -206,7 +210,9 @@ def bake_xml(project_id, template, output):
         keyword_place_xml = ''
         # if keyword_place != 'UNKNOWN':
         for k in keyword_place.split(','):
-            k = k.strip("[]'")
+            k = k.strip(" ")
+            k = k.strip("[]")
+            k = k.strip("'")
             keyword_place_part = f'''
           <gmd:keyword>
             <gco:CharacterString>{k}</gco:CharacterString>

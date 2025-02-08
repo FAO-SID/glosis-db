@@ -479,7 +479,9 @@ CREATE TABLE metadata.layer_manual_metadata (
   delivery_point text,
   individual_id text,
   email text,
-  position text
+  position text,
+  url_paper text,
+  url_project text
 );
 ALTER TABLE metadata.layer_manual_metadata OWNER TO glosis;
 GRANT SELECT ON TABLE metadata.layer_manual_metadata TO glosis_r;
@@ -537,13 +539,11 @@ GRANT SELECT ON TABLE metadata.individual TO glosis_r;
 
 
 CREATE TABLE metadata.url (
-  url_id serial,
   mapset_id text NOT NULL,
-  protocol text,
+  protocol text NOT NULL,
   url text NOT NULL,
-  url_name text,
-  valid text
-  CONSTRAINT url_protocol_check CHECK ((protocol = ANY (ARRAY['link'::text, 'ftp'::text, 'wms'::text, 'wcs'::text, 'wfs'::text])))
+  url_name text NOT NULL
+  CONSTRAINT url_protocol_check CHECK ((protocol = ANY (ARRAY['link', 'ftp', 'wms', 'wcs', 'wfs'])))
 );
 ALTER TABLE metadata.url OWNER TO glosis;
 GRANT SELECT ON TABLE metadata.url TO glosis_r;
@@ -562,7 +562,7 @@ ALTER TABLE metadata.layer_category ADD PRIMARY KEY (mapset_id, value);
 ALTER TABLE metadata.ver_x_org_x_ind ADD PRIMARY KEY (mapset_id, tag, role, position, organisation_id, individual_id);
 ALTER TABLE metadata.organisation ADD PRIMARY KEY (organisation_id);
 ALTER TABLE metadata.individual ADD PRIMARY KEY (individual_id);
-ALTER TABLE metadata.url ADD PRIMARY KEY (url_id);
+ALTER TABLE metadata.url ADD PRIMARY KEY (mapset_id, protocol, url);
 
 
 --------------------------
