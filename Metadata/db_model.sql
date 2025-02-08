@@ -374,7 +374,7 @@ CREATE TABLE metadata.mapset (
   md_browse_graphic text,
   keyword_theme text[],
   keyword_place text[],
-  keyword_discipline text[] DEFAULT '{soil}'::text[],
+  keyword_discipline text[] DEFAULT '{Soil science}'::text[],
   access_constraints text DEFAULT 'copyright',
   use_constraints text DEFAULT 'license',
   other_constraints text,
