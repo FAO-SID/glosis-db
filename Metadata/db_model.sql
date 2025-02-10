@@ -490,7 +490,7 @@ GRANT SELECT ON TABLE metadata.layer_manual_metadata TO glosis_r;
 CREATE TABLE IF NOT EXISTS metadata.layer_category
 (   
   mapset_id text NOT NULL,
-  value smallint NOT NULL,
+  value real NOT NULL,
   code text COLLATE pg_catalog."default" NOT NULL,
   label text COLLATE pg_catalog."default" NOT NULL,
   color text COLLATE pg_catalog."default" NOT NULL,

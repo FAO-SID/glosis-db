@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gmd:MD_Metadata xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:srv="http://www.isotc211.org/2005/srv" xmlns:gmx="http://www.isotc211.org/2005/gmx" xmlns:gts="http://www.isotc211.org/2005/gts" xmlns:gsr="http://www.isotc211.org/2005/gsr" xmlns:gmi="http://www.isotc211.org/2005/gmi" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:geonet="http://www.fao.org/geonetwork" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.isotc211.org/2005/gmd http://schemas.opengis.net/csw/2.0.2/profiles/apiso/1.0.0/apiso.xsd">
   <gmd:fileIdentifier>
-    <gco:CharacterString>d0c26078-e61c-11ef-8760-233d59b512a6</gco:CharacterString>
+    <gco:CharacterString>6be3314c-e7bf-11ef-9395-c3ccf186267e</gco:CharacterString>
   </gmd:fileIdentifier>
   <gmd:language>
     <gmd:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/" codeListValue="eng" />
@@ -21,7 +21,7 @@
         <gco:CharacterString> Departement of Agriculture - Bureau of Soils and Water Management</gco:CharacterString>
       </gmd:organisationName>
       <gmd:positionName>
-        <gco:CharacterString>Soil Scientist</gco:CharacterString>
+        <gco:CharacterString>Science Research Specialist</gco:CharacterString>
       </gmd:positionName>
       <gmd:contactInfo>
         <gmd:CI_Contact>
@@ -47,7 +47,7 @@
                 <gco:CharacterString />
               </gmd:administrativeArea>
               <gmd:postalCode>
-                <gco:CharacterString>1101</gco:CharacterString>
+                <gco:CharacterString>1128</gco:CharacterString>
               </gmd:postalCode>
               <gmd:country>
                 <gco:CharacterString>Philippines</gco:CharacterString>
@@ -65,7 +65,7 @@
     </gmd:CI_ResponsibleParty>
   </gmd:contact>  
   <gmd:dateStamp>
-    <gco:DateTime>2025-01-09</gco:DateTime>
+    <gco:DateTime>2020-08-01</gco:DateTime>
   </gmd:dateStamp>
   <gmd:metadataStandardName>
     <gco:CharacterString>ISO 19115/19139</gco:CharacterString>
@@ -97,7 +97,7 @@
           <gmd:date>
             <gmd:CI_Date>
               <gmd:date>
-                <gco:Date>2024-12-27</gco:Date>
+                <gco:Date>2020-08-01</gco:Date>
               </gmd:date>
               <gmd:dateType>
                 <gmd:CI_DateTypeCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#CI_DateTypeCode" codeListValue="creation" />
@@ -107,7 +107,7 @@
           <gmd:date>
             <gmd:CI_Date>
               <gmd:date>
-                <gco:Date>2025-01-09</gco:Date>
+                <gco:Date>2020-08-01</gco:Date>
               </gmd:date>
               <gmd:dateType>
                 <gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/ML_gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication" />
@@ -117,7 +117,7 @@
           <gmd:identifier>
            <gmd:MD_Identifier>
             <gmd:code>
-             <gco:CharacterString>d0c26078-e61c-11ef-8760-233d59b512a6</gco:CharacterString>
+             <gco:CharacterString>6be3314c-e7bf-11ef-9395-c3ccf186267e</gco:CharacterString>
             </gmd:code>
             <gmd:codeSpace>
              <gco:CharacterString>uuid</gco:CharacterString>
@@ -141,7 +141,7 @@
                 <gco:CharacterString> Departement of Agriculture - Bureau of Soils and Water Management</gco:CharacterString>
               </gmd:organisationName>
               <gmd:positionName>
-                <gco:CharacterString>Soil Scientist</gco:CharacterString>
+                <gco:CharacterString>Science Research Specialist</gco:CharacterString>
               </gmd:positionName>
               <gmd:contactInfo>
                 <gmd:CI_Contact>
@@ -167,7 +167,7 @@
                         <gco:CharacterString />
                       </gmd:administrativeArea>
                       <gmd:postalCode>
-                        <gco:CharacterString>1101</gco:CharacterString>
+                        <gco:CharacterString>1128</gco:CharacterString>
                       </gmd:postalCode>
                       <gmd:country>
                         <gco:CharacterString>Philippines</gco:CharacterString>
@@ -408,7 +408,7 @@
       <gmd:lineage>
         <gmd:LI_Lineage>
           <gmd:statement>
-            <gco:CharacterString>say something abot the software or methods used. Or point to a website where this is described</gco:CharacterString>
+            <gco:CharacterString>https://doi.org/10.4060/ca9215en</gco:CharacterString>
           </gmd:statement>
         </gmd:LI_Lineage>
       </gmd:lineage>
