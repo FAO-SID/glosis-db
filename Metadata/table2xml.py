@@ -560,8 +560,8 @@ cur = conn.cursor()
 template='/home/carva014/Work/Code/FAO/glosis-db/Metadata/template.xml'
 output='/home/carva014/Work/Code/FAO/glosis-db/Metadata/output'
 bake_xml('GSAS', template, output)
-bake_xml('GSOCS', template, output)
-bake_xml('SOILP', template, output)
+bake_xml('GSOC', template, output)
+bake_xml('GSNM', template, output)
 
 
 # close db connection
