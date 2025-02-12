@@ -186,7 +186,6 @@ if len(layer_manual_metadata) > 1:
             WHERE mp.mapset_id = m.mapset_id"""
     cur.execute(sql)
 
-
     # insert organisation
     sql = """INSERT INTO metadata.organisation (organisation_id, url, email, country, city, postal_code, delivery_point)
             SELECT DISTINCT organisation_id, url, organisation_email, country, city, postal_code, delivery_point
@@ -227,45 +226,6 @@ if len(layer_manual_metadata) > 1:
             FROM metadata.layer_manual_metadata
             ON CONFLICT (mapset_id, protocol, url) DO NOTHING"""
     cur.execute(sql)
-
-    # # insert categories
-    # sql = """SELECT metadata.create_category('PH-GSAS-EC-2020', 10, '#F4E7D3', '#5C4033');
-    #         SELECT metadata.create_category('PH-GSAS-ESP-2020', 10, '#F4E7D3', '#5C4033');
-    #         SELECT metadata.create_category('PH-GSAS-PH-2020', 10, '#000249', '#DD1717');
-    #         SELECT metadata.create_category('PH-GSAS-SALT-2020', 10, '#000249', '#DD1717');
-    #         SELECT metadata.create_category('PH-GSOC-ADBAU-2021', 10, '#F4E7D3', '#5C4033');
-    #         SELECT metadata.create_category('PH-GSOC-ADSSM1-2021', 10, '#F4E7D3', '#5C4033');
-    #         SELECT metadata.create_category('PH-GSOC-ADSSM2-2021', 10, '#F4E7D3', '#5C4033');
-    #         SELECT metadata.create_category('PH-GSOC-ADSSM3-2021', 10, '#F4E7D3', '#5C4033');
-    #         SELECT metadata.create_category('PH-GSOC-ASRBAU-2021', 10, '#F4E7D3', '#5C4033');
-    #         SELECT metadata.create_category('PH-GSOC-ASRSSM1-2021', 10, '#F4E7D3', '#5C4033');
-    #         SELECT metadata.create_category('PH-GSOC-ASRSSM2-2021', 10, '#F4E7D3', '#5C4033');
-    #         SELECT metadata.create_category('PH-GSOC-ASRSSM3-2021', 10, '#F4E7D3', '#5C4033');
-    #         SELECT metadata.create_category('PH-GSOC-RDSSM1-2021', 10, '#F4E7D3', '#5C4033');
-    #         SELECT metadata.create_category('PH-GSOC-RDSSM2-2021', 10, '#F4E7D3', '#5C4033');
-    #         SELECT metadata.create_category('PH-GSOC-RDSSM3-2021', 10, '#F4E7D3', '#5C4033');
-    #         SELECT metadata.create_category('PH-GSOC-RSRSSM1-2021', 10, '#F4E7D3', '#5C4033');
-    #         SELECT metadata.create_category('PH-GSOC-RSRSSM1U-2021', 10, '#F4E7D3', '#5C4033');
-    #         SELECT metadata.create_category('PH-GSOC-RSRSSM2-2021', 10, '#F4E7D3', '#5C4033');
-    #         SELECT metadata.create_category('PH-GSOC-RSRSSM2U-2021', 10, '#F4E7D3', '#5C4033');
-    #         SELECT metadata.create_category('PH-GSOC-RSRSSM3-2021', 10, '#F4E7D3', '#5C4033');
-    #         SELECT metadata.create_category('PH-GSOC-RSRSSM3U-2021', 10, '#F4E7D3', '#5C4033');
-    #         SELECT metadata.create_category('PH-GSOC-SOCBAU-2021', 10, '#F4E7D3', '#5C4033');
-    #         SELECT metadata.create_category('PH-GSOC-SOCSSM1-2021', 10, '#F4E7D3', '#5C4033');
-    #         SELECT metadata.create_category('PH-GSOC-SOCSSM2-2021', 10, '#F4E7D3', '#5C4033');
-    #         SELECT metadata.create_category('PH-GSOC-SOCSSM3-2021', 10, '#F4E7D3', '#5C4033');
-    #         SELECT metadata.create_category('PH-GSOC-SSMU-2021', 10, '#F4E7D3', '#5C4033');
-    #         SELECT metadata.create_category('PH-GSOC-T0-2021', 10, '#F4E7D3', '#5C4033');
-    #         SELECT metadata.create_category('PH-GSNM-BD-2023', 10, '#F4E7D3', '#5C4033');
-    #         SELECT metadata.create_category('PH-GSNM-CEC-2023', 10, '#F4E7D3', '#5C4033');
-    #         SELECT metadata.create_category('PH-GSNM-CLAY-2023', 10, '#F4E7D3', '#5C4033');
-    #         SELECT metadata.create_category('PH-GSNM-K-2023', 10, '#F4E7D3', '#5C4033');
-    #         SELECT metadata.create_category('PH-GSNM-OC-2023', 10, '#F4E7D3', '#5C4033');
-    #         SELECT metadata.create_category('PH-GSNM-P-2023', 10, '#F4E7D3', '#5C4033');
-    #         SELECT metadata.create_category('PH-GSNM-PH-2023', 10, '#000249', '#DD1717');
-    #         SELECT metadata.create_category('PH-GSNM-SAND-2023', 10, '#F4E7D3', '#5C4033');
-    #         SELECT metadata.create_category('PH-GSNM-SILT-2023', 10, '#F4E7D3', '#5C4033');"""
-    # cur.execute(sql)
 
 # close db connection
 conn.commit()
