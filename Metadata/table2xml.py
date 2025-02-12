@@ -50,8 +50,7 @@ def bake_xml(project_id, template, output):
         mapset_id = row[0]
     
         # read metadata from table metadata.mapset
-        sql = f'''SELECT parent_identifier, 
-                        parent_identifier,
+        sql = f'''SELECT parent_identifier,
                         file_identifier,
                         language_code, 
                         metadata_standard_name, 
@@ -77,16 +76,10 @@ def bake_xml(project_id, template, output):
                         other_constraints, 
                         spatial_representation_type_code,
                         presentation_form,
-                        distance_uom, 
-                        distance, 
+                        distance_uom,
                         topic_category, 
                         time_period_begin, 
-                        time_period_end, 
-                        west_bound_longitude, 
-                        east_bound_longitude, 
-                        south_bound_latitude, 
-                        north_bound_latitude, 
-                        distribution_format, 
+                        time_period_end,
                         scope_code, 
                         lineage_statement, 
                         lineage_source_uuidref, 
@@ -97,44 +90,58 @@ def bake_xml(project_id, template, output):
         row = cur.fetchone()
 
         parent_identifier = 'UNKNOWN' if row[0] == None else str(row[0])
-        parent_identifier = 'UNKNOWN' if row[1] == None else str(row[1])
-        file_identifier = 'UNKNOWN' if row[2] == None else str(row[2])
-        language_code = 'UNKNOWN' if row[3] == None else str(row[3])
-        metadata_standard_name = 'UNKNOWN' if row[4] == None else str(row[4])
-        metadata_standard_version = 'UNKNOWN' if row[5] == None else str(row[5])
-        reference_system_identifier_code = '-1' if row[6] == None else str(row[6])
-        reference_system_identifier_code_space = 'EPSG' if row[7] == None else str(row[7])
-        title = 'UNKNOWN' if row[8] == None else str(row[8])
-        creation_date = '1900-01-01' if row[9] == None else str(row[9])
-        publication_date = '1900-01-01' if row[10] == None else str(row[10])
-        revision_date = '1900-01-01' if row[11] == None else str(row[11])
-        edition = 'UNKNOWN' if row[12] == None else str(row[12])
-        citation_md_identifier_code = 'UNKNOWN' if row[13] == None else str(row[13])
-        citation_md_identifier_code_space = 'UNKNOWN' if row[14] == None else str(row[14])
-        abstract = 'UNKNOWN' if row[15] == None else str(row[15])
-        status = 'UNKNOWN' if row[16] == None else str(row[16])
-        update_frequency = 'UNKNOWN' if row[17] == None else str(row[17])
-        md_browse_graphic = 'UNKNOWN' if row[18] == None else str(row[18])
-        keyword_theme = 'UNKNOWN' if row[19] == None else str(row[19])
-        keyword_place = 'UNKNOWN' if row[20] == None else str(row[20])
-        keyword_discipline = 'UNKNOWN' if row[21] == None else str(row[21])
-        access_constraints = 'UNKNOWN' if row[22] == None else str(row[22])
-        use_constraints = 'UNKNOWN' if row[23] == None else str(row[23])
-        other_constraints = 'UNKNOWN' if row[24] == None else str(row[24])
-        spatial_representation_type_code = 'UNKNOWN' if row[25] == None else str(row[25])
-        presentation_form = 'UNKNOWN' if row[26] == None else str(row[26])
-        distance_uom = 'UNKNOWN' if row[27] == None else str(row[27])
-        distance = '0' if row[28] == None else str(row[28])
-        topic_category = 'UNKNOWN' if row[29] == None else str(row[29])
-        time_period_begin = '1900-01-01' if row[30] == None else str(row[30])
-        time_period_end = '1900-01-01' if row[31] == None else str(row[31])
-        west_bound_longitude = '0' if row[32] == None else str(row[32])
-        east_bound_longitude = '0' if row[33] == None else str(row[33])
-        south_bound_latitude = '0' if row[34] == None else str(row[34])
-        north_bound_latitude = '0' if row[35] == None else str(row[35])
-        distribution_format = 'UNKNOWN' if row[36] == None else str(row[36])
-        scope_code = 'UNKNOWN' if row[37] == None else str(row[37])
-        lineage_statement = 'UNKNOWN' if row[38] == None else str(row[38])
+        file_identifier = 'UNKNOWN' if row[1] == None else str(row[1])
+        language_code = 'UNKNOWN' if row[2] == None else str(row[2])
+        metadata_standard_name = 'UNKNOWN' if row[3] == None else str(row[3])
+        metadata_standard_version = 'UNKNOWN' if row[4] == None else str(row[4])
+        reference_system_identifier_code = '-1' if row[5] == None else str(row[5])
+        reference_system_identifier_code_space = 'EPSG' if row[6] == None else str(row[6])
+        title = 'UNKNOWN' if row[7] == None else str(row[7])
+        creation_date = '1900-01-01' if row[8] == None else str(row[8])
+        publication_date = '1900-01-01' if row[9] == None else str(row[9])
+        revision_date = '1900-01-01' if row[10] == None else str(row[10])
+        edition = 'UNKNOWN' if row[11] == None else str(row[11])
+        citation_md_identifier_code = 'UNKNOWN' if row[12] == None else str(row[12])
+        citation_md_identifier_code_space = 'UNKNOWN' if row[13] == None else str(row[13])
+        abstract = 'UNKNOWN' if row[14] == None else str(row[14])
+        status = 'UNKNOWN' if row[15] == None else str(row[15])
+        update_frequency = 'UNKNOWN' if row[16] == None else str(row[16])
+        md_browse_graphic = 'UNKNOWN' if row[17] == None else str(row[17])
+        keyword_theme = 'UNKNOWN' if row[18] == None else str(row[18])
+        keyword_place = 'UNKNOWN' if row[19] == None else str(row[19])
+        keyword_discipline = 'UNKNOWN' if row[20] == None else str(row[20])
+        access_constraints = 'UNKNOWN' if row[21] == None else str(row[21])
+        use_constraints = 'UNKNOWN' if row[22] == None else str(row[22])
+        other_constraints = 'UNKNOWN' if row[23] == None else str(row[23])
+        spatial_representation_type_code = 'UNKNOWN' if row[24] == None else str(row[24])
+        presentation_form = 'UNKNOWN' if row[25] == None else str(row[25])
+        distance_uom = 'UNKNOWN' if row[26] == None else str(row[26])
+        topic_category = 'UNKNOWN' if row[27] == None else str(row[27])
+        time_period_begin = '1900-01-01' if row[28] == None else str(row[28])
+        time_period_end = '1900-01-01' if row[29] == None else str(row[29])
+        scope_code = 'UNKNOWN' if row[30] == None else str(row[30])
+        lineage_statement = 'UNKNOWN' if row[31] == None else str(row[31])
+
+
+        # read metadata from table metadata.layer
+        sql = f'''SELECT DISTINCT
+                        distance, 
+                        west_bound_longitude, 
+                        east_bound_longitude, 
+                        south_bound_latitude, 
+                        north_bound_latitude, 
+                        distribution_format
+                 FROM metadata.layer 
+                 WHERE mapset_id='{mapset_id}' '''
+        cur.execute(sql)
+        row = cur.fetchone()
+
+        distance = '0' if row[0] == None else str(row[0])
+        west_bound_longitude = '0' if row[1] == None else str(row[1])
+        east_bound_longitude = '0' if row[2] == None else str(row[2])
+        south_bound_latitude = '0' if row[3] == None else str(row[3])
+        north_bound_latitude = '0' if row[4] == None else str(row[4])
+        distribution_format = 'UNKNOWN' if row[5] == None else str(row[5])
 
 
         # editon

@@ -96,6 +96,7 @@ def spatial_data_scan(rootdir):
                 north_y = geo_transform[3]  # Upper-left Y
                 east_x = west_x + (src_ds.RasterXSize * geo_transform[1])  # Lower-right X
                 south_y = north_y + (src_ds.RasterYSize * geo_transform[5])  # Lower-right Y
+                dic_gdal_text['extent'] = f'{west_x} {south_y} {east_x} {north_y}'
                 west_lon, north_lat = transform_to_wgs84(west_x, north_y, spatial_reference) # in EPSG:4326
                 east_lon, south_lat = transform_to_wgs84(east_x, south_y, spatial_reference) # in EPSG:4326
                 dic_gdal_num['west_bound_longitude'] = west_lon
@@ -155,18 +156,12 @@ if len(layer_manual_metadata) > 1:
     cur.execute(sql)
     with open(layer_manual_metadata, "r") as file:
         cur.copy_expert("COPY metadata.layer_manual_metadata FROM STDIN WITH DELIMITER E'\t' CSV HEADER", file)
-    
-    # update table mapset with scann GeoTIFFs
-    sql = """UPDATE metadata.mapset mp
-            SET reference_system_identifier_code = l.reference_system_identifier_code,
-                distance = l.distance,
-                west_bound_longitude = l.west_bound_longitude,
-                east_bound_longitude = l.east_bound_longitude,
-                south_bound_latitude = l.south_bound_latitude,
-                north_bound_latitude = l.north_bound_latitude,
-                distribution_format = l.distribution_format
-            FROM metadata.layer l
-            WHERE mp.mapset_id = l.mapset_id"""
+
+    sql = """UPDATE metadata.mapset m
+            SET min_stats_minimum = t.min,
+                max_stats_maximum = t.max
+            FROM (SELECT mapset_id, min(stats_minimum) min, max(stats_maximum) max FROM metadata.layer GROUP BY mapset_id) t
+            WHERE m.mapset_id = t.mapset_id"""
     cur.execute(sql)
 
     # update table mapset with manual metadata
@@ -233,44 +228,44 @@ if len(layer_manual_metadata) > 1:
             ON CONFLICT (mapset_id, protocol, url) DO NOTHING"""
     cur.execute(sql)
 
-    # insert categories
-    sql = """SELECT metadata.create_category('PH-GSAS-EC-2020', 10, '#F4E7D3', '#5C4033');
-            SELECT metadata.create_category('PH-GSAS-ESP-2020', 10, '#F4E7D3', '#5C4033');
-            SELECT metadata.create_category('PH-GSAS-PH-2020', 10, '#000249', '#DD1717');
-            SELECT metadata.create_category('PH-GSAS-SALT-2020', 10, '#000249', '#DD1717');
-            SELECT metadata.create_category('PH-GSOC-ADBAU-2021', 10, '#F4E7D3', '#5C4033');
-            SELECT metadata.create_category('PH-GSOC-ADSSM1-2021', 10, '#F4E7D3', '#5C4033');
-            SELECT metadata.create_category('PH-GSOC-ADSSM2-2021', 10, '#F4E7D3', '#5C4033');
-            SELECT metadata.create_category('PH-GSOC-ADSSM3-2021', 10, '#F4E7D3', '#5C4033');
-            SELECT metadata.create_category('PH-GSOC-ASRBAU-2021', 10, '#F4E7D3', '#5C4033');
-            SELECT metadata.create_category('PH-GSOC-ASRSSM1-2021', 10, '#F4E7D3', '#5C4033');
-            SELECT metadata.create_category('PH-GSOC-ASRSSM2-2021', 10, '#F4E7D3', '#5C4033');
-            SELECT metadata.create_category('PH-GSOC-ASRSSM3-2021', 10, '#F4E7D3', '#5C4033');
-            SELECT metadata.create_category('PH-GSOC-RDSSM1-2021', 10, '#F4E7D3', '#5C4033');
-            SELECT metadata.create_category('PH-GSOC-RDSSM2-2021', 10, '#F4E7D3', '#5C4033');
-            SELECT metadata.create_category('PH-GSOC-RDSSM3-2021', 10, '#F4E7D3', '#5C4033');
-            SELECT metadata.create_category('PH-GSOC-RSRSSM1-2021', 10, '#F4E7D3', '#5C4033');
-            SELECT metadata.create_category('PH-GSOC-RSRSSM1U-2021', 10, '#F4E7D3', '#5C4033');
-            SELECT metadata.create_category('PH-GSOC-RSRSSM2-2021', 10, '#F4E7D3', '#5C4033');
-            SELECT metadata.create_category('PH-GSOC-RSRSSM2U-2021', 10, '#F4E7D3', '#5C4033');
-            SELECT metadata.create_category('PH-GSOC-RSRSSM3-2021', 10, '#F4E7D3', '#5C4033');
-            SELECT metadata.create_category('PH-GSOC-RSRSSM3U-2021', 10, '#F4E7D3', '#5C4033');
-            SELECT metadata.create_category('PH-GSOC-SOCBAU-2021', 10, '#F4E7D3', '#5C4033');
-            SELECT metadata.create_category('PH-GSOC-SOCSSM1-2021', 10, '#F4E7D3', '#5C4033');
-            SELECT metadata.create_category('PH-GSOC-SOCSSM2-2021', 10, '#F4E7D3', '#5C4033');
-            SELECT metadata.create_category('PH-GSOC-SOCSSM3-2021', 10, '#F4E7D3', '#5C4033');
-            SELECT metadata.create_category('PH-GSOC-SSMU-2021', 10, '#F4E7D3', '#5C4033');
-            SELECT metadata.create_category('PH-GSOC-T0-2021', 10, '#F4E7D3', '#5C4033');
-            SELECT metadata.create_category('PH-GSNM-BD-2023', 10, '#F4E7D3', '#5C4033');
-            SELECT metadata.create_category('PH-GSNM-CEC-2023', 10, '#F4E7D3', '#5C4033');
-            SELECT metadata.create_category('PH-GSNM-CLAY-2023', 10, '#F4E7D3', '#5C4033');
-            SELECT metadata.create_category('PH-GSNM-K-2023', 10, '#F4E7D3', '#5C4033');
-            SELECT metadata.create_category('PH-GSNM-OC-2023', 10, '#F4E7D3', '#5C4033');
-            SELECT metadata.create_category('PH-GSNM-P-2023', 10, '#F4E7D3', '#5C4033');
-            SELECT metadata.create_category('PH-GSNM-PH-2023', 10, '#000249', '#DD1717');
-            SELECT metadata.create_category('PH-GSNM-SAND-2023', 10, '#F4E7D3', '#5C4033');
-            SELECT metadata.create_category('PH-GSNM-SILT-2023', 10, '#F4E7D3', '#5C4033');"""
-    cur.execute(sql)
+    # # insert categories
+    # sql = """SELECT metadata.create_category('PH-GSAS-EC-2020', 10, '#F4E7D3', '#5C4033');
+    #         SELECT metadata.create_category('PH-GSAS-ESP-2020', 10, '#F4E7D3', '#5C4033');
+    #         SELECT metadata.create_category('PH-GSAS-PH-2020', 10, '#000249', '#DD1717');
+    #         SELECT metadata.create_category('PH-GSAS-SALT-2020', 10, '#000249', '#DD1717');
+    #         SELECT metadata.create_category('PH-GSOC-ADBAU-2021', 10, '#F4E7D3', '#5C4033');
+    #         SELECT metadata.create_category('PH-GSOC-ADSSM1-2021', 10, '#F4E7D3', '#5C4033');
+    #         SELECT metadata.create_category('PH-GSOC-ADSSM2-2021', 10, '#F4E7D3', '#5C4033');
+    #         SELECT metadata.create_category('PH-GSOC-ADSSM3-2021', 10, '#F4E7D3', '#5C4033');
+    #         SELECT metadata.create_category('PH-GSOC-ASRBAU-2021', 10, '#F4E7D3', '#5C4033');
+    #         SELECT metadata.create_category('PH-GSOC-ASRSSM1-2021', 10, '#F4E7D3', '#5C4033');
+    #         SELECT metadata.create_category('PH-GSOC-ASRSSM2-2021', 10, '#F4E7D3', '#5C4033');
+    #         SELECT metadata.create_category('PH-GSOC-ASRSSM3-2021', 10, '#F4E7D3', '#5C4033');
+    #         SELECT metadata.create_category('PH-GSOC-RDSSM1-2021', 10, '#F4E7D3', '#5C4033');
+    #         SELECT metadata.create_category('PH-GSOC-RDSSM2-2021', 10, '#F4E7D3', '#5C4033');
+    #         SELECT metadata.create_category('PH-GSOC-RDSSM3-2021', 10, '#F4E7D3', '#5C4033');
+    #         SELECT metadata.create_category('PH-GSOC-RSRSSM1-2021', 10, '#F4E7D3', '#5C4033');
+    #         SELECT metadata.create_category('PH-GSOC-RSRSSM1U-2021', 10, '#F4E7D3', '#5C4033');
+    #         SELECT metadata.create_category('PH-GSOC-RSRSSM2-2021', 10, '#F4E7D3', '#5C4033');
+    #         SELECT metadata.create_category('PH-GSOC-RSRSSM2U-2021', 10, '#F4E7D3', '#5C4033');
+    #         SELECT metadata.create_category('PH-GSOC-RSRSSM3-2021', 10, '#F4E7D3', '#5C4033');
+    #         SELECT metadata.create_category('PH-GSOC-RSRSSM3U-2021', 10, '#F4E7D3', '#5C4033');
+    #         SELECT metadata.create_category('PH-GSOC-SOCBAU-2021', 10, '#F4E7D3', '#5C4033');
+    #         SELECT metadata.create_category('PH-GSOC-SOCSSM1-2021', 10, '#F4E7D3', '#5C4033');
+    #         SELECT metadata.create_category('PH-GSOC-SOCSSM2-2021', 10, '#F4E7D3', '#5C4033');
+    #         SELECT metadata.create_category('PH-GSOC-SOCSSM3-2021', 10, '#F4E7D3', '#5C4033');
+    #         SELECT metadata.create_category('PH-GSOC-SSMU-2021', 10, '#F4E7D3', '#5C4033');
+    #         SELECT metadata.create_category('PH-GSOC-T0-2021', 10, '#F4E7D3', '#5C4033');
+    #         SELECT metadata.create_category('PH-GSNM-BD-2023', 10, '#F4E7D3', '#5C4033');
+    #         SELECT metadata.create_category('PH-GSNM-CEC-2023', 10, '#F4E7D3', '#5C4033');
+    #         SELECT metadata.create_category('PH-GSNM-CLAY-2023', 10, '#F4E7D3', '#5C4033');
+    #         SELECT metadata.create_category('PH-GSNM-K-2023', 10, '#F4E7D3', '#5C4033');
+    #         SELECT metadata.create_category('PH-GSNM-OC-2023', 10, '#F4E7D3', '#5C4033');
+    #         SELECT metadata.create_category('PH-GSNM-P-2023', 10, '#F4E7D3', '#5C4033');
+    #         SELECT metadata.create_category('PH-GSNM-PH-2023', 10, '#000249', '#DD1717');
+    #         SELECT metadata.create_category('PH-GSNM-SAND-2023', 10, '#F4E7D3', '#5C4033');
+    #         SELECT metadata.create_category('PH-GSNM-SILT-2023', 10, '#F4E7D3', '#5C4033');"""
+    # cur.execute(sql)
 
 # close db connection
 conn.commit()
