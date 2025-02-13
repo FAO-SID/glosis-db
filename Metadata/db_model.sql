@@ -105,59 +105,69 @@ COST 100
 VOLATILE NOT LEAKPROOF
 AS $BODY$
 DECLARE
-  distance_uom text;
-  category_start_color text;
-  category_end_color text;
-  reference_system_identifier_code text;
+  rec_mapset RECORD;
+  rec_layer RECORD;
 BEGIN
 
 SELECT 
-CASE WHEN m.distance_uom='m'  THEN 'METERS'
-     WHEN m.distance_uom='km' THEN 'KILOMETERS'
-     WHEN m.distance_uom='deg' THEN 'DD'
-     END, 
-     m.category_start_color,
-     m.category_end_color,
-     m.reference_system_identifier_code::text
-     INTO distance_uom, category_start_color, category_end_color, reference_system_identifier_code
-FROM metadata.mapset m
-WHERE mapset_id = NEW.mapset_id;
+	l.layer_id,
+  l.reference_system_identifier_code,
+	l.extent,
+	l.file_extension,
+	l.stats_minimum,
+	l.stats_maximum
+INTO rec_layer
+FROM metadata.layer l 
+WHERE l.mapset_id = NEW.mapset_id;
 
-  NEW.map := 'MAP
-  NAME "'||NEW.layer_id||'"
-  EXTENT '||NEW.extent||'
-  UNITS '||distance_uom||'
+SELECT m.mapset_id,
+     CASE 
+      WHEN m.distance_uom='m'  THEN 'METERS'
+      WHEN m.distance_uom='km' THEN 'KILOMETERS'
+      WHEN m.distance_uom='deg' THEN 'DD'
+     END distance_uom, 
+     m.category_start_color,
+     m.category_end_color
+INTO rec_mapset
+FROM metadata.mapset m
+WHERE m.mapset_id = NEW.mapset_id;
+
+UPDATE metadata.layer l SET map = 'MAP
+  NAME "'||rec_layer.layer_id||'"
+  EXTENT '||rec_layer.extent||'
+  UNITS '||rec_mapset.distance_uom||'
   SHAPEPATH "./"
   SIZE 800 600
   IMAGETYPE "PNG24"
   PROJECTION
-      "init=epsg:'||reference_system_identifier_code||'"
+      "init=epsg:'||rec_layer.reference_system_identifier_code||'"
   END # PROJECTION
   WEB
       METADATA
-          "ows_title" "'||NEW.mapset_id||' web-service" 
+          "ows_title" "'||rec_mapset.mapset_id||' web-service" 
           "ows_enable_request" "*" 
-          "ows_srs" "EPSG:'||reference_system_identifier_code||' EPSG:4326 EPSG:3857"
+          "ows_srs" "EPSG:'||rec_layer.reference_system_identifier_code||' EPSG:4326 EPSG:3857"
           "ows_getfeatureinfo_formatlist" "text/plain,text/html,application/json,geojson,application/vnd.ogc.gml,gml"
 		  "wms_feature_info_mime_type" "text/plain,text/html"
       END # METADATA
   END # WEB
   LAYER
       TEMPLATE "getfeatureinfo_template.tmpl"
-      NAME "'||NEW.layer_id||'"
-      DATA "'||NEW.layer_id||'.'||NEW.file_extension||'"
+      NAME "'||rec_mapset.mapset_id||'"
+      DATA "'||rec_layer.layer_id||'.'||rec_layer.file_extension||'"
       TYPE RASTER
       STATUS ON
       CLASS
-        NAME "'||NEW.layer_id||'"
+        NAME "'||rec_layer.layer_id||'"
         STYLE
-            COLORRANGE "'||category_start_color||'" "'||category_end_color||'"  # Start and end colors (blue to brown)
-            DATARANGE '||NEW.stats_minimum||' '||NEW.stats_maximum||'
+            COLORRANGE "'||rec_mapset.category_start_color||'" "'||rec_mapset.category_end_color||'"  # Start and end colors (blue to brown)
+            DATARANGE '||rec_layer.stats_minimum||' '||rec_layer.stats_maximum||'
             RANGEITEM "pixel"
           END # STYLE
       END # CLASS
   END # LAYER
-END # MAP';
+END # MAP'
+WHERE l.mapset_id = NEW.mapset_id;
 
   RETURN NEW;
 END
@@ -252,7 +262,6 @@ CREATE TABLE metadata.mapset (
   language_code text DEFAULT 'eng',
   metadata_standard_name text DEFAULT 'ISO 19115/19139',
   metadata_standard_version text DEFAULT '1.0',
-  reference_system_identifier_code text,
   reference_system_identifier_code_space text DEFAULT 'EPSG',
   title text,
   creation_date date,
@@ -273,7 +282,7 @@ CREATE TABLE metadata.mapset (
   other_constraints text,
   spatial_representation_type_code text DEFAULT 'grid',
   presentation_form text DEFAULT 'mapDigital',
-  distance_uom text,
+  distance_uom text DEFAULT 'm',
   topic_category text[] DEFAULT '{geoscientificInformation,environment}'::text[],
   time_period_begin date,
   time_period_end date,
@@ -477,16 +486,24 @@ ALTER TABLE metadata.mapset ADD FOREIGN KEY (project_id) REFERENCES metadata.pro
 --------------------------
 
 CREATE TRIGGER category
-  AFTER UPDATE OF variable_type, category_num_intervals, category_start_color, category_end_color, min_stats_minimum, max_stats_maximum ON metadata.mapset
+  AFTER UPDATE OF variable_type, category_num_intervals, category_start_color, category_end_color, min_stats_minimum, max_stats_maximum
+  ON metadata.mapset
   FOR EACH ROW
   EXECUTE FUNCTION metadata.category();
 
--- CREATE TRIGGER sld
---   AFTER INSERT OR UPDATE ON metadata.layer_category
---   FOR EACH STATEMENT
---   EXECUTE FUNCTION metadata.sld();
+CREATE TRIGGER sld
+  AFTER INSERT OR UPDATE ON metadata.layer_category
+  FOR EACH STATEMENT
+  EXECUTE FUNCTION metadata.sld();
 
-CREATE TRIGGER map
-  BEFORE UPDATE ON metadata.layer
+CREATE TRIGGER map_layer
+  AFTER UPDATE OF layer_id, mapset_id, reference_system_identifier_code, extent, file_extension, stats_minimum, stats_maximum
+  ON metadata.layer
   FOR EACH ROW
   EXECUTE FUNCTION metadata.map();
+
+CREATE TRIGGER map_mapset
+AFTER UPDATE OF mapset_id, distance_uom, category_start_color, category_end_color
+ON metadata.mapset
+FOR EACH ROW
+EXECUTE FUNCTION metadata.map();

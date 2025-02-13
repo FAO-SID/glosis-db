@@ -54,8 +54,7 @@ def bake_xml(project_id, template, output):
                         file_identifier,
                         language_code, 
                         metadata_standard_name, 
-                        metadata_standard_version, 
-                        reference_system_identifier_code, 
+                        metadata_standard_version,
                         reference_system_identifier_code_space, 
                         title, 
                         creation_date, 
@@ -94,38 +93,38 @@ def bake_xml(project_id, template, output):
         language_code = 'UNKNOWN' if row[2] == None else str(row[2])
         metadata_standard_name = 'UNKNOWN' if row[3] == None else str(row[3])
         metadata_standard_version = 'UNKNOWN' if row[4] == None else str(row[4])
-        reference_system_identifier_code = '-1' if row[5] == None else str(row[5])
-        reference_system_identifier_code_space = 'EPSG' if row[6] == None else str(row[6])
-        title = 'UNKNOWN' if row[7] == None else str(row[7])
-        creation_date = '1900-01-01' if row[8] == None else str(row[8])
-        publication_date = '1900-01-01' if row[9] == None else str(row[9])
-        revision_date = '1900-01-01' if row[10] == None else str(row[10])
-        edition = 'UNKNOWN' if row[11] == None else str(row[11])
-        citation_md_identifier_code = 'UNKNOWN' if row[12] == None else str(row[12])
-        citation_md_identifier_code_space = 'UNKNOWN' if row[13] == None else str(row[13])
-        abstract = 'UNKNOWN' if row[14] == None else str(row[14])
-        status = 'UNKNOWN' if row[15] == None else str(row[15])
-        update_frequency = 'UNKNOWN' if row[16] == None else str(row[16])
-        md_browse_graphic = 'UNKNOWN' if row[17] == None else str(row[17])
-        keyword_theme = 'UNKNOWN' if row[18] == None else str(row[18])
-        keyword_place = 'UNKNOWN' if row[19] == None else str(row[19])
-        keyword_discipline = 'UNKNOWN' if row[20] == None else str(row[20])
-        access_constraints = 'UNKNOWN' if row[21] == None else str(row[21])
-        use_constraints = 'UNKNOWN' if row[22] == None else str(row[22])
-        other_constraints = 'UNKNOWN' if row[23] == None else str(row[23])
-        spatial_representation_type_code = 'UNKNOWN' if row[24] == None else str(row[24])
-        presentation_form = 'UNKNOWN' if row[25] == None else str(row[25])
-        distance_uom = 'UNKNOWN' if row[26] == None else str(row[26])
-        topic_category = 'UNKNOWN' if row[27] == None else str(row[27])
-        time_period_begin = '1900-01-01' if row[28] == None else str(row[28])
-        time_period_end = '1900-01-01' if row[29] == None else str(row[29])
-        scope_code = 'UNKNOWN' if row[30] == None else str(row[30])
-        lineage_statement = 'UNKNOWN' if row[31] == None else str(row[31])
+        reference_system_identifier_code_space = 'EPSG' if row[5] == None else str(row[5])
+        title = 'UNKNOWN' if row[6] == None else str(row[6])
+        creation_date = '1900-01-01' if row[7] == None else str(row[7])
+        publication_date = '1900-01-01' if row[8] == None else str(row[8])
+        revision_date = '1900-01-01' if row[9] == None else str(row[9])
+        edition = 'UNKNOWN' if row[10] == None else str(row[10])
+        citation_md_identifier_code = 'UNKNOWN' if row[11] == None else str(row[11])
+        citation_md_identifier_code_space = 'UNKNOWN' if row[12] == None else str(row[12])
+        abstract = 'UNKNOWN' if row[13] == None else str(row[13])
+        status = 'UNKNOWN' if row[14] == None else str(row[14])
+        update_frequency = 'UNKNOWN' if row[15] == None else str(row[15])
+        md_browse_graphic = 'UNKNOWN' if row[16] == None else str(row[16])
+        keyword_theme = 'UNKNOWN' if row[17] == None else str(row[17])
+        keyword_place = 'UNKNOWN' if row[18] == None else str(row[18])
+        keyword_discipline = 'UNKNOWN' if row[19] == None else str(row[19])
+        access_constraints = 'UNKNOWN' if row[20] == None else str(row[20])
+        use_constraints = 'UNKNOWN' if row[21] == None else str(row[21])
+        other_constraints = 'UNKNOWN' if row[22] == None else str(row[22])
+        spatial_representation_type_code = 'UNKNOWN' if row[23] == None else str(row[23])
+        presentation_form = 'UNKNOWN' if row[24] == None else str(row[24])
+        distance_uom = 'UNKNOWN' if row[25] == None else str(row[25])
+        topic_category = 'UNKNOWN' if row[26] == None else str(row[26])
+        time_period_begin = '1900-01-01' if row[27] == None else str(row[27])
+        time_period_end = '1900-01-01' if row[28] == None else str(row[28])
+        scope_code = 'UNKNOWN' if row[29] == None else str(row[29])
+        lineage_statement = 'UNKNOWN' if row[30] == None else str(row[30])
 
 
         # read metadata from table metadata.layer
         sql = f'''SELECT DISTINCT
-                        distance, 
+                        reference_system_identifier_code,
+                        distance,
                         west_bound_longitude, 
                         east_bound_longitude, 
                         south_bound_latitude, 
@@ -136,12 +135,13 @@ def bake_xml(project_id, template, output):
         cur.execute(sql)
         row = cur.fetchone()
 
-        distance = '0' if row[0] == None else str(row[0])
-        west_bound_longitude = '0' if row[1] == None else str(row[1])
-        east_bound_longitude = '0' if row[2] == None else str(row[2])
-        south_bound_latitude = '0' if row[3] == None else str(row[3])
-        north_bound_latitude = '0' if row[4] == None else str(row[4])
-        distribution_format = 'UNKNOWN' if row[5] == None else str(row[5])
+        reference_system_identifier_code = '-1' if row[0] == None else str(row[0])
+        distance = '0' if row[1] == None else str(row[1])
+        west_bound_longitude = '0' if row[2] == None else str(row[2])
+        east_bound_longitude = '0' if row[3] == None else str(row[3])
+        south_bound_latitude = '0' if row[4] == None else str(row[4])
+        north_bound_latitude = '0' if row[5] == None else str(row[5])
+        distribution_format = 'UNKNOWN' if row[6] == None else str(row[6])
 
 
         # editon
