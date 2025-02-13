@@ -538,8 +538,8 @@ def bake_xml(project_id, template, output):
         # write xml to file
         open_file = open(template, 'r')
         read_file = open_file.read()
-        write_file = open(output+'/%s.xml' % mapset_id,'w')
-        write_file.write(multireplace(read_file, replace))
+        # write_file = open(output+'/%s.xml' % mapset_id,'w')
+        # write_file.write(multireplace(read_file, replace))
 
 
         # write xml in db
@@ -549,7 +549,7 @@ def bake_xml(project_id, template, output):
         
         # close files
         open_file.close
-        write_file.close
+        # write_file.close
         print(mapset_id)
 
 
