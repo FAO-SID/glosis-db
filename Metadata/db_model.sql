@@ -111,6 +111,11 @@ BEGIN
 
 SELECT 
 	l.layer_id,
+  CASE 
+    WHEN l.distance_uom='m'  THEN 'METERS'
+    WHEN l.distance_uom='km' THEN 'KILOMETERS'
+    WHEN l.distance_uom='deg' THEN 'DD'
+  END distance_uom,
   l.reference_system_identifier_code,
 	l.extent,
 	l.file_extension,
@@ -121,13 +126,8 @@ FROM metadata.layer l
 WHERE l.mapset_id = NEW.mapset_id;
 
 SELECT m.mapset_id,
-     CASE 
-      WHEN m.distance_uom='m'  THEN 'METERS'
-      WHEN m.distance_uom='km' THEN 'KILOMETERS'
-      WHEN m.distance_uom='deg' THEN 'DD'
-     END distance_uom, 
-     m.category_start_color,
-     m.category_end_color
+  m.category_start_color,
+  m.category_end_color
 INTO rec_mapset
 FROM metadata.mapset m
 WHERE m.mapset_id = NEW.mapset_id;
@@ -135,7 +135,7 @@ WHERE m.mapset_id = NEW.mapset_id;
 UPDATE metadata.layer l SET map = 'MAP
   NAME "'||rec_layer.layer_id||'"
   EXTENT '||rec_layer.extent||'
-  UNITS '||rec_mapset.distance_uom||'
+  UNITS '||rec_layer.distance_uom||'
   SHAPEPATH "./"
   SIZE 800 600
   IMAGETYPE "PNG24"
@@ -282,7 +282,6 @@ CREATE TABLE metadata.mapset (
   other_constraints text,
   spatial_representation_type_code text DEFAULT 'grid',
   presentation_form text DEFAULT 'mapDigital',
-  distance_uom text DEFAULT 'm',
   topic_category text[] DEFAULT '{geoscientificInformation,environment}'::text[],
   time_period_begin date,
   time_period_end date,
@@ -306,7 +305,6 @@ CREATE TABLE metadata.mapset (
   CONSTRAINT mapset_use_constraints_check CHECK ((use_constraints = ANY (ARRAY['copyright', 'patent', 'patentPending', 'trademark', 'license', 'intellectualPropertyRights', 'restricted','otherRestrictions']))),
   CONSTRAINT mapset_spatial_representation_type_code_check CHECK ((spatial_representation_type_code = ANY (ARRAY['grid', 'vector', 'textTable', 'tin', 'stereoModel', 'video']))),
   CONSTRAINT mapset_presentation_form_check CHECK ((presentation_form = ANY (ARRAY['mapDigital', 'tableDigital', 'mapHardcopy', 'atlasHardcopy']))),
-  CONSTRAINT mapset_distance_uom_check CHECK ((distance_uom = ANY (ARRAY['m', 'km', 'deg']))),
   CONSTRAINT mapset_variable_type_check CHECK ((variable_type = ANY (ARRAY['quantitative', 'categorical'])))
 );
 ALTER TABLE metadata.mapset OWNER TO glosis;
@@ -325,6 +323,7 @@ CREATE TABLE metadata.layer (
   -- from layer_scan.py
   reference_system_identifier_code text,
   distance text,
+  distance_uom text,
   extent text,
   west_bound_longitude numeric(4,1),
   east_bound_longitude numeric(4,1),
@@ -349,7 +348,8 @@ CREATE TABLE metadata.layer (
   scale text,
   n_bands integer,
   metadata text[],
-  map text
+  map text,
+  CONSTRAINT layer_distance_uom_check CHECK ((distance_uom = ANY (ARRAY['m', 'km', 'deg'])))
 );
 ALTER TABLE metadata.layer OWNER TO glosis;
 GRANT SELECT ON TABLE metadata.layer TO glosis_r;
@@ -364,11 +364,9 @@ CREATE TABLE metadata.layer_manual_metadata (
   abstract text,
   keyword_theme text[],
   keyword_place text[],
-  update_frequency text,
   access_constraints text,
   use_constraints text,
   other_constraints text,
-  distance_uom text,
   time_period_begin text,
   time_period_end text,
   citation_md_identifier_code text,
@@ -497,13 +495,13 @@ CREATE TRIGGER sld
   EXECUTE FUNCTION metadata.sld();
 
 CREATE TRIGGER map_layer
-  AFTER UPDATE OF layer_id, mapset_id, reference_system_identifier_code, extent, file_extension, stats_minimum, stats_maximum
+  AFTER UPDATE OF layer_id, mapset_id, distance_uom, reference_system_identifier_code, extent, file_extension, stats_minimum, stats_maximum
   ON metadata.layer
   FOR EACH ROW
   EXECUTE FUNCTION metadata.map();
 
 CREATE TRIGGER map_mapset
-AFTER UPDATE OF mapset_id, distance_uom, category_start_color, category_end_color
+AFTER UPDATE OF mapset_id, category_start_color, category_end_color
 ON metadata.mapset
 FOR EACH ROW
 EXECUTE FUNCTION metadata.map();

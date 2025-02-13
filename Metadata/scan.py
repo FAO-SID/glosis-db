@@ -86,6 +86,12 @@ def spatial_data_scan(rootdir):
                 projection = src_ds.GetProjection()
                 spatial_reference = osr.SpatialReference()
                 spatial_reference.ImportFromWkt(projection)
+                # Check if the CRS is projected or geographic
+                spatial_reference.ImportFromWkt(projection)
+                if spatial_reference.IsProjected():
+                    dic_gdal_text['distance_uom'] = 'm'
+                elif spatial_reference.IsGeographic():
+                    dic_gdal_text['distance_uom'] = 'deg'
                 dic_gdal_text['reference_system_identifier_code'] = spatial_reference.GetAttrValue('AUTHORITY',1)
                 dic_gdal_text['spatial_reference'] = str(spatial_reference)
                 dic_gdal_num['n_bands'] = src_ds.RasterCount
@@ -173,11 +179,9 @@ if len(layer_manual_metadata) > 1:
                 abstract = m.abstract,
                 keyword_theme = m.keyword_theme,
                 keyword_place = m.keyword_place,
-                update_frequency = m.update_frequency,
                 access_constraints = m.access_constraints,
                 use_constraints = m.use_constraints,
                 other_constraints = m.other_constraints,
-                distance_uom = m.distance_uom,
                 time_period_begin = m.time_period_begin::date,
                 time_period_end = m.time_period_end::date,
                 citation_md_identifier_code = m.citation_md_identifier_code,
