@@ -264,6 +264,7 @@ CREATE TABLE metadata.mapset (
   metadata_standard_version text DEFAULT '1.0',
   reference_system_identifier_code_space text DEFAULT 'EPSG',
   title text,
+  unit_id text,
   creation_date date,
   publication_date date,
   revision_date date,
@@ -358,6 +359,7 @@ GRANT SELECT ON TABLE metadata.layer TO glosis_r;
 CREATE TABLE metadata.layer_manual_metadata (
   mapset_id	text,
   title text,
+  unit_id text,
   creation_date text,
   revision_date text,
   publication_date text,

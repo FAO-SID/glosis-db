@@ -173,6 +173,7 @@ if len(layer_manual_metadata) > 1:
     # update table mapset with manual metadata
     sql = """UPDATE metadata.mapset mp
             SET title = m.title,
+                unit_id = m.unit_id,
                 creation_date = m.creation_date::date,
                 revision_date = m.revision_date::date,
                 publication_date = m.publication_date::date,
