@@ -29,7 +29,8 @@ def multireplace(string, replacements):
 
 def bake_xml(project_id, template, output):
     
-    
+    print(f'Creating metadata for project {project_id} ...')
+
     # vars
     replace = {}
     today = datetime.now()
@@ -550,7 +551,7 @@ def bake_xml(project_id, template, output):
         # close files
         open_file.close
         # write_file.close
-        print(mapset_id)
+        # print(mapset_id)
 
 
     # close database connection

@@ -4,6 +4,8 @@ import psycopg2
 
 def export_style(output, project_id):
     
+    print(f'Exporting XML, SLD, MAP for project {project_id} ...')
+
     # iterate formats and records
     for f in ['sld', 'xml']:
         sql = f"""  SELECT m.mapset_id, {f}

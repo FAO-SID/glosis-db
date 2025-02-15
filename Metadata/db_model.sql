@@ -244,7 +244,32 @@ ALTER FUNCTION metadata.sld() OWNER TO glosis;
 --        TABLE         --
 --------------------------
 
+CREATE TABLE metadata.country (
+	country_id bpchar(2) NOT NULL,
+	iso3_code bpchar(3) NULL,
+	gaul_code int4 NULL,
+	color_code bpchar(3) NULL,
+	ar text NULL,
+	en text NULL,
+	es text NULL,
+	fr text NULL,
+	pt text NULL,
+	ru text NULL,
+	zh text NULL,
+	status text NULL,
+	disp_area varchar(3) NULL,
+	capital text NULL,
+	continent text NULL,
+	un_reg text NULL,
+	unreg_note text NULL,
+	continent_custom text NULL
+);
+ALTER TABLE metadata.country OWNER TO glosis;
+GRANT SELECT ON TABLE metadata.country TO glosis_r;
+
+
 CREATE TABLE metadata.project (
+  country_id text NOT NULL,
   project_id text NOT NULL,
   project_name text,
   project_description text
@@ -254,7 +279,9 @@ GRANT SELECT ON TABLE metadata.project TO glosis_r;
 
 
 CREATE TABLE metadata.mapset (
+  country_id text NOT NULL,
   project_id text NOT NULL,
+  property_id text NOT NULL,
   mapset_id text NOT NULL,
   dimension text DEFAULT 'depth',
   parent_identifier uuid,
@@ -310,6 +337,18 @@ CREATE TABLE metadata.mapset (
 );
 ALTER TABLE metadata.mapset OWNER TO glosis;
 GRANT SELECT ON TABLE metadata.mapset TO glosis_r;
+
+CREATE TABLE metadata.property (
+  property_id text NOT NULL,
+  name text,
+  unit_id text,
+  min real,
+  max real,
+  uri text,
+  sld text
+);
+ALTER TABLE metadata.property OWNER TO glosis;
+GRANT SELECT ON TABLE metadata.property TO glosis_r;
 
 
 CREATE TABLE metadata.layer (
@@ -456,9 +495,11 @@ GRANT SELECT ON TABLE metadata.url TO glosis_r;
 --     PRIMARY KEY      --
 --------------------------
 
-ALTER TABLE metadata.project ADD PRIMARY KEY (project_id);
+ALTER TABLE metadata.country ADD PRIMARY KEY (country_id);
+ALTER TABLE metadata.project ADD PRIMARY KEY (country_id, project_id);
 ALTER TABLE metadata.mapset ADD PRIMARY KEY (mapset_id);
 ALTER TABLE metadata.mapset ADD UNIQUE (file_identifier);
+ALTER TABLE metadata.property ADD PRIMARY KEY (property_id);
 ALTER TABLE metadata.layer ADD PRIMARY KEY (layer_id);
 ALTER TABLE metadata.layer_manual_metadata ADD PRIMARY KEY (mapset_id);
 ALTER TABLE metadata.layer_category ADD PRIMARY KEY (mapset_id, value);
@@ -478,7 +519,9 @@ ALTER TABLE metadata.ver_x_org_x_ind ADD FOREIGN KEY (mapset_id) REFERENCES meta
 ALTER TABLE metadata.url ADD FOREIGN KEY (mapset_id) REFERENCES metadata.mapset(mapset_id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE metadata.layer_category ADD FOREIGN KEY (mapset_id) REFERENCES metadata.mapset(mapset_id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE metadata.layer ADD FOREIGN KEY (mapset_id) REFERENCES metadata.mapset(mapset_id) ON UPDATE CASCADE ON DELETE CASCADE;
-ALTER TABLE metadata.mapset ADD FOREIGN KEY (project_id) REFERENCES metadata.project(project_id) ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE metadata.mapset ADD FOREIGN KEY (country_id, project_id) REFERENCES metadata.project(country_id, project_id) ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE metadata.mapset ADD FOREIGN KEY (property_id) REFERENCES metadata.property(property_id) ON UPDATE CASCADE ON DELETE NO ACTION;
+ALTER TABLE metadata.project ADD FOREIGN KEY (country_id) REFERENCES metadata.country(country_id) ON UPDATE CASCADE ON DELETE NO ACTION;
 
 
 --------------------------
