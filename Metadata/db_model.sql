@@ -9,7 +9,7 @@ GRANT USAGE ON SCHEMA metadata TO glosis_r;
 --     TRIGGER FUNCTION       --
 --------------------------------
 
-CREATE OR REPLACE FUNCTION metadata.category()
+CREATE OR REPLACE FUNCTION metadata.class()
 RETURNS TRIGGER AS $$
 DECLARE
     range FLOAT;
@@ -26,59 +26,59 @@ DECLARE
     color TEXT;
 BEGIN
 
-  -- Only when variable_type is quantitative
-  IF NEW.variable_type = 'quantitative' THEN
+  -- Only when property_type is quantitative
+  IF NEW.property_type = 'quantitative' THEN
 
     -- Validate num_intervals
-    IF NEW.category_num_intervals <= 0 THEN
+    IF NEW.num_intervals <= 0 THEN
         RAISE EXCEPTION 'Number of intervals must be greater than 0.';
     END IF;
 
-    -- Validate category_start_color and category_end_color
-    IF NEW.category_start_color NOT LIKE '#______' OR NEW.category_end_color NOT LIKE '#______' THEN
+    -- Validate start_color and end_color
+    IF NEW.start_color NOT LIKE '#______' OR NEW.end_color NOT LIKE '#______' THEN
         RAISE EXCEPTION 'Colors must be in HEX format (e.g., #F4E7D3).';
     END IF;
 
-    -- Check if stats_minimum and max_stats_maximum are valid
-    IF NEW.min_stats_minimum IS NULL OR NEW.max_stats_maximum IS NULL THEN
-        RAISE EXCEPTION 'min_stats_minimum and max_stats_maximum must not be NULL.';
+    -- Check if stats_minimum and max are valid
+    IF NEW.min IS NULL OR NEW.max IS NULL THEN
+        RAISE EXCEPTION 'min and max must not be NULL.';
     END IF;
 
     -- Calculate the range and interval size
-    range := NEW.max_stats_maximum - NEW.min_stats_minimum;
+    range := NEW.max - NEW.min;
     IF range = 0 THEN
         RAISE EXCEPTION 'Range is 0. Cannot create intervals for layer_id %.', NEW.layer_id;
     END IF;
-    interval_size := range / NEW.category_num_intervals;
-    current_min := NEW.min_stats_minimum;
-    current_max := NEW.min_stats_minimum + interval_size;
+    interval_size := range / NEW.num_intervals;
+    current_min := NEW.min;
+    current_max := NEW.min + interval_size;
 
-    -- Delete existing rows for this mapset_id
-    DELETE FROM metadata.layer_category WHERE mapset_id = NEW.mapset_id;
+    -- Delete existing rows for this property_id
+    DELETE FROM metadata.class WHERE property_id = NEW.property_id;
 
-    -- Extract RGB components from category_start_color and category_end_color
-    start_r := ('x' || SUBSTRING(NEW.category_start_color FROM 2 FOR 2))::BIT(8)::INT;
-    start_g := ('x' || SUBSTRING(NEW.category_start_color FROM 4 FOR 2))::BIT(8)::INT;
-    start_b := ('x' || SUBSTRING(NEW.category_start_color FROM 6 FOR 2))::BIT(8)::INT;
-    end_r := ('x' || SUBSTRING(NEW.category_end_color FROM 2 FOR 2))::BIT(8)::INT;
-    end_g := ('x' || SUBSTRING(NEW.category_end_color FROM 4 FOR 2))::BIT(8)::INT;
-    end_b := ('x' || SUBSTRING(NEW.category_end_color FROM 6 FOR 2))::BIT(8)::INT;
+    -- Extract RGB components from start_color and end_color
+    start_r := ('x' || SUBSTRING(NEW.start_color FROM 2 FOR 2))::BIT(8)::INT;
+    start_g := ('x' || SUBSTRING(NEW.start_color FROM 4 FOR 2))::BIT(8)::INT;
+    start_b := ('x' || SUBSTRING(NEW.start_color FROM 6 FOR 2))::BIT(8)::INT;
+    end_r := ('x' || SUBSTRING(NEW.end_color FROM 2 FOR 2))::BIT(8)::INT;
+    end_g := ('x' || SUBSTRING(NEW.end_color FROM 4 FOR 2))::BIT(8)::INT;
+    end_b := ('x' || SUBSTRING(NEW.end_color FROM 6 FOR 2))::BIT(8)::INT;
 
     -- Loop to create intervals
-    WHILE i <= NEW.category_num_intervals LOOP
+    WHILE i <= NEW.num_intervals LOOP
         -- Interpolate the color based on the interval index
         color := '#' || 
-                LPAD(TO_HEX(start_r + (end_r - start_r) * (i - 1) / (NEW.category_num_intervals - 1)), 2, '0') ||
-                LPAD(TO_HEX(start_g + (end_g - start_g) * (i - 1) / (NEW.category_num_intervals - 1)), 2, '0') ||
-                LPAD(TO_HEX(start_b + (end_b - start_b) * (i - 1) / (NEW.category_num_intervals - 1)), 2, '0');
+                LPAD(TO_HEX(start_r + (end_r - start_r) * (i - 1) / (NEW.num_intervals - 1)), 2, '0') ||
+                LPAD(TO_HEX(start_g + (end_g - start_g) * (i - 1) / (NEW.num_intervals - 1)), 2, '0') ||
+                LPAD(TO_HEX(start_b + (end_b - start_b) * (i - 1) / (NEW.num_intervals - 1)), 2, '0');
 
         -- Insert the class interval and color into the categories table
-        INSERT INTO metadata.layer_category (mapset_id, value, code, "label", color, opacity, publish)
-        VALUES (NEW.mapset_id, current_min::numeric(10,2), 
+        INSERT INTO metadata.class (property_id, value, code, "label", color, opacity, publish)
+        VALUES (NEW.property_id, current_min::numeric(10,2), 
               current_min::numeric(10,2) || ' - ' || current_max::numeric(10,2), 
               current_min::numeric(10,2) || ' - ' || current_max::numeric(10,2), 
               color, 1, 't')
-        ON CONFLICT (mapset_id, value)
+        ON CONFLICT (property_id, value)
         DO UPDATE SET
             code = EXCLUDED.code,
             label = EXCLUDED.label,
@@ -105,7 +105,7 @@ COST 100
 VOLATILE NOT LEAKPROOF
 AS $BODY$
 DECLARE
-  rec_mapset RECORD;
+  rec_property RECORD;
   rec_layer RECORD;
 BEGIN
 
@@ -126,11 +126,11 @@ FROM metadata.layer l
 WHERE l.mapset_id = NEW.mapset_id;
 
 SELECT m.mapset_id,
-  m.category_start_color,
-  m.category_end_color
-INTO rec_mapset
-FROM metadata.mapset m
-WHERE m.mapset_id = NEW.mapset_id;
+  p.start_color,
+  p.end_color
+INTO rec_property
+FROM metadata.mapset m, metadata.property p
+WHERE m.property_id = split_part(NEW.mapset_id,'-',3);
 
 UPDATE metadata.layer l SET map = 'MAP
   NAME "'||rec_layer.layer_id||'"
@@ -144,7 +144,7 @@ UPDATE metadata.layer l SET map = 'MAP
   END # PROJECTION
   WEB
       METADATA
-          "ows_title" "'||rec_mapset.mapset_id||' web-service" 
+          "ows_title" "'||rec_property.mapset_id||' web-service" 
           "ows_enable_request" "*" 
           "ows_srs" "EPSG:'||rec_layer.reference_system_identifier_code||' EPSG:4326 EPSG:3857"
           "ows_getfeatureinfo_formatlist" "text/plain,text/html,application/json,geojson,application/vnd.ogc.gml,gml"
@@ -153,14 +153,14 @@ UPDATE metadata.layer l SET map = 'MAP
   END # WEB
   LAYER
       TEMPLATE "getfeatureinfo_template.tmpl"
-      NAME "'||rec_mapset.mapset_id||'"
+      NAME "'||rec_property.mapset_id||'"
       DATA "'||rec_layer.layer_id||'.'||rec_layer.file_extension||'"
       TYPE RASTER
       STATUS ON
       CLASS
         NAME "'||rec_layer.layer_id||'"
         STYLE
-            COLORRANGE "'||rec_mapset.category_start_color||'" "'||rec_mapset.category_end_color||'"  # Start and end colors (blue to brown)
+            COLORRANGE "'||rec_property.start_color||'" "'||rec_property.end_color||'"  # Start and end colors (blue to brown)
             DATARANGE '||rec_layer.stats_minimum||' '||rec_layer.stats_maximum||'
             RANGEITEM "pixel"
           END # STYLE
@@ -200,7 +200,7 @@ DECLARE
                 <sld:SourceChannelName>1</sld:SourceChannelName>
               </sld:GrayChannel>
             </sld:ChannelSelection>
-            <sld:ColorMap type="VARIABLE_TYPE">';
+            <sld:ColorMap type="property_type">';
   part_2 text :='';
   new_row text;
   part_3 text := '
@@ -213,14 +213,14 @@ DECLARE
 </StyledLayerDescriptor>';
 
 BEGIN
-    FOR rec IN SELECT mapset_id, 
-                CASE WHEN variable_type='categorical'  THEN 'values'
-                    WHEN variable_type='quantitative' THEN 'intervals'
-                    END variable_type
-                FROM metadata.mapset ORDER BY mapset_id
+    FOR rec IN SELECT property_id, 
+                CASE WHEN property_type='categorical'  THEN 'values'
+                    WHEN property_type='quantitative' THEN 'intervals'
+                    END property_type
+                FROM metadata.property ORDER BY property_id
     LOOP
 	
-      FOR sub_rec IN SELECT code, value, color, opacity, label FROM metadata.layer_category WHERE mapset_id = rec.mapset_id AND publish IS TRUE ORDER BY value
+      FOR sub_rec IN SELECT code, value, color, opacity, label FROM metadata.class WHERE property_id = rec.property_id AND publish IS TRUE ORDER BY value
     	LOOP
 		
 			SELECT E'\n             <sld:ColorMapEntry quantity="' ||sub_rec.value|| '" color="' ||sub_rec.color|| '" opacity="' ||sub_rec.opacity|| '" label="' ||sub_rec.label|| '"/>' INTO new_row;
@@ -229,7 +229,7 @@ BEGIN
 		
 		END LOOP;
 		
-		  UPDATE metadata.mapset SET sld = replace(replace(part_1,'LAYER_NAME',rec.mapset_id),'VARIABLE_TYPE',rec.variable_type) || part_2 || part_3 WHERE mapset_id = rec.mapset_id;
+		  UPDATE metadata.property SET sld = replace(replace(part_1,'LAYER_NAME',rec.property_id),'property_type',rec.property_type) || part_2 || part_3 WHERE property_id = rec.property_id;
 		  SELECT '' INTO part_2;
 		  SELECT '' INTO new_row;
 		  
@@ -317,13 +317,13 @@ CREATE TABLE metadata.mapset (
   lineage_statement text,
   lineage_source_uuidref text,
   lineage_source_title text,
-  variable_type text DEFAULT 'quantitative',
-  category_num_intervals INT DEFAULT 10, 
-  category_start_color text DEFAULT '#F4E7D3', 
-  category_end_color text DEFAULT '#5C4033',
-  min_stats_minimum real DEFAULT -12345,
-  max_stats_maximum real DEFAULT 12345,
-  sld text,
+  -- property_type text DEFAULT 'quantitative',
+  -- num_intervals INT DEFAULT 10, 
+  -- start_color text DEFAULT '#F4E7D3', 
+  -- end_color text DEFAULT '#5C4033',
+  -- min real DEFAULT -12345,
+  -- max real DEFAULT 12345,
+  -- sld text,
   xml text,
   CONSTRAINT mapset_dimension_check CHECK ((dimension = ANY (ARRAY['depth', 'time']))),
   CONSTRAINT mapset_citation_md_identifier_code_space_check CHECK ((citation_md_identifier_code_space = ANY (ARRAY['doi', 'uuid']))),
@@ -332,8 +332,7 @@ CREATE TABLE metadata.mapset (
   CONSTRAINT mapset_access_constraints_check CHECK ((access_constraints = ANY (ARRAY['copyright', 'patent', 'patentPending', 'trademark', 'license', 'intellectualPropertyRights', 'restricted','otherRestrictions']))),
   CONSTRAINT mapset_use_constraints_check CHECK ((use_constraints = ANY (ARRAY['copyright', 'patent', 'patentPending', 'trademark', 'license', 'intellectualPropertyRights', 'restricted','otherRestrictions']))),
   CONSTRAINT mapset_spatial_representation_type_code_check CHECK ((spatial_representation_type_code = ANY (ARRAY['grid', 'vector', 'textTable', 'tin', 'stereoModel', 'video']))),
-  CONSTRAINT mapset_presentation_form_check CHECK ((presentation_form = ANY (ARRAY['mapDigital', 'tableDigital', 'mapHardcopy', 'atlasHardcopy']))),
-  CONSTRAINT mapset_variable_type_check CHECK ((variable_type = ANY (ARRAY['quantitative', 'categorical'])))
+  CONSTRAINT mapset_presentation_form_check CHECK ((presentation_form = ANY (ARRAY['mapDigital', 'tableDigital', 'mapHardcopy', 'atlasHardcopy'])))
 );
 ALTER TABLE metadata.mapset OWNER TO glosis;
 GRANT SELECT ON TABLE metadata.mapset TO glosis_r;
@@ -345,7 +344,12 @@ CREATE TABLE metadata.property (
   min real,
   max real,
   uri text,
-  sld text
+  property_type text NOT NULL,
+  num_intervals smallint NOT NULL, 
+  start_color text NOT NULL, 
+  end_color text NOT NULL,
+  sld text,
+  CONSTRAINT property_property_type_check CHECK ((property_type = ANY (ARRAY['quantitative', 'categorical'])))
 );
 ALTER TABLE metadata.property OWNER TO glosis;
 GRANT SELECT ON TABLE metadata.property TO glosis_r;
@@ -395,7 +399,7 @@ ALTER TABLE metadata.layer OWNER TO glosis;
 GRANT SELECT ON TABLE metadata.layer TO glosis_r;
 
 
-CREATE TABLE metadata.layer_manual_metadata (
+CREATE TABLE metadata.metadata_manual (
   mapset_id	text,
   title text,
   unit_id text,
@@ -425,13 +429,13 @@ CREATE TABLE metadata.layer_manual_metadata (
   url_paper text,
   url_project text
 );
-ALTER TABLE metadata.layer_manual_metadata OWNER TO glosis;
-GRANT SELECT ON TABLE metadata.layer_manual_metadata TO glosis_r;
+ALTER TABLE metadata.metadata_manual OWNER TO glosis;
+GRANT SELECT ON TABLE metadata.metadata_manual TO glosis_r;
 
 
-CREATE TABLE IF NOT EXISTS metadata.layer_category
+CREATE TABLE IF NOT EXISTS metadata.class
 (   
-  mapset_id text NOT NULL,
+  property_id text NOT NULL,
   value real NOT NULL,
   code text COLLATE pg_catalog."default" NOT NULL,
   label text COLLATE pg_catalog."default" NOT NULL,
@@ -439,8 +443,8 @@ CREATE TABLE IF NOT EXISTS metadata.layer_category
   opacity real NOT NULL,
   publish boolean NOT NULL
 );
-ALTER TABLE metadata.layer_category OWNER TO glosis;
-GRANT SELECT ON TABLE metadata.layer_category TO glosis_r;
+ALTER TABLE metadata.class OWNER TO glosis;
+GRANT SELECT ON TABLE metadata.class TO glosis_r;
 
 
 CREATE TABLE metadata.ver_x_org_x_ind (
@@ -501,8 +505,8 @@ ALTER TABLE metadata.mapset ADD PRIMARY KEY (mapset_id);
 ALTER TABLE metadata.mapset ADD UNIQUE (file_identifier);
 ALTER TABLE metadata.property ADD PRIMARY KEY (property_id);
 ALTER TABLE metadata.layer ADD PRIMARY KEY (layer_id);
-ALTER TABLE metadata.layer_manual_metadata ADD PRIMARY KEY (mapset_id);
-ALTER TABLE metadata.layer_category ADD PRIMARY KEY (mapset_id, value);
+ALTER TABLE metadata.metadata_manual ADD PRIMARY KEY (mapset_id);
+ALTER TABLE metadata.class ADD PRIMARY KEY (property_id, value);
 ALTER TABLE metadata.ver_x_org_x_ind ADD PRIMARY KEY (mapset_id, tag, role, position, organisation_id, individual_id);
 ALTER TABLE metadata.organisation ADD PRIMARY KEY (organisation_id);
 ALTER TABLE metadata.individual ADD PRIMARY KEY (individual_id);
@@ -517,7 +521,7 @@ ALTER TABLE metadata.ver_x_org_x_ind ADD FOREIGN KEY (individual_id) REFERENCES 
 ALTER TABLE metadata.ver_x_org_x_ind ADD FOREIGN KEY (organisation_id) REFERENCES metadata.organisation(organisation_id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE metadata.ver_x_org_x_ind ADD FOREIGN KEY (mapset_id) REFERENCES metadata.mapset(mapset_id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE metadata.url ADD FOREIGN KEY (mapset_id) REFERENCES metadata.mapset(mapset_id) ON UPDATE CASCADE ON DELETE CASCADE;
-ALTER TABLE metadata.layer_category ADD FOREIGN KEY (mapset_id) REFERENCES metadata.mapset(mapset_id) ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE metadata.class ADD FOREIGN KEY (property_id) REFERENCES metadata.property(property_id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE metadata.layer ADD FOREIGN KEY (mapset_id) REFERENCES metadata.mapset(mapset_id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE metadata.mapset ADD FOREIGN KEY (country_id, project_id) REFERENCES metadata.project(country_id, project_id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE metadata.mapset ADD FOREIGN KEY (property_id) REFERENCES metadata.property(property_id) ON UPDATE CASCADE ON DELETE NO ACTION;
@@ -528,14 +532,14 @@ ALTER TABLE metadata.project ADD FOREIGN KEY (country_id) REFERENCES metadata.co
 --       TRIGGER        --
 --------------------------
 
-CREATE TRIGGER category
-  AFTER UPDATE OF variable_type, category_num_intervals, category_start_color, category_end_color, min_stats_minimum, max_stats_maximum
-  ON metadata.mapset
+CREATE TRIGGER class
+  AFTER UPDATE OF property_type, num_intervals, start_color, end_color, min, max
+  ON metadata.property
   FOR EACH ROW
-  EXECUTE FUNCTION metadata.category();
+  EXECUTE FUNCTION metadata.class();
 
 CREATE TRIGGER sld
-  AFTER INSERT OR UPDATE ON metadata.layer_category
+  AFTER INSERT OR UPDATE ON metadata.class
   FOR EACH STATEMENT
   EXECUTE FUNCTION metadata.sld();
 
@@ -545,8 +549,8 @@ CREATE TRIGGER map_layer
   FOR EACH ROW
   EXECUTE FUNCTION metadata.map();
 
-CREATE TRIGGER map_mapset
-AFTER UPDATE OF mapset_id, category_start_color, category_end_color
-ON metadata.mapset
-FOR EACH ROW
-EXECUTE FUNCTION metadata.map();
+-- CREATE TRIGGER map_property
+-- AFTER UPDATE OF property_id, start_color, end_color
+-- ON metadata.property
+-- FOR EACH ROW
+-- EXECUTE FUNCTION metadata.map();

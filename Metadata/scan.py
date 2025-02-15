@@ -39,21 +39,21 @@ def spatial_data_scan(rootdir):
 
             # get path
             file_name = str(file)
-            layer_id = file_name[:-4]
-            country_id = layer_id.split('-')[0]
-            project_id = layer_id.split('-')[1]
-            property_id = layer_id.split('-')[2]
-            mapset_id = '-'.join(layer_id.split('-')[:4])
             file_path = str(subdir)
             path = os.path.join(subdir, file)
+            file_extension = os.path.splitext(file)[-1].lstrip('.').lower()
 
-            # file metadata
-            file_stat        = os.stat(path)
-            file_size        = file_stat[6]
-            file_size_pretty = convert_size(file_stat[6])
-            file_extension   = os.path.splitext(file)[-1].lstrip('.').lower()
+            if file_extension in ['asc', 'ecw', 'grb', 'rb2', 'hdf', 'jpg', 'nc', 'tif']:
 
-            if os.path.splitext(file)[-1].lstrip('.').lower() in ['asc', 'ecw', 'grb', 'rb2', 'hdf', 'jpg', 'nc', 'tif']:
+                # file metadata
+                file_stat = os.stat(path)
+                file_size = file_stat[6]
+                file_size_pretty = convert_size(file_stat[6])
+                layer_id = file_name[:-4]
+                country_id = layer_id.split('-')[0]
+                project_id = layer_id.split('-')[1]
+                property_id = layer_id.split('-')[2]
+                mapset_id = '-'.join(layer_id.split('-')[:4])
 
                 # insert project
                 sql = f"INSERT INTO metadata.project(country_id, project_id) VALUES('{country_id}', '{project_id}') ON CONFLICT (country_id, project_id) DO NOTHING"
@@ -151,7 +151,7 @@ cur = conn.cursor()
 
 # run function
 rootdir = '/home/carva014/Downloads/FAO/SIS/PH/Processed'
-layer_manual_metadata = '/home/carva014/Downloads/FAO/SIS/PH/metadata.xlsx - metadata.tsv'
+metadata_manual = '/home/carva014/Downloads/FAO/SIS/PH/metadata.xlsx - metadata.tsv'
 
 spatial_data_scan(rootdir)
 
@@ -159,13 +159,6 @@ sql = """UPDATE metadata.layer SET compression = NULL WHERE compression='None';
          UPDATE metadata.layer SET stats_mean = NULL WHERE stats_mean=-123456789;
          UPDATE metadata.layer SET stats_std_dev = NULL WHERE stats_std_dev=-123456789;
          UPDATE metadata.layer SET no_data_value = NULL WHERE no_data_value=-123456789;"""
-cur.execute(sql)
-
-sql = """UPDATE metadata.mapset m
-        SET min_stats_minimum = t.min,
-            max_stats_maximum = t.max
-        FROM (SELECT mapset_id, min(stats_minimum) min, max(stats_maximum) max FROM metadata.layer GROUP BY mapset_id) t
-        WHERE m.mapset_id = t.mapset_id"""
 cur.execute(sql)
 
 sql = """UPDATE metadata.property p
@@ -192,21 +185,21 @@ sql = """UPDATE metadata.mapset mp
             time_period_end = m.time_period_end::date,
             citation_md_identifier_code = m.citation_md_identifier_code,
             lineage_statement = m.lineage_statement
-        FROM metadata.layer_manual_metadata m
+        FROM metadata.metadata_manual m
         WHERE mp.mapset_id = m.mapset_id"""
 cur.execute(sql)
 
 # insert organisation
 sql = """INSERT INTO metadata.organisation (organisation_id, url, email, country, city, postal_code, delivery_point)
         SELECT DISTINCT organisation_id, url, organisation_email, country, city, postal_code, delivery_point
-        FROM metadata.layer_manual_metadata
+        FROM metadata.metadata_manual
         ON CONFLICT (organisation_id) DO NOTHING"""
 cur.execute(sql)
 
 # insert individual
 sql = """INSERT INTO metadata.individual (individual_id, email)
         SELECT DISTINCT individual_id, email
-        FROM metadata.layer_manual_metadata
+        FROM metadata.metadata_manual
         ON CONFLICT (individual_id) DO NOTHING"""
 cur.execute(sql)
 
@@ -214,26 +207,26 @@ cur.execute(sql)
 sql = """INSERT INTO metadata.ver_x_org_x_ind (mapset_id, tag, "role", "position", organisation_id, individual_id)
         SELECT DISTINCT l.mapset_id, 'contact', 'resourceProvider', m.position, m.organisation_id, m.individual_id
         FROM metadata.layer l
-        LEFT JOIN metadata.layer_manual_metadata m ON  m.mapset_id = l.mapset_id
+        LEFT JOIN metadata.metadata_manual m ON  m.mapset_id = l.mapset_id
             UNION
         SELECT DISTINCT l.mapset_id, 'pointOfContact', 'author', m.position, m.organisation_id, m.individual_id
         FROM metadata.layer l
-        LEFT JOIN metadata.layer_manual_metadata m ON  m.mapset_id = l.mapset_id
+        LEFT JOIN metadata.metadata_manual m ON  m.mapset_id = l.mapset_id
         ON CONFLICT (mapset_id, tag, role, "position", organisation_id, individual_id) DO NOTHING"""
 cur.execute(sql)
 
 # insert url
 sql = """INSERT INTO metadata.url (mapset_id, protocol, url, url_name)
-        SELECT DISTINCT mapset_id, 'WWW:LINK-1.0-http--link', url_paper, 'Scientific paper' FROM metadata.layer_manual_metadata WHERE url_paper IS NOT NULL
+        SELECT DISTINCT mapset_id, 'WWW:LINK-1.0-http--link', url_paper, 'Scientific paper' FROM metadata.metadata_manual WHERE url_paper IS NOT NULL
             UNION
-        SELECT DISTINCT mapset_id, 'WWW:LINK-1.0-http--link', url_project, 'Project webpage' FROM metadata.layer_manual_metadata WHERE url_project IS NOT NULL
+        SELECT DISTINCT mapset_id, 'WWW:LINK-1.0-http--link', url_project, 'Project webpage' FROM metadata.metadata_manual WHERE url_project IS NOT NULL
             UNION
         SELECT m.mapset_id, 'WWW:LINK-1.0-http--link', 'https://storage.googleapis.com/fao-gismgr-glosis-data/DATA/GLOSIS/MAP/'||l.layer_id||'.'||l.file_extension , 'Download '||l.dimension_des 
-        FROM metadata.layer_manual_metadata m
+        FROM metadata.metadata_manual m
         LEFT JOIN metadata.layer l ON l.mapset_id = m.mapset_id
             UNION
         SELECT mapset_id, 'OGC:WMTS', 'https://data.apps.fao.org/map/wmts/wmts?layer=fao-gismgr/GLOSIS/maps/'||mapset_id||'&tilematrixset=EPSG:900913&Service=WMTS&request=GetCapabilities', 'Web Map Tile Service'
-        FROM metadata.layer_manual_metadata
+        FROM metadata.metadata_manual
         ON CONFLICT (mapset_id, protocol, url) DO NOTHING"""
 cur.execute(sql)
 

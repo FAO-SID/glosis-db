@@ -1,97 +1,97 @@
-"property_id"	"property_name"	"uri"
-"ACEXC"	"Acidity - exchangeable"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Aciexc"
-"ACEXT"	"Acidity - extractable"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Aciext"
-"ALEXC"	"Aluminium (Al+++) - exchangeable"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Aluexc"
-"ALEXT"	"Aluminium (Al) - dithionite extractable"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Aludit"
-"ALSAT"	"Aluminium (Al+++) - saturation (ESP)"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Alusat"
-"AWCV"	"Available water capacity - volumetric"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Avavol"
-"BEXT"	"Boron (B) - extractable"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Borext"
-"BREXT"	"Bromite (Br-) - extractable"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Bro"
-"BSATC"	"Base saturation - calculated"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Bascal"
-"BSATS"	"Base saturation - sum of cations"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Bassum"
-"BSEXC"	"Bases - exchangeable"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Basexc"
-"BTOT"	"Boron (B) - total"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Bortot"
-"CAEXC"	"Calcium (Ca++) - exchangeable"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Calexc"
-"CAEXT"	"Calcium (Ca++) - extractable"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Calext"
-"CASOL"	"Calcium (Ca++) - soluble"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Calsol"
-"CATOT"	"Calcium (Ca++) - total"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Caltot"
-"CCEFRA"	"Calcium carbonate equivalent - fraction"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Calfra"
-"CCETOT"	"Calcium carbonate equivalent - total"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Ccetot"
-"CEXT"	"Carbon (C) - extractable"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Carpyr"
-"CFA"	"Carbon - fulvic acid"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Carful"
-"CFRAG"	"Coarse fragments"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-CoaFra"
-"CHA"	"Carbon - humic acid"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Carhum"
-"CLAY"	"Clay texture fraction"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Textclay"
-"CLSOL"	"Chloride (Cl-) - soluble"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Chl"
-"CNRAT"	"Carbon/Nitrogen (C/N) ratio"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-CaN"
-"CO3SOL"	"Carbonate (CO3--) - soluble"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Car"
-"CORG"	"Carbon (C) - organic"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Carorg"
-"CTHUM"	"Carbon - total humic"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Cartoh"
-"CTOT"	"Carbon (C) - total"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Cartot"
-"CUEXT"	"Copper (Cu) - extractable"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Copext"
-"CUTOT"	"Copper (Cu) - total"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Coptot"
-"FEEXT"	"Iron (Fe) - extractable"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Iroext"
-"FETOT"	"Iron (Fe) - total"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Irotot"
-"HCO3SOL"	"Hydrocarbonate (HCO3-) - soluble"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Hyd"
-"HEXC"	"Hydrogen (H+) - exchangeable"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Hydexc"
-"KEXC"	"Potassium (K+) - exchangeable"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Potexc"
-"KEXT"	"Potassium (K) - extractable"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Potext"
-"KSOL"	"Potassium (K+) - soluble"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Potsol"
-"KTOT"	"Potassium (K) - total"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Pottot"
-"MGEXC"	"Magnesium (Mg++) - exchangeable"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Magexc"
-"MGEXT"	"Magnesium (Mg) - extractable"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Magext"
-"MGSOL"	"Magnesium (Mg++) - soluble"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Magsol"
-"MGTOT"	"Magnesium (Mg) - total"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Magtot"
-"MNEXT"	"Manganese (Mn) - extractable"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Manext"
-"MNTOT"	"Manganese (Mn) - total"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Mantot"
-"NAEXC"	"Sodium (Na+) - exchangeable"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Sodexc"
-"NAEXT"	"Sodium (Na) - extractable"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Sodext"
-"NASOL"	"Sodium (Na+) - soluble"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Sodsol"
-"NATOT"	"Sodium (Na) - total"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Sodtot"
-"NO2SOL"	"Nitrite (NO2-) - soluble"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Nit2"
-"NO3SOL"	"Nitrate (NO3-) - soluble"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Nit3"
-"NTOT"	"Nitrogen (N) - total"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Nittot"
-"PEXT"	"Phosphorus (P) - extractable"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Phoext"
-"PHX"	"pH - Hydrogen potential"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-pH"
-"PO4SOL"	"Phosphate (PO4--) - soluble"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Pho"
-"PRET"	"Phosphorus (P) - retention"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Phoret"
-"PTOT"	"Phosphorus (P) - total"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Photot"
-"SAND"	"Sand texture fraction"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Textsand"
-"SEEXT"	"Selenium (Se) - extractable"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Selext"
-"SETOT"	"Selenium (Se) - total"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Seltot"
-"SEXT"	"Sulfur (S) - extractable"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Sulext"
-"SIEXT"	"Silicon (Si) - oxalate extractable"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Siloxa"
-"SILT"	"Silt texture fraction"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Textsilt"
-"SO4SOL"	"Sulfate (SO4--) - soluble"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Sul"
-"STOT"	"Sulfur (S) - total"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Sultot"
-"ZNEXT"	"Zinc (Zn) - extractable"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Zinext"
-"ZNTOT"	"Zinc (Zn)"	"http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Zin"
-"ECX"	"Electrical conductivity"	
-"SALT"	"Salinification"	
-"BKD"	"Bulk dnsity"	
-"CEC"	"Cation exchange capacity"	
-"PXX"	"Phosphorus (P)"	
-"KXX"	"Potassium (K)"	
-"CORGADBAU"	"Organic Carbon Sequestration Potential - AbsDiff Business As Usual (BAU)"	
-"CORGADSSM1"	"Organic Carbon Sequestration Potential - AbsDiff SSM1"	
-"CORGADSSM2"	"Organic Carbon Sequestration Potential - AbsDiff SSM2"	
-"CORGADSSM3"	"Organic Carbon Sequestration Potential - AbsDiff SSM3"	
-"CORGASRSSM1"	"Organic Carbon Sequestration Potential - ASR SSM1"	
-"CORGASRSSM2"	"Organic Carbon Sequestration Potential - ASR SSM2"	
-"CORGASRSSM3"	"Organic Carbon Sequestration Potential - ASR SSM3"	
-"CORGASRBAU"	"Organic Carbon Sequestration Potential - ASR Business As Usual (BAU)"	
-"CORGSOCBAU"	"Organic Carbon Sequestration Potential - SOC Business As Usual (BAU)"	
-"CORGSOCSSM1"	"Organic Carbon Sequestration Potential - SOC SSM1"	
-"CORGSOCSSM2"	"Organic Carbon Sequestration Potential - SOC SSM2"	
-"CORGSOCSSM3"	"Organic Carbon Sequestration Potential - SOC SSM3"	
-"CORGRDSSM1"	"Organic Carbon Sequestration Potential - RelDiff SSM1"	
-"CORGRDSSM2"	"Organic Carbon Sequestration Potential - RelDiff SSM2"	
-"CORGRDSSM3"	"Organic Carbon Sequestration Potential - RelDiff SSM3"	
-"CORGRSRSSM1"	"Organic Carbon Sequestration Potential - RSR SSM1"	
-"CORGRSRSSM1U"	"Organic Carbon Sequestration Potential - RSR SSM1 uncertainty"	
-"CORGRSRSSM2"	"Organic Carbon Sequestration Potential - RSR SSM2"	
-"CORGRSRSSM2U"	"Organic Carbon Sequestration Potential - RSR SSM1 uncertainty"	
-"CORGRSRSSM3"	"Organic Carbon Sequestration Potential - RSR SSM3"	
-"CORGRSRSSM3U"	"Organic Carbon Sequestration Potential - RSR SSM3 uncertainty"	
-"CORGSSMU"	"Organic Carbon Sequestration Potential - SSM uncertainty"	
-"CORGT0"	"Organic Carbon Sequestration Potential - Time Zero (TO)"	
+property_id	name	unit_id	min	max	uri	property_type	num_intervals	start_color	end_color
+ACEXC	Acidity - exchangeable				http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Aciexc	quantitative	10	#F4E7D3	#5C4033
+ACEXT	Acidity - extractable				http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Aciext	quantitative	10	#F4E7D3	#5C4033
+ALEXC	Aluminium (Al+++) - exchangeable				http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Aluexc	quantitative	10	#F4E7D3	#5C4033
+ALEXT	Aluminium (Al) - dithionite extractable				http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Aludit	quantitative	10	#F4E7D3	#5C4033
+ALSAT	Aluminium (Al+++) - saturation (ESP)				http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Alusat	quantitative	10	#F4E7D3	#5C4033
+AWCV	Available water capacity - volumetric				http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Avavol	quantitative	10	#F4E7D3	#5C4033
+BEXT	Boron (B) - extractable				http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Borext	quantitative	10	#F4E7D3	#5C4033
+BKD	Bulk density		1.3558288	1.67693		quantitative	10	#F4E7D3	#5C4033
+BREXT	Bromite (Br-) - extractable				http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Bro	quantitative	10	#F4E7D3	#5C4033
+BSATC	Base saturation - calculated				http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Bascal	quantitative	10	#F4E7D3	#5C4033
+BSATS	Base saturation - sum of cations				http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Bassum	quantitative	10	#F4E7D3	#5C4033
+BSEXC	Bases - exchangeable				http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Basexc	quantitative	10	#F4E7D3	#5C4033
+BTOT	Boron (B) - total				http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Bortot	quantitative	10	#F4E7D3	#5C4033
+CAEXC	Calcium (Ca++) - exchangeable				http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Calexc	quantitative	10	#F4E7D3	#5C4033
+CAEXT	Calcium (Ca++) - extractable				http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Calext	quantitative	10	#F4E7D3	#5C4033
+CASOL	Calcium (Ca++) - soluble				http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Calsol	quantitative	10	#F4E7D3	#5C4033
+CATOT	Calcium (Ca++) - total				http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Caltot	quantitative	10	#F4E7D3	#5C4033
+CCEFRA	Calcium carbonate equivalent - fraction				http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Calfra	quantitative	10	#F4E7D3	#5C4033
+CCETOT	Calcium carbonate equivalent - total				http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Ccetot	quantitative	10	#F4E7D3	#5C4033
+CEC	Cation exchange capacity		21.071983	69.35965		quantitative	10	#F4E7D3	#5C4033
+CEXT	Carbon (C) - extractable				http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Carpyr	quantitative	10	#F4E7D3	#5C4033
+CFA	Carbon - fulvic acid				http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Carful	quantitative	10	#F4E7D3	#5C4033
+CFRAG	Coarse fragments				http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-CoaFra	quantitative	10	#F4E7D3	#5C4033
+CHA	Carbon - humic acid				http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Carhum	quantitative	10	#F4E7D3	#5C4033
+CLAY	Clay texture fraction		27.360031	67.1589	http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Textclay	quantitative	10	#F4E7D3	#5C4033
+CLSOL	Chloride (Cl-) - soluble				http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Chl	quantitative	10	#F4E7D3	#5C4033
+CNRAT	Carbon/Nitrogen (C/N) ratio				http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-CaN	quantitative	10	#F4E7D3	#5C4033
+CO3SOL	Carbonate (CO3--) - soluble				http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Car	quantitative	10	#F4E7D3	#5C4033
+CORG	Carbon (C) - organic		16.380156	76.38958	http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Carorg	quantitative	10	#F4E7D3	#5C4033
+CORGADBAU	Organic Carbon Sequestration Potential - AbsDiff Business As Usual (BAU)		0.0010684401	6.5648284		quantitative	10	#F4E7D3	#5C4033
+CORGADSSM1	Organic Carbon Sequestration Potential - AbsDiff SSM1		0.00003006	10.026632		quantitative	10	#F4E7D3	#5C4033
+CORGADSSM2	Organic Carbon Sequestration Potential - AbsDiff SSM2		0.052192554	13.488356		quantitative	10	#F4E7D3	#5C4033
+CORGADSSM3	Organic Carbon Sequestration Potential - AbsDiff SSM3		0.092895254	20.538095		quantitative	10	#F4E7D3	#5C4033
+CORGASRBAU	Organic Carbon Sequestration Potential - ASR Business As Usual (BAU)		-0.34343064	0.32824144		quantitative	10	#F4E7D3	#5C4033
+CORGASRSSM1	Organic Carbon Sequestration Potential - ASR SSM1		-0.31955418	0.5013316		quantitative	10	#F4E7D3	#5C4033
+CORGASRSSM2	Organic Carbon Sequestration Potential - ASR SSM2		-0.29567802	0.6744178		quantitative	10	#F4E7D3	#5C4033
+CORGASRSSM3	Organic Carbon Sequestration Potential - ASR SSM3		-0.2479248	1.0269047		quantitative	10	#F4E7D3	#5C4033
+CORGRDSSM1	Organic Carbon Sequestration Potential - RelDiff SSM1		0	3.8705504		quantitative	10	#F4E7D3	#5C4033
+CORGRDSSM2	Organic Carbon Sequestration Potential - RelDiff SSM2		0	7.7410727		quantitative	10	#F4E7D3	#5C4033
+CORGRDSSM3	Organic Carbon Sequestration Potential - RelDiff SSM3		0	15.482187		quantitative	10	#F4E7D3	#5C4033
+CORGRSRSSM1	Organic Carbon Sequestration Potential - RSR SSM1		0	0.19352752		quantitative	10	#F4E7D3	#5C4033
+CORGRSRSSM1U	Organic Carbon Sequestration Potential - RSR SSM1 uncertainty		5.4367414	706.39966		quantitative	10	#F4E7D3	#5C4033
+CORGRSRSSM2	Organic Carbon Sequestration Potential - RSR SSM2		0	0.38705364		quantitative	10	#F4E7D3	#5C4033
+CORGRSRSSM2U	Organic Carbon Sequestration Potential - RSR SSM1 uncertainty		5.4618306	706.39966		quantitative	10	#F4E7D3	#5C4033
+CORGRSRSSM3	Organic Carbon Sequestration Potential - RSR SSM3		0	0.77410936		quantitative	10	#F4E7D3	#5C4033
+CORGRSRSSM3U	Organic Carbon Sequestration Potential - RSR SSM3 uncertainty		5.511483	706.39966		quantitative	10	#F4E7D3	#5C4033
+CORGSOCBAU	Organic Carbon Sequestration Potential - SOC Business As Usual (BAU)		13.679958	128.05634		quantitative	10	#F4E7D3	#5C4033
+CORGSOCSSM1	Organic Carbon Sequestration Potential - SOC SSM1		14.032591	131.83133		quantitative	10	#F4E7D3	#5C4033
+CORGSOCSSM2	Organic Carbon Sequestration Potential - SOC SSM2		14.385205	135.60625		quantitative	10	#F4E7D3	#5C4033
+CORGSOCSSM3	Organic Carbon Sequestration Potential - SOC SSM3		15.080028	143.22684		quantitative	10	#F4E7D3	#5C4033
+CORGSSMU	Organic Carbon Sequestration Potential - SSM uncertainty		9.564035	32.408905		quantitative	10	#F4E7D3	#5C4033
+CORGT0	Organic Carbon Sequestration Potential - Time Zero (TO)		0	123.467384		quantitative	10	#F4E7D3	#5C4033
+CTHUM	Carbon - total humic				http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Cartoh	quantitative	10	#F4E7D3	#5C4033
+CTOT	Carbon (C) - total				http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Cartot	quantitative	10	#F4E7D3	#5C4033
+CUEXT	Copper (Cu) - extractable				http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Copext	quantitative	10	#F4E7D3	#5C4033
+CUTOT	Copper (Cu) - total				http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Coptot	quantitative	10	#F4E7D3	#5C4033
+ECX	Electrical conductivity		0.025647739	1.366607		quantitative	10	#CA0020	#3F68E2
+FEEXT	Iron (Fe) - extractable				http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Iroext	quantitative	10	#F4E7D3	#5C4033
+FETOT	Iron (Fe) - total				http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Irotot	quantitative	10	#F4E7D3	#5C4033
+HCO3SOL	Hydrocarbonate (HCO3-) - soluble				http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Hyd	quantitative	10	#F4E7D3	#5C4033
+HEXC	Hydrogen (H+) - exchangeable				http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Hydexc	quantitative	10	#F4E7D3	#5C4033
+KEXC	Potassium (K+) - exchangeable				http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Potexc	quantitative	10	#F4E7D3	#5C4033
+KEXT	Potassium (K) - extractable				http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Potext	quantitative	10	#F4E7D3	#5C4033
+KSOL	Potassium (K+) - soluble				http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Potsol	quantitative	10	#F4E7D3	#5C4033
+KTOT	Potassium (K) - total				http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Pottot	quantitative	10	#F4E7D3	#5C4033
+KXX	Potassium (K)		0.16248894	79.42959		quantitative	10	#F4E7D3	#5C4033
+MGEXC	Magnesium (Mg++) - exchangeable				http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Magexc	quantitative	10	#F4E7D3	#5C4033
+MGEXT	Magnesium (Mg) - extractable				http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Magext	quantitative	10	#F4E7D3	#5C4033
+MGSOL	Magnesium (Mg++) - soluble				http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Magsol	quantitative	10	#F4E7D3	#5C4033
+MGTOT	Magnesium (Mg) - total				http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Magtot	quantitative	10	#F4E7D3	#5C4033
+MNEXT	Manganese (Mn) - extractable				http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Manext	quantitative	10	#F4E7D3	#5C4033
+MNTOT	Manganese (Mn) - total				http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Mantot	quantitative	10	#F4E7D3	#5C4033
+NAEXC	Sodium (Na+) - exchangeable		0.02154164	17.657295	http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Sodexc	quantitative	10	#F4E7D3	#5C4033
+NAEXT	Sodium (Na) - extractable				http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Sodext	quantitative	10	#F4E7D3	#5C4033
+NASOL	Sodium (Na+) - soluble				http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Sodsol	quantitative	10	#F4E7D3	#5C4033
+NATOT	Sodium (Na) - total				http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Sodtot	quantitative	10	#F4E7D3	#5C4033
+NO2SOL	Nitrite (NO2-) - soluble				http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Nit2	quantitative	10	#F4E7D3	#5C4033
+NO3SOL	Nitrate (NO3-) - soluble				http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Nit3	quantitative	10	#F4E7D3	#5C4033
+NTOT	Nitrogen (N) - total				http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Nittot	quantitative	10	#F4E7D3	#5C4033
+PEXT	Phosphorus (P) - extractable				http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Phoext	quantitative	10	#F4E7D3	#5C4033
+PHX	pH - Hydrogen potential		4.6541586	7.8325057	http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-pH	quantitative	10	#CA0020	#3F68E2
+PO4SOL	Phosphate (PO4--) - soluble				http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Pho	quantitative	10	#F4E7D3	#5C4033
+PRET	Phosphorus (P) - retention				http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Phoret	quantitative	10	#F4E7D3	#5C4033
+PTOT	Phosphorus (P) - total				http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Photot	quantitative	10	#F4E7D3	#5C4033
+PXX	Phosphorus (P)		2.8180482	47.85452		quantitative	10	#F4E7D3	#5C4033
+SALT	Salinification		1	3		categorical	4	#F4E7D3	#5C4033
+SAND	Sand texture fraction		10.4794445	63.249043	http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Textsand	quantitative	10	#F4E7D3	#5C4033
+SEEXT	Selenium (Se) - extractable				http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Selext	quantitative	10	#F4E7D3	#5C4033
+SETOT	Selenium (Se) - total				http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Seltot	quantitative	10	#F4E7D3	#5C4033
+SEXT	Sulfur (S) - extractable				http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Sulext	quantitative	10	#F4E7D3	#5C4033
+SIEXT	Silicon (Si) - oxalate extractable				http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Siloxa	quantitative	10	#F4E7D3	#5C4033
+SILT	Silt texture fraction		18.000025	45.677876	http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Textsilt	quantitative	10	#F4E7D3	#5C4033
+SO4SOL	Sulfate (SO4--) - soluble				http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Sul	quantitative	10	#F4E7D3	#5C4033
+STOT	Sulfur (S) - total				http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Sultot	quantitative	10	#F4E7D3	#5C4033
+ZNEXT	Zinc (Zn) - extractable				http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Zinext	quantitative	10	#F4E7D3	#5C4033
+ZNTOT	Zinc (Zn)				http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Zin	quantitative	10	#F4E7D3	#5C4033
