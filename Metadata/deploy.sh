@@ -8,10 +8,10 @@ psql -q -h localhost -p 5432 -d iso19139 -U glosis -c "DELETE FROM metadata.proj
 psql -q -h localhost -p 5432 -d iso19139 -U glosis -c "DELETE FROM metadata.country"
 psql -q -h localhost -p 5432 -d iso19139 -U glosis -c "DELETE FROM metadata.property"
 psql -q -h localhost -p 5432 -d iso19139 -U glosis -c "DELETE FROM metadata.metadata_manual"
-cat FAO/glosis-db/Metadata/data_country.tsv | psql -q -h localhost -p 5432 -d iso19139 -U glosis -c "COPY metadata.country FROM STDIN WITH DELIMITER E'\t'"
-cat FAO/glosis-db/Metadata/data_property.tsv | psql -q -h localhost -p 5432 -d iso19139 -U glosis -c "COPY metadata.property(property_id,name,unit_id,min,max,uri,property_type,num_intervals,start_color,end_color) FROM STDIN WITH DELIMITER E'\t' CSV HEADER"
+cat /home/carva014/Work/Code/FAO/glosis-db/Metadata/data_country.tsv | psql -q -h localhost -p 5432 -d iso19139 -U glosis -c "COPY metadata.country FROM STDIN WITH DELIMITER E'\t'"
+cat /home/carva014/Work/Code/FAO/glosis-db/Metadata/data_property.tsv | psql -q -h localhost -p 5432 -d iso19139 -U glosis -c "COPY metadata.property(property_id,name,unit_id,min,max,uri,property_type,num_intervals,start_color,end_color) FROM STDIN WITH DELIMITER E'\t' CSV HEADER"
 echo 'Adding manual metadata ...'
-cat FAO/glosis-db/Metadata/data_PH_metadata.tsv | psql -q -h localhost -p 5432 -d iso19139 -U glosis -c "COPY metadata.metadata_manual FROM STDIN WITH DELIMITER E'\t' CSV HEADER"
+cat /home/carva014/Work/Code/FAO/glosis-db/Metadata/data_PH_metadata.tsv | psql -q -h localhost -p 5432 -d iso19139 -U glosis -c "COPY metadata.metadata_manual FROM STDIN WITH DELIMITER E'\t' CSV HEADER"
 eval "$(conda shell.bash hook)"
 conda activate db
 python /home/carva014/Work/Code/FAO/glosis-db/Metadata/scan.py
