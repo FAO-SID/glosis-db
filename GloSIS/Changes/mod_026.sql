@@ -115,3 +115,5 @@ SELECT procedure_phys_chem_id FROM core.procedure_phys_chem; --25
 SELECT instance FROM core. procedure_phys_chem_tmp
  INTERSECT
 SELECT procedure_phys_chem_id FROM core. procedure_phys_chem;--250
+
+DROP TABLE IF EXISTS core.procedure_phys_chem_tmp;
