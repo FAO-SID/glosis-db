@@ -1,1008 +1,1008 @@
-property_phys_chem_id,procedure_phys_chem_id,unit_of_measure_id,value_min,value_max
-Acidity - exchangeable,ExchAcid_ph0-kcl1m,cmol/kg,0,100
-Acidity - exchangeable,ExchAcid_ph0-nh4cl,cmol/kg,0,100
-Acidity - exchangeable,ExchAcid_ph0-unkn,cmol/kg,0,100
-Acidity - exchangeable,ExchAcid_ph7-caoac,cmol/kg,0,100
-Acidity - exchangeable,ExchAcid_ph7-unkn,cmol/kg,0,100
-Acidity - exchangeable,ExchAcid_ph8-bacl2tea,cmol/kg,0,100
-Acidity - exchangeable,ExchAcid_ph8-unkn,cmol/kg,0,100
-Aluminium (Al+++) - exchangeable,ExchBases_ph0-cohex,cmol/kg,0,100
-Aluminium (Al+++) - exchangeable,ExchBases_ph0-nh4cl,cmol/kg,0,100
-Aluminium (Al+++) - exchangeable,ExchBases_ph7-nh4oac,cmol/kg,0,100
-Aluminium (Al+++) - exchangeable,ExchBases_ph7-nh4oac-aas,cmol/kg,0,100
-Aluminium (Al+++) - exchangeable,ExchBases_ph7-nh4oac-fp,cmol/kg,0,100
-Aluminium (Al+++) - exchangeable,ExchBases_ph7-unkn,cmol/kg,0,100
-Aluminium (Al+++) - exchangeable,ExchBases_ph8-bacl2tea,cmol/kg,0,100
-Aluminium (Al+++) - exchangeable,ExchBases_ph8-unkn,cmol/kg,0,100
-Aluminium (Al+++) - exchangeable,ExchBases_ph-unkn-edta,cmol/kg,0,100
-Aluminium (Al+++) - exchangeable,ExchBases_ph-unkn-m3,cmol/kg,0,100
-Aluminium (Al+++) - exchangeable,ExchBases_ph-unkn-m3-spec,cmol/kg,0,100
-aluminiumProperty,Total_h2so4,%,0,100
-aluminiumProperty,Total_hcl,%,0,100
-aluminiumProperty,Total_hcl-aquaregia,%,0,100
-aluminiumProperty,Total_hclo4,%,0,100
-aluminiumProperty,Total_hno3-aquafortis,%,0,100
-aluminiumProperty,Total_nh4-6mo7o24,%,0,100
-aluminiumProperty,Total_tp03,%,0,100
-aluminiumProperty,Total_tp04,%,0,100
-aluminiumProperty,Total_tp05,%,0,100
-aluminiumProperty,Total_tp06,%,0,100
-aluminiumProperty,Total_tp07,%,0,100
-aluminiumProperty,Total_tp08,%,0,100
-aluminiumProperty,Total_tp09,%,0,100
-aluminiumProperty,Total_tp10,%,0,100
-aluminiumProperty,Total_unkn,%,0,100
-aluminiumProperty,Total_xrd,%,0,100
-aluminiumProperty,Total_xrf,%,0,100
-aluminiumProperty,Total_xrf-p,%,0,100
-aluminiumProperty,Total_xtf-t,%,0,100
-Available water capacity - volumetric (FC to WP),PAWHC_calcul-fc100wp,m³/100 m³,0,100
-Available water capacity - volumetric (FC to WP),PAWHC_calcul-fc200wp,m³/100 m³,0,100
-Available water capacity - volumetric (FC to WP),PAWHC_calcul-fc300wp,m³/100 m³,0,100
-Base saturation - calculated,BSat_calcul-cec,%,0,100
-Base saturation - calculated,BSat_calcul-ecec,%,0,100
-Boron (B) - extractable,Extr_ap14,%,0,100
-Boron (B) - extractable,Extr_ap15,%,0,100
-Boron (B) - extractable,Extr_ap20,%,0,100
-Boron (B) - extractable,Extr_ap21,%,0,100
-Boron (B) - extractable,Extr_c6h8o7-reeuwijk,%,0,100
-Boron (B) - extractable,Extr_cacl2,%,0,100
-Boron (B) - extractable,Extr_capo4,%,0,100
-Boron (B) - extractable,Extr_dtpa,%,0,100
-Boron (B) - extractable,Extr_edta,%,0,100
-Boron (B) - extractable,Extr_h2so4-truog,%,0,100
-Boron (B) - extractable,Extr_hcl-h2so4-nelson,%,0,100
-Boron (B) - extractable,Extr_hcl-nh4f-bray1,%,0,100
-Boron (B) - extractable,Extr_hcl-nh4f-bray2,%,0,100
-Boron (B) - extractable,Extr_hcl-nh4f-kurtz-bray,%,0,100
-Boron (B) - extractable,Extr_hno3,%,0,100
-Boron (B) - extractable,Extr_hotwater,%,0,100
-Boron (B) - extractable,Extr_m1,%,0,100
-Boron (B) - extractable,Extr_m2,%,0,100
-Boron (B) - extractable,Extr_m3,%,0,100
-Boron (B) - extractable,Extr_m3-spec,%,0,100
-Boron (B) - extractable,Extr_nahco3-olsen,%,0,100
-Boron (B) - extractable,Extr_nahco3-olsen-dabin,%,0,100
-Boron (B) - extractable,Extr_naoac-morgan,%,0,100
-Boron (B) - extractable,Extr_nh4ch3ch-oh-cooh-leuven,%,0,100
-Boron (B) - extractable,Extr_nh4-co3-2-ambic1,%,0,100
-Boron (B) - total,Total_h2so4,%,0,100
-Boron (B) - total,Total_hcl,%,0,100
-Boron (B) - total,Total_hcl-aquaregia,%,0,100
-Boron (B) - total,Total_hclo4,%,0,100
-Boron (B) - total,Total_hno3-aquafortis,%,0,100
-Boron (B) - total,Total_nh4-6mo7o24,%,0,100
-Boron (B) - total,Total_tp03,%,0,100
-Boron (B) - total,Total_tp04,%,0,100
-Boron (B) - total,Total_tp05,%,0,100
-Boron (B) - total,Total_tp06,%,0,100
-Boron (B) - total,Total_tp07,%,0,100
-Boron (B) - total,Total_tp08,%,0,100
-Boron (B) - total,Total_tp09,%,0,100
-Boron (B) - total,Total_tp10,%,0,100
-Boron (B) - total,Total_unkn,%,0,100
-Boron (B) - total,Total_xrd,%,0,100
-Boron (B) - total,Total_xrf,%,0,100
-Boron (B) - total,Total_xrf-p,%,0,100
-Boron (B) - total,Total_xtf-t,%,0,100
-bulkDensityFineEarthProperty,BlkDensF_fe-cl-fc,kg/dm³,0.01,2.65
-bulkDensityFineEarthProperty,BlkDensF_fe-cl-od,kg/dm³,0.01,2.65
-bulkDensityFineEarthProperty,BlkDensF_fe-cl-unkn,kg/dm³,0.01,2.65
-bulkDensityFineEarthProperty,BlkDensF_fe-co-fc,kg/dm³,0.01,2.65
-bulkDensityFineEarthProperty,BlkDensF_fe-co-od,kg/dm³,0.01,2.65
-bulkDensityFineEarthProperty,BlkDensF_fe-co-unkn,kg/dm³,0.01,2.65
-bulkDensityFineEarthProperty,BlkDensF_fe-rpl-unkn,kg/dm³,0.01,2.65
-bulkDensityFineEarthProperty,BlkDensF_fe-unkn,kg/dm³,0.01,2.65
-bulkDensityFineEarthProperty,BlkDensF_fe-unkn-fc,kg/dm³,0.01,2.65
-bulkDensityFineEarthProperty,BlkDensF_fe-unkn-od,kg/dm³,0.01,2.65
-bulkDensityWholeSoilProperty,BlkDensW_we-cl-fc,kg/dm³,0.01,3.6
-bulkDensityWholeSoilProperty,BlkDensW_we-cl-od,kg/dm³,0.01,3.6
-bulkDensityWholeSoilProperty,BlkDensW_we-cl-unkn,kg/dm³,0.01,3.6
-bulkDensityWholeSoilProperty,BlkDensW_we-co-fc,kg/dm³,0.01,3.6
-bulkDensityWholeSoilProperty,BlkDensW_we-co-od,kg/dm³,0.01,3.6
-bulkDensityWholeSoilProperty,BlkDensW_we-co-unkn,kg/dm³,0.01,3.6
-bulkDensityWholeSoilProperty,BlkDensW_we-rpl-unkn,kg/dm³,0.01,3.6
-bulkDensityWholeSoilProperty,BlkDensW_we-unkn,kg/dm³,0.01,3.6
-cadmiumProperty,Extr_ap14,%,0,100
-cadmiumProperty,Extr_ap15,%,0,100
-cadmiumProperty,Extr_ap20,%,0,100
-cadmiumProperty,Extr_ap21,%,0,100
-cadmiumProperty,Extr_c6h8o7-reeuwijk,%,0,100
-cadmiumProperty,Extr_cacl2,%,0,100
-cadmiumProperty,Extr_capo4,%,0,100
-cadmiumProperty,Extr_dtpa,%,0,100
-cadmiumProperty,Extr_edta,%,0,100
-cadmiumProperty,Extr_h2so4-truog,%,0,100
-cadmiumProperty,Extr_hcl-h2so4-nelson,%,0,100
-cadmiumProperty,Extr_hcl-nh4f-bray1,%,0,100
-cadmiumProperty,Extr_hcl-nh4f-bray2,%,0,100
-cadmiumProperty,Extr_hcl-nh4f-kurtz-bray,%,0,100
-cadmiumProperty,Extr_hno3,%,0,100
-cadmiumProperty,Extr_hotwater,%,0,100
-cadmiumProperty,Extr_m1,%,0,100
-cadmiumProperty,Extr_m2,%,0,100
-cadmiumProperty,Extr_m3,%,0,100
-cadmiumProperty,Extr_m3-spec,%,0,100
-cadmiumProperty,Extr_nahco3-olsen,%,0,100
-cadmiumProperty,Extr_nahco3-olsen-dabin,%,0,100
-cadmiumProperty,Extr_naoac-morgan,%,0,100
-cadmiumProperty,Extr_nh4ch3ch-oh-cooh-leuven,%,0,100
-cadmiumProperty,Extr_nh4-co3-2-ambic1,%,0,100
-cadmiumProperty,Total_h2so4,%,0,100
-cadmiumProperty,Total_hcl,%,0,100
-cadmiumProperty,Total_hcl-aquaregia,%,0,100
-cadmiumProperty,Total_hclo4,%,0,100
-cadmiumProperty,Total_hno3-aquafortis,%,0,100
-cadmiumProperty,Total_nh4-6mo7o24,%,0,100
-cadmiumProperty,Total_tp03,%,0,100
-cadmiumProperty,Total_tp04,%,0,100
-cadmiumProperty,Total_tp05,%,0,100
-cadmiumProperty,Total_tp06,%,0,100
-cadmiumProperty,Total_tp07,%,0,100
-cadmiumProperty,Total_tp08,%,0,100
-cadmiumProperty,Total_tp09,%,0,100
-cadmiumProperty,Total_tp10,%,0,100
-cadmiumProperty,Total_unkn,%,0,100
-cadmiumProperty,Total_xrd,%,0,100
-cadmiumProperty,Total_xrf,%,0,100
-cadmiumProperty,Total_xrf-p,%,0,100
-cadmiumProperty,Total_xtf-t,%,0,100
-Calcium (Ca++) - exchangeable,ExchBases_ph0-cohex,cmol/kg,0,100
-Calcium (Ca++) - exchangeable,ExchBases_ph0-nh4cl,cmol/kg,0,100
-Calcium (Ca++) - exchangeable,ExchBases_ph7-nh4oac,cmol/kg,0,100
-Calcium (Ca++) - exchangeable,ExchBases_ph7-nh4oac-aas,cmol/kg,0,100
-Calcium (Ca++) - exchangeable,ExchBases_ph7-nh4oac-fp,cmol/kg,0,100
-Calcium (Ca++) - exchangeable,ExchBases_ph7-unkn,cmol/kg,0,100
-Calcium (Ca++) - exchangeable,ExchBases_ph8-bacl2tea,cmol/kg,0,100
-Calcium (Ca++) - exchangeable,ExchBases_ph8-unkn,cmol/kg,0,100
-Calcium (Ca++) - exchangeable,ExchBases_ph-unkn-edta,cmol/kg,0,100
-Calcium (Ca++) - exchangeable,ExchBases_ph-unkn-m3,cmol/kg,0,100
-Calcium (Ca++) - exchangeable,ExchBases_ph-unkn-m3-spec,cmol/kg,0,100
-Calcium (Ca++) - extractable,Extr_ap14,cmol/kg,0,1000
-Calcium (Ca++) - extractable,Extr_ap15,cmol/kg,0,1000
-Calcium (Ca++) - extractable,Extr_ap20,cmol/kg,0,1000
-Calcium (Ca++) - extractable,Extr_ap21,cmol/kg,0,1000
-Calcium (Ca++) - extractable,Extr_c6h8o7-reeuwijk,cmol/kg,0,1000
-Calcium (Ca++) - extractable,Extr_cacl2,cmol/kg,0,1000
-Calcium (Ca++) - extractable,Extr_capo4,cmol/kg,0,1000
-Calcium (Ca++) - extractable,Extr_dtpa,cmol/kg,0,1000
-Calcium (Ca++) - extractable,Extr_edta,cmol/kg,0,1000
-Calcium (Ca++) - extractable,Extr_h2so4-truog,cmol/kg,0,1000
-Calcium (Ca++) - extractable,Extr_hcl-h2so4-nelson,cmol/kg,0,1000
-Calcium (Ca++) - extractable,Extr_hcl-nh4f-bray1,cmol/kg,0,1000
-Calcium (Ca++) - extractable,Extr_hcl-nh4f-bray2,cmol/kg,0,1000
-Calcium (Ca++) - extractable,Extr_hcl-nh4f-kurtz-bray,cmol/kg,0,1000
-Calcium (Ca++) - extractable,Extr_hno3,cmol/kg,0,1000
-Calcium (Ca++) - extractable,Extr_hotwater,cmol/kg,0,1000
-Calcium (Ca++) - extractable,Extr_m1,cmol/kg,0,1000
-Calcium (Ca++) - extractable,Extr_m2,cmol/kg,0,1000
-Calcium (Ca++) - extractable,Extr_m3,cmol/kg,0,1000
-Calcium (Ca++) - extractable,Extr_m3-spec,cmol/kg,0,1000
-Calcium (Ca++) - extractable,Extr_nahco3-olsen,cmol/kg,0,1000
-Calcium (Ca++) - extractable,Extr_nahco3-olsen-dabin,cmol/kg,0,1000
-Calcium (Ca++) - extractable,Extr_naoac-morgan,cmol/kg,0,1000
-Calcium (Ca++) - extractable,Extr_nh4ch3ch-oh-cooh-leuven,cmol/kg,0,1000
-Calcium (Ca++) - extractable,Extr_nh4-co3-2-ambic1,cmol/kg,0,1000
-Calcium (Ca++) - total,Total_h2so4,cmol/kg,0,1000
-Calcium (Ca++) - total,Total_hcl,cmol/kg,0,1000
-Calcium (Ca++) - total,Total_hcl-aquaregia,cmol/kg,0,1000
-Calcium (Ca++) - total,Total_hclo4,cmol/kg,0,1000
-Calcium (Ca++) - total,Total_hno3-aquafortis,cmol/kg,0,1000
-Calcium (Ca++) - total,Total_nh4-6mo7o24,cmol/kg,0,1000
-Calcium (Ca++) - total,Total_tp03,cmol/kg,0,1000
-Calcium (Ca++) - total,Total_tp04,cmol/kg,0,1000
-Calcium (Ca++) - total,Total_tp05,cmol/kg,0,1000
-Calcium (Ca++) - total,Total_tp06,cmol/kg,0,1000
-Calcium (Ca++) - total,Total_tp07,cmol/kg,0,1000
-Calcium (Ca++) - total,Total_tp08,cmol/kg,0,1000
-Calcium (Ca++) - total,Total_tp09,cmol/kg,0,1000
-Calcium (Ca++) - total,Total_tp10,cmol/kg,0,1000
-Calcium (Ca++) - total,Total_unkn,cmol/kg,0,1000
-Calcium (Ca++) - total,Total_xrd,cmol/kg,0,1000
-Calcium (Ca++) - total,Total_xrf,cmol/kg,0,1000
-Calcium (Ca++) - total,Total_xrf-p,cmol/kg,0,1000
-Calcium (Ca++) - total,Total_xtf-t,cmol/kg,0,1000
-Carbon (C) - organic,OrgC_acid-dc,g/kg,0,1000
-Carbon (C) - organic,OrgC_acid-dc-ht,g/kg,0,1000
-Carbon (C) - organic,OrgC_acid-dc-ht-analyser,g/kg,0,1000
-Carbon (C) - organic,OrgC_acid-dc-lt,g/kg,0,1000
-Carbon (C) - organic,OrgC_acid-dc-lt-loi,g/kg,0,1000
-Carbon (C) - organic,OrgC_acid-dc-mt,g/kg,0,1000
-Carbon (C) - organic,OrgC_acid-dc-spec,g/kg,0,1000
-Carbon (C) - organic,OrgC_calcul-tc-ic,g/kg,0,1000
-Carbon (C) - organic,OrgC_dc,g/kg,0,1000
-Carbon (C) - organic,OrgC_dc-ht,g/kg,0,1000
-Carbon (C) - organic,OrgC_dc-ht-analyser,g/kg,0,1000
-Carbon (C) - organic,OrgC_dc-lt,g/kg,0,1000
-Carbon (C) - organic,OrgC_dc-lt-loi,g/kg,0,1000
-Carbon (C) - organic,OrgC_dc-mt,g/kg,0,1000
-Carbon (C) - organic,OrgC_dc-spec,g/kg,0,1000
-Carbon (C) - organic,OrgC_wc,g/kg,0,1000
-Carbon (C) - organic,OrgC_wc-cro3-jackson,g/kg,0,1000
-Carbon (C) - organic,OrgC_wc-cro3-kalembra,g/kg,0,1000
-Carbon (C) - organic,OrgC_wc-cro3-knopp,g/kg,0,1000
-Carbon (C) - organic,OrgC_wc-cro3-kurmies,g/kg,0,1000
-Carbon (C) - organic,OrgC_wc-cro3-nelson,g/kg,0,1000
-Carbon (C) - organic,OrgC_wc-cro3-nrcs6a1c,g/kg,0,1000
-Carbon (C) - organic,OrgC_wc-cro3-tiurin,g/kg,0,1000
-Carbon (C) - organic,OrgC_wc-cro3-walkleyblack,g/kg,0,1000
-Carbon (C) - total,TotC_calcul-ic-oc,g/kg,0,1000
-Carbon (C) - total,TotC_dc-ht,g/kg,0,1000
-Carbon (C) - total,TotC_dc-ht-analyser,g/kg,0,1000
-Carbon (C) - total,TotC_dc-ht-spec,g/kg,0,1000
-Carbon (C) - total,TotC_dc-mt,g/kg,0,1000
-carbonInorganicProperty,InOrgC_calcul-caco3,g/kg,0,1000
-carbonInorganicProperty,InOrgC_calcul-tc-oc,g/kg,0,1000
-Clay texture fraction,SaSiCl_2-20-2000u,%,0,100
-Clay texture fraction,SaSiCl_2-20-2000u-adj100,%,0,100
-Clay texture fraction,SaSiCl_2-20-2000u-disp,%,0,100
-Clay texture fraction,SaSiCl_2-20-2000u-disp-beaker,%,0,100
-Clay texture fraction,SaSiCl_2-20-2000u-disp-hydrometer,%,0,100
-Clay texture fraction,SaSiCl_2-20-2000u-disp-hydrometer-bouy,%,0,100
-Clay texture fraction,SaSiCl_2-20-2000u-disp-laser,%,0,100
-Clay texture fraction,SaSiCl_2-20-2000u-disp-pipette,%,0,100
-Clay texture fraction,SaSiCl_2-20-2000u-disp-spec,%,0,100
-Clay texture fraction,SaSiCl_2-20-2000u-fld,%,0,100
-Clay texture fraction,SaSiCl_2-20-2000u-nodisp,%,0,100
-Clay texture fraction,SaSiCl_2-20-2000u-nodisp-hydrometer,%,0,100
-Clay texture fraction,SaSiCl_2-20-2000u-nodisp-hydrometer-bouy,%,0,100
-Clay texture fraction,SaSiCl_2-20-2000u-nodisp-laser,%,0,100
-Clay texture fraction,SaSiCl_2-20-2000u-nodisp-pipette,%,0,100
-Clay texture fraction,SaSiCl_2-20-2000u-nodisp-spec,%,0,100
-Clay texture fraction,SaSiCl_2-50-2000u,%,0,100
-Clay texture fraction,SaSiCl_2-50-2000u-adj100,%,0,100
-Clay texture fraction,SaSiCl_2-50-2000u-disp,%,0,100
-Clay texture fraction,SaSiCl_2-50-2000u-disp-beaker,%,0,100
-Clay texture fraction,SaSiCl_2-50-2000u-disp-hydrometer,%,0,100
-Clay texture fraction,SaSiCl_2-50-2000u-disp-hydrometer-bouy,%,0,100
-Clay texture fraction,SaSiCl_2-50-2000u-disp-laser,%,0,100
-Clay texture fraction,SaSiCl_2-50-2000u-disp-pipette,%,0,100
-Clay texture fraction,SaSiCl_2-50-2000u-disp-spec,%,0,100
-Clay texture fraction,SaSiCl_2-50-2000u-fld,%,0,100
-Clay texture fraction,SaSiCl_2-50-2000u-nodisp,%,0,100
-Clay texture fraction,SaSiCl_2-50-2000u-nodisp-hydrometer,%,0,100
-Clay texture fraction,SaSiCl_2-50-2000u-nodisp-hydrometer-bouy,%,0,100
-Clay texture fraction,SaSiCl_2-50-2000u-nodisp-laser,%,0,100
-Clay texture fraction,SaSiCl_2-50-2000u-nodisp-pipette,%,0,100
-Clay texture fraction,SaSiCl_2-50-2000u-nodisp-spec,%,0,100
-Clay texture fraction,SaSiCl_2-64-2000u,%,0,100
-Clay texture fraction,SaSiCl_2-64-2000u-adj100,%,0,100
-Clay texture fraction,SaSiCl_2-64-2000u-disp,%,0,100
-Clay texture fraction,SaSiCl_2-64-2000u-disp-beaker,%,0,100
-Clay texture fraction,SaSiCl_2-64-2000u-disp-hydrometer,%,0,100
-Clay texture fraction,SaSiCl_2-64-2000u-disp-hydrometer-bouy,%,0,100
-Clay texture fraction,SaSiCl_2-64-2000u-disp-laser,%,0,100
-Clay texture fraction,SaSiCl_2-64-2000u-disp-pipette,%,0,100
-Clay texture fraction,SaSiCl_2-64-2000u-disp-spec,%,0,100
-Clay texture fraction,SaSiCl_2-64-2000u-fld,%,0,100
-Clay texture fraction,SaSiCl_2-64-2000u-nodisp,%,0,100
-Clay texture fraction,SaSiCl_2-64-2000u-nodisp-hydrometer,%,0,100
-Clay texture fraction,SaSiCl_2-64-2000u-nodisp-hydrometer-bouy,%,0,100
-Clay texture fraction,SaSiCl_2-64-2000u-nodisp-laser,%,0,100
-Clay texture fraction,SaSiCl_2-64-2000u-nodisp-pipette,%,0,100
-Clay texture fraction,SaSiCl_2-64-2000u-nodisp-spec,%,0,100
-coarseFragmentsProperty,CrsFrg_fld,%,0,100
-coarseFragmentsProperty,CrsFrg_fldcls,%,0,100
-coarseFragmentsProperty,CrsFrg_lab,%,0,100
-Copper (Cu) - extractable,Extr_ap14,%,0,100
-Copper (Cu) - extractable,Extr_ap15,%,0,100
-Copper (Cu) - extractable,Extr_ap20,%,0,100
-Copper (Cu) - extractable,Extr_ap21,%,0,100
-Copper (Cu) - extractable,Extr_c6h8o7-reeuwijk,%,0,100
-Copper (Cu) - extractable,Extr_cacl2,%,0,100
-Copper (Cu) - extractable,Extr_capo4,%,0,100
-Copper (Cu) - extractable,Extr_dtpa,%,0,100
-Copper (Cu) - extractable,Extr_edta,%,0,100
-Copper (Cu) - extractable,Extr_h2so4-truog,%,0,100
-Copper (Cu) - extractable,Extr_hcl-h2so4-nelson,%,0,100
-Copper (Cu) - extractable,Extr_hcl-nh4f-bray1,%,0,100
-Copper (Cu) - extractable,Extr_hcl-nh4f-bray2,%,0,100
-Copper (Cu) - extractable,Extr_hcl-nh4f-kurtz-bray,%,0,100
-Copper (Cu) - extractable,Extr_hno3,%,0,100
-Copper (Cu) - extractable,Extr_hotwater,%,0,100
-Copper (Cu) - extractable,Extr_m1,%,0,100
-Copper (Cu) - extractable,Extr_m2,%,0,100
-Copper (Cu) - extractable,Extr_m3,%,0,100
-Copper (Cu) - extractable,Extr_m3-spec,%,0,100
-Copper (Cu) - extractable,Extr_nahco3-olsen,%,0,100
-Copper (Cu) - extractable,Extr_nahco3-olsen-dabin,%,0,100
-Copper (Cu) - extractable,Extr_naoac-morgan,%,0,100
-Copper (Cu) - extractable,Extr_nh4ch3ch-oh-cooh-leuven,%,0,100
-Copper (Cu) - extractable,Extr_nh4-co3-2-ambic1,%,0,100
-Copper (Cu) - total,Total_h2so4,%,0,100
-Copper (Cu) - total,Total_hcl,%,0,100
-Copper (Cu) - total,Total_hcl-aquaregia,%,0,100
-Copper (Cu) - total,Total_hclo4,%,0,100
-Copper (Cu) - total,Total_hno3-aquafortis,%,0,100
-Copper (Cu) - total,Total_nh4-6mo7o24,%,0,100
-Copper (Cu) - total,Total_tp03,%,0,100
-Copper (Cu) - total,Total_tp04,%,0,100
-Copper (Cu) - total,Total_tp05,%,0,100
-Copper (Cu) - total,Total_tp06,%,0,100
-Copper (Cu) - total,Total_tp07,%,0,100
-Copper (Cu) - total,Total_tp08,%,0,100
-Copper (Cu) - total,Total_tp09,%,0,100
-Copper (Cu) - total,Total_tp10,%,0,100
-Copper (Cu) - total,Total_unkn,%,0,100
-Copper (Cu) - total,Total_xrd,%,0,100
-Copper (Cu) - total,Total_xrf,%,0,100
-Copper (Cu) - total,Total_xrf-p,%,0,100
-Copper (Cu) - total,Total_xtf-t,%,0,100
-effectiveCecProperty,EffCEC_calcul-b,cmol/kg,0,100
-effectiveCecProperty,EffCEC_calcul-ba,cmol/kg,0,100
-electricalConductivityProperty,ECe_sat,dS/m,0,60
-electricalConductivityProperty,EC_ratio1-1,dS/m,0,60
-electricalConductivityProperty,EC_ratio1-10,dS/m,0,60
-electricalConductivityProperty,EC_ratio1-2,dS/m,0,60
-electricalConductivityProperty,EC_ratio1-2.5,dS/m,0,60
-electricalConductivityProperty,EC_ratio1-5,dS/m,0,60
-gypsumProperty,CaSO4_gy01,%,0,100
-gypsumProperty,CaSO4_gy02,%,0,100
-gypsumProperty,CaSO4_gy03,%,0,100
-gypsumProperty,CaSO4_gy04,%,0,100
-gypsumProperty,CaSO4_gy05,%,0,100
-gypsumProperty,CaSO4_gy06,%,0,100
-gypsumProperty,CaSO4_gy07,%,0,100
-hydraulicConductivityProperty,Ksat_bhole,cm/h,0,100
-hydraulicConductivityProperty,KSat_calcul-ptf,cm/h,0,100
-hydraulicConductivityProperty,KSat_calcul-ptf-genuchten,cm/h,0,100
-hydraulicConductivityProperty,KSat_calcul-ptf-saxton,cm/h,0,100
-hydraulicConductivityProperty,Ksat_column,cm/h,0,100
-hydraulicConductivityProperty,Ksat_dblring,cm/h,0,100
-hydraulicConductivityProperty,Ksat_invbhole,cm/h,0,100
-Hydrogen (H+) - exchangeable,ExchBases_ph0-cohex,cmol/kg,0,100
-Hydrogen (H+) - exchangeable,ExchBases_ph0-nh4cl,cmol/kg,0,100
-Hydrogen (H+) - exchangeable,ExchBases_ph7-nh4oac,cmol/kg,0,100
-Hydrogen (H+) - exchangeable,ExchBases_ph7-nh4oac-aas,cmol/kg,0,100
-Hydrogen (H+) - exchangeable,ExchBases_ph7-nh4oac-fp,cmol/kg,0,100
-Hydrogen (H+) - exchangeable,ExchBases_ph7-unkn,cmol/kg,0,100
-Hydrogen (H+) - exchangeable,ExchBases_ph8-bacl2tea,cmol/kg,0,100
-Hydrogen (H+) - exchangeable,ExchBases_ph8-unkn,cmol/kg,0,100
-Hydrogen (H+) - exchangeable,ExchBases_ph-unkn-edta,cmol/kg,0,100
-Hydrogen (H+) - exchangeable,ExchBases_ph-unkn-m3,cmol/kg,0,100
-Hydrogen (H+) - exchangeable,ExchBases_ph-unkn-m3-spec,cmol/kg,0,100
-Iron (Fe) - extractable,Extr_ap14,%,0,100
-Iron (Fe) - extractable,Extr_ap15,%,0,100
-Iron (Fe) - extractable,Extr_ap20,%,0,100
-Iron (Fe) - extractable,Extr_ap21,%,0,100
-Iron (Fe) - extractable,Extr_c6h8o7-reeuwijk,%,0,100
-Iron (Fe) - extractable,Extr_cacl2,%,0,100
-Iron (Fe) - extractable,Extr_capo4,%,0,100
-Iron (Fe) - extractable,Extr_dtpa,%,0,100
-Iron (Fe) - extractable,Extr_edta,%,0,100
-Iron (Fe) - extractable,Extr_h2so4-truog,%,0,100
-Iron (Fe) - extractable,Extr_hcl-h2so4-nelson,%,0,100
-Iron (Fe) - extractable,Extr_hcl-nh4f-bray1,%,0,100
-Iron (Fe) - extractable,Extr_hcl-nh4f-bray2,%,0,100
-Iron (Fe) - extractable,Extr_hcl-nh4f-kurtz-bray,%,0,100
-Iron (Fe) - extractable,Extr_hno3,%,0,100
-Iron (Fe) - extractable,Extr_hotwater,%,0,100
-Iron (Fe) - extractable,Extr_m1,%,0,100
-Iron (Fe) - extractable,Extr_m2,%,0,100
-Iron (Fe) - extractable,Extr_m3,%,0,100
-Iron (Fe) - extractable,Extr_m3-spec,%,0,100
-Iron (Fe) - extractable,Extr_nahco3-olsen,%,0,100
-Iron (Fe) - extractable,Extr_nahco3-olsen-dabin,%,0,100
-Iron (Fe) - extractable,Extr_naoac-morgan,%,0,100
-Iron (Fe) - extractable,Extr_nh4ch3ch-oh-cooh-leuven,%,0,100
-Iron (Fe) - extractable,Extr_nh4-co3-2-ambic1,%,0,100
-Iron (Fe) - total,Total_h2so4,%,0,100
-Iron (Fe) - total,Total_hcl,%,0,100
-Iron (Fe) - total,Total_hcl-aquaregia,%,0,100
-Iron (Fe) - total,Total_hclo4,%,0,100
-Iron (Fe) - total,Total_hno3-aquafortis,%,0,100
-Iron (Fe) - total,Total_nh4-6mo7o24,%,0,100
-Iron (Fe) - total,Total_tp03,%,0,100
-Iron (Fe) - total,Total_tp04,%,0,100
-Iron (Fe) - total,Total_tp05,%,0,100
-Iron (Fe) - total,Total_tp06,%,0,100
-Iron (Fe) - total,Total_tp07,%,0,100
-Iron (Fe) - total,Total_tp08,%,0,100
-Iron (Fe) - total,Total_tp09,%,0,100
-Iron (Fe) - total,Total_tp10,%,0,100
-Iron (Fe) - total,Total_unkn,%,0,100
-Iron (Fe) - total,Total_xrd,%,0,100
-Iron (Fe) - total,Total_xrf,%,0,100
-Iron (Fe) - total,Total_xrf-p,%,0,100
-Iron (Fe) - total,Total_xtf-t,%,0,100
-Magnesium (Mg++) - exchangeable,ExchBases_ph0-cohex,cmol/kg,0,100
-Magnesium (Mg++) - exchangeable,ExchBases_ph0-nh4cl,cmol/kg,0,100
-Magnesium (Mg++) - exchangeable,ExchBases_ph7-nh4oac,cmol/kg,0,100
-Magnesium (Mg++) - exchangeable,ExchBases_ph7-nh4oac-aas,cmol/kg,0,100
-Magnesium (Mg++) - exchangeable,ExchBases_ph7-nh4oac-fp,cmol/kg,0,100
-Magnesium (Mg++) - exchangeable,ExchBases_ph7-unkn,cmol/kg,0,100
-Magnesium (Mg++) - exchangeable,ExchBases_ph8-bacl2tea,cmol/kg,0,100
-Magnesium (Mg++) - exchangeable,ExchBases_ph8-unkn,cmol/kg,0,100
-Magnesium (Mg++) - exchangeable,ExchBases_ph-unkn-edta,cmol/kg,0,100
-Magnesium (Mg++) - exchangeable,ExchBases_ph-unkn-m3,cmol/kg,0,100
-Magnesium (Mg++) - exchangeable,ExchBases_ph-unkn-m3-spec,cmol/kg,0,100
-Magnesium (Mg) - extractable,Extr_ap14,cmol/kg,0,1000
-Magnesium (Mg) - extractable,Extr_ap15,cmol/kg,0,1000
-Magnesium (Mg) - extractable,Extr_ap20,cmol/kg,0,1000
-Magnesium (Mg) - extractable,Extr_ap21,cmol/kg,0,1000
-Magnesium (Mg) - extractable,Extr_c6h8o7-reeuwijk,cmol/kg,0,1000
-Magnesium (Mg) - extractable,Extr_cacl2,cmol/kg,0,1000
-Magnesium (Mg) - extractable,Extr_capo4,cmol/kg,0,1000
-Magnesium (Mg) - extractable,Extr_dtpa,cmol/kg,0,1000
-Magnesium (Mg) - extractable,Extr_edta,cmol/kg,0,1000
-Magnesium (Mg) - extractable,Extr_h2so4-truog,cmol/kg,0,1000
-Magnesium (Mg) - extractable,Extr_hcl-h2so4-nelson,cmol/kg,0,1000
-Magnesium (Mg) - extractable,Extr_hcl-nh4f-bray1,cmol/kg,0,1000
-Magnesium (Mg) - extractable,Extr_hcl-nh4f-bray2,cmol/kg,0,1000
-Magnesium (Mg) - extractable,Extr_hcl-nh4f-kurtz-bray,cmol/kg,0,1000
-Magnesium (Mg) - extractable,Extr_hno3,cmol/kg,0,1000
-Magnesium (Mg) - extractable,Extr_hotwater,cmol/kg,0,1000
-Magnesium (Mg) - extractable,Extr_m1,cmol/kg,0,1000
-Magnesium (Mg) - extractable,Extr_m2,cmol/kg,0,1000
-Magnesium (Mg) - extractable,Extr_m3,cmol/kg,0,1000
-Magnesium (Mg) - extractable,Extr_m3-spec,cmol/kg,0,1000
-Magnesium (Mg) - extractable,Extr_nahco3-olsen,cmol/kg,0,1000
-Magnesium (Mg) - extractable,Extr_nahco3-olsen-dabin,cmol/kg,0,1000
-Magnesium (Mg) - extractable,Extr_naoac-morgan,cmol/kg,0,1000
-Magnesium (Mg) - extractable,Extr_nh4ch3ch-oh-cooh-leuven,cmol/kg,0,1000
-Magnesium (Mg) - extractable,Extr_nh4-co3-2-ambic1,cmol/kg,0,1000
-Magnesium (Mg) - total,Total_h2so4,cmol/kg,0,1000
-Magnesium (Mg) - total,Total_hcl,cmol/kg,0,1000
-Magnesium (Mg) - total,Total_hcl-aquaregia,cmol/kg,0,1000
-Magnesium (Mg) - total,Total_hclo4,cmol/kg,0,1000
-Magnesium (Mg) - total,Total_hno3-aquafortis,cmol/kg,0,1000
-Magnesium (Mg) - total,Total_nh4-6mo7o24,cmol/kg,0,1000
-Magnesium (Mg) - total,Total_tp03,cmol/kg,0,1000
-Magnesium (Mg) - total,Total_tp04,cmol/kg,0,1000
-Magnesium (Mg) - total,Total_tp05,cmol/kg,0,1000
-Magnesium (Mg) - total,Total_tp06,cmol/kg,0,1000
-Magnesium (Mg) - total,Total_tp07,cmol/kg,0,1000
-Magnesium (Mg) - total,Total_tp08,cmol/kg,0,1000
-Magnesium (Mg) - total,Total_tp09,cmol/kg,0,1000
-Magnesium (Mg) - total,Total_tp10,cmol/kg,0,1000
-Magnesium (Mg) - total,Total_unkn,cmol/kg,0,1000
-Magnesium (Mg) - total,Total_xrd,cmol/kg,0,1000
-Magnesium (Mg) - total,Total_xrf,cmol/kg,0,1000
-Magnesium (Mg) - total,Total_xrf-p,cmol/kg,0,1000
-Magnesium (Mg) - total,Total_xtf-t,cmol/kg,0,1000
-Manganese (Mn) - extractable,Extr_ap14,cmol/kg,0,1000
-Manganese (Mn) - extractable,Extr_ap15,cmol/kg,0,1000
-Manganese (Mn) - extractable,Extr_ap20,cmol/kg,0,1000
-Manganese (Mn) - extractable,Extr_ap21,cmol/kg,0,1000
-Manganese (Mn) - extractable,Extr_c6h8o7-reeuwijk,cmol/kg,0,1000
-Manganese (Mn) - extractable,Extr_cacl2,cmol/kg,0,1000
-Manganese (Mn) - extractable,Extr_capo4,cmol/kg,0,1000
-Manganese (Mn) - extractable,Extr_dtpa,cmol/kg,0,1000
-Manganese (Mn) - extractable,Extr_edta,cmol/kg,0,1000
-Manganese (Mn) - extractable,Extr_h2so4-truog,cmol/kg,0,1000
-Manganese (Mn) - extractable,Extr_hcl-h2so4-nelson,cmol/kg,0,1000
-Manganese (Mn) - extractable,Extr_hcl-nh4f-bray1,cmol/kg,0,1000
-Manganese (Mn) - extractable,Extr_hcl-nh4f-bray2,cmol/kg,0,1000
-Manganese (Mn) - extractable,Extr_hcl-nh4f-kurtz-bray,cmol/kg,0,1000
-Manganese (Mn) - extractable,Extr_hno3,cmol/kg,0,1000
-Manganese (Mn) - extractable,Extr_hotwater,cmol/kg,0,1000
-Manganese (Mn) - extractable,Extr_m1,cmol/kg,0,1000
-Manganese (Mn) - extractable,Extr_m2,cmol/kg,0,1000
-Manganese (Mn) - extractable,Extr_m3,cmol/kg,0,1000
-Manganese (Mn) - extractable,Extr_m3-spec,cmol/kg,0,1000
-Manganese (Mn) - extractable,Extr_nahco3-olsen,cmol/kg,0,1000
-Manganese (Mn) - extractable,Extr_nahco3-olsen-dabin,cmol/kg,0,1000
-Manganese (Mn) - extractable,Extr_naoac-morgan,cmol/kg,0,1000
-Manganese (Mn) - extractable,Extr_nh4ch3ch-oh-cooh-leuven,cmol/kg,0,1000
-Manganese (Mn) - extractable,Extr_nh4-co3-2-ambic1,cmol/kg,0,1000
-Manganese (Mn) - total,Total_h2so4,cmol/kg,0,1000
-Manganese (Mn) - total,Total_hcl,cmol/kg,0,1000
-Manganese (Mn) - total,Total_hcl-aquaregia,cmol/kg,0,1000
-Manganese (Mn) - total,Total_hclo4,cmol/kg,0,1000
-Manganese (Mn) - total,Total_hno3-aquafortis,cmol/kg,0,1000
-Manganese (Mn) - total,Total_nh4-6mo7o24,cmol/kg,0,1000
-Manganese (Mn) - total,Total_tp03,cmol/kg,0,1000
-Manganese (Mn) - total,Total_tp04,cmol/kg,0,1000
-Manganese (Mn) - total,Total_tp05,cmol/kg,0,1000
-Manganese (Mn) - total,Total_tp06,cmol/kg,0,1000
-Manganese (Mn) - total,Total_tp07,cmol/kg,0,1000
-Manganese (Mn) - total,Total_tp08,cmol/kg,0,1000
-Manganese (Mn) - total,Total_tp09,cmol/kg,0,1000
-Manganese (Mn) - total,Total_tp10,cmol/kg,0,1000
-Manganese (Mn) - total,Total_unkn,cmol/kg,0,1000
-Manganese (Mn) - total,Total_xrd,cmol/kg,0,1000
-Manganese (Mn) - total,Total_xrf,cmol/kg,0,1000
-Manganese (Mn) - total,Total_xrf-p,cmol/kg,0,1000
-Manganese (Mn) - total,Total_xtf-t,cmol/kg,0,1000
-manganeseProperty,ExchBases_ph0-cohex,cmol/kg,0,1000
-manganeseProperty,ExchBases_ph0-nh4cl,cmol/kg,0,1000
-manganeseProperty,ExchBases_ph7-nh4oac,cmol/kg,0,1000
-manganeseProperty,ExchBases_ph7-nh4oac-aas,cmol/kg,0,1000
-manganeseProperty,ExchBases_ph7-nh4oac-fp,cmol/kg,0,1000
-manganeseProperty,ExchBases_ph7-unkn,cmol/kg,0,1000
-manganeseProperty,ExchBases_ph8-bacl2tea,cmol/kg,0,1000
-manganeseProperty,ExchBases_ph8-unkn,cmol/kg,0,1000
-manganeseProperty,ExchBases_ph-unkn-edta,cmol/kg,0,1000
-manganeseProperty,ExchBases_ph-unkn-m3,cmol/kg,0,1000
-manganeseProperty,ExchBases_ph-unkn-m3-spec,cmol/kg,0,1000
-molybdenumProperty,Extr_ap14,%,0,100
-molybdenumProperty,Extr_ap15,%,0,100
-molybdenumProperty,Extr_ap20,%,0,100
-molybdenumProperty,Extr_ap21,%,0,100
-molybdenumProperty,Extr_c6h8o7-reeuwijk,%,0,100
-molybdenumProperty,Extr_cacl2,%,0,100
-molybdenumProperty,Extr_capo4,%,0,100
-molybdenumProperty,Extr_dtpa,%,0,100
-molybdenumProperty,Extr_edta,%,0,100
-molybdenumProperty,Extr_h2so4-truog,%,0,100
-molybdenumProperty,Extr_hcl-h2so4-nelson,%,0,100
-molybdenumProperty,Extr_hcl-nh4f-bray1,%,0,100
-molybdenumProperty,Extr_hcl-nh4f-bray2,%,0,100
-molybdenumProperty,Extr_hcl-nh4f-kurtz-bray,%,0,100
-molybdenumProperty,Extr_hno3,%,0,100
-molybdenumProperty,Extr_hotwater,%,0,100
-molybdenumProperty,Extr_m1,%,0,100
-molybdenumProperty,Extr_m2,%,0,100
-molybdenumProperty,Extr_m3,%,0,100
-molybdenumProperty,Extr_m3-spec,%,0,100
-molybdenumProperty,Extr_nahco3-olsen,%,0,100
-molybdenumProperty,Extr_nahco3-olsen-dabin,%,0,100
-molybdenumProperty,Extr_naoac-morgan,%,0,100
-molybdenumProperty,Extr_nh4ch3ch-oh-cooh-leuven,%,0,100
-molybdenumProperty,Extr_nh4-co3-2-ambic1,%,0,100
-molybdenumProperty,Total_h2so4,%,0,100
-molybdenumProperty,Total_hcl,%,0,100
-molybdenumProperty,Total_hcl-aquaregia,%,0,100
-molybdenumProperty,Total_hclo4,%,0,100
-molybdenumProperty,Total_hno3-aquafortis,%,0,100
-molybdenumProperty,Total_nh4-6mo7o24,%,0,100
-molybdenumProperty,Total_tp03,%,0,100
-molybdenumProperty,Total_tp04,%,0,100
-molybdenumProperty,Total_tp05,%,0,100
-molybdenumProperty,Total_tp06,%,0,100
-molybdenumProperty,Total_tp07,%,0,100
-molybdenumProperty,Total_tp08,%,0,100
-molybdenumProperty,Total_tp09,%,0,100
-molybdenumProperty,Total_tp10,%,0,100
-molybdenumProperty,Total_unkn,%,0,100
-molybdenumProperty,Total_xrd,%,0,100
-molybdenumProperty,Total_xrf,%,0,100
-molybdenumProperty,Total_xrf-p,%,0,100
-molybdenumProperty,Total_xtf-t,%,0,100
-Nitrogen (N) - total,TotalN_bremner,g/kg,0,1000
-Nitrogen (N) - total,TotalN_calcul,g/kg,0,1000
-Nitrogen (N) - total,TotalN_calcul-oc10,g/kg,0,1000
-Nitrogen (N) - total,TotalN_dc,g/kg,0,1000
-Nitrogen (N) - total,TotalN_dc-ht-dumas,g/kg,0,1000
-Nitrogen (N) - total,TotalN_dc-ht-leco,g/kg,0,1000
-Nitrogen (N) - total,TotalN_dc-spec,g/kg,0,1000
-Nitrogen (N) - total,TotalN_h2so4,g/kg,0,1000
-Nitrogen (N) - total,TotalN_kjeldahl,g/kg,0,1000
-Nitrogen (N) - total,TotalN_kjeldahl-nh4,g/kg,0,1000
-Nitrogen (N) - total,TotalN_nelson,g/kg,0,1000
-Nitrogen (N) - total,TotalN_tn04,g/kg,0,1000
-Nitrogen (N) - total,TotalN_tn06,g/kg,0,1000
-Nitrogen (N) - total,TotalN_tn08,g/kg,0,1000
-organicMatterProperty,FulAcidC_unkn,g/kg,0,1000
-organicMatterProperty,HumAcidC_unkn,g/kg,0,1000
-organicMatterProperty,OrgM_calcul-oc1.73,g/kg,0,1000
-organicMatterProperty,TotHumC_unkn,g/kg,0,1000
-pH - Hydrogen potential,pHCaCl2,pH,1.5,13
-pH - Hydrogen potential,pHCaCl2_ratio1-1,pH,1.5,13
-pH - Hydrogen potential,pHCaCl2_ratio1-10,pH,1.5,13
-pH - Hydrogen potential,pHCaCl2_ratio1-2,pH,1.5,13
-pH - Hydrogen potential,pHCaCl2_ratio1-2.5,pH,1.5,13
-pH - Hydrogen potential,pHCaCl2_ratio1-5,pH,1.5,13
-pH - Hydrogen potential,pHCaCl2_sat,pH,1.5,13
-pH - Hydrogen potential,pHH2O,pH,1.5,13
-pH - Hydrogen potential,pHH2O_ratio1-1,pH,1.5,13
-pH - Hydrogen potential,pHH2O_ratio1-10,pH,1.5,13
-pH - Hydrogen potential,pHH2O_ratio1-2,pH,1.5,13
-pH - Hydrogen potential,pHH2O_ratio1-2.5,pH,1.5,13
-pH - Hydrogen potential,pHH2O_ratio1-5,pH,1.5,13
-pH - Hydrogen potential,pHH2O_sat,pH,1.5,13
-pH - Hydrogen potential,pHH2O_unkn-spec,pH,1.5,13
-pH - Hydrogen potential,pHKCl,pH,1.5,13
-pH - Hydrogen potential,pHKCl_ratio1-1,pH,1.5,13
-pH - Hydrogen potential,pHKCl_ratio1-10,pH,1.5,13
-pH - Hydrogen potential,pHKCl_ratio1-2,pH,1.5,13
-pH - Hydrogen potential,pHKCl_ratio1-2.5,pH,1.5,13
-pH - Hydrogen potential,pHKCl_ratio1-5,pH,1.5,13
-pH - Hydrogen potential,pHKCl_sat,pH,1.5,13
-pH - Hydrogen potential,pHNaF,pH,1.5,13
-pH - Hydrogen potential,pHNaF_ratio1-1,pH,1.5,13
-pH - Hydrogen potential,pHNaF_ratio1-10,pH,1.5,13
-pH - Hydrogen potential,pHNaF_ratio1-2,pH,1.5,13
-pH - Hydrogen potential,pHNaF_ratio1-2.5,pH,1.5,13
-pH - Hydrogen potential,pHNaF_ratio1-5,pH,1.5,13
-pH - Hydrogen potential,pHNaF_sat,pH,1.5,13
-Phosphorus (P) - extractable,Extr_ap14,%,0,100
-Phosphorus (P) - extractable,Extr_ap15,%,0,100
-Phosphorus (P) - extractable,Extr_ap20,%,0,100
-Phosphorus (P) - extractable,Extr_ap21,%,0,100
-Phosphorus (P) - extractable,Extr_c6h8o7-reeuwijk,%,0,100
-Phosphorus (P) - extractable,Extr_cacl2,%,0,100
-Phosphorus (P) - extractable,Extr_capo4,%,0,100
-Phosphorus (P) - extractable,Extr_dtpa,%,0,100
-Phosphorus (P) - extractable,Extr_edta,%,0,100
-Phosphorus (P) - extractable,Extr_h2so4-truog,%,0,100
-Phosphorus (P) - extractable,Extr_hcl-h2so4-nelson,%,0,100
-Phosphorus (P) - extractable,Extr_hcl-nh4f-bray1,%,0,100
-Phosphorus (P) - extractable,Extr_hcl-nh4f-bray2,%,0,100
-Phosphorus (P) - extractable,Extr_hcl-nh4f-kurtz-bray,%,0,100
-Phosphorus (P) - extractable,Extr_hno3,%,0,100
-Phosphorus (P) - extractable,Extr_hotwater,%,0,100
-Phosphorus (P) - extractable,Extr_m1,%,0,100
-Phosphorus (P) - extractable,Extr_m2,%,0,100
-Phosphorus (P) - extractable,Extr_m3,%,0,100
-Phosphorus (P) - extractable,Extr_m3-spec,%,0,100
-Phosphorus (P) - extractable,Extr_nahco3-olsen,%,0,100
-Phosphorus (P) - extractable,Extr_nahco3-olsen-dabin,%,0,100
-Phosphorus (P) - extractable,Extr_naoac-morgan,%,0,100
-Phosphorus (P) - extractable,Extr_nh4ch3ch-oh-cooh-leuven,%,0,100
-Phosphorus (P) - extractable,Extr_nh4-co3-2-ambic1,%,0,100
-Phosphorus (P) - retention,RetentP_blakemore,g/hg,0,100
-Phosphorus (P) - retention,RetentP_unkn-spec,g/hg,0,100
-Phosphorus (P) - total,Total_h2so4,%,0,100
-Phosphorus (P) - total,Total_hcl,%,0,100
-Phosphorus (P) - total,Total_hcl-aquaregia,%,0,100
-Phosphorus (P) - total,Total_hclo4,%,0,100
-Phosphorus (P) - total,Total_hno3-aquafortis,%,0,100
-Phosphorus (P) - total,Total_nh4-6mo7o24,%,0,100
-Phosphorus (P) - total,Total_tp03,%,0,100
-Phosphorus (P) - total,Total_tp04,%,0,100
-Phosphorus (P) - total,Total_tp05,%,0,100
-Phosphorus (P) - total,Total_tp06,%,0,100
-Phosphorus (P) - total,Total_tp07,%,0,100
-Phosphorus (P) - total,Total_tp08,%,0,100
-Phosphorus (P) - total,Total_tp09,%,0,100
-Phosphorus (P) - total,Total_tp10,%,0,100
-Phosphorus (P) - total,Total_unkn,%,0,100
-Phosphorus (P) - total,Total_xrd,%,0,100
-Phosphorus (P) - total,Total_xrf,%,0,100
-Phosphorus (P) - total,Total_xrf-p,%,0,100
-Phosphorus (P) - total,Total_xtf-t,%,0,100
-pHProperty,pHCaCl2,pH,1.5,13
-pHProperty,pHCaCl2_ratio1-1,pH,1.5,13
-pHProperty,pHCaCl2_ratio1-10,pH,1.5,13
-pHProperty,pHCaCl2_ratio1-2,pH,1.5,13
-pHProperty,pHCaCl2_ratio1-2.5,pH,1.5,13
-pHProperty,pHCaCl2_ratio1-5,pH,1.5,13
-pHProperty,pHCaCl2_sat,pH,1.5,13
-pHProperty,pHH2O,pH,1.5,13
-pHProperty,pHH2O_ratio1-1,pH,1.5,13
-pHProperty,pHH2O_ratio1-10,pH,1.5,13
-pHProperty,pHH2O_ratio1-2,pH,1.5,13
-pHProperty,pHH2O_ratio1-2.5,pH,1.5,13
-pHProperty,pHH2O_ratio1-5,pH,1.5,13
-pHProperty,pHH2O_sat,pH,1.5,13
-pHProperty,pHH2O_unkn-spec,pH,1.5,13
-pHProperty,pHKCl,pH,1.5,13
-pHProperty,pHKCl_ratio1-1,pH,1.5,13
-pHProperty,pHKCl_ratio1-10,pH,1.5,13
-pHProperty,pHKCl_ratio1-2,pH,1.5,13
-pHProperty,pHKCl_ratio1-2.5,pH,1.5,13
-pHProperty,pHKCl_ratio1-5,pH,1.5,13
-pHProperty,pHKCl_sat,pH,1.5,13
-pHProperty,pHNaF,pH,1.5,13
-pHProperty,pHNaF_ratio1-1,pH,1.5,13
-pHProperty,pHNaF_ratio1-10,pH,1.5,13
-pHProperty,pHNaF_ratio1-2,pH,1.5,13
-pHProperty,pHNaF_ratio1-2.5,pH,1.5,13
-pHProperty,pHNaF_ratio1-5,pH,1.5,13
-pHProperty,pHNaF_sat,pH,1.5,13
-porosityProperty,Poros_calcul-pf0,m³/100 m³,0,100
-Potassium (K+) - exchangeable,ExchBases_ph0-cohex,cmol/kg,0,100
-Potassium (K+) - exchangeable,ExchBases_ph0-nh4cl,cmol/kg,0,100
-Potassium (K+) - exchangeable,ExchBases_ph7-nh4oac,cmol/kg,0,100
-Potassium (K+) - exchangeable,ExchBases_ph7-nh4oac-aas,cmol/kg,0,100
-Potassium (K+) - exchangeable,ExchBases_ph7-nh4oac-fp,cmol/kg,0,100
-Potassium (K+) - exchangeable,ExchBases_ph7-unkn,cmol/kg,0,100
-Potassium (K+) - exchangeable,ExchBases_ph8-bacl2tea,cmol/kg,0,100
-Potassium (K+) - exchangeable,ExchBases_ph8-unkn,cmol/kg,0,100
-Potassium (K+) - exchangeable,ExchBases_ph-unkn-edta,cmol/kg,0,100
-Potassium (K+) - exchangeable,ExchBases_ph-unkn-m3,cmol/kg,0,100
-Potassium (K+) - exchangeable,ExchBases_ph-unkn-m3-spec,cmol/kg,0,100
-Potassium (K) - extractable,Extr_ap14,cmol/kg,0,1000
-Potassium (K) - extractable,Extr_ap15,cmol/kg,0,1000
-Potassium (K) - extractable,Extr_ap20,cmol/kg,0,1000
-Potassium (K) - extractable,Extr_ap21,cmol/kg,0,1000
-Potassium (K) - extractable,Extr_c6h8o7-reeuwijk,cmol/kg,0,1000
-Potassium (K) - extractable,Extr_cacl2,cmol/kg,0,1000
-Potassium (K) - extractable,Extr_capo4,cmol/kg,0,1000
-Potassium (K) - extractable,Extr_dtpa,cmol/kg,0,1000
-Potassium (K) - extractable,Extr_edta,cmol/kg,0,1000
-Potassium (K) - extractable,Extr_h2so4-truog,cmol/kg,0,1000
-Potassium (K) - extractable,Extr_hcl-h2so4-nelson,cmol/kg,0,1000
-Potassium (K) - extractable,Extr_hcl-nh4f-bray1,cmol/kg,0,1000
-Potassium (K) - extractable,Extr_hcl-nh4f-bray2,cmol/kg,0,1000
-Potassium (K) - extractable,Extr_hcl-nh4f-kurtz-bray,cmol/kg,0,1000
-Potassium (K) - extractable,Extr_hno3,cmol/kg,0,1000
-Potassium (K) - extractable,Extr_hotwater,cmol/kg,0,1000
-Potassium (K) - extractable,Extr_m1,cmol/kg,0,1000
-Potassium (K) - extractable,Extr_m2,cmol/kg,0,1000
-Potassium (K) - extractable,Extr_m3,cmol/kg,0,1000
-Potassium (K) - extractable,Extr_m3-spec,cmol/kg,0,1000
-Potassium (K) - extractable,Extr_nahco3-olsen,cmol/kg,0,1000
-Potassium (K) - extractable,Extr_nahco3-olsen-dabin,cmol/kg,0,1000
-Potassium (K) - extractable,Extr_naoac-morgan,cmol/kg,0,1000
-Potassium (K) - extractable,Extr_nh4ch3ch-oh-cooh-leuven,cmol/kg,0,1000
-Potassium (K) - extractable,Extr_nh4-co3-2-ambic1,cmol/kg,0,1000
-Potassium (K) - total,Total_h2so4,cmol/kg,0,1000
-Potassium (K) - total,Total_hcl,cmol/kg,0,1000
-Potassium (K) - total,Total_hcl-aquaregia,cmol/kg,0,1000
-Potassium (K) - total,Total_hclo4,cmol/kg,0,1000
-Potassium (K) - total,Total_hno3-aquafortis,cmol/kg,0,1000
-Potassium (K) - total,Total_nh4-6mo7o24,cmol/kg,0,1000
-Potassium (K) - total,Total_tp03,cmol/kg,0,1000
-Potassium (K) - total,Total_tp04,cmol/kg,0,1000
-Potassium (K) - total,Total_tp05,cmol/kg,0,1000
-Potassium (K) - total,Total_tp06,cmol/kg,0,1000
-Potassium (K) - total,Total_tp07,cmol/kg,0,1000
-Potassium (K) - total,Total_tp08,cmol/kg,0,1000
-Potassium (K) - total,Total_tp09,cmol/kg,0,1000
-Potassium (K) - total,Total_tp10,cmol/kg,0,1000
-Potassium (K) - total,Total_unkn,cmol/kg,0,1000
-Potassium (K) - total,Total_xrd,cmol/kg,0,1000
-Potassium (K) - total,Total_xrf,cmol/kg,0,1000
-Potassium (K) - total,Total_xrf-p,cmol/kg,0,1000
-Potassium (K) - total,Total_xtf-t,cmol/kg,0,1000
-Sand texture fraction,SaSiCl_2-20-2000u,%,0,100
-Sand texture fraction,SaSiCl_2-20-2000u-adj100,%,0,100
-Sand texture fraction,SaSiCl_2-20-2000u-disp,%,0,100
-Sand texture fraction,SaSiCl_2-20-2000u-disp-beaker,%,0,100
-Sand texture fraction,SaSiCl_2-20-2000u-disp-hydrometer,%,0,100
-Sand texture fraction,SaSiCl_2-20-2000u-disp-hydrometer-bouy,%,0,100
-Sand texture fraction,SaSiCl_2-20-2000u-disp-laser,%,0,100
-Sand texture fraction,SaSiCl_2-20-2000u-disp-pipette,%,0,100
-Sand texture fraction,SaSiCl_2-20-2000u-disp-spec,%,0,100
-Sand texture fraction,SaSiCl_2-20-2000u-fld,%,0,100
-Sand texture fraction,SaSiCl_2-20-2000u-nodisp,%,0,100
-Sand texture fraction,SaSiCl_2-20-2000u-nodisp-hydrometer,%,0,100
-Sand texture fraction,SaSiCl_2-20-2000u-nodisp-hydrometer-bouy,%,0,100
-Sand texture fraction,SaSiCl_2-20-2000u-nodisp-laser,%,0,100
-Sand texture fraction,SaSiCl_2-20-2000u-nodisp-pipette,%,0,100
-Sand texture fraction,SaSiCl_2-20-2000u-nodisp-spec,%,0,100
-Sand texture fraction,SaSiCl_2-50-2000u,%,0,100
-Sand texture fraction,SaSiCl_2-50-2000u-adj100,%,0,100
-Sand texture fraction,SaSiCl_2-50-2000u-disp,%,0,100
-Sand texture fraction,SaSiCl_2-50-2000u-disp-beaker,%,0,100
-Sand texture fraction,SaSiCl_2-50-2000u-disp-hydrometer,%,0,100
-Sand texture fraction,SaSiCl_2-50-2000u-disp-hydrometer-bouy,%,0,100
-Sand texture fraction,SaSiCl_2-50-2000u-disp-laser,%,0,100
-Sand texture fraction,SaSiCl_2-50-2000u-disp-pipette,%,0,100
-Sand texture fraction,SaSiCl_2-50-2000u-disp-spec,%,0,100
-Sand texture fraction,SaSiCl_2-50-2000u-fld,%,0,100
-Sand texture fraction,SaSiCl_2-50-2000u-nodisp,%,0,100
-Sand texture fraction,SaSiCl_2-50-2000u-nodisp-hydrometer,%,0,100
-Sand texture fraction,SaSiCl_2-50-2000u-nodisp-hydrometer-bouy,%,0,100
-Sand texture fraction,SaSiCl_2-50-2000u-nodisp-laser,%,0,100
-Sand texture fraction,SaSiCl_2-50-2000u-nodisp-pipette,%,0,100
-Sand texture fraction,SaSiCl_2-50-2000u-nodisp-spec,%,0,100
-Sand texture fraction,SaSiCl_2-64-2000u,%,0,100
-Sand texture fraction,SaSiCl_2-64-2000u-adj100,%,0,100
-Sand texture fraction,SaSiCl_2-64-2000u-disp,%,0,100
-Sand texture fraction,SaSiCl_2-64-2000u-disp-beaker,%,0,100
-Sand texture fraction,SaSiCl_2-64-2000u-disp-hydrometer,%,0,100
-Sand texture fraction,SaSiCl_2-64-2000u-disp-hydrometer-bouy,%,0,100
-Sand texture fraction,SaSiCl_2-64-2000u-disp-laser,%,0,100
-Sand texture fraction,SaSiCl_2-64-2000u-disp-pipette,%,0,100
-Sand texture fraction,SaSiCl_2-64-2000u-disp-spec,%,0,100
-Sand texture fraction,SaSiCl_2-64-2000u-fld,%,0,100
-Sand texture fraction,SaSiCl_2-64-2000u-nodisp,%,0,100
-Sand texture fraction,SaSiCl_2-64-2000u-nodisp-hydrometer,%,0,100
-Sand texture fraction,SaSiCl_2-64-2000u-nodisp-hydrometer-bouy,%,0,100
-Sand texture fraction,SaSiCl_2-64-2000u-nodisp-laser,%,0,100
-Sand texture fraction,SaSiCl_2-64-2000u-nodisp-pipette,%,0,100
-Sand texture fraction,SaSiCl_2-64-2000u-nodisp-spec,%,0,100
-Silt texture fraction,SaSiCl_2-20-2000u,%,0,100
-Silt texture fraction,SaSiCl_2-20-2000u-adj100,%,0,100
-Silt texture fraction,SaSiCl_2-20-2000u-disp,%,0,100
-Silt texture fraction,SaSiCl_2-20-2000u-disp-beaker,%,0,100
-Silt texture fraction,SaSiCl_2-20-2000u-disp-hydrometer,%,0,100
-Silt texture fraction,SaSiCl_2-20-2000u-disp-hydrometer-bouy,%,0,100
-Silt texture fraction,SaSiCl_2-20-2000u-disp-laser,%,0,100
-Silt texture fraction,SaSiCl_2-20-2000u-disp-pipette,%,0,100
-Silt texture fraction,SaSiCl_2-20-2000u-disp-spec,%,0,100
-Silt texture fraction,SaSiCl_2-20-2000u-fld,%,0,100
-Silt texture fraction,SaSiCl_2-20-2000u-nodisp,%,0,100
-Silt texture fraction,SaSiCl_2-20-2000u-nodisp-hydrometer,%,0,100
-Silt texture fraction,SaSiCl_2-20-2000u-nodisp-hydrometer-bouy,%,0,100
-Silt texture fraction,SaSiCl_2-20-2000u-nodisp-laser,%,0,100
-Silt texture fraction,SaSiCl_2-20-2000u-nodisp-pipette,%,0,100
-Silt texture fraction,SaSiCl_2-20-2000u-nodisp-spec,%,0,100
-Silt texture fraction,SaSiCl_2-50-2000u,%,0,100
-Silt texture fraction,SaSiCl_2-50-2000u-adj100,%,0,100
-Silt texture fraction,SaSiCl_2-50-2000u-disp,%,0,100
-Silt texture fraction,SaSiCl_2-50-2000u-disp-beaker,%,0,100
-Silt texture fraction,SaSiCl_2-50-2000u-disp-hydrometer,%,0,100
-Silt texture fraction,SaSiCl_2-50-2000u-disp-hydrometer-bouy,%,0,100
-Silt texture fraction,SaSiCl_2-50-2000u-disp-laser,%,0,100
-Silt texture fraction,SaSiCl_2-50-2000u-disp-pipette,%,0,100
-Silt texture fraction,SaSiCl_2-50-2000u-disp-spec,%,0,100
-Silt texture fraction,SaSiCl_2-50-2000u-fld,%,0,100
-Silt texture fraction,SaSiCl_2-50-2000u-nodisp,%,0,100
-Silt texture fraction,SaSiCl_2-50-2000u-nodisp-hydrometer,%,0,100
-Silt texture fraction,SaSiCl_2-50-2000u-nodisp-hydrometer-bouy,%,0,100
-Silt texture fraction,SaSiCl_2-50-2000u-nodisp-laser,%,0,100
-Silt texture fraction,SaSiCl_2-50-2000u-nodisp-pipette,%,0,100
-Silt texture fraction,SaSiCl_2-50-2000u-nodisp-spec,%,0,100
-Silt texture fraction,SaSiCl_2-64-2000u,%,0,100
-Silt texture fraction,SaSiCl_2-64-2000u-adj100,%,0,100
-Silt texture fraction,SaSiCl_2-64-2000u-disp,%,0,100
-Silt texture fraction,SaSiCl_2-64-2000u-disp-beaker,%,0,100
-Silt texture fraction,SaSiCl_2-64-2000u-disp-hydrometer,%,0,100
-Silt texture fraction,SaSiCl_2-64-2000u-disp-hydrometer-bouy,%,0,100
-Silt texture fraction,SaSiCl_2-64-2000u-disp-laser,%,0,100
-Silt texture fraction,SaSiCl_2-64-2000u-disp-pipette,%,0,100
-Silt texture fraction,SaSiCl_2-64-2000u-disp-spec,%,0,100
-Silt texture fraction,SaSiCl_2-64-2000u-fld,%,0,100
-Silt texture fraction,SaSiCl_2-64-2000u-nodisp,%,0,100
-Silt texture fraction,SaSiCl_2-64-2000u-nodisp-hydrometer,%,0,100
-Silt texture fraction,SaSiCl_2-64-2000u-nodisp-hydrometer-bouy,%,0,100
-Silt texture fraction,SaSiCl_2-64-2000u-nodisp-laser,%,0,100
-Silt texture fraction,SaSiCl_2-64-2000u-nodisp-pipette,%,0,100
-Silt texture fraction,SaSiCl_2-64-2000u-nodisp-spec,%,0,100
-Sodium (Na+) - exchangeable,ExchBases_ph0-cohex,cmol/kg,0,100
-Sodium (Na+) - exchangeable,ExchBases_ph0-nh4cl,cmol/kg,0,100
-Sodium (Na+) - exchangeable,ExchBases_ph7-nh4oac,cmol/kg,0,100
-Sodium (Na+) - exchangeable,ExchBases_ph7-nh4oac-aas,cmol/kg,0,100
-Sodium (Na+) - exchangeable,ExchBases_ph7-nh4oac-fp,cmol/kg,0,100
-Sodium (Na+) - exchangeable,ExchBases_ph7-unkn,cmol/kg,0,100
-Sodium (Na+) - exchangeable,ExchBases_ph8-bacl2tea,cmol/kg,0,100
-Sodium (Na+) - exchangeable,ExchBases_ph8-unkn,cmol/kg,0,100
-Sodium (Na+) - exchangeable,ExchBases_ph-unkn-edta,cmol/kg,0,100
-Sodium (Na+) - exchangeable,ExchBases_ph-unkn-m3,cmol/kg,0,100
-Sodium (Na+) - exchangeable,ExchBases_ph-unkn-m3-spec,cmol/kg,0,100
-Sodium (Na) - extractable,Extr_ap14,cmol/kg,0,1000
-Sodium (Na) - extractable,Extr_ap15,cmol/kg,0,1000
-Sodium (Na) - extractable,Extr_ap20,cmol/kg,0,1000
-Sodium (Na) - extractable,Extr_ap21,cmol/kg,0,1000
-Sodium (Na) - extractable,Extr_c6h8o7-reeuwijk,cmol/kg,0,1000
-Sodium (Na) - extractable,Extr_cacl2,cmol/kg,0,1000
-Sodium (Na) - extractable,Extr_capo4,cmol/kg,0,1000
-Sodium (Na) - extractable,Extr_dtpa,cmol/kg,0,1000
-Sodium (Na) - extractable,Extr_edta,cmol/kg,0,1000
-Sodium (Na) - extractable,Extr_h2so4-truog,cmol/kg,0,1000
-Sodium (Na) - extractable,Extr_hcl-h2so4-nelson,cmol/kg,0,1000
-Sodium (Na) - extractable,Extr_hcl-nh4f-bray1,cmol/kg,0,1000
-Sodium (Na) - extractable,Extr_hcl-nh4f-bray2,cmol/kg,0,1000
-Sodium (Na) - extractable,Extr_hcl-nh4f-kurtz-bray,cmol/kg,0,1000
-Sodium (Na) - extractable,Extr_hno3,cmol/kg,0,1000
-Sodium (Na) - extractable,Extr_hotwater,cmol/kg,0,1000
-Sodium (Na) - extractable,Extr_m1,cmol/kg,0,1000
-Sodium (Na) - extractable,Extr_m2,cmol/kg,0,1000
-Sodium (Na) - extractable,Extr_m3,cmol/kg,0,1000
-Sodium (Na) - extractable,Extr_m3-spec,cmol/kg,0,1000
-Sodium (Na) - extractable,Extr_nahco3-olsen,cmol/kg,0,1000
-Sodium (Na) - extractable,Extr_nahco3-olsen-dabin,cmol/kg,0,1000
-Sodium (Na) - extractable,Extr_naoac-morgan,cmol/kg,0,1000
-Sodium (Na) - extractable,Extr_nh4ch3ch-oh-cooh-leuven,cmol/kg,0,1000
-Sodium (Na) - extractable,Extr_nh4-co3-2-ambic1,cmol/kg,0,1000
-Sodium (Na) - total,Total_h2so4,cmol/kg,0,1000
-Sodium (Na) - total,Total_hcl,cmol/kg,0,1000
-Sodium (Na) - total,Total_hcl-aquaregia,cmol/kg,0,1000
-Sodium (Na) - total,Total_hclo4,cmol/kg,0,1000
-Sodium (Na) - total,Total_hno3-aquafortis,cmol/kg,0,1000
-Sodium (Na) - total,Total_nh4-6mo7o24,cmol/kg,0,1000
-Sodium (Na) - total,Total_tp03,cmol/kg,0,1000
-Sodium (Na) - total,Total_tp04,cmol/kg,0,1000
-Sodium (Na) - total,Total_tp05,cmol/kg,0,1000
-Sodium (Na) - total,Total_tp06,cmol/kg,0,1000
-Sodium (Na) - total,Total_tp07,cmol/kg,0,1000
-Sodium (Na) - total,Total_tp08,cmol/kg,0,1000
-Sodium (Na) - total,Total_tp09,cmol/kg,0,1000
-Sodium (Na) - total,Total_tp10,cmol/kg,0,1000
-Sodium (Na) - total,Total_unkn,cmol/kg,0,1000
-Sodium (Na) - total,Total_xrd,cmol/kg,0,1000
-Sodium (Na) - total,Total_xrf,cmol/kg,0,1000
-Sodium (Na) - total,Total_xrf-p,cmol/kg,0,1000
-Sodium (Na) - total,Total_xtf-t,cmol/kg,0,1000
-solubleSaltsProperty,SlbAn_calcul-unkn,cmol/L,0,1000
-solubleSaltsProperty,SlbCat_calcul-unkn,cmol/L,0,1000
-Sulfur (S) - extractable,Extr_ap14,%,0,100
-Sulfur (S) - extractable,Extr_ap15,%,0,100
-Sulfur (S) - extractable,Extr_ap20,%,0,100
-Sulfur (S) - extractable,Extr_ap21,%,0,100
-Sulfur (S) - extractable,Extr_c6h8o7-reeuwijk,%,0,100
-Sulfur (S) - extractable,Extr_cacl2,%,0,100
-Sulfur (S) - extractable,Extr_capo4,%,0,100
-Sulfur (S) - extractable,Extr_dtpa,%,0,100
-Sulfur (S) - extractable,Extr_edta,%,0,100
-Sulfur (S) - extractable,Extr_h2so4-truog,%,0,100
-Sulfur (S) - extractable,Extr_hcl-h2so4-nelson,%,0,100
-Sulfur (S) - extractable,Extr_hcl-nh4f-bray1,%,0,100
-Sulfur (S) - extractable,Extr_hcl-nh4f-bray2,%,0,100
-Sulfur (S) - extractable,Extr_hcl-nh4f-kurtz-bray,%,0,100
-Sulfur (S) - extractable,Extr_hno3,%,0,100
-Sulfur (S) - extractable,Extr_hotwater,%,0,100
-Sulfur (S) - extractable,Extr_m1,%,0,100
-Sulfur (S) - extractable,Extr_m2,%,0,100
-Sulfur (S) - extractable,Extr_m3,%,0,100
-Sulfur (S) - extractable,Extr_m3-spec,%,0,100
-Sulfur (S) - extractable,Extr_nahco3-olsen,%,0,100
-Sulfur (S) - extractable,Extr_nahco3-olsen-dabin,%,0,100
-Sulfur (S) - extractable,Extr_naoac-morgan,%,0,100
-Sulfur (S) - extractable,Extr_nh4ch3ch-oh-cooh-leuven,%,0,100
-Sulfur (S) - extractable,Extr_nh4-co3-2-ambic1,%,0,100
-Sulfur (S) - total,Total_h2so4,%,0,100
-Sulfur (S) - total,Total_hcl,%,0,100
-Sulfur (S) - total,Total_hcl-aquaregia,%,0,100
-Sulfur (S) - total,Total_hclo4,%,0,100
-Sulfur (S) - total,Total_hno3-aquafortis,%,0,100
-Sulfur (S) - total,Total_nh4-6mo7o24,%,0,100
-Sulfur (S) - total,Total_tp03,%,0,100
-Sulfur (S) - total,Total_tp04,%,0,100
-Sulfur (S) - total,Total_tp05,%,0,100
-Sulfur (S) - total,Total_tp06,%,0,100
-Sulfur (S) - total,Total_tp07,%,0,100
-Sulfur (S) - total,Total_tp08,%,0,100
-Sulfur (S) - total,Total_tp09,%,0,100
-Sulfur (S) - total,Total_tp10,%,0,100
-Sulfur (S) - total,Total_unkn,%,0,100
-Sulfur (S) - total,Total_xrd,%,0,100
-Sulfur (S) - total,Total_xrf,%,0,100
-Sulfur (S) - total,Total_xrf-p,%,0,100
-Sulfur (S) - total,Total_xtf-t,%,0,100
-totalCarbonateEquivalentProperty,CaCO3_acid-ch3cooh-dc,g/kg,0,1000
-totalCarbonateEquivalentProperty,CaCO3_acid-ch3cooh-nodc,g/kg,0,1000
-totalCarbonateEquivalentProperty,CaCO3_acid-ch3cooh-unkn,g/kg,0,1000
-totalCarbonateEquivalentProperty,CaCO3_acid-dc,g/kg,0,1000
-totalCarbonateEquivalentProperty,CaCO3_acid-h2so4-dc,g/kg,0,1000
-totalCarbonateEquivalentProperty,CaCO3_acid-h2so4-nodc,g/kg,0,1000
-totalCarbonateEquivalentProperty,CaCO3_acid-h2so4-unkn,g/kg,0,1000
-totalCarbonateEquivalentProperty,CaCO3_acid-h3po4-dc,g/kg,0,1000
-totalCarbonateEquivalentProperty,CaCO3_acid-h3po4-nodc,g/kg,0,1000
-totalCarbonateEquivalentProperty,CaCO3_acid-h3po4-unkn,g/kg,0,1000
-totalCarbonateEquivalentProperty,CaCO3_acid-hcl-dc,g/kg,0,1000
-totalCarbonateEquivalentProperty,CaCO3_acid-hcl-nodc,g/kg,0,1000
-totalCarbonateEquivalentProperty,CaCO3_acid-hcl-unkn,g/kg,0,1000
-totalCarbonateEquivalentProperty,CaCO3_acid-nodc,g/kg,0,1000
-totalCarbonateEquivalentProperty,CaCO3_acid-unkn,g/kg,0,1000
-totalCarbonateEquivalentProperty,CaCO3_ca01,g/kg,0,1000
-totalCarbonateEquivalentProperty,CaCO3_ca02,g/kg,0,1000
-totalCarbonateEquivalentProperty,CaCO3_ca03,g/kg,0,1000
-totalCarbonateEquivalentProperty,CaCO3_ca04,g/kg,0,1000
-totalCarbonateEquivalentProperty,CaCO3_ca05,g/kg,0,1000
-totalCarbonateEquivalentProperty,CaCO3_ca06,g/kg,0,1000
-totalCarbonateEquivalentProperty,CaCO3_ca07,g/kg,0,1000
-totalCarbonateEquivalentProperty,CaCO3_ca08,g/kg,0,1000
-totalCarbonateEquivalentProperty,CaCO3_ca09,g/kg,0,1000
-totalCarbonateEquivalentProperty,CaCO3_ca10,g/kg,0,1000
-totalCarbonateEquivalentProperty,CaCO3_ca11,g/kg,0,1000
-totalCarbonateEquivalentProperty,CaCO3_ca12,g/kg,0,1000
-totalCarbonateEquivalentProperty,CaCO3_calcul-tc-oc,g/kg,0,1000
-zincProperty,Total_h2so4,%,0,100
-zincProperty,Total_hcl,%,0,100
-zincProperty,Total_hcl-aquaregia,%,0,100
-zincProperty,Total_hclo4,%,0,100
-zincProperty,Total_hno3-aquafortis,%,0,100
-zincProperty,Total_nh4-6mo7o24,%,0,100
-zincProperty,Total_tp03,%,0,100
-zincProperty,Total_tp04,%,0,100
-zincProperty,Total_tp05,%,0,100
-zincProperty,Total_tp06,%,0,100
-zincProperty,Total_tp07,%,0,100
-zincProperty,Total_tp08,%,0,100
-zincProperty,Total_tp09,%,0,100
-zincProperty,Total_tp10,%,0,100
-zincProperty,Total_unkn,%,0,100
-zincProperty,Total_xrd,%,0,100
-zincProperty,Total_xrf,%,0,100
-zincProperty,Total_xrf-p,%,0,100
-zincProperty,Total_xtf-t,%,0,100
-Zinc (Zn) - extractable,Extr_ap14,%,0,100
-Zinc (Zn) - extractable,Extr_ap15,%,0,100
-Zinc (Zn) - extractable,Extr_ap20,%,0,100
-Zinc (Zn) - extractable,Extr_ap21,%,0,100
-Zinc (Zn) - extractable,Extr_c6h8o7-reeuwijk,%,0,100
-Zinc (Zn) - extractable,Extr_cacl2,%,0,100
-Zinc (Zn) - extractable,Extr_capo4,%,0,100
-Zinc (Zn) - extractable,Extr_dtpa,%,0,100
-Zinc (Zn) - extractable,Extr_edta,%,0,100
-Zinc (Zn) - extractable,Extr_h2so4-truog,%,0,100
-Zinc (Zn) - extractable,Extr_hcl-h2so4-nelson,%,0,100
-Zinc (Zn) - extractable,Extr_hcl-nh4f-bray1,%,0,100
-Zinc (Zn) - extractable,Extr_hcl-nh4f-bray2,%,0,100
-Zinc (Zn) - extractable,Extr_hcl-nh4f-kurtz-bray,%,0,100
-Zinc (Zn) - extractable,Extr_hno3,%,0,100
-Zinc (Zn) - extractable,Extr_hotwater,%,0,100
-Zinc (Zn) - extractable,Extr_m1,%,0,100
-Zinc (Zn) - extractable,Extr_m2,%,0,100
-Zinc (Zn) - extractable,Extr_m3,%,0,100
-Zinc (Zn) - extractable,Extr_m3-spec,%,0,100
-Zinc (Zn) - extractable,Extr_nahco3-olsen,%,0,100
-Zinc (Zn) - extractable,Extr_nahco3-olsen-dabin,%,0,100
-Zinc (Zn) - extractable,Extr_naoac-morgan,%,0,100
-Zinc (Zn) - extractable,Extr_nh4ch3ch-oh-cooh-leuven,%,0,100
-Zinc (Zn) - extractable,Extr_nh4-co3-2-ambic1,%,0,100
+property_phys_chem_id,procedure_phys_chem_id,unit_of_measure_id,value_min,value_max,definition,citation,reference
+Acidity - exchangeable,ExchAcid_ph0-kcl1m,cmol/kg,0,100,,,
+Acidity - exchangeable,ExchAcid_ph0-nh4cl,cmol/kg,0,100,,,
+Acidity - exchangeable,ExchAcid_ph0-unkn,cmol/kg,0,100,,,
+Acidity - exchangeable,ExchAcid_ph7-caoac,cmol/kg,0,100,,,
+Acidity - exchangeable,ExchAcid_ph7-unkn,cmol/kg,0,100,,,
+Acidity - exchangeable,ExchAcid_ph8-bacl2tea,cmol/kg,0,100,,,
+Acidity - exchangeable,ExchAcid_ph8-unkn,cmol/kg,0,100,,,
+Aluminium (Al+++) - exchangeable,ExchBases_ph0-cohex,cmol/kg,0,100,,,
+Aluminium (Al+++) - exchangeable,ExchBases_ph0-nh4cl,cmol/kg,0,100,,,
+Aluminium (Al+++) - exchangeable,ExchBases_ph7-nh4oac,cmol/kg,0,100,,,
+Aluminium (Al+++) - exchangeable,ExchBases_ph7-nh4oac-aas,cmol/kg,0,100,,,
+Aluminium (Al+++) - exchangeable,ExchBases_ph7-nh4oac-fp,cmol/kg,0,100,,,
+Aluminium (Al+++) - exchangeable,ExchBases_ph7-unkn,cmol/kg,0,100,,,
+Aluminium (Al+++) - exchangeable,ExchBases_ph8-bacl2tea,cmol/kg,0,100,,,
+Aluminium (Al+++) - exchangeable,ExchBases_ph8-unkn,cmol/kg,0,100,,,
+Aluminium (Al+++) - exchangeable,ExchBases_ph-unkn-edta,cmol/kg,0,100,,,
+Aluminium (Al+++) - exchangeable,ExchBases_ph-unkn-m3,cmol/kg,0,100,,,
+Aluminium (Al+++) - exchangeable,ExchBases_ph-unkn-m3-spec,cmol/kg,0,100,,,
+aluminiumProperty,Total_h2so4,%,0,100,,,
+aluminiumProperty,Total_hcl,%,0,100,,,
+aluminiumProperty,Total_hcl-aquaregia,%,0,100,,,
+aluminiumProperty,Total_hclo4,%,0,100,,,
+aluminiumProperty,Total_hno3-aquafortis,%,0,100,,,
+aluminiumProperty,Total_nh4-6mo7o24,%,0,100,,,
+aluminiumProperty,Total_tp03,%,0,100,,,
+aluminiumProperty,Total_tp04,%,0,100,,,
+aluminiumProperty,Total_tp05,%,0,100,,,
+aluminiumProperty,Total_tp06,%,0,100,,,
+aluminiumProperty,Total_tp07,%,0,100,,,
+aluminiumProperty,Total_tp08,%,0,100,,,
+aluminiumProperty,Total_tp09,%,0,100,,,
+aluminiumProperty,Total_tp10,%,0,100,,,
+aluminiumProperty,Total_unkn,%,0,100,,,
+aluminiumProperty,Total_xrd,%,0,100,,,
+aluminiumProperty,Total_xrf,%,0,100,,,
+aluminiumProperty,Total_xrf-p,%,0,100,,,
+aluminiumProperty,Total_xtf-t,%,0,100,,,
+Available water capacity - volumetric (FC to WP),PAWHC_calcul-fc100wp,m³/100 m³,0,100,,,
+Available water capacity - volumetric (FC to WP),PAWHC_calcul-fc200wp,m³/100 m³,0,100,,,
+Available water capacity - volumetric (FC to WP),PAWHC_calcul-fc300wp,m³/100 m³,0,100,,,
+Base saturation - calculated,BSat_calcul-cec,%,0,100,,,
+Base saturation - calculated,BSat_calcul-ecec,%,0,100,,,
+Boron (B) - extractable,Extr_ap14,%,0,100,,,
+Boron (B) - extractable,Extr_ap15,%,0,100,,,
+Boron (B) - extractable,Extr_ap20,%,0,100,,,
+Boron (B) - extractable,Extr_ap21,%,0,100,,,
+Boron (B) - extractable,Extr_c6h8o7-reeuwijk,%,0,100,,,
+Boron (B) - extractable,Extr_cacl2,%,0,100,,,
+Boron (B) - extractable,Extr_capo4,%,0,100,,,
+Boron (B) - extractable,Extr_dtpa,%,0,100,,,
+Boron (B) - extractable,Extr_edta,%,0,100,,,
+Boron (B) - extractable,Extr_h2so4-truog,%,0,100,,,
+Boron (B) - extractable,Extr_hcl-h2so4-nelson,%,0,100,,,
+Boron (B) - extractable,Extr_hcl-nh4f-bray1,%,0,100,,,
+Boron (B) - extractable,Extr_hcl-nh4f-bray2,%,0,100,,,
+Boron (B) - extractable,Extr_hcl-nh4f-kurtz-bray,%,0,100,,,
+Boron (B) - extractable,Extr_hno3,%,0,100,,,
+Boron (B) - extractable,Extr_hotwater,%,0,100,,,
+Boron (B) - extractable,Extr_m1,%,0,100,,,
+Boron (B) - extractable,Extr_m2,%,0,100,,,
+Boron (B) - extractable,Extr_m3,%,0,100,,,
+Boron (B) - extractable,Extr_m3-spec,%,0,100,,,
+Boron (B) - extractable,Extr_nahco3-olsen,%,0,100,,,
+Boron (B) - extractable,Extr_nahco3-olsen-dabin,%,0,100,,,
+Boron (B) - extractable,Extr_naoac-morgan,%,0,100,,,
+Boron (B) - extractable,Extr_nh4ch3ch-oh-cooh-leuven,%,0,100,,,
+Boron (B) - extractable,Extr_nh4-co3-2-ambic1,%,0,100,,,
+Boron (B) - total,Total_h2so4,%,0,100,,,
+Boron (B) - total,Total_hcl,%,0,100,,,
+Boron (B) - total,Total_hcl-aquaregia,%,0,100,,,
+Boron (B) - total,Total_hclo4,%,0,100,,,
+Boron (B) - total,Total_hno3-aquafortis,%,0,100,,,
+Boron (B) - total,Total_nh4-6mo7o24,%,0,100,,,
+Boron (B) - total,Total_tp03,%,0,100,,,
+Boron (B) - total,Total_tp04,%,0,100,,,
+Boron (B) - total,Total_tp05,%,0,100,,,
+Boron (B) - total,Total_tp06,%,0,100,,,
+Boron (B) - total,Total_tp07,%,0,100,,,
+Boron (B) - total,Total_tp08,%,0,100,,,
+Boron (B) - total,Total_tp09,%,0,100,,,
+Boron (B) - total,Total_tp10,%,0,100,,,
+Boron (B) - total,Total_unkn,%,0,100,,,
+Boron (B) - total,Total_xrd,%,0,100,,,
+Boron (B) - total,Total_xrf,%,0,100,,,
+Boron (B) - total,Total_xrf-p,%,0,100,,,
+Boron (B) - total,Total_xtf-t,%,0,100,,,
+bulkDensityFineEarthProperty,BlkDensF_fe-cl-fc,kg/dm³,0.01,2.65,,,
+bulkDensityFineEarthProperty,BlkDensF_fe-cl-od,kg/dm³,0.01,2.65,,,
+bulkDensityFineEarthProperty,BlkDensF_fe-cl-unkn,kg/dm³,0.01,2.65,,,
+bulkDensityFineEarthProperty,BlkDensF_fe-co-fc,kg/dm³,0.01,2.65,,,
+bulkDensityFineEarthProperty,BlkDensF_fe-co-od,kg/dm³,0.01,2.65,,,
+bulkDensityFineEarthProperty,BlkDensF_fe-co-unkn,kg/dm³,0.01,2.65,,,
+bulkDensityFineEarthProperty,BlkDensF_fe-rpl-unkn,kg/dm³,0.01,2.65,,,
+bulkDensityFineEarthProperty,BlkDensF_fe-unkn,kg/dm³,0.01,2.65,,,
+bulkDensityFineEarthProperty,BlkDensF_fe-unkn-fc,kg/dm³,0.01,2.65,,,
+bulkDensityFineEarthProperty,BlkDensF_fe-unkn-od,kg/dm³,0.01,2.65,,,
+bulkDensityWholeSoilProperty,BlkDensW_we-cl-fc,kg/dm³,0.01,3.6,,,
+bulkDensityWholeSoilProperty,BlkDensW_we-cl-od,kg/dm³,0.01,3.6,,,
+bulkDensityWholeSoilProperty,BlkDensW_we-cl-unkn,kg/dm³,0.01,3.6,,,
+bulkDensityWholeSoilProperty,BlkDensW_we-co-fc,kg/dm³,0.01,3.6,,,
+bulkDensityWholeSoilProperty,BlkDensW_we-co-od,kg/dm³,0.01,3.6,,,
+bulkDensityWholeSoilProperty,BlkDensW_we-co-unkn,kg/dm³,0.01,3.6,,,
+bulkDensityWholeSoilProperty,BlkDensW_we-rpl-unkn,kg/dm³,0.01,3.6,,,
+bulkDensityWholeSoilProperty,BlkDensW_we-unkn,kg/dm³,0.01,3.6,,,
+cadmiumProperty,Extr_ap14,%,0,100,,,
+cadmiumProperty,Extr_ap15,%,0,100,,,
+cadmiumProperty,Extr_ap20,%,0,100,,,
+cadmiumProperty,Extr_ap21,%,0,100,,,
+cadmiumProperty,Extr_c6h8o7-reeuwijk,%,0,100,,,
+cadmiumProperty,Extr_cacl2,%,0,100,,,
+cadmiumProperty,Extr_capo4,%,0,100,,,
+cadmiumProperty,Extr_dtpa,%,0,100,,,
+cadmiumProperty,Extr_edta,%,0,100,,,
+cadmiumProperty,Extr_h2so4-truog,%,0,100,,,
+cadmiumProperty,Extr_hcl-h2so4-nelson,%,0,100,,,
+cadmiumProperty,Extr_hcl-nh4f-bray1,%,0,100,,,
+cadmiumProperty,Extr_hcl-nh4f-bray2,%,0,100,,,
+cadmiumProperty,Extr_hcl-nh4f-kurtz-bray,%,0,100,,,
+cadmiumProperty,Extr_hno3,%,0,100,,,
+cadmiumProperty,Extr_hotwater,%,0,100,,,
+cadmiumProperty,Extr_m1,%,0,100,,,
+cadmiumProperty,Extr_m2,%,0,100,,,
+cadmiumProperty,Extr_m3,%,0,100,,,
+cadmiumProperty,Extr_m3-spec,%,0,100,,,
+cadmiumProperty,Extr_nahco3-olsen,%,0,100,,,
+cadmiumProperty,Extr_nahco3-olsen-dabin,%,0,100,,,
+cadmiumProperty,Extr_naoac-morgan,%,0,100,,,
+cadmiumProperty,Extr_nh4ch3ch-oh-cooh-leuven,%,0,100,,,
+cadmiumProperty,Extr_nh4-co3-2-ambic1,%,0,100,,,
+cadmiumProperty,Total_h2so4,%,0,100,,,
+cadmiumProperty,Total_hcl,%,0,100,,,
+cadmiumProperty,Total_hcl-aquaregia,%,0,100,,,
+cadmiumProperty,Total_hclo4,%,0,100,,,
+cadmiumProperty,Total_hno3-aquafortis,%,0,100,,,
+cadmiumProperty,Total_nh4-6mo7o24,%,0,100,,,
+cadmiumProperty,Total_tp03,%,0,100,,,
+cadmiumProperty,Total_tp04,%,0,100,,,
+cadmiumProperty,Total_tp05,%,0,100,,,
+cadmiumProperty,Total_tp06,%,0,100,,,
+cadmiumProperty,Total_tp07,%,0,100,,,
+cadmiumProperty,Total_tp08,%,0,100,,,
+cadmiumProperty,Total_tp09,%,0,100,,,
+cadmiumProperty,Total_tp10,%,0,100,,,
+cadmiumProperty,Total_unkn,%,0,100,,,
+cadmiumProperty,Total_xrd,%,0,100,,,
+cadmiumProperty,Total_xrf,%,0,100,,,
+cadmiumProperty,Total_xrf-p,%,0,100,,,
+cadmiumProperty,Total_xtf-t,%,0,100,,,
+Calcium (Ca++) - exchangeable,ExchBases_ph0-cohex,cmol/kg,0,100,,,
+Calcium (Ca++) - exchangeable,ExchBases_ph0-nh4cl,cmol/kg,0,100,,,
+Calcium (Ca++) - exchangeable,ExchBases_ph7-nh4oac,cmol/kg,0,100,,,
+Calcium (Ca++) - exchangeable,ExchBases_ph7-nh4oac-aas,cmol/kg,0,100,,,
+Calcium (Ca++) - exchangeable,ExchBases_ph7-nh4oac-fp,cmol/kg,0,100,,,
+Calcium (Ca++) - exchangeable,ExchBases_ph7-unkn,cmol/kg,0,100,,,
+Calcium (Ca++) - exchangeable,ExchBases_ph8-bacl2tea,cmol/kg,0,100,,,
+Calcium (Ca++) - exchangeable,ExchBases_ph8-unkn,cmol/kg,0,100,,,
+Calcium (Ca++) - exchangeable,ExchBases_ph-unkn-edta,cmol/kg,0,100,,,
+Calcium (Ca++) - exchangeable,ExchBases_ph-unkn-m3,cmol/kg,0,100,,,
+Calcium (Ca++) - exchangeable,ExchBases_ph-unkn-m3-spec,cmol/kg,0,100,,,
+Calcium (Ca++) - extractable,Extr_ap14,cmol/kg,0,1000,,,
+Calcium (Ca++) - extractable,Extr_ap15,cmol/kg,0,1000,,,
+Calcium (Ca++) - extractable,Extr_ap20,cmol/kg,0,1000,,,
+Calcium (Ca++) - extractable,Extr_ap21,cmol/kg,0,1000,,,
+Calcium (Ca++) - extractable,Extr_c6h8o7-reeuwijk,cmol/kg,0,1000,,,
+Calcium (Ca++) - extractable,Extr_cacl2,cmol/kg,0,1000,,,
+Calcium (Ca++) - extractable,Extr_capo4,cmol/kg,0,1000,,,
+Calcium (Ca++) - extractable,Extr_dtpa,cmol/kg,0,1000,,,
+Calcium (Ca++) - extractable,Extr_edta,cmol/kg,0,1000,,,
+Calcium (Ca++) - extractable,Extr_h2so4-truog,cmol/kg,0,1000,,,
+Calcium (Ca++) - extractable,Extr_hcl-h2so4-nelson,cmol/kg,0,1000,,,
+Calcium (Ca++) - extractable,Extr_hcl-nh4f-bray1,cmol/kg,0,1000,,,
+Calcium (Ca++) - extractable,Extr_hcl-nh4f-bray2,cmol/kg,0,1000,,,
+Calcium (Ca++) - extractable,Extr_hcl-nh4f-kurtz-bray,cmol/kg,0,1000,,,
+Calcium (Ca++) - extractable,Extr_hno3,cmol/kg,0,1000,,,
+Calcium (Ca++) - extractable,Extr_hotwater,cmol/kg,0,1000,,,
+Calcium (Ca++) - extractable,Extr_m1,cmol/kg,0,1000,,,
+Calcium (Ca++) - extractable,Extr_m2,cmol/kg,0,1000,,,
+Calcium (Ca++) - extractable,Extr_m3,cmol/kg,0,1000,,,
+Calcium (Ca++) - extractable,Extr_m3-spec,cmol/kg,0,1000,,,
+Calcium (Ca++) - extractable,Extr_nahco3-olsen,cmol/kg,0,1000,,,
+Calcium (Ca++) - extractable,Extr_nahco3-olsen-dabin,cmol/kg,0,1000,,,
+Calcium (Ca++) - extractable,Extr_naoac-morgan,cmol/kg,0,1000,,,
+Calcium (Ca++) - extractable,Extr_nh4ch3ch-oh-cooh-leuven,cmol/kg,0,1000,,,
+Calcium (Ca++) - extractable,Extr_nh4-co3-2-ambic1,cmol/kg,0,1000,,,
+Calcium (Ca++) - total,Total_h2so4,cmol/kg,0,1000,,,
+Calcium (Ca++) - total,Total_hcl,cmol/kg,0,1000,,,
+Calcium (Ca++) - total,Total_hcl-aquaregia,cmol/kg,0,1000,,,
+Calcium (Ca++) - total,Total_hclo4,cmol/kg,0,1000,,,
+Calcium (Ca++) - total,Total_hno3-aquafortis,cmol/kg,0,1000,,,
+Calcium (Ca++) - total,Total_nh4-6mo7o24,cmol/kg,0,1000,,,
+Calcium (Ca++) - total,Total_tp03,cmol/kg,0,1000,,,
+Calcium (Ca++) - total,Total_tp04,cmol/kg,0,1000,,,
+Calcium (Ca++) - total,Total_tp05,cmol/kg,0,1000,,,
+Calcium (Ca++) - total,Total_tp06,cmol/kg,0,1000,,,
+Calcium (Ca++) - total,Total_tp07,cmol/kg,0,1000,,,
+Calcium (Ca++) - total,Total_tp08,cmol/kg,0,1000,,,
+Calcium (Ca++) - total,Total_tp09,cmol/kg,0,1000,,,
+Calcium (Ca++) - total,Total_tp10,cmol/kg,0,1000,,,
+Calcium (Ca++) - total,Total_unkn,cmol/kg,0,1000,,,
+Calcium (Ca++) - total,Total_xrd,cmol/kg,0,1000,,,
+Calcium (Ca++) - total,Total_xrf,cmol/kg,0,1000,,,
+Calcium (Ca++) - total,Total_xrf-p,cmol/kg,0,1000,,,
+Calcium (Ca++) - total,Total_xtf-t,cmol/kg,0,1000,,,
+Carbon (C) - organic,OrgC_acid-dc,g/kg,0,1000,,,
+Carbon (C) - organic,OrgC_acid-dc-ht,g/kg,0,1000,,,
+Carbon (C) - organic,OrgC_acid-dc-ht-analyser,g/kg,0,1000,,,
+Carbon (C) - organic,OrgC_acid-dc-lt,g/kg,0,1000,,,
+Carbon (C) - organic,OrgC_acid-dc-lt-loi,g/kg,0,1000,,,
+Carbon (C) - organic,OrgC_acid-dc-mt,g/kg,0,1000,,,
+Carbon (C) - organic,OrgC_acid-dc-spec,g/kg,0,1000,,,
+Carbon (C) - organic,OrgC_calcul-tc-ic,g/kg,0,1000,,,
+Carbon (C) - organic,OrgC_dc,g/kg,0,1000,,,
+Carbon (C) - organic,OrgC_dc-ht,g/kg,0,1000,,,
+Carbon (C) - organic,OrgC_dc-ht-analyser,g/kg,0,1000,,,
+Carbon (C) - organic,OrgC_dc-lt,g/kg,0,1000,,,
+Carbon (C) - organic,OrgC_dc-lt-loi,g/kg,0,1000,,,
+Carbon (C) - organic,OrgC_dc-mt,g/kg,0,1000,,,
+Carbon (C) - organic,OrgC_dc-spec,g/kg,0,1000,,,
+Carbon (C) - organic,OrgC_wc,g/kg,0,1000,,,
+Carbon (C) - organic,OrgC_wc-cro3-jackson,g/kg,0,1000,,,
+Carbon (C) - organic,OrgC_wc-cro3-kalembra,g/kg,0,1000,,,
+Carbon (C) - organic,OrgC_wc-cro3-knopp,g/kg,0,1000,,,
+Carbon (C) - organic,OrgC_wc-cro3-kurmies,g/kg,0,1000,,,
+Carbon (C) - organic,OrgC_wc-cro3-nelson,g/kg,0,1000,,,
+Carbon (C) - organic,OrgC_wc-cro3-nrcs6a1c,g/kg,0,1000,,,
+Carbon (C) - organic,OrgC_wc-cro3-tiurin,g/kg,0,1000,,,
+Carbon (C) - organic,OrgC_wc-cro3-walkleyblack,g/kg,0,1000,,,
+Carbon (C) - total,TotC_calcul-ic-oc,g/kg,0,1000,,,
+Carbon (C) - total,TotC_dc-ht,g/kg,0,1000,,,
+Carbon (C) - total,TotC_dc-ht-analyser,g/kg,0,1000,,,
+Carbon (C) - total,TotC_dc-ht-spec,g/kg,0,1000,,,
+Carbon (C) - total,TotC_dc-mt,g/kg,0,1000,,,
+carbonInorganicProperty,InOrgC_calcul-caco3,g/kg,0,1000,,,
+carbonInorganicProperty,InOrgC_calcul-tc-oc,g/kg,0,1000,,,
+Clay texture fraction,SaSiCl_2-20-2000u,%,0,100,,,
+Clay texture fraction,SaSiCl_2-20-2000u-adj100,%,0,100,,,
+Clay texture fraction,SaSiCl_2-20-2000u-disp,%,0,100,,,
+Clay texture fraction,SaSiCl_2-20-2000u-disp-beaker,%,0,100,,,
+Clay texture fraction,SaSiCl_2-20-2000u-disp-hydrometer,%,0,100,,,
+Clay texture fraction,SaSiCl_2-20-2000u-disp-hydrometer-bouy,%,0,100,,,
+Clay texture fraction,SaSiCl_2-20-2000u-disp-laser,%,0,100,,,
+Clay texture fraction,SaSiCl_2-20-2000u-disp-pipette,%,0,100,,,
+Clay texture fraction,SaSiCl_2-20-2000u-disp-spec,%,0,100,,,
+Clay texture fraction,SaSiCl_2-20-2000u-fld,%,0,100,,,
+Clay texture fraction,SaSiCl_2-20-2000u-nodisp,%,0,100,,,
+Clay texture fraction,SaSiCl_2-20-2000u-nodisp-hydrometer,%,0,100,,,
+Clay texture fraction,SaSiCl_2-20-2000u-nodisp-hydrometer-bouy,%,0,100,,,
+Clay texture fraction,SaSiCl_2-20-2000u-nodisp-laser,%,0,100,,,
+Clay texture fraction,SaSiCl_2-20-2000u-nodisp-pipette,%,0,100,,,
+Clay texture fraction,SaSiCl_2-20-2000u-nodisp-spec,%,0,100,,,
+Clay texture fraction,SaSiCl_2-50-2000u,%,0,100,,,
+Clay texture fraction,SaSiCl_2-50-2000u-adj100,%,0,100,,,
+Clay texture fraction,SaSiCl_2-50-2000u-disp,%,0,100,,,
+Clay texture fraction,SaSiCl_2-50-2000u-disp-beaker,%,0,100,,,
+Clay texture fraction,SaSiCl_2-50-2000u-disp-hydrometer,%,0,100,,,
+Clay texture fraction,SaSiCl_2-50-2000u-disp-hydrometer-bouy,%,0,100,,,
+Clay texture fraction,SaSiCl_2-50-2000u-disp-laser,%,0,100,,,
+Clay texture fraction,SaSiCl_2-50-2000u-disp-pipette,%,0,100,,,
+Clay texture fraction,SaSiCl_2-50-2000u-disp-spec,%,0,100,,,
+Clay texture fraction,SaSiCl_2-50-2000u-fld,%,0,100,,,
+Clay texture fraction,SaSiCl_2-50-2000u-nodisp,%,0,100,,,
+Clay texture fraction,SaSiCl_2-50-2000u-nodisp-hydrometer,%,0,100,,,
+Clay texture fraction,SaSiCl_2-50-2000u-nodisp-hydrometer-bouy,%,0,100,,,
+Clay texture fraction,SaSiCl_2-50-2000u-nodisp-laser,%,0,100,,,
+Clay texture fraction,SaSiCl_2-50-2000u-nodisp-pipette,%,0,100,,,
+Clay texture fraction,SaSiCl_2-50-2000u-nodisp-spec,%,0,100,,,
+Clay texture fraction,SaSiCl_2-64-2000u,%,0,100,,,
+Clay texture fraction,SaSiCl_2-64-2000u-adj100,%,0,100,,,
+Clay texture fraction,SaSiCl_2-64-2000u-disp,%,0,100,,,
+Clay texture fraction,SaSiCl_2-64-2000u-disp-beaker,%,0,100,,,
+Clay texture fraction,SaSiCl_2-64-2000u-disp-hydrometer,%,0,100,,,
+Clay texture fraction,SaSiCl_2-64-2000u-disp-hydrometer-bouy,%,0,100,,,
+Clay texture fraction,SaSiCl_2-64-2000u-disp-laser,%,0,100,,,
+Clay texture fraction,SaSiCl_2-64-2000u-disp-pipette,%,0,100,,,
+Clay texture fraction,SaSiCl_2-64-2000u-disp-spec,%,0,100,,,
+Clay texture fraction,SaSiCl_2-64-2000u-fld,%,0,100,,,
+Clay texture fraction,SaSiCl_2-64-2000u-nodisp,%,0,100,,,
+Clay texture fraction,SaSiCl_2-64-2000u-nodisp-hydrometer,%,0,100,,,
+Clay texture fraction,SaSiCl_2-64-2000u-nodisp-hydrometer-bouy,%,0,100,,,
+Clay texture fraction,SaSiCl_2-64-2000u-nodisp-laser,%,0,100,,,
+Clay texture fraction,SaSiCl_2-64-2000u-nodisp-pipette,%,0,100,,,
+Clay texture fraction,SaSiCl_2-64-2000u-nodisp-spec,%,0,100,,,
+coarseFragmentsProperty,CrsFrg_fld,%,0,100,,,
+coarseFragmentsProperty,CrsFrg_fldcls,%,0,100,,,
+coarseFragmentsProperty,CrsFrg_lab,%,0,100,,,
+Copper (Cu) - extractable,Extr_ap14,%,0,100,,,
+Copper (Cu) - extractable,Extr_ap15,%,0,100,,,
+Copper (Cu) - extractable,Extr_ap20,%,0,100,,,
+Copper (Cu) - extractable,Extr_ap21,%,0,100,,,
+Copper (Cu) - extractable,Extr_c6h8o7-reeuwijk,%,0,100,,,
+Copper (Cu) - extractable,Extr_cacl2,%,0,100,,,
+Copper (Cu) - extractable,Extr_capo4,%,0,100,,,
+Copper (Cu) - extractable,Extr_dtpa,%,0,100,,,
+Copper (Cu) - extractable,Extr_edta,%,0,100,,,
+Copper (Cu) - extractable,Extr_h2so4-truog,%,0,100,,,
+Copper (Cu) - extractable,Extr_hcl-h2so4-nelson,%,0,100,,,
+Copper (Cu) - extractable,Extr_hcl-nh4f-bray1,%,0,100,,,
+Copper (Cu) - extractable,Extr_hcl-nh4f-bray2,%,0,100,,,
+Copper (Cu) - extractable,Extr_hcl-nh4f-kurtz-bray,%,0,100,,,
+Copper (Cu) - extractable,Extr_hno3,%,0,100,,,
+Copper (Cu) - extractable,Extr_hotwater,%,0,100,,,
+Copper (Cu) - extractable,Extr_m1,%,0,100,,,
+Copper (Cu) - extractable,Extr_m2,%,0,100,,,
+Copper (Cu) - extractable,Extr_m3,%,0,100,,,
+Copper (Cu) - extractable,Extr_m3-spec,%,0,100,,,
+Copper (Cu) - extractable,Extr_nahco3-olsen,%,0,100,,,
+Copper (Cu) - extractable,Extr_nahco3-olsen-dabin,%,0,100,,,
+Copper (Cu) - extractable,Extr_naoac-morgan,%,0,100,,,
+Copper (Cu) - extractable,Extr_nh4ch3ch-oh-cooh-leuven,%,0,100,,,
+Copper (Cu) - extractable,Extr_nh4-co3-2-ambic1,%,0,100,,,
+Copper (Cu) - total,Total_h2so4,%,0,100,,,
+Copper (Cu) - total,Total_hcl,%,0,100,,,
+Copper (Cu) - total,Total_hcl-aquaregia,%,0,100,,,
+Copper (Cu) - total,Total_hclo4,%,0,100,,,
+Copper (Cu) - total,Total_hno3-aquafortis,%,0,100,,,
+Copper (Cu) - total,Total_nh4-6mo7o24,%,0,100,,,
+Copper (Cu) - total,Total_tp03,%,0,100,,,
+Copper (Cu) - total,Total_tp04,%,0,100,,,
+Copper (Cu) - total,Total_tp05,%,0,100,,,
+Copper (Cu) - total,Total_tp06,%,0,100,,,
+Copper (Cu) - total,Total_tp07,%,0,100,,,
+Copper (Cu) - total,Total_tp08,%,0,100,,,
+Copper (Cu) - total,Total_tp09,%,0,100,,,
+Copper (Cu) - total,Total_tp10,%,0,100,,,
+Copper (Cu) - total,Total_unkn,%,0,100,,,
+Copper (Cu) - total,Total_xrd,%,0,100,,,
+Copper (Cu) - total,Total_xrf,%,0,100,,,
+Copper (Cu) - total,Total_xrf-p,%,0,100,,,
+Copper (Cu) - total,Total_xtf-t,%,0,100,,,
+effectiveCecProperty,EffCEC_calcul-b,cmol/kg,0,100,,,
+effectiveCecProperty,EffCEC_calcul-ba,cmol/kg,0,100,,,
+electricalConductivityProperty,ECe_sat,dS/m,0,60,,,
+electricalConductivityProperty,EC_ratio1-1,dS/m,0,60,,,
+electricalConductivityProperty,EC_ratio1-10,dS/m,0,60,,,
+electricalConductivityProperty,EC_ratio1-2,dS/m,0,60,,,
+electricalConductivityProperty,EC_ratio1-2.5,dS/m,0,60,,,
+electricalConductivityProperty,EC_ratio1-5,dS/m,0,60,,,
+gypsumProperty,CaSO4_gy01,%,0,100,,,
+gypsumProperty,CaSO4_gy02,%,0,100,,,
+gypsumProperty,CaSO4_gy03,%,0,100,,,
+gypsumProperty,CaSO4_gy04,%,0,100,,,
+gypsumProperty,CaSO4_gy05,%,0,100,,,
+gypsumProperty,CaSO4_gy06,%,0,100,,,
+gypsumProperty,CaSO4_gy07,%,0,100,,,
+hydraulicConductivityProperty,Ksat_bhole,cm/h,0,100,,,
+hydraulicConductivityProperty,KSat_calcul-ptf,cm/h,0,100,,,
+hydraulicConductivityProperty,KSat_calcul-ptf-genuchten,cm/h,0,100,,,
+hydraulicConductivityProperty,KSat_calcul-ptf-saxton,cm/h,0,100,,,
+hydraulicConductivityProperty,Ksat_column,cm/h,0,100,,,
+hydraulicConductivityProperty,Ksat_dblring,cm/h,0,100,,,
+hydraulicConductivityProperty,Ksat_invbhole,cm/h,0,100,,,
+Hydrogen (H+) - exchangeable,ExchBases_ph0-cohex,cmol/kg,0,100,,,
+Hydrogen (H+) - exchangeable,ExchBases_ph0-nh4cl,cmol/kg,0,100,,,
+Hydrogen (H+) - exchangeable,ExchBases_ph7-nh4oac,cmol/kg,0,100,,,
+Hydrogen (H+) - exchangeable,ExchBases_ph7-nh4oac-aas,cmol/kg,0,100,,,
+Hydrogen (H+) - exchangeable,ExchBases_ph7-nh4oac-fp,cmol/kg,0,100,,,
+Hydrogen (H+) - exchangeable,ExchBases_ph7-unkn,cmol/kg,0,100,,,
+Hydrogen (H+) - exchangeable,ExchBases_ph8-bacl2tea,cmol/kg,0,100,,,
+Hydrogen (H+) - exchangeable,ExchBases_ph8-unkn,cmol/kg,0,100,,,
+Hydrogen (H+) - exchangeable,ExchBases_ph-unkn-edta,cmol/kg,0,100,,,
+Hydrogen (H+) - exchangeable,ExchBases_ph-unkn-m3,cmol/kg,0,100,,,
+Hydrogen (H+) - exchangeable,ExchBases_ph-unkn-m3-spec,cmol/kg,0,100,,,
+Iron (Fe) - extractable,Extr_ap14,%,0,100,,,
+Iron (Fe) - extractable,Extr_ap15,%,0,100,,,
+Iron (Fe) - extractable,Extr_ap20,%,0,100,,,
+Iron (Fe) - extractable,Extr_ap21,%,0,100,,,
+Iron (Fe) - extractable,Extr_c6h8o7-reeuwijk,%,0,100,,,
+Iron (Fe) - extractable,Extr_cacl2,%,0,100,,,
+Iron (Fe) - extractable,Extr_capo4,%,0,100,,,
+Iron (Fe) - extractable,Extr_dtpa,%,0,100,,,
+Iron (Fe) - extractable,Extr_edta,%,0,100,,,
+Iron (Fe) - extractable,Extr_h2so4-truog,%,0,100,,,
+Iron (Fe) - extractable,Extr_hcl-h2so4-nelson,%,0,100,,,
+Iron (Fe) - extractable,Extr_hcl-nh4f-bray1,%,0,100,,,
+Iron (Fe) - extractable,Extr_hcl-nh4f-bray2,%,0,100,,,
+Iron (Fe) - extractable,Extr_hcl-nh4f-kurtz-bray,%,0,100,,,
+Iron (Fe) - extractable,Extr_hno3,%,0,100,,,
+Iron (Fe) - extractable,Extr_hotwater,%,0,100,,,
+Iron (Fe) - extractable,Extr_m1,%,0,100,,,
+Iron (Fe) - extractable,Extr_m2,%,0,100,,,
+Iron (Fe) - extractable,Extr_m3,%,0,100,,,
+Iron (Fe) - extractable,Extr_m3-spec,%,0,100,,,
+Iron (Fe) - extractable,Extr_nahco3-olsen,%,0,100,,,
+Iron (Fe) - extractable,Extr_nahco3-olsen-dabin,%,0,100,,,
+Iron (Fe) - extractable,Extr_naoac-morgan,%,0,100,,,
+Iron (Fe) - extractable,Extr_nh4ch3ch-oh-cooh-leuven,%,0,100,,,
+Iron (Fe) - extractable,Extr_nh4-co3-2-ambic1,%,0,100,,,
+Iron (Fe) - total,Total_h2so4,%,0,100,,,
+Iron (Fe) - total,Total_hcl,%,0,100,,,
+Iron (Fe) - total,Total_hcl-aquaregia,%,0,100,,,
+Iron (Fe) - total,Total_hclo4,%,0,100,,,
+Iron (Fe) - total,Total_hno3-aquafortis,%,0,100,,,
+Iron (Fe) - total,Total_nh4-6mo7o24,%,0,100,,,
+Iron (Fe) - total,Total_tp03,%,0,100,,,
+Iron (Fe) - total,Total_tp04,%,0,100,,,
+Iron (Fe) - total,Total_tp05,%,0,100,,,
+Iron (Fe) - total,Total_tp06,%,0,100,,,
+Iron (Fe) - total,Total_tp07,%,0,100,,,
+Iron (Fe) - total,Total_tp08,%,0,100,,,
+Iron (Fe) - total,Total_tp09,%,0,100,,,
+Iron (Fe) - total,Total_tp10,%,0,100,,,
+Iron (Fe) - total,Total_unkn,%,0,100,,,
+Iron (Fe) - total,Total_xrd,%,0,100,,,
+Iron (Fe) - total,Total_xrf,%,0,100,,,
+Iron (Fe) - total,Total_xrf-p,%,0,100,,,
+Iron (Fe) - total,Total_xtf-t,%,0,100,,,
+Magnesium (Mg++) - exchangeable,ExchBases_ph0-cohex,cmol/kg,0,100,,,
+Magnesium (Mg++) - exchangeable,ExchBases_ph0-nh4cl,cmol/kg,0,100,,,
+Magnesium (Mg++) - exchangeable,ExchBases_ph7-nh4oac,cmol/kg,0,100,,,
+Magnesium (Mg++) - exchangeable,ExchBases_ph7-nh4oac-aas,cmol/kg,0,100,,,
+Magnesium (Mg++) - exchangeable,ExchBases_ph7-nh4oac-fp,cmol/kg,0,100,,,
+Magnesium (Mg++) - exchangeable,ExchBases_ph7-unkn,cmol/kg,0,100,,,
+Magnesium (Mg++) - exchangeable,ExchBases_ph8-bacl2tea,cmol/kg,0,100,,,
+Magnesium (Mg++) - exchangeable,ExchBases_ph8-unkn,cmol/kg,0,100,,,
+Magnesium (Mg++) - exchangeable,ExchBases_ph-unkn-edta,cmol/kg,0,100,,,
+Magnesium (Mg++) - exchangeable,ExchBases_ph-unkn-m3,cmol/kg,0,100,,,
+Magnesium (Mg++) - exchangeable,ExchBases_ph-unkn-m3-spec,cmol/kg,0,100,,,
+Magnesium (Mg) - extractable,Extr_ap14,cmol/kg,0,1000,,,
+Magnesium (Mg) - extractable,Extr_ap15,cmol/kg,0,1000,,,
+Magnesium (Mg) - extractable,Extr_ap20,cmol/kg,0,1000,,,
+Magnesium (Mg) - extractable,Extr_ap21,cmol/kg,0,1000,,,
+Magnesium (Mg) - extractable,Extr_c6h8o7-reeuwijk,cmol/kg,0,1000,,,
+Magnesium (Mg) - extractable,Extr_cacl2,cmol/kg,0,1000,,,
+Magnesium (Mg) - extractable,Extr_capo4,cmol/kg,0,1000,,,
+Magnesium (Mg) - extractable,Extr_dtpa,cmol/kg,0,1000,,,
+Magnesium (Mg) - extractable,Extr_edta,cmol/kg,0,1000,,,
+Magnesium (Mg) - extractable,Extr_h2so4-truog,cmol/kg,0,1000,,,
+Magnesium (Mg) - extractable,Extr_hcl-h2so4-nelson,cmol/kg,0,1000,,,
+Magnesium (Mg) - extractable,Extr_hcl-nh4f-bray1,cmol/kg,0,1000,,,
+Magnesium (Mg) - extractable,Extr_hcl-nh4f-bray2,cmol/kg,0,1000,,,
+Magnesium (Mg) - extractable,Extr_hcl-nh4f-kurtz-bray,cmol/kg,0,1000,,,
+Magnesium (Mg) - extractable,Extr_hno3,cmol/kg,0,1000,,,
+Magnesium (Mg) - extractable,Extr_hotwater,cmol/kg,0,1000,,,
+Magnesium (Mg) - extractable,Extr_m1,cmol/kg,0,1000,,,
+Magnesium (Mg) - extractable,Extr_m2,cmol/kg,0,1000,,,
+Magnesium (Mg) - extractable,Extr_m3,cmol/kg,0,1000,,,
+Magnesium (Mg) - extractable,Extr_m3-spec,cmol/kg,0,1000,,,
+Magnesium (Mg) - extractable,Extr_nahco3-olsen,cmol/kg,0,1000,,,
+Magnesium (Mg) - extractable,Extr_nahco3-olsen-dabin,cmol/kg,0,1000,,,
+Magnesium (Mg) - extractable,Extr_naoac-morgan,cmol/kg,0,1000,,,
+Magnesium (Mg) - extractable,Extr_nh4ch3ch-oh-cooh-leuven,cmol/kg,0,1000,,,
+Magnesium (Mg) - extractable,Extr_nh4-co3-2-ambic1,cmol/kg,0,1000,,,
+Magnesium (Mg) - total,Total_h2so4,cmol/kg,0,1000,,,
+Magnesium (Mg) - total,Total_hcl,cmol/kg,0,1000,,,
+Magnesium (Mg) - total,Total_hcl-aquaregia,cmol/kg,0,1000,,,
+Magnesium (Mg) - total,Total_hclo4,cmol/kg,0,1000,,,
+Magnesium (Mg) - total,Total_hno3-aquafortis,cmol/kg,0,1000,,,
+Magnesium (Mg) - total,Total_nh4-6mo7o24,cmol/kg,0,1000,,,
+Magnesium (Mg) - total,Total_tp03,cmol/kg,0,1000,,,
+Magnesium (Mg) - total,Total_tp04,cmol/kg,0,1000,,,
+Magnesium (Mg) - total,Total_tp05,cmol/kg,0,1000,,,
+Magnesium (Mg) - total,Total_tp06,cmol/kg,0,1000,,,
+Magnesium (Mg) - total,Total_tp07,cmol/kg,0,1000,,,
+Magnesium (Mg) - total,Total_tp08,cmol/kg,0,1000,,,
+Magnesium (Mg) - total,Total_tp09,cmol/kg,0,1000,,,
+Magnesium (Mg) - total,Total_tp10,cmol/kg,0,1000,,,
+Magnesium (Mg) - total,Total_unkn,cmol/kg,0,1000,,,
+Magnesium (Mg) - total,Total_xrd,cmol/kg,0,1000,,,
+Magnesium (Mg) - total,Total_xrf,cmol/kg,0,1000,,,
+Magnesium (Mg) - total,Total_xrf-p,cmol/kg,0,1000,,,
+Magnesium (Mg) - total,Total_xtf-t,cmol/kg,0,1000,,,
+Manganese (Mn) - extractable,Extr_ap14,cmol/kg,0,1000,,,
+Manganese (Mn) - extractable,Extr_ap15,cmol/kg,0,1000,,,
+Manganese (Mn) - extractable,Extr_ap20,cmol/kg,0,1000,,,
+Manganese (Mn) - extractable,Extr_ap21,cmol/kg,0,1000,,,
+Manganese (Mn) - extractable,Extr_c6h8o7-reeuwijk,cmol/kg,0,1000,,,
+Manganese (Mn) - extractable,Extr_cacl2,cmol/kg,0,1000,,,
+Manganese (Mn) - extractable,Extr_capo4,cmol/kg,0,1000,,,
+Manganese (Mn) - extractable,Extr_dtpa,cmol/kg,0,1000,,,
+Manganese (Mn) - extractable,Extr_edta,cmol/kg,0,1000,,,
+Manganese (Mn) - extractable,Extr_h2so4-truog,cmol/kg,0,1000,,,
+Manganese (Mn) - extractable,Extr_hcl-h2so4-nelson,cmol/kg,0,1000,,,
+Manganese (Mn) - extractable,Extr_hcl-nh4f-bray1,cmol/kg,0,1000,,,
+Manganese (Mn) - extractable,Extr_hcl-nh4f-bray2,cmol/kg,0,1000,,,
+Manganese (Mn) - extractable,Extr_hcl-nh4f-kurtz-bray,cmol/kg,0,1000,,,
+Manganese (Mn) - extractable,Extr_hno3,cmol/kg,0,1000,,,
+Manganese (Mn) - extractable,Extr_hotwater,cmol/kg,0,1000,,,
+Manganese (Mn) - extractable,Extr_m1,cmol/kg,0,1000,,,
+Manganese (Mn) - extractable,Extr_m2,cmol/kg,0,1000,,,
+Manganese (Mn) - extractable,Extr_m3,cmol/kg,0,1000,,,
+Manganese (Mn) - extractable,Extr_m3-spec,cmol/kg,0,1000,,,
+Manganese (Mn) - extractable,Extr_nahco3-olsen,cmol/kg,0,1000,,,
+Manganese (Mn) - extractable,Extr_nahco3-olsen-dabin,cmol/kg,0,1000,,,
+Manganese (Mn) - extractable,Extr_naoac-morgan,cmol/kg,0,1000,,,
+Manganese (Mn) - extractable,Extr_nh4ch3ch-oh-cooh-leuven,cmol/kg,0,1000,,,
+Manganese (Mn) - extractable,Extr_nh4-co3-2-ambic1,cmol/kg,0,1000,,,
+Manganese (Mn) - total,Total_h2so4,cmol/kg,0,1000,,,
+Manganese (Mn) - total,Total_hcl,cmol/kg,0,1000,,,
+Manganese (Mn) - total,Total_hcl-aquaregia,cmol/kg,0,1000,,,
+Manganese (Mn) - total,Total_hclo4,cmol/kg,0,1000,,,
+Manganese (Mn) - total,Total_hno3-aquafortis,cmol/kg,0,1000,,,
+Manganese (Mn) - total,Total_nh4-6mo7o24,cmol/kg,0,1000,,,
+Manganese (Mn) - total,Total_tp03,cmol/kg,0,1000,,,
+Manganese (Mn) - total,Total_tp04,cmol/kg,0,1000,,,
+Manganese (Mn) - total,Total_tp05,cmol/kg,0,1000,,,
+Manganese (Mn) - total,Total_tp06,cmol/kg,0,1000,,,
+Manganese (Mn) - total,Total_tp07,cmol/kg,0,1000,,,
+Manganese (Mn) - total,Total_tp08,cmol/kg,0,1000,,,
+Manganese (Mn) - total,Total_tp09,cmol/kg,0,1000,,,
+Manganese (Mn) - total,Total_tp10,cmol/kg,0,1000,,,
+Manganese (Mn) - total,Total_unkn,cmol/kg,0,1000,,,
+Manganese (Mn) - total,Total_xrd,cmol/kg,0,1000,,,
+Manganese (Mn) - total,Total_xrf,cmol/kg,0,1000,,,
+Manganese (Mn) - total,Total_xrf-p,cmol/kg,0,1000,,,
+Manganese (Mn) - total,Total_xtf-t,cmol/kg,0,1000,,,
+manganeseProperty,ExchBases_ph0-cohex,cmol/kg,0,1000,,,
+manganeseProperty,ExchBases_ph0-nh4cl,cmol/kg,0,1000,,,
+manganeseProperty,ExchBases_ph7-nh4oac,cmol/kg,0,1000,,,
+manganeseProperty,ExchBases_ph7-nh4oac-aas,cmol/kg,0,1000,,,
+manganeseProperty,ExchBases_ph7-nh4oac-fp,cmol/kg,0,1000,,,
+manganeseProperty,ExchBases_ph7-unkn,cmol/kg,0,1000,,,
+manganeseProperty,ExchBases_ph8-bacl2tea,cmol/kg,0,1000,,,
+manganeseProperty,ExchBases_ph8-unkn,cmol/kg,0,1000,,,
+manganeseProperty,ExchBases_ph-unkn-edta,cmol/kg,0,1000,,,
+manganeseProperty,ExchBases_ph-unkn-m3,cmol/kg,0,1000,,,
+manganeseProperty,ExchBases_ph-unkn-m3-spec,cmol/kg,0,1000,,,
+molybdenumProperty,Extr_ap14,%,0,100,,,
+molybdenumProperty,Extr_ap15,%,0,100,,,
+molybdenumProperty,Extr_ap20,%,0,100,,,
+molybdenumProperty,Extr_ap21,%,0,100,,,
+molybdenumProperty,Extr_c6h8o7-reeuwijk,%,0,100,,,
+molybdenumProperty,Extr_cacl2,%,0,100,,,
+molybdenumProperty,Extr_capo4,%,0,100,,,
+molybdenumProperty,Extr_dtpa,%,0,100,,,
+molybdenumProperty,Extr_edta,%,0,100,,,
+molybdenumProperty,Extr_h2so4-truog,%,0,100,,,
+molybdenumProperty,Extr_hcl-h2so4-nelson,%,0,100,,,
+molybdenumProperty,Extr_hcl-nh4f-bray1,%,0,100,,,
+molybdenumProperty,Extr_hcl-nh4f-bray2,%,0,100,,,
+molybdenumProperty,Extr_hcl-nh4f-kurtz-bray,%,0,100,,,
+molybdenumProperty,Extr_hno3,%,0,100,,,
+molybdenumProperty,Extr_hotwater,%,0,100,,,
+molybdenumProperty,Extr_m1,%,0,100,,,
+molybdenumProperty,Extr_m2,%,0,100,,,
+molybdenumProperty,Extr_m3,%,0,100,,,
+molybdenumProperty,Extr_m3-spec,%,0,100,,,
+molybdenumProperty,Extr_nahco3-olsen,%,0,100,,,
+molybdenumProperty,Extr_nahco3-olsen-dabin,%,0,100,,,
+molybdenumProperty,Extr_naoac-morgan,%,0,100,,,
+molybdenumProperty,Extr_nh4ch3ch-oh-cooh-leuven,%,0,100,,,
+molybdenumProperty,Extr_nh4-co3-2-ambic1,%,0,100,,,
+molybdenumProperty,Total_h2so4,%,0,100,,,
+molybdenumProperty,Total_hcl,%,0,100,,,
+molybdenumProperty,Total_hcl-aquaregia,%,0,100,,,
+molybdenumProperty,Total_hclo4,%,0,100,,,
+molybdenumProperty,Total_hno3-aquafortis,%,0,100,,,
+molybdenumProperty,Total_nh4-6mo7o24,%,0,100,,,
+molybdenumProperty,Total_tp03,%,0,100,,,
+molybdenumProperty,Total_tp04,%,0,100,,,
+molybdenumProperty,Total_tp05,%,0,100,,,
+molybdenumProperty,Total_tp06,%,0,100,,,
+molybdenumProperty,Total_tp07,%,0,100,,,
+molybdenumProperty,Total_tp08,%,0,100,,,
+molybdenumProperty,Total_tp09,%,0,100,,,
+molybdenumProperty,Total_tp10,%,0,100,,,
+molybdenumProperty,Total_unkn,%,0,100,,,
+molybdenumProperty,Total_xrd,%,0,100,,,
+molybdenumProperty,Total_xrf,%,0,100,,,
+molybdenumProperty,Total_xrf-p,%,0,100,,,
+molybdenumProperty,Total_xtf-t,%,0,100,,,
+Nitrogen (N) - total,TotalN_bremner,g/kg,0,1000,,,
+Nitrogen (N) - total,TotalN_calcul,g/kg,0,1000,,,
+Nitrogen (N) - total,TotalN_calcul-oc10,g/kg,0,1000,,,
+Nitrogen (N) - total,TotalN_dc,g/kg,0,1000,,,
+Nitrogen (N) - total,TotalN_dc-ht-dumas,g/kg,0,1000,,,
+Nitrogen (N) - total,TotalN_dc-ht-leco,g/kg,0,1000,,,
+Nitrogen (N) - total,TotalN_dc-spec,g/kg,0,1000,,,
+Nitrogen (N) - total,TotalN_h2so4,g/kg,0,1000,,,
+Nitrogen (N) - total,TotalN_kjeldahl,g/kg,0,1000,,,
+Nitrogen (N) - total,TotalN_kjeldahl-nh4,g/kg,0,1000,,,
+Nitrogen (N) - total,TotalN_nelson,g/kg,0,1000,,,
+Nitrogen (N) - total,TotalN_tn04,g/kg,0,1000,,,
+Nitrogen (N) - total,TotalN_tn06,g/kg,0,1000,,,
+Nitrogen (N) - total,TotalN_tn08,g/kg,0,1000,,,
+organicMatterProperty,FulAcidC_unkn,g/kg,0,1000,,,
+organicMatterProperty,HumAcidC_unkn,g/kg,0,1000,,,
+organicMatterProperty,OrgM_calcul-oc1.73,g/kg,0,1000,,,
+organicMatterProperty,TotHumC_unkn,g/kg,0,1000,,,
+pH - Hydrogen potential,pHCaCl2,pH,1.5,13,,,
+pH - Hydrogen potential,pHCaCl2_ratio1-1,pH,1.5,13,,,
+pH - Hydrogen potential,pHCaCl2_ratio1-10,pH,1.5,13,,,
+pH - Hydrogen potential,pHCaCl2_ratio1-2,pH,1.5,13,,,
+pH - Hydrogen potential,pHCaCl2_ratio1-2.5,pH,1.5,13,,,
+pH - Hydrogen potential,pHCaCl2_ratio1-5,pH,1.5,13,,,
+pH - Hydrogen potential,pHCaCl2_sat,pH,1.5,13,,,
+pH - Hydrogen potential,pHH2O,pH,1.5,13,,,
+pH - Hydrogen potential,pHH2O_ratio1-1,pH,1.5,13,,,
+pH - Hydrogen potential,pHH2O_ratio1-10,pH,1.5,13,,,
+pH - Hydrogen potential,pHH2O_ratio1-2,pH,1.5,13,,,
+pH - Hydrogen potential,pHH2O_ratio1-2.5,pH,1.5,13,,,
+pH - Hydrogen potential,pHH2O_ratio1-5,pH,1.5,13,,,
+pH - Hydrogen potential,pHH2O_sat,pH,1.5,13,,,
+pH - Hydrogen potential,pHH2O_unkn-spec,pH,1.5,13,,,
+pH - Hydrogen potential,pHKCl,pH,1.5,13,,,
+pH - Hydrogen potential,pHKCl_ratio1-1,pH,1.5,13,,,
+pH - Hydrogen potential,pHKCl_ratio1-10,pH,1.5,13,,,
+pH - Hydrogen potential,pHKCl_ratio1-2,pH,1.5,13,,,
+pH - Hydrogen potential,pHKCl_ratio1-2.5,pH,1.5,13,,,
+pH - Hydrogen potential,pHKCl_ratio1-5,pH,1.5,13,,,
+pH - Hydrogen potential,pHKCl_sat,pH,1.5,13,,,
+pH - Hydrogen potential,pHNaF,pH,1.5,13,,,
+pH - Hydrogen potential,pHNaF_ratio1-1,pH,1.5,13,,,
+pH - Hydrogen potential,pHNaF_ratio1-10,pH,1.5,13,,,
+pH - Hydrogen potential,pHNaF_ratio1-2,pH,1.5,13,,,
+pH - Hydrogen potential,pHNaF_ratio1-2.5,pH,1.5,13,,,
+pH - Hydrogen potential,pHNaF_ratio1-5,pH,1.5,13,,,
+pH - Hydrogen potential,pHNaF_sat,pH,1.5,13,,,
+Phosphorus (P) - extractable,Extr_ap14,%,0,100,,,
+Phosphorus (P) - extractable,Extr_ap15,%,0,100,,,
+Phosphorus (P) - extractable,Extr_ap20,%,0,100,,,
+Phosphorus (P) - extractable,Extr_ap21,%,0,100,,,
+Phosphorus (P) - extractable,Extr_c6h8o7-reeuwijk,%,0,100,,,
+Phosphorus (P) - extractable,Extr_cacl2,%,0,100,,,
+Phosphorus (P) - extractable,Extr_capo4,%,0,100,,,
+Phosphorus (P) - extractable,Extr_dtpa,%,0,100,,,
+Phosphorus (P) - extractable,Extr_edta,%,0,100,,,
+Phosphorus (P) - extractable,Extr_h2so4-truog,%,0,100,,,
+Phosphorus (P) - extractable,Extr_hcl-h2so4-nelson,%,0,100,,,
+Phosphorus (P) - extractable,Extr_hcl-nh4f-bray1,%,0,100,,,
+Phosphorus (P) - extractable,Extr_hcl-nh4f-bray2,%,0,100,,,
+Phosphorus (P) - extractable,Extr_hcl-nh4f-kurtz-bray,%,0,100,,,
+Phosphorus (P) - extractable,Extr_hno3,%,0,100,,,
+Phosphorus (P) - extractable,Extr_hotwater,%,0,100,,,
+Phosphorus (P) - extractable,Extr_m1,%,0,100,,,
+Phosphorus (P) - extractable,Extr_m2,%,0,100,,,
+Phosphorus (P) - extractable,Extr_m3,%,0,100,,,
+Phosphorus (P) - extractable,Extr_m3-spec,%,0,100,,,
+Phosphorus (P) - extractable,Extr_nahco3-olsen,%,0,100,,,
+Phosphorus (P) - extractable,Extr_nahco3-olsen-dabin,%,0,100,,,
+Phosphorus (P) - extractable,Extr_naoac-morgan,%,0,100,,,
+Phosphorus (P) - extractable,Extr_nh4ch3ch-oh-cooh-leuven,%,0,100,,,
+Phosphorus (P) - extractable,Extr_nh4-co3-2-ambic1,%,0,100,,,
+Phosphorus (P) - retention,RetentP_blakemore,g/hg,0,100,,,
+Phosphorus (P) - retention,RetentP_unkn-spec,g/hg,0,100,,,
+Phosphorus (P) - total,Total_h2so4,%,0,100,,,
+Phosphorus (P) - total,Total_hcl,%,0,100,,,
+Phosphorus (P) - total,Total_hcl-aquaregia,%,0,100,,,
+Phosphorus (P) - total,Total_hclo4,%,0,100,,,
+Phosphorus (P) - total,Total_hno3-aquafortis,%,0,100,,,
+Phosphorus (P) - total,Total_nh4-6mo7o24,%,0,100,,,
+Phosphorus (P) - total,Total_tp03,%,0,100,,,
+Phosphorus (P) - total,Total_tp04,%,0,100,,,
+Phosphorus (P) - total,Total_tp05,%,0,100,,,
+Phosphorus (P) - total,Total_tp06,%,0,100,,,
+Phosphorus (P) - total,Total_tp07,%,0,100,,,
+Phosphorus (P) - total,Total_tp08,%,0,100,,,
+Phosphorus (P) - total,Total_tp09,%,0,100,,,
+Phosphorus (P) - total,Total_tp10,%,0,100,,,
+Phosphorus (P) - total,Total_unkn,%,0,100,,,
+Phosphorus (P) - total,Total_xrd,%,0,100,,,
+Phosphorus (P) - total,Total_xrf,%,0,100,,,
+Phosphorus (P) - total,Total_xrf-p,%,0,100,,,
+Phosphorus (P) - total,Total_xtf-t,%,0,100,,,
+pHProperty,pHCaCl2,pH,1.5,13,,,
+pHProperty,pHCaCl2_ratio1-1,pH,1.5,13,,,
+pHProperty,pHCaCl2_ratio1-10,pH,1.5,13,,,
+pHProperty,pHCaCl2_ratio1-2,pH,1.5,13,,,
+pHProperty,pHCaCl2_ratio1-2.5,pH,1.5,13,,,
+pHProperty,pHCaCl2_ratio1-5,pH,1.5,13,,,
+pHProperty,pHCaCl2_sat,pH,1.5,13,,,
+pHProperty,pHH2O,pH,1.5,13,,,
+pHProperty,pHH2O_ratio1-1,pH,1.5,13,,,
+pHProperty,pHH2O_ratio1-10,pH,1.5,13,,,
+pHProperty,pHH2O_ratio1-2,pH,1.5,13,,,
+pHProperty,pHH2O_ratio1-2.5,pH,1.5,13,,,
+pHProperty,pHH2O_ratio1-5,pH,1.5,13,,,
+pHProperty,pHH2O_sat,pH,1.5,13,,,
+pHProperty,pHH2O_unkn-spec,pH,1.5,13,,,
+pHProperty,pHKCl,pH,1.5,13,,,
+pHProperty,pHKCl_ratio1-1,pH,1.5,13,,,
+pHProperty,pHKCl_ratio1-10,pH,1.5,13,,,
+pHProperty,pHKCl_ratio1-2,pH,1.5,13,,,
+pHProperty,pHKCl_ratio1-2.5,pH,1.5,13,,,
+pHProperty,pHKCl_ratio1-5,pH,1.5,13,,,
+pHProperty,pHKCl_sat,pH,1.5,13,,,
+pHProperty,pHNaF,pH,1.5,13,,,
+pHProperty,pHNaF_ratio1-1,pH,1.5,13,,,
+pHProperty,pHNaF_ratio1-10,pH,1.5,13,,,
+pHProperty,pHNaF_ratio1-2,pH,1.5,13,,,
+pHProperty,pHNaF_ratio1-2.5,pH,1.5,13,,,
+pHProperty,pHNaF_ratio1-5,pH,1.5,13,,,
+pHProperty,pHNaF_sat,pH,1.5,13,,,
+porosityProperty,Poros_calcul-pf0,m³/100 m³,0,100,,,
+Potassium (K+) - exchangeable,ExchBases_ph0-cohex,cmol/kg,0,100,,,
+Potassium (K+) - exchangeable,ExchBases_ph0-nh4cl,cmol/kg,0,100,,,
+Potassium (K+) - exchangeable,ExchBases_ph7-nh4oac,cmol/kg,0,100,,,
+Potassium (K+) - exchangeable,ExchBases_ph7-nh4oac-aas,cmol/kg,0,100,,,
+Potassium (K+) - exchangeable,ExchBases_ph7-nh4oac-fp,cmol/kg,0,100,,,
+Potassium (K+) - exchangeable,ExchBases_ph7-unkn,cmol/kg,0,100,,,
+Potassium (K+) - exchangeable,ExchBases_ph8-bacl2tea,cmol/kg,0,100,,,
+Potassium (K+) - exchangeable,ExchBases_ph8-unkn,cmol/kg,0,100,,,
+Potassium (K+) - exchangeable,ExchBases_ph-unkn-edta,cmol/kg,0,100,,,
+Potassium (K+) - exchangeable,ExchBases_ph-unkn-m3,cmol/kg,0,100,,,
+Potassium (K+) - exchangeable,ExchBases_ph-unkn-m3-spec,cmol/kg,0,100,,,
+Potassium (K) - extractable,Extr_ap14,cmol/kg,0,1000,,,
+Potassium (K) - extractable,Extr_ap15,cmol/kg,0,1000,,,
+Potassium (K) - extractable,Extr_ap20,cmol/kg,0,1000,,,
+Potassium (K) - extractable,Extr_ap21,cmol/kg,0,1000,,,
+Potassium (K) - extractable,Extr_c6h8o7-reeuwijk,cmol/kg,0,1000,,,
+Potassium (K) - extractable,Extr_cacl2,cmol/kg,0,1000,,,
+Potassium (K) - extractable,Extr_capo4,cmol/kg,0,1000,,,
+Potassium (K) - extractable,Extr_dtpa,cmol/kg,0,1000,,,
+Potassium (K) - extractable,Extr_edta,cmol/kg,0,1000,,,
+Potassium (K) - extractable,Extr_h2so4-truog,cmol/kg,0,1000,,,
+Potassium (K) - extractable,Extr_hcl-h2so4-nelson,cmol/kg,0,1000,,,
+Potassium (K) - extractable,Extr_hcl-nh4f-bray1,cmol/kg,0,1000,,,
+Potassium (K) - extractable,Extr_hcl-nh4f-bray2,cmol/kg,0,1000,,,
+Potassium (K) - extractable,Extr_hcl-nh4f-kurtz-bray,cmol/kg,0,1000,,,
+Potassium (K) - extractable,Extr_hno3,cmol/kg,0,1000,,,
+Potassium (K) - extractable,Extr_hotwater,cmol/kg,0,1000,,,
+Potassium (K) - extractable,Extr_m1,cmol/kg,0,1000,,,
+Potassium (K) - extractable,Extr_m2,cmol/kg,0,1000,,,
+Potassium (K) - extractable,Extr_m3,cmol/kg,0,1000,,,
+Potassium (K) - extractable,Extr_m3-spec,cmol/kg,0,1000,,,
+Potassium (K) - extractable,Extr_nahco3-olsen,cmol/kg,0,1000,,,
+Potassium (K) - extractable,Extr_nahco3-olsen-dabin,cmol/kg,0,1000,,,
+Potassium (K) - extractable,Extr_naoac-morgan,cmol/kg,0,1000,,,
+Potassium (K) - extractable,Extr_nh4ch3ch-oh-cooh-leuven,cmol/kg,0,1000,,,
+Potassium (K) - extractable,Extr_nh4-co3-2-ambic1,cmol/kg,0,1000,,,
+Potassium (K) - total,Total_h2so4,cmol/kg,0,1000,,,
+Potassium (K) - total,Total_hcl,cmol/kg,0,1000,,,
+Potassium (K) - total,Total_hcl-aquaregia,cmol/kg,0,1000,,,
+Potassium (K) - total,Total_hclo4,cmol/kg,0,1000,,,
+Potassium (K) - total,Total_hno3-aquafortis,cmol/kg,0,1000,,,
+Potassium (K) - total,Total_nh4-6mo7o24,cmol/kg,0,1000,,,
+Potassium (K) - total,Total_tp03,cmol/kg,0,1000,,,
+Potassium (K) - total,Total_tp04,cmol/kg,0,1000,,,
+Potassium (K) - total,Total_tp05,cmol/kg,0,1000,,,
+Potassium (K) - total,Total_tp06,cmol/kg,0,1000,,,
+Potassium (K) - total,Total_tp07,cmol/kg,0,1000,,,
+Potassium (K) - total,Total_tp08,cmol/kg,0,1000,,,
+Potassium (K) - total,Total_tp09,cmol/kg,0,1000,,,
+Potassium (K) - total,Total_tp10,cmol/kg,0,1000,,,
+Potassium (K) - total,Total_unkn,cmol/kg,0,1000,,,
+Potassium (K) - total,Total_xrd,cmol/kg,0,1000,,,
+Potassium (K) - total,Total_xrf,cmol/kg,0,1000,,,
+Potassium (K) - total,Total_xrf-p,cmol/kg,0,1000,,,
+Potassium (K) - total,Total_xtf-t,cmol/kg,0,1000,,,
+Sand texture fraction,SaSiCl_2-20-2000u,%,0,100,,,
+Sand texture fraction,SaSiCl_2-20-2000u-adj100,%,0,100,,,
+Sand texture fraction,SaSiCl_2-20-2000u-disp,%,0,100,,,
+Sand texture fraction,SaSiCl_2-20-2000u-disp-beaker,%,0,100,,,
+Sand texture fraction,SaSiCl_2-20-2000u-disp-hydrometer,%,0,100,,,
+Sand texture fraction,SaSiCl_2-20-2000u-disp-hydrometer-bouy,%,0,100,,,
+Sand texture fraction,SaSiCl_2-20-2000u-disp-laser,%,0,100,,,
+Sand texture fraction,SaSiCl_2-20-2000u-disp-pipette,%,0,100,,,
+Sand texture fraction,SaSiCl_2-20-2000u-disp-spec,%,0,100,,,
+Sand texture fraction,SaSiCl_2-20-2000u-fld,%,0,100,,,
+Sand texture fraction,SaSiCl_2-20-2000u-nodisp,%,0,100,,,
+Sand texture fraction,SaSiCl_2-20-2000u-nodisp-hydrometer,%,0,100,,,
+Sand texture fraction,SaSiCl_2-20-2000u-nodisp-hydrometer-bouy,%,0,100,,,
+Sand texture fraction,SaSiCl_2-20-2000u-nodisp-laser,%,0,100,,,
+Sand texture fraction,SaSiCl_2-20-2000u-nodisp-pipette,%,0,100,,,
+Sand texture fraction,SaSiCl_2-20-2000u-nodisp-spec,%,0,100,,,
+Sand texture fraction,SaSiCl_2-50-2000u,%,0,100,,,
+Sand texture fraction,SaSiCl_2-50-2000u-adj100,%,0,100,,,
+Sand texture fraction,SaSiCl_2-50-2000u-disp,%,0,100,,,
+Sand texture fraction,SaSiCl_2-50-2000u-disp-beaker,%,0,100,,,
+Sand texture fraction,SaSiCl_2-50-2000u-disp-hydrometer,%,0,100,,,
+Sand texture fraction,SaSiCl_2-50-2000u-disp-hydrometer-bouy,%,0,100,,,
+Sand texture fraction,SaSiCl_2-50-2000u-disp-laser,%,0,100,,,
+Sand texture fraction,SaSiCl_2-50-2000u-disp-pipette,%,0,100,,,
+Sand texture fraction,SaSiCl_2-50-2000u-disp-spec,%,0,100,,,
+Sand texture fraction,SaSiCl_2-50-2000u-fld,%,0,100,,,
+Sand texture fraction,SaSiCl_2-50-2000u-nodisp,%,0,100,,,
+Sand texture fraction,SaSiCl_2-50-2000u-nodisp-hydrometer,%,0,100,,,
+Sand texture fraction,SaSiCl_2-50-2000u-nodisp-hydrometer-bouy,%,0,100,,,
+Sand texture fraction,SaSiCl_2-50-2000u-nodisp-laser,%,0,100,,,
+Sand texture fraction,SaSiCl_2-50-2000u-nodisp-pipette,%,0,100,,,
+Sand texture fraction,SaSiCl_2-50-2000u-nodisp-spec,%,0,100,,,
+Sand texture fraction,SaSiCl_2-64-2000u,%,0,100,,,
+Sand texture fraction,SaSiCl_2-64-2000u-adj100,%,0,100,,,
+Sand texture fraction,SaSiCl_2-64-2000u-disp,%,0,100,,,
+Sand texture fraction,SaSiCl_2-64-2000u-disp-beaker,%,0,100,,,
+Sand texture fraction,SaSiCl_2-64-2000u-disp-hydrometer,%,0,100,,,
+Sand texture fraction,SaSiCl_2-64-2000u-disp-hydrometer-bouy,%,0,100,,,
+Sand texture fraction,SaSiCl_2-64-2000u-disp-laser,%,0,100,,,
+Sand texture fraction,SaSiCl_2-64-2000u-disp-pipette,%,0,100,,,
+Sand texture fraction,SaSiCl_2-64-2000u-disp-spec,%,0,100,,,
+Sand texture fraction,SaSiCl_2-64-2000u-fld,%,0,100,,,
+Sand texture fraction,SaSiCl_2-64-2000u-nodisp,%,0,100,,,
+Sand texture fraction,SaSiCl_2-64-2000u-nodisp-hydrometer,%,0,100,,,
+Sand texture fraction,SaSiCl_2-64-2000u-nodisp-hydrometer-bouy,%,0,100,,,
+Sand texture fraction,SaSiCl_2-64-2000u-nodisp-laser,%,0,100,,,
+Sand texture fraction,SaSiCl_2-64-2000u-nodisp-pipette,%,0,100,,,
+Sand texture fraction,SaSiCl_2-64-2000u-nodisp-spec,%,0,100,,,
+Silt texture fraction,SaSiCl_2-20-2000u,%,0,100,,,
+Silt texture fraction,SaSiCl_2-20-2000u-adj100,%,0,100,,,
+Silt texture fraction,SaSiCl_2-20-2000u-disp,%,0,100,,,
+Silt texture fraction,SaSiCl_2-20-2000u-disp-beaker,%,0,100,,,
+Silt texture fraction,SaSiCl_2-20-2000u-disp-hydrometer,%,0,100,,,
+Silt texture fraction,SaSiCl_2-20-2000u-disp-hydrometer-bouy,%,0,100,,,
+Silt texture fraction,SaSiCl_2-20-2000u-disp-laser,%,0,100,,,
+Silt texture fraction,SaSiCl_2-20-2000u-disp-pipette,%,0,100,,,
+Silt texture fraction,SaSiCl_2-20-2000u-disp-spec,%,0,100,,,
+Silt texture fraction,SaSiCl_2-20-2000u-fld,%,0,100,,,
+Silt texture fraction,SaSiCl_2-20-2000u-nodisp,%,0,100,,,
+Silt texture fraction,SaSiCl_2-20-2000u-nodisp-hydrometer,%,0,100,,,
+Silt texture fraction,SaSiCl_2-20-2000u-nodisp-hydrometer-bouy,%,0,100,,,
+Silt texture fraction,SaSiCl_2-20-2000u-nodisp-laser,%,0,100,,,
+Silt texture fraction,SaSiCl_2-20-2000u-nodisp-pipette,%,0,100,,,
+Silt texture fraction,SaSiCl_2-20-2000u-nodisp-spec,%,0,100,,,
+Silt texture fraction,SaSiCl_2-50-2000u,%,0,100,,,
+Silt texture fraction,SaSiCl_2-50-2000u-adj100,%,0,100,,,
+Silt texture fraction,SaSiCl_2-50-2000u-disp,%,0,100,,,
+Silt texture fraction,SaSiCl_2-50-2000u-disp-beaker,%,0,100,,,
+Silt texture fraction,SaSiCl_2-50-2000u-disp-hydrometer,%,0,100,,,
+Silt texture fraction,SaSiCl_2-50-2000u-disp-hydrometer-bouy,%,0,100,,,
+Silt texture fraction,SaSiCl_2-50-2000u-disp-laser,%,0,100,,,
+Silt texture fraction,SaSiCl_2-50-2000u-disp-pipette,%,0,100,,,
+Silt texture fraction,SaSiCl_2-50-2000u-disp-spec,%,0,100,,,
+Silt texture fraction,SaSiCl_2-50-2000u-fld,%,0,100,,,
+Silt texture fraction,SaSiCl_2-50-2000u-nodisp,%,0,100,,,
+Silt texture fraction,SaSiCl_2-50-2000u-nodisp-hydrometer,%,0,100,,,
+Silt texture fraction,SaSiCl_2-50-2000u-nodisp-hydrometer-bouy,%,0,100,,,
+Silt texture fraction,SaSiCl_2-50-2000u-nodisp-laser,%,0,100,,,
+Silt texture fraction,SaSiCl_2-50-2000u-nodisp-pipette,%,0,100,,,
+Silt texture fraction,SaSiCl_2-50-2000u-nodisp-spec,%,0,100,,,
+Silt texture fraction,SaSiCl_2-64-2000u,%,0,100,,,
+Silt texture fraction,SaSiCl_2-64-2000u-adj100,%,0,100,,,
+Silt texture fraction,SaSiCl_2-64-2000u-disp,%,0,100,,,
+Silt texture fraction,SaSiCl_2-64-2000u-disp-beaker,%,0,100,,,
+Silt texture fraction,SaSiCl_2-64-2000u-disp-hydrometer,%,0,100,,,
+Silt texture fraction,SaSiCl_2-64-2000u-disp-hydrometer-bouy,%,0,100,,,
+Silt texture fraction,SaSiCl_2-64-2000u-disp-laser,%,0,100,,,
+Silt texture fraction,SaSiCl_2-64-2000u-disp-pipette,%,0,100,,,
+Silt texture fraction,SaSiCl_2-64-2000u-disp-spec,%,0,100,,,
+Silt texture fraction,SaSiCl_2-64-2000u-fld,%,0,100,,,
+Silt texture fraction,SaSiCl_2-64-2000u-nodisp,%,0,100,,,
+Silt texture fraction,SaSiCl_2-64-2000u-nodisp-hydrometer,%,0,100,,,
+Silt texture fraction,SaSiCl_2-64-2000u-nodisp-hydrometer-bouy,%,0,100,,,
+Silt texture fraction,SaSiCl_2-64-2000u-nodisp-laser,%,0,100,,,
+Silt texture fraction,SaSiCl_2-64-2000u-nodisp-pipette,%,0,100,,,
+Silt texture fraction,SaSiCl_2-64-2000u-nodisp-spec,%,0,100,,,
+Sodium (Na+) - exchangeable,ExchBases_ph0-cohex,cmol/kg,0,100,,,
+Sodium (Na+) - exchangeable,ExchBases_ph0-nh4cl,cmol/kg,0,100,,,
+Sodium (Na+) - exchangeable,ExchBases_ph7-nh4oac,cmol/kg,0,100,,,
+Sodium (Na+) - exchangeable,ExchBases_ph7-nh4oac-aas,cmol/kg,0,100,,,
+Sodium (Na+) - exchangeable,ExchBases_ph7-nh4oac-fp,cmol/kg,0,100,,,
+Sodium (Na+) - exchangeable,ExchBases_ph7-unkn,cmol/kg,0,100,,,
+Sodium (Na+) - exchangeable,ExchBases_ph8-bacl2tea,cmol/kg,0,100,,,
+Sodium (Na+) - exchangeable,ExchBases_ph8-unkn,cmol/kg,0,100,,,
+Sodium (Na+) - exchangeable,ExchBases_ph-unkn-edta,cmol/kg,0,100,,,
+Sodium (Na+) - exchangeable,ExchBases_ph-unkn-m3,cmol/kg,0,100,,,
+Sodium (Na+) - exchangeable,ExchBases_ph-unkn-m3-spec,cmol/kg,0,100,,,
+Sodium (Na) - extractable,Extr_ap14,cmol/kg,0,1000,,,
+Sodium (Na) - extractable,Extr_ap15,cmol/kg,0,1000,,,
+Sodium (Na) - extractable,Extr_ap20,cmol/kg,0,1000,,,
+Sodium (Na) - extractable,Extr_ap21,cmol/kg,0,1000,,,
+Sodium (Na) - extractable,Extr_c6h8o7-reeuwijk,cmol/kg,0,1000,,,
+Sodium (Na) - extractable,Extr_cacl2,cmol/kg,0,1000,,,
+Sodium (Na) - extractable,Extr_capo4,cmol/kg,0,1000,,,
+Sodium (Na) - extractable,Extr_dtpa,cmol/kg,0,1000,,,
+Sodium (Na) - extractable,Extr_edta,cmol/kg,0,1000,,,
+Sodium (Na) - extractable,Extr_h2so4-truog,cmol/kg,0,1000,,,
+Sodium (Na) - extractable,Extr_hcl-h2so4-nelson,cmol/kg,0,1000,,,
+Sodium (Na) - extractable,Extr_hcl-nh4f-bray1,cmol/kg,0,1000,,,
+Sodium (Na) - extractable,Extr_hcl-nh4f-bray2,cmol/kg,0,1000,,,
+Sodium (Na) - extractable,Extr_hcl-nh4f-kurtz-bray,cmol/kg,0,1000,,,
+Sodium (Na) - extractable,Extr_hno3,cmol/kg,0,1000,,,
+Sodium (Na) - extractable,Extr_hotwater,cmol/kg,0,1000,,,
+Sodium (Na) - extractable,Extr_m1,cmol/kg,0,1000,,,
+Sodium (Na) - extractable,Extr_m2,cmol/kg,0,1000,,,
+Sodium (Na) - extractable,Extr_m3,cmol/kg,0,1000,,,
+Sodium (Na) - extractable,Extr_m3-spec,cmol/kg,0,1000,,,
+Sodium (Na) - extractable,Extr_nahco3-olsen,cmol/kg,0,1000,,,
+Sodium (Na) - extractable,Extr_nahco3-olsen-dabin,cmol/kg,0,1000,,,
+Sodium (Na) - extractable,Extr_naoac-morgan,cmol/kg,0,1000,,,
+Sodium (Na) - extractable,Extr_nh4ch3ch-oh-cooh-leuven,cmol/kg,0,1000,,,
+Sodium (Na) - extractable,Extr_nh4-co3-2-ambic1,cmol/kg,0,1000,,,
+Sodium (Na) - total,Total_h2so4,cmol/kg,0,1000,,,
+Sodium (Na) - total,Total_hcl,cmol/kg,0,1000,,,
+Sodium (Na) - total,Total_hcl-aquaregia,cmol/kg,0,1000,,,
+Sodium (Na) - total,Total_hclo4,cmol/kg,0,1000,,,
+Sodium (Na) - total,Total_hno3-aquafortis,cmol/kg,0,1000,,,
+Sodium (Na) - total,Total_nh4-6mo7o24,cmol/kg,0,1000,,,
+Sodium (Na) - total,Total_tp03,cmol/kg,0,1000,,,
+Sodium (Na) - total,Total_tp04,cmol/kg,0,1000,,,
+Sodium (Na) - total,Total_tp05,cmol/kg,0,1000,,,
+Sodium (Na) - total,Total_tp06,cmol/kg,0,1000,,,
+Sodium (Na) - total,Total_tp07,cmol/kg,0,1000,,,
+Sodium (Na) - total,Total_tp08,cmol/kg,0,1000,,,
+Sodium (Na) - total,Total_tp09,cmol/kg,0,1000,,,
+Sodium (Na) - total,Total_tp10,cmol/kg,0,1000,,,
+Sodium (Na) - total,Total_unkn,cmol/kg,0,1000,,,
+Sodium (Na) - total,Total_xrd,cmol/kg,0,1000,,,
+Sodium (Na) - total,Total_xrf,cmol/kg,0,1000,,,
+Sodium (Na) - total,Total_xrf-p,cmol/kg,0,1000,,,
+Sodium (Na) - total,Total_xtf-t,cmol/kg,0,1000,,,
+solubleSaltsProperty,SlbAn_calcul-unkn,cmol/L,0,1000,,,
+solubleSaltsProperty,SlbCat_calcul-unkn,cmol/L,0,1000,,,
+Sulfur (S) - extractable,Extr_ap14,%,0,100,,,
+Sulfur (S) - extractable,Extr_ap15,%,0,100,,,
+Sulfur (S) - extractable,Extr_ap20,%,0,100,,,
+Sulfur (S) - extractable,Extr_ap21,%,0,100,,,
+Sulfur (S) - extractable,Extr_c6h8o7-reeuwijk,%,0,100,,,
+Sulfur (S) - extractable,Extr_cacl2,%,0,100,,,
+Sulfur (S) - extractable,Extr_capo4,%,0,100,,,
+Sulfur (S) - extractable,Extr_dtpa,%,0,100,,,
+Sulfur (S) - extractable,Extr_edta,%,0,100,,,
+Sulfur (S) - extractable,Extr_h2so4-truog,%,0,100,,,
+Sulfur (S) - extractable,Extr_hcl-h2so4-nelson,%,0,100,,,
+Sulfur (S) - extractable,Extr_hcl-nh4f-bray1,%,0,100,,,
+Sulfur (S) - extractable,Extr_hcl-nh4f-bray2,%,0,100,,,
+Sulfur (S) - extractable,Extr_hcl-nh4f-kurtz-bray,%,0,100,,,
+Sulfur (S) - extractable,Extr_hno3,%,0,100,,,
+Sulfur (S) - extractable,Extr_hotwater,%,0,100,,,
+Sulfur (S) - extractable,Extr_m1,%,0,100,,,
+Sulfur (S) - extractable,Extr_m2,%,0,100,,,
+Sulfur (S) - extractable,Extr_m3,%,0,100,,,
+Sulfur (S) - extractable,Extr_m3-spec,%,0,100,,,
+Sulfur (S) - extractable,Extr_nahco3-olsen,%,0,100,,,
+Sulfur (S) - extractable,Extr_nahco3-olsen-dabin,%,0,100,,,
+Sulfur (S) - extractable,Extr_naoac-morgan,%,0,100,,,
+Sulfur (S) - extractable,Extr_nh4ch3ch-oh-cooh-leuven,%,0,100,,,
+Sulfur (S) - extractable,Extr_nh4-co3-2-ambic1,%,0,100,,,
+Sulfur (S) - total,Total_h2so4,%,0,100,,,
+Sulfur (S) - total,Total_hcl,%,0,100,,,
+Sulfur (S) - total,Total_hcl-aquaregia,%,0,100,,,
+Sulfur (S) - total,Total_hclo4,%,0,100,,,
+Sulfur (S) - total,Total_hno3-aquafortis,%,0,100,,,
+Sulfur (S) - total,Total_nh4-6mo7o24,%,0,100,,,
+Sulfur (S) - total,Total_tp03,%,0,100,,,
+Sulfur (S) - total,Total_tp04,%,0,100,,,
+Sulfur (S) - total,Total_tp05,%,0,100,,,
+Sulfur (S) - total,Total_tp06,%,0,100,,,
+Sulfur (S) - total,Total_tp07,%,0,100,,,
+Sulfur (S) - total,Total_tp08,%,0,100,,,
+Sulfur (S) - total,Total_tp09,%,0,100,,,
+Sulfur (S) - total,Total_tp10,%,0,100,,,
+Sulfur (S) - total,Total_unkn,%,0,100,,,
+Sulfur (S) - total,Total_xrd,%,0,100,,,
+Sulfur (S) - total,Total_xrf,%,0,100,,,
+Sulfur (S) - total,Total_xrf-p,%,0,100,,,
+Sulfur (S) - total,Total_xtf-t,%,0,100,,,
+totalCarbonateEquivalentProperty,CaCO3_acid-ch3cooh-dc,g/kg,0,1000,,,
+totalCarbonateEquivalentProperty,CaCO3_acid-ch3cooh-nodc,g/kg,0,1000,,,
+totalCarbonateEquivalentProperty,CaCO3_acid-ch3cooh-unkn,g/kg,0,1000,,,
+totalCarbonateEquivalentProperty,CaCO3_acid-dc,g/kg,0,1000,,,
+totalCarbonateEquivalentProperty,CaCO3_acid-h2so4-dc,g/kg,0,1000,,,
+totalCarbonateEquivalentProperty,CaCO3_acid-h2so4-nodc,g/kg,0,1000,,,
+totalCarbonateEquivalentProperty,CaCO3_acid-h2so4-unkn,g/kg,0,1000,,,
+totalCarbonateEquivalentProperty,CaCO3_acid-h3po4-dc,g/kg,0,1000,,,
+totalCarbonateEquivalentProperty,CaCO3_acid-h3po4-nodc,g/kg,0,1000,,,
+totalCarbonateEquivalentProperty,CaCO3_acid-h3po4-unkn,g/kg,0,1000,,,
+totalCarbonateEquivalentProperty,CaCO3_acid-hcl-dc,g/kg,0,1000,,,
+totalCarbonateEquivalentProperty,CaCO3_acid-hcl-nodc,g/kg,0,1000,,,
+totalCarbonateEquivalentProperty,CaCO3_acid-hcl-unkn,g/kg,0,1000,,,
+totalCarbonateEquivalentProperty,CaCO3_acid-nodc,g/kg,0,1000,,,
+totalCarbonateEquivalentProperty,CaCO3_acid-unkn,g/kg,0,1000,,,
+totalCarbonateEquivalentProperty,CaCO3_ca01,g/kg,0,1000,,,
+totalCarbonateEquivalentProperty,CaCO3_ca02,g/kg,0,1000,,,
+totalCarbonateEquivalentProperty,CaCO3_ca03,g/kg,0,1000,,,
+totalCarbonateEquivalentProperty,CaCO3_ca04,g/kg,0,1000,,,
+totalCarbonateEquivalentProperty,CaCO3_ca05,g/kg,0,1000,,,
+totalCarbonateEquivalentProperty,CaCO3_ca06,g/kg,0,1000,,,
+totalCarbonateEquivalentProperty,CaCO3_ca07,g/kg,0,1000,,,
+totalCarbonateEquivalentProperty,CaCO3_ca08,g/kg,0,1000,,,
+totalCarbonateEquivalentProperty,CaCO3_ca09,g/kg,0,1000,,,
+totalCarbonateEquivalentProperty,CaCO3_ca10,g/kg,0,1000,,,
+totalCarbonateEquivalentProperty,CaCO3_ca11,g/kg,0,1000,,,
+totalCarbonateEquivalentProperty,CaCO3_ca12,g/kg,0,1000,,,
+totalCarbonateEquivalentProperty,CaCO3_calcul-tc-oc,g/kg,0,1000,,,
+zincProperty,Total_h2so4,%,0,100,,,
+zincProperty,Total_hcl,%,0,100,,,
+zincProperty,Total_hcl-aquaregia,%,0,100,,,
+zincProperty,Total_hclo4,%,0,100,,,
+zincProperty,Total_hno3-aquafortis,%,0,100,,,
+zincProperty,Total_nh4-6mo7o24,%,0,100,,,
+zincProperty,Total_tp03,%,0,100,,,
+zincProperty,Total_tp04,%,0,100,,,
+zincProperty,Total_tp05,%,0,100,,,
+zincProperty,Total_tp06,%,0,100,,,
+zincProperty,Total_tp07,%,0,100,,,
+zincProperty,Total_tp08,%,0,100,,,
+zincProperty,Total_tp09,%,0,100,,,
+zincProperty,Total_tp10,%,0,100,,,
+zincProperty,Total_unkn,%,0,100,,,
+zincProperty,Total_xrd,%,0,100,,,
+zincProperty,Total_xrf,%,0,100,,,
+zincProperty,Total_xrf-p,%,0,100,,,
+zincProperty,Total_xtf-t,%,0,100,,,
+Zinc (Zn) - extractable,Extr_ap14,%,0,100,,,
+Zinc (Zn) - extractable,Extr_ap15,%,0,100,,,
+Zinc (Zn) - extractable,Extr_ap20,%,0,100,,,
+Zinc (Zn) - extractable,Extr_ap21,%,0,100,,,
+Zinc (Zn) - extractable,Extr_c6h8o7-reeuwijk,%,0,100,,,
+Zinc (Zn) - extractable,Extr_cacl2,%,0,100,,,
+Zinc (Zn) - extractable,Extr_capo4,%,0,100,,,
+Zinc (Zn) - extractable,Extr_dtpa,%,0,100,,,
+Zinc (Zn) - extractable,Extr_edta,%,0,100,,,
+Zinc (Zn) - extractable,Extr_h2so4-truog,%,0,100,,,
+Zinc (Zn) - extractable,Extr_hcl-h2so4-nelson,%,0,100,,,
+Zinc (Zn) - extractable,Extr_hcl-nh4f-bray1,%,0,100,,,
+Zinc (Zn) - extractable,Extr_hcl-nh4f-bray2,%,0,100,,,
+Zinc (Zn) - extractable,Extr_hcl-nh4f-kurtz-bray,%,0,100,,,
+Zinc (Zn) - extractable,Extr_hno3,%,0,100,,,
+Zinc (Zn) - extractable,Extr_hotwater,%,0,100,,,
+Zinc (Zn) - extractable,Extr_m1,%,0,100,,,
+Zinc (Zn) - extractable,Extr_m2,%,0,100,,,
+Zinc (Zn) - extractable,Extr_m3,%,0,100,,,
+Zinc (Zn) - extractable,Extr_m3-spec,%,0,100,,,
+Zinc (Zn) - extractable,Extr_nahco3-olsen,%,0,100,,,
+Zinc (Zn) - extractable,Extr_nahco3-olsen-dabin,%,0,100,,,
+Zinc (Zn) - extractable,Extr_naoac-morgan,%,0,100,,,
+Zinc (Zn) - extractable,Extr_nh4ch3ch-oh-cooh-leuven,%,0,100,,,
+Zinc (Zn) - extractable,Extr_nh4-co3-2-ambic1,%,0,100,,,

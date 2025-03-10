@@ -31,6 +31,7 @@ psql -h localhost -p 5432 -d iso28258 -U glosis -f /home/carva014/Work/Code/FAO/
 psql -h localhost -p 5432 -d iso28258 -U glosis -f /home/carva014/Work/Code/FAO/glosis-db/GloSIS/Changes/mod_023.sql
 psql -h localhost -p 5432 -d iso28258 -U glosis -f /home/carva014/Work/Code/FAO/glosis-db/GloSIS/Changes/mod_024.sql
 psql -h localhost -p 5432 -d iso28258 -U glosis -f /home/carva014/Work/Code/FAO/glosis-db/GloSIS/Changes/mod_025.sql
+psql -h localhost -p 5432 -d iso28258 -U glosis -f /home/carva014/Work/Code/FAO/glosis-db/GloSIS/Changes/mod_026.sql
 
 # Dump iso28258 database
 date=`date +%Y-%m-%d`
@@ -51,4 +52,9 @@ pg_dump -h localhost \
         -f /home/carva014/Work/Code/FAO/glosis-db/GloSIS/ISO_28258_v_latest.sql
 
 # Export table with codelists of properties, procedures, units and alowed valu range
-psql -h localhost -p 5432 -d iso28258 -U glosis -c "\COPY (SELECT property_phys_chem_id, procedure_phys_chem_id, unit_of_measure_id, value_min, value_max FROM core.observation_phys_chem ORDER BY 1, 2) TO '/home/carva014/Work/Code/FAO/glosis-db/GloSIS/observation_phys_chem_code_list.csv' WITH CSV HEADER"
+psql -h localhost -p 5432 -d iso28258 -U glosis -c "\COPY (
+        SELECT o.property_phys_chem_id, o.procedure_phys_chem_id, o.unit_of_measure_id, o.value_min, o.value_max, p.definition, p.citation, p.reference 
+        FROM core.observation_phys_chem o
+        LEFT JOIN core.procedure_phys_chem p ON p.procedure_phys_chem_id = o.procedure_phys_chem_id
+        ORDER BY 1, 2) 
+        TO '/home/carva014/Work/Code/FAO/glosis-db/GloSIS/observation_phys_chem_code_list.csv' WITH CSV HEADER"

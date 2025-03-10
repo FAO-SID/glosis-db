@@ -260,18 +260,101 @@ psql -h localhost -p 5432 -d sislac -U eloi -c "
         INSERT INTO result (layer_id, glosis_property_uri, property_pretty_name, unit, glosis_procedure_uri, property_source, value) SELECT layer_id, NULL, 'Structure grade descriptive', NULL, NULL, 'estruc_grado', estruc_grado FROM sislac_zenodo WHERE estruc_grado IS NOT NULL AND estruc_grado != 'S/D';
         "
 
+# Number of points (66 746)
+psql -h localhost -p 5432 -d sislac -U eloi -c "SELECT count(*) FROM profile"
+
+# Number of layers (192 568)
+psql -h localhost -p 5432 -d sislac -U eloi -c "SELECT count(*) FROM layer"
+
+# Number of results (1 230 092)
+psql -h localhost -p 5432 -d sislac -U eloi -c "SELECT count(*) FROM result"
+
+# List of Soil properties (30)
 psql -h localhost -p 5432 -d sislac -U eloi -c "
         SELECT DISTINCT property_source, property_pretty_name, unit, glosis_property_uri
         FROM result
         ORDER BY property_pretty_name, property_source"
+#  property_source  |    property_pretty_name     | unit |                            glosis_property_uri                             
+# ------------------+-----------------------------+------+----------------------------------------------------------------------------
+#  b                | Boron (B)                   |      | 
+#  bulk_density     | Bulk density                |      | 
+#  ca               | Calcium (Ca++)              |      | 
+#  co3              | Carbonates                  |      | 
+#  ca_co3           | Carbon (C) - inorganic      | %    | http://w3id.org/glosis/model/layerhorizon/carbonInorganicProperty
+#  organic_carbon   | Carbon (C) - organic        | %    | http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Carorg
+#  clay             | Clay texture fraction       | %    | http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Textclay
+#  coarse_fragments | Coarse fragments            | %    | http://w3id.org/glosis/model/layerhorizon/coarseFragmentsProperty
+#  cons_seco        | Consistency dry descriptive |      | 
+#  cons_humedo      | Consistency wet descriptive |      | 
+#  cu               | Copper (Cu)                 |      | 
+#  ecec             | Effective CEC               |      | http://w3id.org/glosis/model/layerhorizon/effectiveCecProperty
+#  conductivity     | Electrical conductivity     |      | http://w3id.org/glosis/model/layerhorizon/electricalConductivityProperty
+#  humedad          | Humidity descriptive        |      | 
+#  fe               | Iron (Fe)                   |      | 
+#  mg               | Magnesium (Mg)              |      | 
+#  mn               | Manganese (Mn)              |      | 
+#  n                | Nitrogen (N)                |      | 
+#  ph               | pH - Hydrogen potential     | pH   | http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-pH
+#  p                | Phosphorus (P)              |      | 
+#  k                | Potassium (K)               |      | 
+#  sand             | Sand texture fraction       | %    | http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Textsand
+#  silt             | Silt texture fraction       | %    | http://w3id.org/glosis/model/codelists/physioChemicalPropertyCode-Textsilt
+#  estruc_clase     | Structure class descriptive |      | 
+#  estruc_grado     | Structure grade descriptive |      | 
+#  estruc_tipo      | Structure type descriptive  |      | 
+#  s                | Sulfur (S)                  |      | 
+#  textura          | Texture descriptive         |      | 
+#  water_retention  | Water retention             | %    | 
+#  zn               | Zinc (Zn)                   |      | 
+# (30 rows)
 
+
+# Example of what data to show when cliking in a point
 psql -h localhost -p 5432 -d sislac -U eloi -c "
-        SELECT l.upper_depth AS top, l.lower_depth AS bottom, r.property_pretty_name AS property, r.unit, r.value
+        SELECT l.upper_depth, l.lower_depth, r.property_pretty_name AS property, r.unit, r.value
         FROM layer AS l
         LEFT JOIN result AS r ON r.layer_id = l.layer_id
         WHERE l.profile_id = 1    -- << the ID of the clicked point in the map by the user
         ORDER BY r.property_pretty_name, l.upper_depth"
-
+#  upper_depth | lower_depth |        property         | unit | value 
+# -------------+-------------+-------------------------+------+-------
+#            0 |          15 | Carbon (C) - inorganic  | %    | 0
+#           15 |          43 | Carbon (C) - inorganic  | %    | 0
+#           43 |          66 | Carbon (C) - inorganic  | %    | 0
+#           66 |         100 | Carbon (C) - inorganic  | %    | 0
+#            0 |          15 | Carbon (C) - organic    | %    | 1.11
+#           15 |          43 | Carbon (C) - organic    | %    | 0.67
+#           43 |          66 | Carbon (C) - organic    | %    | 0.05
+#           66 |         100 | Carbon (C) - organic    | %    | 0.05
+#            0 |          15 | Clay texture fraction   | %    | 44
+#           15 |          43 | Clay texture fraction   | %    | 46
+#           43 |          66 | Clay texture fraction   | %    | 38
+#           66 |         100 | Clay texture fraction   | %    | 34
+#            0 |          15 | Coarse fragments        | %    | 0
+#           15 |          43 | Coarse fragments        | %    | 0
+#           43 |          66 | Coarse fragments        | %    | 0
+#           66 |         100 | Coarse fragments        | %    | 0
+#            0 |          15 | Effective CEC           |      | 22.08
+#           15 |          43 | Effective CEC           |      | 20.16
+#           43 |          66 | Effective CEC           |      | 24.16
+#           66 |         100 | Effective CEC           |      | 19.52
+#            0 |          15 | Electrical conductivity |      | 0.21
+#           15 |          43 | Electrical conductivity |      | 0.17
+#           43 |          66 | Electrical conductivity |      | 0.06
+#           66 |         100 | Electrical conductivity |      | 0.05
+#            0 |          15 | pH - Hydrogen potential | pH   | 6.22
+#           15 |          43 | pH - Hydrogen potential | pH   | 6.5
+#           43 |          66 | pH - Hydrogen potential | pH   | 7.1
+#           66 |         100 | pH - Hydrogen potential | pH   | 7.11
+#            0 |          15 | Sand texture fraction   | %    | 17
+#           15 |          43 | Sand texture fraction   | %    | 13
+#           43 |          66 | Sand texture fraction   | %    | 13
+#           66 |         100 | Sand texture fraction   | %    | 15
+#            0 |          15 | Silt texture fraction   | %    | 39
+#           15 |          43 | Silt texture fraction   | %    | 41
+#           43 |          66 | Silt texture fraction   | %    | 49
+#           66 |         100 | Silt texture fraction   | %    | 51
+# (36 rows)
 
 # Export tables from PostgreSQL to gpkg
 cd /home/carva014/Work/Code/FAO/glosis-db/SISLAC/

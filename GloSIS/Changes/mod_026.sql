@@ -20,8 +20,8 @@ CREATE TABLE IF NOT EXISTS core.procedure_phys_chem_tmp (
 	CONSTRAINT procedure_phys_chem_tmp_pkey PRIMARY KEY (attribute, instance)
     );
 
-COPY core.procedure_phys_chem_tmp FROM '/tmp/glosis_procedure.csv' WITH (FORMAT CSV, HEADER, NULL ''); --275
-SELECT count(*) FROM core.procedure_phys_chem; --298
+COPY core.procedure_phys_chem_tmp FROM '/home/carva014/Work/Code/FAO/glosis-db/GloSIS/Changes/mod_026.csv' WITH (FORMAT CSV, HEADER, NULL ''); --275
+-- SELECT count(*) FROM core.procedure_phys_chem; --298
 
 ALTER TABLE core.procedure_phys_chem ADD COLUMN definition text;
 ALTER TABLE core.procedure_phys_chem ADD COLUMN reference text;
@@ -31,9 +31,9 @@ UPDATE core.procedure_phys_chem SET definition = t.definition FROM core.procedur
 UPDATE core.procedure_phys_chem SET reference = t.reference FROM core.procedure_phys_chem_tmp t WHERE procedure_phys_chem_id = t.instance;
 UPDATE core.procedure_phys_chem SET citation = t.citation FROM core.procedure_phys_chem_tmp t WHERE procedure_phys_chem_id = t.instance;
 
-SELECT procedure_phys_chem_id FROM core.procedure_phys_chem
- EXCEPT
-SELECT instance FROM core.procedure_phys_chem_tmp; --48
+-- SELECT procedure_phys_chem_id FROM core.procedure_phys_chem
+--  EXCEPT
+-- SELECT instance FROM core.procedure_phys_chem_tmp; --48
 -- SaSiCl_2-20-2000u-nodisp
 -- SaSiCl_2-50-2000u-disp-hydrometer
 -- SaSiCl_2-20-2000u-disp-hydrometer
@@ -83,9 +83,9 @@ SELECT instance FROM core.procedure_phys_chem_tmp; --48
 -- SaSiCl_2-50-2000u-nodisp-laser
 -- SaSiCl_2-20-2000u-nodisp-hydrometer
 
-SELECT instance FROM core.procedure_phys_chem_tmp
- EXCEPT
-SELECT procedure_phys_chem_id FROM core.procedure_phys_chem; --25
+-- SELECT instance FROM core.procedure_phys_chem_tmp
+--  EXCEPT
+-- SELECT procedure_phys_chem_id FROM core.procedure_phys_chem; --25
 -- hydrometer-disp
 -- hydrometer-disp-spec
 -- laser-nodisp
@@ -112,8 +112,8 @@ SELECT procedure_phys_chem_id FROM core.procedure_phys_chem; --25
 -- laser-disp
 -- pipette-nodisp
 
-SELECT instance FROM core. procedure_phys_chem_tmp
- INTERSECT
-SELECT procedure_phys_chem_id FROM core. procedure_phys_chem;--250
+-- SELECT instance FROM core. procedure_phys_chem_tmp
+--  INTERSECT
+-- SELECT procedure_phys_chem_id FROM core. procedure_phys_chem;--250
 
 DROP TABLE IF EXISTS core.procedure_phys_chem_tmp;
