@@ -127,37 +127,5 @@ else
     update_style
 fi
 
-
-
-
-
-
-
 # Cleanup temp files
-# rm -f "$JSON_FILE" "$SLD_FILE"
-
-
-
-
-
-
-
-
-# Request idToken
-# curl    -X "POST" \
-#         -H "X-GISMGR-API-KEY: ${API_KEY}" \
-#         -H “Accept: application/json” \
-#         -H "Content-Length: 0" \
-#         "${BASE_URL}/catalog/identity/accounts:signInWithApiKey"
-
-# {"requestId":"64e6a388-684a-47c1-9413-0efa157863cb",
-# "timestamp":1739977149531,
-# "runtime":1198,
-# "status":200,
-# "message":"OK",
-# "response":{
-#     "idToken":"eyJhbGciOiJSUzI1NiIsImtpZCI6IjBjYmJiZDI2NjNhY2U4OTU4YTFhOTY4ZmZjNDQxN2U4MDEyYmVmYmUiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiRWxvaSBSaWJlaXJvIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2Zhby1tYXBzIiwiYXVkIjoiZmFvLW1hcHMiLCJhdXRoX3RpbWUiOjE3Mzk5NzcxNDksInVzZXJfaWQiOiJBdGttNWltMmlCVGo3eVpZVXZtNDJzM2M0c1EyIiwic3ViIjoiQXRrbTVpbTJpQlRqN3laWVV2bTQyczNjNHNRMiIsImlhdCI6MTczOTk3NzE0OSwiZXhwIjoxNzM5OTgwNzQ5LCJlbWFpbCI6ImVsb2kucmliZWlyb0BmYW8ub3JnIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7ImVtYWlsIjpbImVsb2kucmliZWlyb0BmYW8ub3JnIl19LCJzaWduX2luX3Byb3ZpZGVyIjoiY3VzdG9tIn19.yYa5SJkWrPVfrT88fmCIqG_EzPL-uhgnGIair4PVYtctsbFYzpmwQdJJ8jYSOu6wqPrnVWg2ge89R9HcPkYWMwrmyv5vAJoZjUIWGvywDXvIRiyWGqgaUBDOBz7AgBKaosf_rxp_-yA1gmxulhhbOVG168vbSLu6ak8tCIWbdwMbzNZ9jyp3Yu2F8iTnmoQmF96W7IM1m5jjyYKViIfe6BJvgO2NCvSvSrDc9skhnudg2CdMtnghIsJUl0i_MwSyJfXZBfcYJHQnz5fq8Hg4keOe9lUStpzaHsps6oSi2OEstvzb3sGVsUI6JIUL4oVjfzDBmd848sVUh7UDNYNzpA",
-#     "refreshToken":"AMf-vByDW9FeaoJ7mn-Yw6LB3SLhiaWc6jRiszDvLePxqDWj1xF7Qg86Vv58eGf9BamgSvq-E4op_nbcBKi4D2POjrMQXwWfnA8jroJwA4uYSLd-Isco0GBVjSXTEnc2N9MgfLk6Lr0cnZXPLUC9zfjcVZYJrwRHoXeiSZ15mXW3BcHnDqNm7rk",
-#     "expiresIn":"3600"
-#     }
-# }
+rm -f "$JSON_FILE" "$SLD_FILE"
