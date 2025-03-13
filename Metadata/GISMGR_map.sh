@@ -59,14 +59,14 @@ is_token_valid() {
 
 
 # Function to create or update (if existis) mapset in GISMGR
-update_mapset() {
+update_map() {
 
     # Read ID_TOKEN
     source "$TOKEN_CACHE_FILE"
 
     # Loop soil properties
     psql -h "$DB_HOST" -p "$DB_PORT" -d "$DB_NAME" -U "$DB_USER" -t -A -F"|" -c \
-    "SELECT m.mapset_id,
+    "SELECT  m.mapset_id,
         'SOIL-'|| pp.property_id style_code,
         UPPER(REPLACE(c.en,' ','_')) country,
         UPPER(REPLACE(REPLACE(REPLACE(REPLACE(pp.name,' - ','_'),' ','_'),'(',''),')','')) property,
@@ -79,7 +79,7 @@ update_mapset() {
     LEFT JOIN metadata.property pp ON pp.property_id = m.property_id
     WHERE pp.min IS NOT NULL 
     AND pp.property_type='quantitative'
-    AND m.mapset_id IN (SELECT mapset_id FROM metadata.layer GROUP BY mapset_id HAVING count(*)>1)
+    AND m.mapset_id IN (SELECT mapset_id FROM metadata.layer GROUP BY mapset_id HAVING count(*)=1)
     ORDER BY pp.property_id;" | \
     while IFS="|" read -r MAP_CODE STYLE_CODE COUNTRY PROPERTY TITLE ABSTRACT UNIT; do
         > "$FILE_JSON"
@@ -95,28 +95,11 @@ update_mapset() {
         echo "  \"extensions\": [" >> "$FILE_JSON"
         echo "       \".tif\" " >> "$FILE_JSON"
         echo "  ], " >> "$FILE_JSON"
-        echo "  \"defaultStyleCode\": \"${STYLE_CODE}\"," >> "$FILE_JSON"
+        echo "  \"styleCode\": \"${STYLE_CODE}\"," >> "$FILE_JSON"
         echo "  \"measureCaption\": null," >> "$FILE_JSON"
         echo "  \"measureUnit\": null," >> "$FILE_JSON"
         echo "  \"scale\": 1," >> "$FILE_JSON"
         echo "  \"offset\": 0," >> "$FILE_JSON"
-        echo "  \"dimensions\": [" >> "$FILE_JSON"
-        echo "      \"GLOSIS:YEAR\"," >> "$FILE_JSON"
-        echo "      \"GLOSIS:DEPTH\"" >> "$FILE_JSON"
-        echo "  ]," >> "$FILE_JSON"
-        echo "  \"dimensionMembers\": {" >> "$FILE_JSON"
-        echo "      \"rules\": [" >> "$FILE_JSON"
-        echo "          {" >> "$FILE_JSON"
-        echo "              \"regex\": \"^PH-GSAS-([A-Z]{2,4})-(\\\d{4})-(\\\d{1,2}-\\\d{2,3}).tif$\"," >> "$FILE_JSON"
-        echo "              \"members\": {" >> "$FILE_JSON"
-        echo "                  \"SHARED:YEAR\": \"\$2\"," >> "$FILE_JSON"
-        echo "                  \"SHARED:DEPTH\": \"\$3\"" >> "$FILE_JSON"
-        echo "              }" >> "$FILE_JSON"
-        echo "          }" >> "$FILE_JSON"
-        echo "      ]," >> "$FILE_JSON"
-        echo "      \"lookUp\": null" >> "$FILE_JSON"
-        echo "  }," >> "$FILE_JSON"
-        echo "  \"styleRules\": null," >> "$FILE_JSON"
         echo "  \"classes\": null," >> "$FILE_JSON"
         echo "  \"flags\": null," >> "$FILE_JSON"
         echo "  \"bigTiff\": null," >> "$FILE_JSON"
@@ -130,23 +113,23 @@ update_mapset() {
         echo "  ]" >> "$FILE_JSON"
         echo "}" >> "$FILE_JSON"
 
-        # Check if mapset exists
+        # Check if map exists
         RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" -H "Authorization: Bearer $ID_TOKEN" \
-            "${BASE_URL}/catalog/workspaces/${WORKSPACE}/mapsets/${MAP_CODE}")
+            "${BASE_URL}/catalog/workspaces/${WORKSPACE}/maps/${MAP_CODE}")
         if [ "$RESPONSE" -eq 200 ]; then
             echo "Exists. Updating..."
             HTTP_METHOD="PUT"
-            URL="${BASE_URL}/catalog/workspaces/${WORKSPACE}/mapsets/${MAP_CODE}"
+            URL="${BASE_URL}/catalog/workspaces/${WORKSPACE}/maps/${MAP_CODE}"
         elif [ "$RESPONSE" -eq 404 ]; then
             echo "Does not exist. Creating..."
             HTTP_METHOD="POST"
-            URL="${BASE_URL}/catalog/workspaces/${WORKSPACE}/mapsets"
+            URL="${BASE_URL}/catalog/workspaces/${WORKSPACE}/maps"
         else
-            echo "Error checking mapet ${MAP_CODE}, HTTP response: $RESPONSE"
+            echo "Error checking map ${MAP_CODE}, HTTP response: $RESPONSE"
             continue
         fi
 
-        # Upload or Update the mapset
+        # Upload or Update the map
         curl -X $HTTP_METHOD \
             -H "Content-Type: application/json" \
             -H "Accept: application/json" \
@@ -155,9 +138,9 @@ update_mapset() {
             "$URL"
 
         if [ $? -eq 0 ]; then
-            echo "Successfully processed mapet: $MAP_CODE"
+            echo "Successfully processed map: $MAP_CODE"
         else
-            echo "Failed to process mapet: $MAP_CODE"
+            echo "Failed to process map: $MAP_CODE"
         fi
 
     done
@@ -167,9 +150,9 @@ update_mapset() {
 # Main script logic
 if token=$(is_token_valid); then
     echo "Using cached ID_TOKEN."
-    update_mapset
+    update_map
 else
     token=$(request_new_token)
     echo "New ID_TOKEN requested."
-    update_mapset
+    update_map
 fi
