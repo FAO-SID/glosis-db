@@ -36,6 +36,7 @@ request_new_token() {
     echo "New ID_TOKEN saved to cache."
 }
 
+
 # Function to check if the cached ID_TOKEN is still valid
 is_token_valid() {
     if [[ ! -f "$TOKEN_CACHE_FILE" ]]; then
@@ -56,6 +57,7 @@ is_token_valid() {
         return 1  # Token is expired
     fi
 }
+
 
 # Function to create or update (if existis) style in GISMGR
 update_style() {
