@@ -69,11 +69,7 @@ update_mapset() {
     "SELECT m.mapset_id,
         'SOIL-'|| pp.property_id style_code,
         UPPER(REPLACE(c.en,' ','_')) country,
-        UPPER(REPLACE(REPLACE(REPLACE(REPLACE(pp.name,' - ','_'),' ','_'),'(',''),')','')) property,
-        split_part(m.mapset_id,'-',4) pub_year_n,
-        'Y-'||split_part(m.mapset_id,'-',4) pub_year_t,
-        split_part(l.layer_id,'-',5)||'-'||split_part(l.layer_id,'-',6) depth_n,
-        'D-'||split_part(l.layer_id,'-',5)||'-'||split_part(l.layer_id,'-',6) depth_t,
+        UPPER(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(pp.name,' - ','_'),' ','_'),'(',''),')',''),'+','')) property,
         m.title,
         m.abstract,
         COALESCE(pp.unit_id,'unknown') unit_id
@@ -86,7 +82,7 @@ update_mapset() {
     AND pp.property_type='quantitative'
     AND m.mapset_id IN (SELECT mapset_id FROM metadata.layer GROUP BY mapset_id HAVING count(*)>1)
     ORDER BY pp.property_id;" | \
-    while IFS="|" read -r MAP_CODE STYLE_CODE COUNTRY PROPERTY YEARN YEART DEPTHN DEPTHT TITLE ABSTRACT UNIT; do
+    while IFS="|" read -r MAP_CODE STYLE_CODE COUNTRY PROPERTY TITLE ABSTRACT UNIT; do
         > "$FILE_JSON"
         echo ""
         echo $MAP_CODE
@@ -106,27 +102,18 @@ update_mapset() {
         echo "  \"scale\": 1," >> "$FILE_JSON"
         echo "  \"offset\": 0," >> "$FILE_JSON"
         echo "  \"dimensions\": [" >> "$FILE_JSON"
-        echo "      \"GLOSIS:YEAR\"," >> "$FILE_JSON"
         echo "      \"GLOSIS:DEPTH\"" >> "$FILE_JSON"
         echo "  ]," >> "$FILE_JSON"
         echo "  \"dimensionMembers\": {" >> "$FILE_JSON"
         echo "      \"rules\": [" >> "$FILE_JSON"
         echo "          {" >> "$FILE_JSON"
-        echo "              \"regex\": \"^PH-GSAS-([A-Z]{2,4})-(\\\d{4})-(\\\d{1,2}-\\\d{2,3}).tif$\"," >> "$FILE_JSON"
+        echo "              \"regex\": \"^${MAP_CODE}-(\\\d{1,3}-\\\d{1,3}).tif$\"," >> "$FILE_JSON"
         echo "              \"members\": {" >> "$FILE_JSON"
-        echo "                  \"SHARED:YEAR\": \"\$2\"," >> "$FILE_JSON"
-        echo "                  \"SHARED:DEPTH\": \"\$3\"" >> "$FILE_JSON"
+        echo "                  \"GLOSIS:DEPTH\": \"D-\$1\"" >> "$FILE_JSON"
         echo "              }" >> "$FILE_JSON"
         echo "          }" >> "$FILE_JSON"
         echo "      ]," >> "$FILE_JSON"
-        echo "      \"lookUp\": {" >> "$FILE_JSON"
-        echo "          \"GLOSIS:YEAR\": {" >> "$FILE_JSON"
-        echo "              \"${YEARN}\": \"${YEART}\"" >> "$FILE_JSON"
-        echo "          }," >> "$FILE_JSON"
-        echo "          \"GLOSIS:DEPTH\": {" >> "$FILE_JSON"
-        echo "              \"${DEPTHN}\": \"${DEPTHT}\"" >> "$FILE_JSON"
-        echo "          }" >> "$FILE_JSON"
-        echo "      }" >> "$FILE_JSON"
+        echo "      \"lookUp\": null" >> "$FILE_JSON"
         echo "  }," >> "$FILE_JSON"
         echo "  \"styleRules\": null," >> "$FILE_JSON"
         echo "  \"classes\": null," >> "$FILE_JSON"
@@ -158,32 +145,30 @@ update_mapset() {
             continue
         fi
 
-        # # Upload or Update the mapset
-        # curl -X $HTTP_METHOD \
-        #     -H "Content-Type: application/json" \
-        #     -H "Accept: application/json" \
-        #     -H "Authorization: Bearer $ID_TOKEN" \
-        #     -d @$FILE_JSON \
-        #     "$URL"
+        # Upload or Update the mapset
+        curl -X $HTTP_METHOD \
+            -H "Content-Type: application/json" \
+            -H "Accept: application/json" \
+            -H "Authorization: Bearer $ID_TOKEN" \
+            -d @$FILE_JSON \
+            "$URL"
 
-        # if [ $? -eq 0 ]; then
-        #     echo "Successfully processed mapet: $MAP_CODE"
-        # else
-        #     echo "Failed to process mapet: $MAP_CODE"
-        # fi
+        if [ $? -eq 0 ]; then
+            echo "Successfully processed mapet: $MAP_CODE"
+        else
+            echo "Failed to process mapet: $MAP_CODE"
+        fi
 
     done
 }
 
 
-update_mapset
-
-# # Main script logic
-# if token=$(is_token_valid); then
-#     echo "Using cached ID_TOKEN."
-#     update_mapset
-# else
-#     token=$(request_new_token)
-#     echo "New ID_TOKEN requested."
-#     update_mapset
-# fi
+# Main script logic
+if token=$(is_token_valid); then
+    echo "Using cached ID_TOKEN."
+    update_mapset
+else
+    token=$(request_new_token)
+    echo "New ID_TOKEN requested."
+    update_mapset
+fi
