@@ -1,0 +1,96 @@
+{
+  "metadataStandardVersion": "1.0",
+  "referenceSystemIdentifier": "***reference_system_identifier_code_space***:***reference_system_identifier_code***",
+  "language": "***language_code***",
+  "characterSet": "utf8",
+  "spatialRepresentationInfo": {
+    "vectorSpatialRepresentation": [],
+    "gridSpatialRepresentation": []
+  },
+  "dataIdentification": {
+    "status": "***status***",
+    "spatialRepresentationType": [
+      "***spatial_representation_type_code***"
+    ],
+    "language": "***language_code***",
+    "abstract": "***abstract***",
+    "citation": {
+      "dates": [
+        {
+          "date": "***publication_date***",
+          "dateType": "publication"
+        }
+      ],
+      "title": "***title***"
+    },
+    "supplementalInformation": "",
+    "descriptiveKeywords": [
+      {
+        "keywords": [***keyword_theme_json***],
+        "type": "theme"
+      },
+      {
+        "keywords": [***keyword_place_json***],
+        "type": "place"
+      },
+      {
+        "keywords": [***keyword_discipline_json***],
+        "type": "discipline"
+      }
+    ],
+    "resourceConstraints": {
+      "legalConstraints": {
+        "otherConstraints": [
+          "***other_constraints***"
+        ],
+        "accessConstraints": [
+          "***access_constraints***"
+        ],
+        "useConstraints": [
+          "***use_constraints***"
+        ]
+      }
+    },
+    "extent": [
+      {
+        "temporal": {},
+        "geographic": {
+          "bbox": {
+            "west": "***west_bound_longitude***",
+            "east": "***east_bound_longitude***",
+            "north": "***north_bound_latitude***",
+            "south": "***south_bound_latitude***"
+          }
+        }
+      }
+    ],
+    "spatialResolution": [
+      {
+        "distance": "***distance***",
+        "scaleDenominator": "",
+        "unit": "***distance_uom***"
+      }
+    ],
+    "topicCategory": [
+      ***topic_category***
+    ],
+    "resourceMaintenance": {
+      "maintenanceAndUpdateFrequency": "***update_frequency***"
+    }
+  },
+  "dataQualityInfo": {
+    "lineage": {
+      "source": [],
+      "statement": ""
+    },
+    "scope": "***scope_code***"
+  },
+  "distributionFormat": [
+    {
+      "version": "***data_type***",
+      "name": "***distribution_format***"
+    }
+  ],
+  "fileIdentifier": "***file_identifier***",
+  "metadataStandardName": "***metadata_standard_name***"
+}

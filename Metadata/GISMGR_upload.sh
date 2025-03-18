@@ -13,7 +13,7 @@ DB_USER="glosis"
 # curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-linux-x86_64.tar.gz
 # tar -xf google-cloud-cli-linux-x86_64.tar.gz
 # ./google-cloud-sdk/install.sh
-# # Manually restart shell
+# # Manually close and restart shell, init and login
 # ./google-cloud-sdk/bin/gcloud init
 
 
