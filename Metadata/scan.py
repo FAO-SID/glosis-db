@@ -63,7 +63,7 @@ def spatial_data_scan(rootdir):
                 # print (file_name)
                 sql = f"INSERT INTO metadata.mapset(country_id, project_id, property_id, mapset_id) VALUES('{country_id}', '{project_id}', '{property_id}', '{mapset_id}') ON CONFLICT (mapset_id) DO NOTHING"
                 cur.execute(sql)
-                dimension_des = layer_id.split('-')[4] + ' to ' + layer_id.split('-')[5] + ' cm'
+                dimension_des = layer_id.split('-')[4] + '-' + layer_id.split('-')[5]
                 sql = f"INSERT INTO metadata.layer(mapset_id, dimension_des, file_path, layer_id, file_extension, file_size, file_size_pretty) VALUES('{mapset_id}', '{dimension_des}','{file_path}','{layer_id}','{file_extension}','{file_size}','{file_size_pretty}')"
                 cur.execute(sql)
 
@@ -221,11 +221,17 @@ sql = """INSERT INTO metadata.url (mapset_id, protocol, url, url_name)
             UNION
         SELECT DISTINCT mapset_id, 'WWW:LINK-1.0-http--link', url_project, 'Project webpage' FROM metadata.metadata_manual WHERE url_project IS NOT NULL
             UNION
-        SELECT m.mapset_id, 'WWW:LINK-1.0-http--link', 'https://storage.googleapis.com/fao-gismgr-glosis-data/DATA/GLOSIS/MAP/'||l.layer_id||'.'||l.file_extension , 'Download '||l.dimension_des 
+        SELECT m.mapset_id, 'WWW:LINK-1.0-http--link', 'https://storage.googleapis.com/fao-gismgr-glosis-data/DATA/GLOSIS/MAP/'||'GLOSIS.'||l.mapset_id||'.'||l.file_extension , 'Download '||l.dimension_des 
         FROM metadata.metadata_manual m
         LEFT JOIN metadata.layer l ON l.mapset_id = m.mapset_id
+        WHERE l.mapset_id IN (SELECT mapset_id FROM metadata.layer GROUP BY mapset_id HAVING count(*)=1)
+                UNION
+        SELECT m.mapset_id, 'WWW:LINK-1.0-http--link', 'https://storage.googleapis.com/fao-gismgr-glosis-data/DATA/GLOSIS/MAPSET/'||l.mapset_id||'/GLOSIS.'||l.mapset_id||'.D-'||l.dimension_des||'.'||l.file_extension , 'Download '||l.dimension_des 
+        FROM metadata.metadata_manual m
+        LEFT JOIN metadata.layer l ON l.mapset_id = m.mapset_id
+        WHERE l.mapset_id IN (SELECT mapset_id FROM metadata.layer GROUP BY mapset_id HAVING count(*)>1)
             UNION
-        SELECT mapset_id, 'OGC:WMTS', 'https://data.apps.fao.org/map/wmts/wmts?layer=fao-gismgr/GLOSIS/maps/'||mapset_id||'&tilematrixset=EPSG:900913&Service=WMTS&request=GetCapabilities', 'Web Map Tile Service'
+        SELECT mapset_id, 'OGC:WMTS', 'https://data.apps.fao.org/map/wmts/wmts?layer=fao-gismgr/GLOSIS/mapsets/'||mapset_id||'&amp;tilematrixset=EPSG:4326&amp;Service=WMTS&amp;request=GetTile&amp;Version=1.0.0&amp;Format=image/png&amp;TileMatrix={z}&amp;TileCol={y}&amp;TileRow={x}&amp;layertype=Image', 'Web Map Tile Service'
         FROM metadata.metadata_manual
         ON CONFLICT (mapset_id, protocol, url) DO NOTHING"""
 cur.execute(sql)
@@ -234,7 +240,3 @@ cur.execute(sql)
 conn.commit()
 cur.close()
 conn.close()
-
-
-
-

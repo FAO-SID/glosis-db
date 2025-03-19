@@ -1,0 +1,55 @@
+// Online resource WMTS
+{
+  "extras": [
+    {
+      "protocol": "OGC:WMTS",
+      "name": "fao-gismgr/GLOSIS/mapsets/PH-GSAS-ECX-2020",
+      "description": "WMTS for Soil Electrical Conductivity (Philippines - 1 km)"
+    }
+
+    // Online resource Download
+    {
+      "protocol": "WWW:LINK-1.0-http--link",
+      "name": "GLOSIS-PH-GSAS-ECX-2020",
+      "description": "Download the data from Google Cloud Storage"
+    }
+
+    // Resource maintainer
+    {
+      "role": "pointOfContact",
+      "organisationName": "FAO-UN",
+      "contactInfo": {
+        "phone": {
+          "voice": ""
+        },
+        "address": {
+          "electronicMailAddress": "Ismaila.Seck@fao.org",
+          "country": "Italy",
+          "postalCode": "00153",
+          "city": "Rome",
+          "deliveryPoint": "Viale delle Terme di Caracalla"
+        }
+      },
+      "individualName": "Ismaila Seck - FAO Animal Production and Health Division (NSA)"
+    }
+
+    // Metadata contact
+    {
+      "role": "pointOfContact",
+      "organisationName": "FAO-UN",
+      "contactInfo": {
+        "phone": {
+          "voice": ""
+        },
+        "address": {
+          "electronicMailAddress": "alessandra.falcucci@fao.org",
+          "country": "",
+          "postalCode": "",
+          "city": "",
+          "deliveryPoint": ""
+        }
+      },
+      "individualName": "Alessandra Falcucci - FAO Animal Production and Health Division (NSA)"
+    }
+  ]
+}

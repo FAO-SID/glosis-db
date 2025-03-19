@@ -3,10 +3,7 @@
   "referenceSystemIdentifier": "***reference_system_identifier_code_space***:***reference_system_identifier_code***",
   "language": "***language_code***",
   "characterSet": "utf8",
-  "spatialRepresentationInfo": {
-    "vectorSpatialRepresentation": [],
-    "gridSpatialRepresentation": []
-  },
+  "spatialRepresentationInfo": ***spatial_representation_info_json***,
   "dataIdentification": {
     "status": "***status***",
     "spatialRepresentationType": [
@@ -53,7 +50,6 @@
     },
     "extent": [
       {
-        "temporal": {},
         "geographic": {
           "bbox": {
             "west": "***west_bound_longitude***",
@@ -71,8 +67,7 @@
         "unit": "***distance_uom***"
       }
     ],
-    "topicCategory": [
-      ***topic_category***
+    "topicCategory": [ ***topic_category***
     ],
     "resourceMaintenance": {
       "maintenanceAndUpdateFrequency": "***update_frequency***"

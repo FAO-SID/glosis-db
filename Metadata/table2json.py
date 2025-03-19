@@ -5,6 +5,7 @@
 import psycopg2
 import re
 import ast
+import json
 from datetime import datetime
 
 
@@ -131,7 +132,11 @@ def bake_json(project_id, template, output):
                         south_bound_latitude, 
                         north_bound_latitude, 
                         distribution_format,
-                        data_type
+                        data_type,
+                        raster_size_x,
+                        raster_size_y,
+                        pixel_size_x,
+                        pixel_size_y
                  FROM metadata.layer 
                  WHERE mapset_id='{mapset_id}' '''
         cur.execute(sql)
@@ -146,7 +151,10 @@ def bake_json(project_id, template, output):
         north_bound_latitude = '0' if row[6] == None else str(row[6])
         distribution_format = 'UNKNOWN' if row[7] == None else str(row[7])
         data_type = 'UNKNOWN' if row[8] == None else str(row[8])
-
+        raster_size_x = 'UNKNOWN' if row[9] == None else str(row[9])
+        raster_size_y = 'UNKNOWN' if row[10] == None else str(row[10])
+        pixel_size_x = 'UNKNOWN' if row[11] == None else str(row[11])
+        pixel_size_y = 'UNKNOWN' if row[12] == None else str(row[12])
 
         # # editon
         # edition_json = ''
@@ -198,8 +206,8 @@ def bake_json(project_id, template, output):
             k = k.strip(" ")
             k = k.strip("[]")
             k = k.strip("'")
-            k = k.replace(" ", "_")
-            k = k.upper()
+            k = k.replace(" ", "-")
+            k = k.lower()
             if c < n:
               keyword_theme_part = f'''
             "{k}",'''
@@ -218,8 +226,8 @@ def bake_json(project_id, template, output):
             k = k.strip(" ")
             k = k.strip("[]")
             k = k.strip("'")
-            k = k.replace(" ", "_")
-            k = k.upper()
+            k = k.replace(" ", "-")
+            k = k.lower()
             if c < n:
               keyword_discipline_part = f'''
             "{k}",'''
@@ -238,8 +246,8 @@ def bake_json(project_id, template, output):
             k = k.strip(" ")
             k = k.strip("[]")
             k = k.strip("'")
-            k = k.replace(" ", "_")
-            k = k.upper()
+            k = k.replace(" ", "-")
+            k = k.lower()
             if c < n:
               keyword_place_part = f'''
             "{k}",'''
@@ -249,12 +257,38 @@ def bake_json(project_id, template, output):
             keyword_place_json = keyword_place_json + keyword_place_part
 
 
-        # # deal with vector/grid resolution
-        # if spatial_representation_type_code == 'grid':
-        #     resolution = f'''
-        #   <gmd:distance>
-        #     <gco:Distance uom="{distance_uom}">{distance}</gco:Distance>
-        #   </gmd:distance>'''
+        # deal with vector/grid resolution
+        if spatial_representation_type_code == 'grid':
+            # Build the dictionary
+          spatial_representation_info = {
+      "gridSpatialRepresentation": [
+    {
+        "numberOfDimensions": "2",
+        "dimension": [
+            {
+                "dimensionName": "row",
+                "dimensionSize": str(raster_size_y),
+                "resolution": {
+                    "value": str(pixel_size_y),
+                    "uom": str(distance_uom)
+                }
+            },
+            {
+                "dimensionName": "column",
+                "dimensionSize": str(raster_size_x),
+                "resolution": {
+                    "value": str(pixel_size_x),
+                    "uom": str(distance_uom)
+                }
+            }
+        ],
+        "transformationParameterAvailability": False
+    }
+  ]
+}
+          # Convert the dictionary to a JSON string
+          spatial_representation_info_json = json.dumps(spatial_representation_info, indent=2)
+
         # elif spatial_representation_type_code == 'vector':
         #     resolution = f'''
         #   <gmd:equivalentScale>
@@ -275,8 +309,8 @@ def bake_json(project_id, template, output):
             k = k.strip(" ")
             k = k.strip("[]")
             k = k.strip("'")
-            k = k.replace(" ", "_")
-            k = k.upper()
+            k = k.replace(" ", "-")
+            k = k.lower()
             if c < n:
               topic_category_part = f'''
             "{k}",'''
@@ -549,7 +583,7 @@ def bake_json(project_id, template, output):
         replace['***other_constraints***'] = other_constraints
         replace['***spatial_representation_type_code***'] = spatial_representation_type_code
         replace['***presentation_form***'] = presentation_form
-        # replace['***resolution***'] = resolution
+        replace['***spatial_representation_info_json***'] = spatial_representation_info_json
         replace['***topic_category***'] = topic_category_json
         replace['***time_period_begin***'] = time_period_begin
         replace['***time_period_end***'] = time_period_end
