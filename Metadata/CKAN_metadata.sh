@@ -73,7 +73,7 @@ update_metadata() {
     done
 }
 
-
+# test, not working
 curl -X POST http://data.apps.fao.org/api/action/package_create \
 -H "Authorization: API-KEY" \
 -H "Content-Type: application/json" \
