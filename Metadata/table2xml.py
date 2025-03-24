@@ -104,7 +104,7 @@ def bake_xml(project_id, template, output):
         abstract = 'UNKNOWN' if row[13] == None else str(row[13])
         status = 'UNKNOWN' if row[14] == None else str(row[14])
         update_frequency = 'UNKNOWN' if row[15] == None else str(row[15])
-        md_browse_graphic = 'UNKNOWN' if row[16] == None else str(row[16])
+        md_browse_graphic = 'https://www.freeworldmaps.net/asia/philippines/philippines-physical-map.jpg' if row[16] == None else str(row[16])
         keyword_theme = 'UNKNOWN' if row[17] == None else str(row[17])
         keyword_place = 'UNKNOWN' if row[18] == None else str(row[18])
         keyword_discipline = 'UNKNOWN' if row[19] == None else str(row[19])
@@ -138,10 +138,10 @@ def bake_xml(project_id, template, output):
         reference_system_identifier_code = '-1' if row[0] == None else str(row[0])
         distance = '0' if row[1] == None else str(row[1])
         distance_uom = 'UNKNOWN' if row[2] == None else str(row[2])
-        west_bound_longitude = '0' if row[3] == None else str(row[3])
-        east_bound_longitude = '0' if row[4] == None else str(row[4])
-        south_bound_latitude = '0' if row[4] == None else str(row[4])
-        north_bound_latitude = '0' if row[6] == None else str(row[6])
+        west_bound_longitude = '0' if row[6] == None else str(row[6]) #N
+        east_bound_longitude = '0' if row[5] == None else str(row[5]) #S
+        south_bound_latitude = '0' if row[4] == None else str(row[4]) #E
+        north_bound_latitude = '0' if row[3] == None else str(row[3]) #W
         distribution_format = 'UNKNOWN' if row[7] == None else str(row[7])
 
 
@@ -513,7 +513,7 @@ def bake_xml(project_id, template, output):
         replace['***status***'] = status
         replace['***update_frequency***'] = update_frequency
         replace['***point_of_contact_ci_responsible_party_xml***'] = point_of_contact_ci_responsible_party_xml
-        replace['***md_browse_graphic***'] = '%s' % md_browse_graphic
+        replace['***md_browse_graphic***'] = md_browse_graphic
         replace['***keyword_theme_xml***'] = keyword_theme_xml
         replace['***keyword_discipline_xml***'] = keyword_discipline_xml
         replace['***keyword_place_xml***'] = keyword_place_xml

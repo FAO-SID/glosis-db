@@ -11,8 +11,7 @@ gdal.UseExceptions()  # Explicitly enable exceptions
 def transform_to_wgs84(x, y, source_srs):
     """Transform coordinates from source projection to EPSG:4326 (lat/lon)."""
     target_srs = osr.SpatialReference()
-    target_srs.ImportFromEPSG(4326)  # WGS 84
-
+    target_srs.ImportFromEPSG(4326)
     transform = osr.CoordinateTransformation(source_srs, target_srs)
     lon, lat, _ = transform.TransformPoint(x, y)
     return lon, lat
