@@ -310,7 +310,6 @@ def bake_json(project_id, template, output):
             k = k.strip("[]")
             k = k.strip("'")
             k = k.replace(" ", "-")
-            k = k.lower()
             if c < n:
               topic_category_part = f'''
             "{k}",'''
