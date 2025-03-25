@@ -313,7 +313,7 @@ CREATE TABLE metadata.mapset (
   topic_category text[] DEFAULT '{geoscientificInformation,environment}'::text[],
   time_period_begin date,
   time_period_end date,
-  scope_code text DEFAULT 'project',
+  scope_code text DEFAULT 'dataset',
   lineage_statement text,
   lineage_source_uuidref text,
   lineage_source_title text,
