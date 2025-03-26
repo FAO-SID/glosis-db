@@ -1,0 +1,34 @@
+{
+  "fileIdentifier": "***file_identifier***",
+  "workspace_id": "GLOSIS",
+  "map_id": "PH-GSAS-NAEXC-2020",
+  "owner_org": "glosis",
+  "map_type":"mapsets",
+  "ckan_url": "https://data.apps.fao.org/catalog",
+  "user_api_key": "",
+   "resources": [
+    {
+      "jsonschema_body": {
+        "organisationName": "Departement of Agriculture - Bureau of Soils and Water Management",
+        "role": "pointOfContact",
+        "contactInfo": {
+          "phone": {
+            "voice": ""
+          },
+          "address": {
+            "electronicMailAddress": "andrew.flores@bswm.da.gov.ph",
+            "country": "Philippines",
+            "postalCode": "1128",
+            "city": "Quezon",
+            "deliveryPoint": "SRDC Bldg. Elliptical Road corner Visayas Avenue, Diliman"
+          }
+        },
+        "individualName": "Andrew B. Flores"
+      },
+      "description": "pointOfContact: Departement of Agriculture - Bureau of Soils and Water Management",
+      "jsonschema_opt": {},
+      "jsonschema_type": "metadata-contact",
+      "name": "Departement of Agriculture - Bureau of Soils and Water Management"
+    }
+  ]
+}

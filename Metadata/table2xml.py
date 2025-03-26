@@ -154,20 +154,20 @@ def bake_xml(project_id, template, output):
           </gmd:edition>'''
 
 
-        # citation_md_identifier uuid
-        citation_md_identifier_uuid_xml = ''
-        if file_identifier != 'UNKNOWN':
-            citation_md_identifier_uuid_xml = f'''
-          <gmd:identifier>
-           <gmd:MD_Identifier>
-            <gmd:code>
-             <gco:CharacterString>{file_identifier}</gco:CharacterString>
-            </gmd:code>
-            <gmd:codeSpace>
-             <gco:CharacterString>uuid</gco:CharacterString>
-            </gmd:codeSpace>
-           </gmd:MD_Identifier>
-          </gmd:identifier>'''
+        # # citation_md_identifier uuid
+        # citation_md_identifier_uuid_xml = ''
+        # if file_identifier != 'UNKNOWN':
+        #     citation_md_identifier_uuid_xml = f'''
+        #   <gmd:identifier>
+        #    <gmd:MD_Identifier>
+        #     <gmd:code>
+        #      <gco:CharacterString>{file_identifier}</gco:CharacterString>
+        #     </gmd:code>
+        #     <gmd:codeSpace>
+        #      <gco:CharacterString>uuid</gco:CharacterString>
+        #     </gmd:codeSpace>
+        #    </gmd:MD_Identifier>
+        #   </gmd:identifier>'''
 
 
         # citation_md_identifier doi
@@ -507,7 +507,7 @@ def bake_xml(project_id, template, output):
         replace['***creation_date***'] = creation_date
         replace['***publication_date***'] = publication_date
         replace['***edition_xml***'] = edition_xml
-        replace['***citation_md_identifier_uuid_xml***'] = citation_md_identifier_uuid_xml
+        # replace['***citation_md_identifier_uuid_xml***'] = citation_md_identifier_uuid_xml
         replace['***citation_md_identifier_doi_xml***'] = citation_md_identifier_doi_xml
         replace['***abstract***'] = abstract
         replace['***status***'] = status
